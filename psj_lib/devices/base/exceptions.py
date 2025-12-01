@@ -3,75 +3,176 @@ from typing import Type
 
 
 class DeviceError(Exception):
-    """Base class for device-related errors."""
+    """Base exception class for all device-related errors.
+    
+    This is the parent exception for all errors that occur during device
+    communication and operation. Catch this exception to handle any device
+    error generically, or catch specific subclasses for targeted error handling.
+    
+    Device errors typically result from:
+    - Invalid commands or parameters sent to the device
+    - Hardware conditions (overload, underload)
+    - Communication protocol violations
+    - Device configuration issues
+    
+    Example:
+        >>> try:
+        ...     await device.write("invalid_command")
+        ... except DeviceError as e:
+        ...     print(f"Device error occurred: {e}")
+    """
 
     pass
 
 
 class ErrorNotSpecified(DeviceError):
-    """Error not specified."""
+    """Generic error when the device does not provide specific error details.
+    
+    Raised when the device reports an error condition but does not provide
+    a specific error code. This typically indicates an internal device error
+    or a communication protocol issue.
+    """
 
     pass
 
 
 class UnknownCommand(DeviceError):
-    """Unknown command."""
+    """The device does not recognize the command sent.
+    
+    Raised when attempting to send a command that is not supported by the
+    device or is not valid for the current device firmware version.
+    
+    Common causes:
+    - Typo in command name
+    - Command not supported by device model
+    - Firmware version incompatibility
+    """
 
     pass
 
 
 class ParameterMissing(DeviceError):
-    """Parameter missing."""
+    """Required parameter was not provided with the command.
+    
+    Raised when a command that requires one or more parameters is sent
+    without the necessary parameter values.
+    
+    Example:
+        A command expecting a channel number was sent without specifying
+        which channel to operate on.
+    """
 
     pass
 
 
 class AdmissibleParameterRangeExceeded(DeviceError):
-    """Admissible parameter range exceeded."""
+    """Parameter value is outside the acceptable range for the command.
+    
+    Raised when a parameter value exceeds the valid range defined by the
+    device for that particular command. Check device documentation for
+    valid parameter ranges.
+    
+    Example:
+        Setting a voltage beyond the device's maximum output capability.
+    """
 
     pass
 
 
 class CommandParameterCountExceeded(DeviceError):
-    """Command's parameter count exceeded."""
+    """Too many parameters were provided for the command.
+    
+    Raised when more parameters are sent than the command expects.
+    Each command has a defined number of parameters; sending extra
+    parameters results in this error.
+    """
 
     pass
 
 
 class ParameterLockedOrReadOnly(DeviceError):
-    """Parameter is locked or read only."""
+    """Attempted to modify a read-only or locked parameter.
+    
+    Raised when trying to write to a parameter that:
+    - Is inherently read-only (e.g., hardware status, sensor values)
+    - Is currently locked by device configuration or security settings
+    - Cannot be changed in the current device operation mode
+    
+    Example:
+        Attempting to change a factory calibration value that is locked.
+    """
 
     pass
 
 
 class Underload(DeviceError):
-    """Underload."""
+    """Device detected an underload condition.
+    """
 
     pass
 
 
 class Overload(DeviceError):
-    """Overload."""
+    """Device detected an overload condition.
+    """
 
     pass
 
 
 class ParameterTooLow(DeviceError):
-    """Parameter too low."""
+    """Parameter value is below the minimum acceptable value.
+    
+    Raised when a parameter value is below the lower bound of the
+    acceptable range for that parameter.
+    
+    This is more specific than AdmissibleParameterRangeExceeded,
+    indicating specifically that the value is too low.
+    """
 
     pass
 
 
 class ParameterTooHigh(DeviceError):
-    """Parameter too high."""
+    """Parameter value exceeds the maximum acceptable value.
+    
+    Raised when a parameter value exceeds the upper bound of the
+    acceptable range for that parameter.
+    
+    This is more specific than AdmissibleParameterRangeExceeded,
+    indicating specifically that the value is too high.
+    """
 
     pass
 
 
 class ErrorCode(Enum):
-    """
-    ErrorCode(Enum):
-        An enumeration representing various error codes and their corresponding descriptions.
+    """Enumeration of device error codes with exception class mapping.
+    
+    This enum defines all possible error codes that can be returned by
+    piezoelectric devices. Each error code corresponds to a specific
+    DeviceError exception subclass.
+    
+    Error codes are returned by the device in response to invalid commands,
+    parameter violations, or hardware conditions. The ErrorCode class provides
+    utilities to convert error codes to exceptions and raise appropriate errors.
+    
+    Attributes:
+        ERROR_NOT_SPECIFIED (int): Generic unspecified error (code 1)
+        UNKNOWN_COMMAND (int): Command not recognized by device (code 2)
+        PARAMETER_MISSING (int): Required parameter not provided (code 3)
+        ADMISSIBLE_PARAMETER_RANGE_EXCEEDED (int): Parameter outside valid range (code 4)
+        COMMAND_PARAMETER_COUNT_EXCEEDED (int): Too many parameters provided (code 5)
+        PARAMETER_LOCKED_OR_READ_ONLY (int): Cannot modify locked/read-only parameter (code 6)
+        UNDERLOAD (int): Device detected underload condition (code 7)
+        OVERLOAD (int): Device detected overload condition (code 8)
+        PARAMETER_TOO_LOW (int): Parameter below minimum value (code 9)
+        PARAMETER_TOO_HIGH (int): Parameter above maximum value (code 10)
+        DESCRIPTIONS (dict): Mapping of error codes to human-readable descriptions
+    
+    Example:
+        >>> error_code = ErrorCode.from_value(2)
+        >>> print(error_code)  # ErrorCode.UNKNOWN_COMMAND
+        >>> ErrorCode.raise_error(error_code)  # Raises UnknownCommand exception
     """
     ERROR_NOT_SPECIFIED = 1
     UNKNOWN_COMMAND = 2

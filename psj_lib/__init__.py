@@ -1,3 +1,34 @@
+"""
+psj_lib - Python Library for Piezosystem Jena Devices
+
+This library provides a comprehensive interface for controlling piezoelectric amplifiers
+and control devices manufactured by piezosystem jena GmbH. It offers both low-level
+transport protocol implementations and high-level device abstractions for easy integration
+into automation and control systems.
+
+The library currently supports the d-Drive modular piezo amplifier system, with a flexible
+architecture designed to accommodate additional device types in the future.
+
+Main Components:
+    - Base device classes: Generic piezo device and channel abstractions
+    - Transport protocols: Serial and Telnet communication interfaces
+    - Capabilities: Modular features like PID control, waveform generation, data recording
+    - d-Drive: Specific implementations for d-Drive modular amplifiers
+
+Example:
+    >>> from psj_lib import DDriveDevice, TransportType
+    >>> # Connect to a d-Drive device via serial port
+    >>> device = DDriveDevice(TransportType.SERIAL, "COM3")
+    >>> await device.connect()
+    >>> # Access a channel
+    >>> channel = device.channel[0]
+    >>> await channel.setpoint.set(50.0)  # Set to 50 µm or 50 mrad or 50 V (depending on actuator and closed-loop mode)
+    >>> await device.close()
+
+For detailed documentation and examples, visit:
+https://github.com/piezosystemjena/psj-lib
+"""
+
 from .devices.base import (
     PiezoChannel,
     PiezoDevice,
