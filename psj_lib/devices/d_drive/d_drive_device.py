@@ -148,10 +148,12 @@ class DDriveDevice(PiezoDevice):
             - This is an internal method used by device factory
         """
         # Check if the device returns the expected device string
-        await tp.write("\n")
-        msg = await tp.read_message()
-
-        return "DSM V" in msg
+        try:
+            await tp.write("\n")
+            msg = await tp.read_message()
+            return "DSM V" in msg
+        except Exception:
+            return False
 
     async def _discover_channels(self):
         """Discover and initialize all available amplifier channels.

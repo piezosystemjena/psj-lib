@@ -308,7 +308,8 @@ class DDriveChannel(PiezoChannel):
     closed_loop_controller = CapabilityDescriptor(
         ClosedLoopController, {
             ClosedLoopController.CMD_ENABLE: "cloop"
-        }
+        },
+        SAMPLE_PERIOD
     )
     """Closed-loop position control enable/disable.
     
