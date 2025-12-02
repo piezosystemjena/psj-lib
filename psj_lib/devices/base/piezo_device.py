@@ -374,8 +374,7 @@ class PiezoDevice:
 
         Returns:
             Dictionary mapping channel IDs (int) to PiezoChannel instances.
-            Returns empty dict for single-channel devices or before channels
-            are discovered during connect().
+            Returns empty dict before channels are discovered during connect().
 
         Example:
             >>> await device.connect()  # Discovers channels

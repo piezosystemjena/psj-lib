@@ -184,14 +184,7 @@ class DDriveDevice(PiezoDevice):
         lines = response.split("\n")
 
         # Reset all channels
-        self._channels = {
-            0: None,
-            1: None,
-            2: None,
-            3: None,
-            4: None,
-            5: None
-        }
+        self._channels = {}
 
         # Go through every line in the response
         for line in lines:
