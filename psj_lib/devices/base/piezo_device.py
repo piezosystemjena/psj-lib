@@ -29,16 +29,13 @@ from ..transport_protocol import (
     TransportType,
 )
 from .command_cache import CommandCache
-from .device_factory import DeviceFactory
+from .device_factory import DEVICE_MODEL_REGISTRY, DeviceFactory
 from .exceptions import ErrorCode
 from .piezo_channel import PiezoChannel
 from .piezo_types import DeviceInfo
 
 # Global module locker
 logger = logging.getLogger(__name__)
-
-DEVICE_MODEL_REGISTRY: dict[str, type["PiezoDevice"]] = {}
-
 
 class PiezoDevice:
     """Generic base class for piezoelectric amplifier and controller devices.

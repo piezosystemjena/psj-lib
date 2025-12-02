@@ -16,7 +16,11 @@ class PiezoChannel:
     The channel communicates with the parent device via a write callback function,
     which handles the low-level command transmission. This design allows channels
     to be device-agnostic while providing a consistent interface.
-    
+
+    Specific device implementations typically define PiezoCapability instances
+    as attributes of the channel class to expose functionality like setpoint, 
+    position, and PID control.
+
     Type Aliases:
         ChannelID: Integer identifier for the channel (typically 0-based)
         Command: String representing a device command name

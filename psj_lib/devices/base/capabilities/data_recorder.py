@@ -12,14 +12,8 @@ class DataRecorderChannel(Enum):
     or data retrieval.
 
     Subclasses may define specific channel meanings.
-    
-    Attributes:
-        CHANNEL_1: First recorder channel
-        CHANNEL_2: Second recorder channel
     """
-    CHANNEL_1 = 1
-    CHANNEL_2 = 2
-
+    pass
 
 class DataRecorder(PiezoCapability):
     """Record device signals to internal memory for later retrieval.
@@ -70,6 +64,9 @@ class DataRecorder(PiezoCapability):
     CMD_PTR = "DATA_RECORDER_POINTER"
     CMD_GET_DATA_1 = "DATA_RECORDER_GET_DATA_1"
     CMD_GET_DATA_2 = "DATA_RECORDER_GET_DATA_2"
+
+    CHANNEL_1_IDX = 1
+    CHANNEL_2_IDX = 2
 
     def __init__(
         self, 
@@ -191,7 +188,9 @@ class DataRecorder(PiezoCapability):
         if index is not None:
             await self._write(self.CMD_PTR, [index])
 
-        cmd = self.CMD_GET_DATA_1 if channel == DataRecorderChannel.CHANNEL_1 else self.CMD_GET_DATA_2
+        channel_idx = channel.value
+
+        cmd = self.CMD_GET_DATA_1 if channel_idx == self.CHANNEL_1_IDX else self.CMD_GET_DATA_2
         return await self._write(cmd)[0]
 
     async def get_all_data(

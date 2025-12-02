@@ -11,7 +11,6 @@ from .capabilities.d_drive_status_register import DDriveStatusRegister
 from .capabilities.d_drive_trigger_out import DDriveTriggerOut
 from .capabilities.d_drive_waveform_generator import DDriveWaveformGenerator
 
-
 class DDriveChannel(PiezoChannel):
     """Single d-Drive amplifier channel with all control capabilities.
     
@@ -163,11 +162,11 @@ class DDriveChannel(PiezoChannel):
     """
     
     # Capability descriptors
-    status_register = CapabilityDescriptor(
+    status_register: Status = CapabilityDescriptor(
         Status, {
             Status.CMD_STATUS: "stat"
         },
-        DDriveStatusRegister
+        register_type=DDriveStatusRegister
     )
     """d-Drive status register with hardware state information.
     
@@ -187,7 +186,7 @@ class DDriveChannel(PiezoChannel):
         ...     print(f"Closed-loop: {status.closed_loop}")
     """
 
-    actuator_description = CapabilityDescriptor(
+    actuator_description: ActuatorDescription = CapabilityDescriptor(
         ActuatorDescription, {
             ActuatorDescription.CMD_DESCRIPTION: "acdescr"
         }
@@ -201,7 +200,7 @@ class DDriveChannel(PiezoChannel):
         >>> print(f"Actuator: {desc}")
     """
 
-    setpoint = CapabilityDescriptor(
+    setpoint: Setpoint = CapabilityDescriptor(
         Setpoint, {
             Setpoint.CMD_SETPOINT: "set"
         }
@@ -217,7 +216,7 @@ class DDriveChannel(PiezoChannel):
         >>> target = await channel.setpoint.get()
     """
 
-    position = CapabilityDescriptor(
+    position: Position = CapabilityDescriptor(
         Position, {
             Position.CMD_POSITION: "mess"
         }
@@ -228,12 +227,14 @@ class DDriveChannel(PiezoChannel):
     In closed-loop mode, this is the feedback value.
     In open loop mode, this is the output voltage.
 
+    Please note that for d-Drive devices, the position value is only updated every 500ms.
+
     Example:
         >>> pos = await channel.position.get()
         >>> print(f"Current position: {pos:.3f} µm")
     """
 
-    temperature = CapabilityDescriptor(
+    temperature: Temperature = CapabilityDescriptor(
         Temperature, {
             Temperature.CMD_TEMPERATURE: "ktemp"
         }
@@ -248,7 +249,7 @@ class DDriveChannel(PiezoChannel):
         >>> print(f"Temperature: {temp:.1f}°C")
     """
 
-    fan = CapabilityDescriptor(
+    fan: Fan = CapabilityDescriptor(
         Fan, {
             Fan.CMD_ENABLE: "fan"
         }
@@ -262,11 +263,11 @@ class DDriveChannel(PiezoChannel):
         >>> is_on = await channel.fan.get_enabled()
     """
 
-    modulation_source = CapabilityDescriptor(
+    modulation_source: ModulationSource = CapabilityDescriptor(
         ModulationSource, {
             ModulationSource.CMD_SOURCE: "modon"
         },
-        DDriveModulationSourceTypes
+        sources=DDriveModulationSourceTypes
     )
     """Modulation input source selection.
     
@@ -281,7 +282,7 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    monitor_output = CapabilityDescriptor(
+    monitor_output: MonitorOutput = CapabilityDescriptor(
         MonitorOutput, {
             MonitorOutput.CMD_OUTPUT_SRC: "monsrc"
         }
@@ -305,11 +306,11 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    closed_loop_controller = CapabilityDescriptor(
+    closed_loop_controller: ClosedLoopController = CapabilityDescriptor(
         ClosedLoopController, {
             ClosedLoopController.CMD_ENABLE: "cloop"
         },
-        SAMPLE_PERIOD
+        sample_period=SAMPLE_PERIOD
     )
     """Closed-loop position control enable/disable.
     
@@ -322,7 +323,7 @@ class DDriveChannel(PiezoChannel):
         >>> is_closed = await channel.closed_loop_controller.get_enabled()
     """
 
-    slew_rate = CapabilityDescriptor(
+    slew_rate: SlewRate = CapabilityDescriptor(
         SlewRate, {
             SlewRate.CMD_RATE: "sr"
         }
@@ -337,7 +338,7 @@ class DDriveChannel(PiezoChannel):
         >>> rate = await channel.slew_rate.get()
     """
 
-    pcf = CapabilityDescriptor(
+    pcf: PreControlFactor = CapabilityDescriptor(
         PreControlFactor, {
             PreControlFactor.CMD_VALUE: "pcf"
         }
@@ -352,7 +353,7 @@ class DDriveChannel(PiezoChannel):
         >>> pcf_val = await channel.pcf.get()
     """
 
-    error_lpf = CapabilityDescriptor(
+    error_lpf: ErrorLowPassFilter = CapabilityDescriptor(
         ErrorLowPassFilter, {
             ErrorLowPassFilter.CMD_CUTOFF_FREQUENCY: "errlpf",
             ErrorLowPassFilter.CMD_ORDER: "elpor"
@@ -370,7 +371,7 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    pid_controller = CapabilityDescriptor(
+    pid_controller: PIDController = CapabilityDescriptor(
         PIDController, {
             PIDController.CMD_P: "kp",
             PIDController.CMD_I: "ki",
@@ -392,7 +393,7 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    notch = CapabilityDescriptor(
+    notch: NotchFilter = CapabilityDescriptor(
         NotchFilter, {
             NotchFilter.CMD_ENABLE: "notchon",
             NotchFilter.CMD_FREQUENCY: "notchf",
@@ -412,7 +413,7 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    lpf = CapabilityDescriptor(
+    lpf: LowPassFilter = CapabilityDescriptor(
         LowPassFilter, {
             LowPassFilter.CMD_ENABLE: "lpon",
             LowPassFilter.CMD_CUTOFF_FREQUENCY: "lpf"
@@ -429,7 +430,7 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    trigger_out = CapabilityDescriptor(
+    trigger_out: DDriveTriggerOut = CapabilityDescriptor(
         DDriveTriggerOut, {
             DDriveTriggerOut.CMD_START: "trigstart",
             DDriveTriggerOut.CMD_STOP: "trigstop",
@@ -458,7 +459,7 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    data_recorder = CapabilityDescriptor(
+    data_recorder: DataRecorder = CapabilityDescriptor(
         DataRecorder, {
             DataRecorder.CMD_START_RECORDING: "recstart",
             DataRecorder.CMD_STRIDE: "recstride",
@@ -467,7 +468,7 @@ class DDriveChannel(PiezoChannel):
             DataRecorder.CMD_GET_DATA_1: "m",
             DataRecorder.CMD_GET_DATA_2: "u"
         },
-        SAMPLE_PERIOD
+        sample_period=SAMPLE_PERIOD
     )
     """Two-channel data recorder for signal capture.
     
@@ -503,7 +504,7 @@ class DDriveChannel(PiezoChannel):
         - Use stride for longer durations at lower rate
     """
 
-    units = CapabilityDescriptor(
+    units: Units = CapabilityDescriptor(
         Units, {
             Units.CMD_UNIT_POSITION: "acclmas",
             Units.CMD_UNIT_VOLTAGE: "acolmas"
@@ -519,7 +520,7 @@ class DDriveChannel(PiezoChannel):
         >>> print(f"Position: {pos_unit}, Voltage: {vol_unit}")
     """
 
-    waveform_generator = CapabilityDescriptor(
+    waveform_generator: DDriveWaveformGenerator = CapabilityDescriptor(
         DDriveWaveformGenerator, {
             DDriveWaveformGenerator.CMD_WFG_TYPE: "gfkt",
             DDriveWaveformGenerator.CMD_SINE_AMPLITUDE: "gasin",

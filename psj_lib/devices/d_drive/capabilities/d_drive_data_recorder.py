@@ -1,4 +1,4 @@
-from ...base.capabilities import DataRecorderChannel
+from ...base.capabilities import DataRecorderChannel, DataRecorder
 
 
 class DDriveDataRecorderChannel(DataRecorderChannel):
@@ -39,5 +39,5 @@ class DDriveDataRecorderChannel(DataRecorderChannel):
         - Maximum 500,000 samples per channel
         - POSITION and VOLTAGE are semantic aliases for hardware channels
     """
-    POSITION = DataRecorderChannel.CHANNEL_1
-    VOLTAGE = DataRecorderChannel.CHANNEL_2
+    POSITION = DataRecorder.CHANNEL_1_IDX
+    VOLTAGE = DataRecorder.CHANNEL_2_IDX

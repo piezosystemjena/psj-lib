@@ -93,7 +93,7 @@ class Status(PiezoCapability):
         super().__init__(write_cb, device_commands)
         self._register_type = register_type
 
-    async def get(self) -> None:
+    async def get(self) -> StatusRegister:
         """Query device status register.
         
         Returns:

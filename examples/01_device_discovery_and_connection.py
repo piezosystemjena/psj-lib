@@ -27,7 +27,7 @@ async def main():
     try:
         # Discover devices on all interfaces (Serial + Telnet)
         devices = await PiezoDevice.discover_devices(
-            discover_flags=DiscoverFlags.ALL_INTERFACES
+            flags=DiscoverFlags.ALL_INTERFACES
         )
         
         if not devices:

@@ -326,16 +326,16 @@ class YourDeviceChannel(PiezoChannel):
     # ========================================================================
     # Each descriptor maps a capability to its device commands
     
-    status_register = CapabilityDescriptor(
+    status_register: Status = CapabilityDescriptor(
         Status,
         {
             Status.CMD_STATUS: "stat"  # Replace with your device's command
         },
-        YourDeviceStatusRegister  # Your custom status register class
+        register_type=YourDeviceStatusRegister  # Your custom status register class
     )
     """Hardware status register with device state information."""
 
-    actuator_description = CapabilityDescriptor(
+    actuator_description: ActuatorDescription = CapabilityDescriptor(
         ActuatorDescription,
         {
             ActuatorDescription.CMD_DESCRIPTION: "acdescr"
@@ -343,7 +343,7 @@ class YourDeviceChannel(PiezoChannel):
     )
     """Actuator identification string."""
 
-    setpoint = CapabilityDescriptor(
+    setpoint: Setpoint = CapabilityDescriptor(
         Setpoint,
         {
             Setpoint.CMD_SETPOINT: "set"
@@ -351,7 +351,7 @@ class YourDeviceChannel(PiezoChannel):
     )
     """Target position control (commanded position)."""
 
-    position = CapabilityDescriptor(
+    position: Position = CapabilityDescriptor(
         Position,
         {
             Position.CMD_POSITION: "pos"  # Your device's position read command
@@ -359,7 +359,7 @@ class YourDeviceChannel(PiezoChannel):
     )
     """Actual position readback from sensor."""
 
-    temperature = CapabilityDescriptor(
+    temperature: Temperature = CapabilityDescriptor(
         Temperature,
         {
             Temperature.CMD_TEMPERATURE: "temp"
@@ -367,16 +367,16 @@ class YourDeviceChannel(PiezoChannel):
     )
     """Channel electronics temperature."""
 
-    closed_loop_controller = CapabilityDescriptor(
+    closed_loop_controller: ClosedLoopController = CapabilityDescriptor(
         ClosedLoopController,
         {
             ClosedLoopController.CMD_ENABLE: "cl"
         },
-        SAMPLE_PERIOD
+        sample_period=SAMPLE_PERIOD
     )
     """Closed-loop position control enable/disable."""
 
-    slew_rate = CapabilityDescriptor(
+    slew_rate: SlewRate = CapabilityDescriptor(
         SlewRate,
         {
             SlewRate.CMD_RATE: "sr"
@@ -384,7 +384,7 @@ class YourDeviceChannel(PiezoChannel):
     )
     """Maximum rate of change limiting."""
 
-    pid_controller = CapabilityDescriptor(
+    pid_controller: PIDController = CapabilityDescriptor(
         PIDController,
         {
             PIDController.CMD_P: "kp",
@@ -395,7 +395,7 @@ class YourDeviceChannel(PiezoChannel):
     )
     """PID controller parameter configuration."""
 
-    waveform_generator = CapabilityDescriptor(
+    waveform_generator: YourDeviceWaveformGenerator = CapabilityDescriptor(
         YourDeviceWaveformGenerator,  # Your custom implementation
         {
             YourDeviceWaveformGenerator.CMD_WFG_TYPE: "wfg_type",
@@ -406,7 +406,7 @@ class YourDeviceChannel(PiezoChannel):
     )
     """Multi-waveform generator with custom waveform support."""
 
-    data_recorder = CapabilityDescriptor(
+    data_recorder: DataRecorder = CapabilityDescriptor(
         DataRecorder,
         {
             DataRecorder.CMD_START_RECORDING: "rec_start",
@@ -416,7 +416,7 @@ class YourDeviceChannel(PiezoChannel):
             DataRecorder.CMD_GET_DATA_1: "rec_ch1",
             DataRecorder.CMD_GET_DATA_2: "rec_ch2",
         },
-        SAMPLE_PERIOD  # Pass sample period for time calculations
+        sample_period=SAMPLE_PERIOD  # Pass sample period for time calculations
     )
     """Two-channel data recorder for signal capture."""
 
@@ -960,7 +960,7 @@ class YourDeviceWaveformGenerator(PiezoCapability):
 1. **Check command strings match device protocol:**
    ```python
    # Verify in device documentation
-   setpoint = CapabilityDescriptor(
+   setpoint: Setpoint = CapabilityDescriptor(
        Setpoint,
        {
            Setpoint.CMD_SETPOINT: "set"  # Ensure this is correct!

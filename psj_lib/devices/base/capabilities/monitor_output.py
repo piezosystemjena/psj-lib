@@ -18,7 +18,9 @@ class MonitorOutputSource(Enum):
         - Device-specific subclasses define actual sources
         - UNKNOWN used for unrecognized device responses
     """
-    UNKNOWN = 99
+    @property
+    def UNKNOWN(self):
+        return -1
 
 
 class MonitorOutput(PiezoCapability):

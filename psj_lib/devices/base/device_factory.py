@@ -1,9 +1,12 @@
+from typing import TYPE_CHECKING
+
 from ..transport_protocol import DetectedDevice
-from .piezo_device import PiezoDevice
+
+if TYPE_CHECKING:
+    from .piezo_device import PiezoDevice
 
 # Device model registry
-DEVICE_MODEL_REGISTRY = {}
-
+DEVICE_MODEL_REGISTRY: dict[str, type["PiezoDevice"]] = {}
 
 class DeviceFactory:
     """Internal factory class for creating device instances from device identifiers.
@@ -38,7 +41,7 @@ class DeviceFactory:
     """
 
     @staticmethod
-    def from_id(device_id: str, *args, **kwargs) -> PiezoDevice:
+    def from_id(device_id: str, *args, **kwargs) -> "PiezoDevice":
         """Create a device instance from its device ID string.
 
         This method looks up the device class in the registry and instantiates
@@ -80,7 +83,7 @@ class DeviceFactory:
         return cls(*args, **kwargs)
 
     @staticmethod
-    def from_detected_device(detected_device: DetectedDevice) -> PiezoDevice:
+    def from_detected_device(detected_device: DetectedDevice) -> "PiezoDevice":
         """Create a device instance from a DetectedDevice discovery result.
         
         This is a convenience method that extracts the device ID, transport type,
