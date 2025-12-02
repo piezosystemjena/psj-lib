@@ -29,13 +29,16 @@ from ..transport_protocol import (
     TransportType,
 )
 from .command_cache import CommandCache
-from .device_factory import DEVICE_MODEL_REGISTRY, DeviceFactory
+from .device_factory import DeviceFactory
 from .exceptions import ErrorCode
 from .piezo_channel import PiezoChannel
 from .piezo_types import DeviceInfo
 
 # Global module locker
 logger = logging.getLogger(__name__)
+
+DEVICE_MODEL_REGISTRY: dict[str, type["PiezoDevice"]] = {}
+
 
 class PiezoDevice:
     """Generic base class for piezoelectric amplifier and controller devices.
@@ -1085,3 +1088,53 @@ class PiezoDevice:
         """
         for cmd, values in backup.items():
             await self.write(cmd, values)
+
+    async def __aenter__(self) -> Self:
+        """Async context manager entry - connects and returns the device instance.
+        
+        Allows using the device with async context manager syntax for
+        automatic connection and resource cleanup. The device is automatically
+        connected when entering the context.
+
+        Returns:
+            The connected device instance (self)
+
+        Raises:
+            DeviceUnavailableException: If connection fails or device type mismatch
+            TransportException: If transport-specific connection errors occur
+
+        Example:
+            >>> async with DDriveDevice(TransportType.SERIAL, 'COM3') as device:
+            ...     await device.write('voltage', [10.0])
+            >>> # Automatically closed on exit
+        
+        Note:
+            - Automatically calls connect() with default parameters
+            - Device is closed automatically on context exit
+            - Exceptions during connection propagate normally
+        """
+        await self.connect()
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Async context manager exit - closes device connection.
+        
+        Automatically called when exiting the async context manager block.
+        Ensures proper cleanup of device resources even if exceptions occur.
+
+        Args:
+            exc_type: Exception type if an exception occurred, None otherwise
+            exc_val: Exception value if an exception occurred, None otherwise
+            exc_tb: Exception traceback if an exception occurred, None otherwise
+
+        Returns:
+            False to allow exceptions to propagate (not suppressed)
+        
+        Note:
+            - Always closes device connection
+            - Does not suppress exceptions (returns False)
+            - Safe to call even if already closed
+        """
+        await self.close()
+        return False
+    
