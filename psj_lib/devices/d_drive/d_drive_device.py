@@ -12,7 +12,7 @@ for high-precision nanopositioning. It features:
 - RS-232/USB connectivity options
 
 For detailed hardware specifications, refer to the d-Drive Instruction Manual.
-(https://www.piezosystem.com/wp-content/uploads/2022/04/d-Drive-Instruction-Manual.pdf)
+(https://www.piezosystem.com/products/amplifiers/modular/50ma-300ma-ddrive-digital-systems/)
 """
 
 from ..base.piezo_device import PiezoDevice

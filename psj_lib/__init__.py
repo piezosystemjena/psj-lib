@@ -32,6 +32,17 @@ https://github.com/piezosystemjena/psj-lib
 from .devices.base import (
     PiezoChannel,
     PiezoDevice,
+    DeviceError,
+    ErrorNotSpecified,
+    UnknownCommand,
+    ParameterMissing,
+    AdmissibleParameterRangeExceeded,
+    CommandParameterCountExceeded,
+    ParameterLockedOrReadOnly,
+    ParameterTooHigh,
+    ParameterTooLow,
+    Underload,
+    Overload,
 )
 from .devices.base.capabilities import (
     ActuatorDescription,
@@ -84,12 +95,28 @@ from .devices.transport_protocol import (
     DiscoverFlags,
     TransportProtocolInfo,
     TransportType,
+    DeviceUnavailableException,
+    ProtocolException,
+    TimeoutException
 )
 
 __all__ = [
     # Base Device Classes
     "PiezoChannel",
     "PiezoDevice",
+
+    # Exceptions
+    "DeviceError",
+    "ErrorNotSpecified",
+    "UnknownCommand",
+    "ParameterMissing",
+    "AdmissibleParameterRangeExceeded",
+    "CommandParameterCountExceeded",
+    "ParameterLockedOrReadOnly",
+    "ParameterTooHigh",
+    "ParameterTooLow",
+    "Underload",
+    "Overload",
 
     # Base Capabilities
     "ActuatorDescription",
@@ -142,6 +169,9 @@ __all__ = [
     "DiscoverFlags",
     "TransportProtocolInfo",
     "TransportType",
+    "DeviceUnavailableException",
+    "ProtocolException",
+    "TimeoutException",
 ]
 
 __version__ = "0.0.1"

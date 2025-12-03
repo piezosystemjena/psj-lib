@@ -2,6 +2,19 @@ from . import capabilities
 from .piezo_channel import PiezoChannel
 from .piezo_device import PiezoDevice
 from .piezo_types import ActorType, DeviceInfo, SensorType
+from .exceptions import (
+    DeviceError, 
+    ErrorNotSpecified,
+    UnknownCommand,
+    ParameterMissing,
+    AdmissibleParameterRangeExceeded,
+    CommandParameterCountExceeded,
+    ParameterLockedOrReadOnly,
+    ParameterTooHigh,
+    ParameterTooLow,
+    Underload,
+    Overload
+)
 
 __all__ = [
     "PiezoDevice",
@@ -9,5 +22,16 @@ __all__ = [
     "SensorType",
     "ActorType",
     "DeviceInfo",
+    "DeviceError",
+    "ErrorNotSpecified",
+    "UnknownCommand",
+    "ParameterMissing",
+    "AdmissibleParameterRangeExceeded",
+    "CommandParameterCountExceeded",
+    "ParameterLockedOrReadOnly",
+    "ParameterTooHigh",
+    "ParameterTooLow",
+    "Underload",
+    "Overload",
     "capabilities",
 ]
