@@ -145,6 +145,19 @@ class ParameterTooHigh(DeviceError):
     pass
 
 
+class UnknownChannel(DeviceError):
+    """Specified channel does not exist on the device.
+    
+    Raised when attempting to access or configure a channel number
+    that is not present on the connected device.
+    
+    Example:
+        Accessing channel 3 on a single-channel device.
+    """
+
+    pass
+
+
 class ErrorCode(Enum):
     """Enumeration of device error codes with exception class mapping.
     
@@ -167,6 +180,7 @@ class ErrorCode(Enum):
         OVERLOAD (int): Device detected overload condition (code 8)
         PARAMETER_TOO_LOW (int): Parameter below minimum value (code 9)
         PARAMETER_TOO_HIGH (int): Parameter above maximum value (code 10)
+        UNKNOWN_CHANNEL (int): Specified channel does not exist (code 99)
         DESCRIPTIONS (dict): Mapping of error codes to human-readable descriptions
     
     Example:
@@ -184,6 +198,7 @@ class ErrorCode(Enum):
     OVERLOAD = 8
     PARAMETER_TOO_LOW = 9
     PARAMETER_TOO_HIGH = 10
+    UNKNOWN_CHANNEL = 99
 
     DESCRIPTIONS = {
         ERROR_NOT_SPECIFIED: "Error not specified",
@@ -195,7 +210,8 @@ class ErrorCode(Enum):
         UNDERLOAD: "Underload",
         OVERLOAD: "Overload",
         PARAMETER_TOO_LOW: "Parameter too low",
-        PARAMETER_TOO_HIGH: "Parameter too high"
+        PARAMETER_TOO_HIGH: "Parameter too high",
+        UNKNOWN_CHANNEL: "Channel does not exist"
     }
 
 
@@ -244,7 +260,8 @@ class ErrorCode(Enum):
             cls.UNDERLOAD: Underload,
             cls.OVERLOAD: Overload,
             cls.PARAMETER_TOO_LOW: ParameterTooLow,
-            cls.PARAMETER_TOO_HIGH: ParameterTooHigh
+            cls.PARAMETER_TOO_HIGH: ParameterTooHigh,
+            cls.UNKNOWN_CHANNEL: UnknownChannel,
         }
 
         return exception_map.get(error_code, ErrorNotSpecified)

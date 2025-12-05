@@ -78,7 +78,7 @@ class PiezoCapability:
         self._write_cb = write_cb
         self._device_commands = device_commands
 
-    def _write(self, command: str, params: list[Param] | None = None) -> list[str]:
+    async def _write(self, command: str, params: list[Param] | None = None) -> list[str]:
         """Execute a device command with optional parameters.
         
         Args:
@@ -92,4 +92,4 @@ class PiezoCapability:
             - Used by subclasses to implement specific operations
             - Delegates actual execution to write_cb
         """
-        return self._write_cb(self._device_commands, command, params)
+        return await self._write_cb(self._device_commands, command, params)

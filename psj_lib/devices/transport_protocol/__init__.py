@@ -9,6 +9,8 @@ from .transport_types import (
     TransportProtocolInfo,
     TransportType,
 )
+from .serial.serial_protocol import SerialProtocol
+from .telnet.telnet_protocol import TelnetProtocol
 
 __all__ = [
     "DetectedDevice",
@@ -21,4 +23,6 @@ __all__ = [
     "TransportProtocol",
     "TransportProtocolInfo",
     "TransportType",
+    "SerialProtocol",
+    "TelnetProtocol",
 ]

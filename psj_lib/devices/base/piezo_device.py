@@ -17,7 +17,7 @@ Key Features:
 """
 
 import logging
-from typing import Awaitable, Self
+from typing import Awaitable, Self, Type
 
 from ..._internal._reentrant_lock import _ReentrantAsyncLock
 from ..transport_protocol import (
@@ -29,15 +29,13 @@ from ..transport_protocol import (
     TransportType,
 )
 from .command_cache import CommandCache
-from .device_factory import DeviceFactory
+from .device_factory import DeviceFactory, DEVICE_MODEL_REGISTRY
 from .exceptions import ErrorCode
 from .piezo_channel import PiezoChannel
 from .piezo_types import DeviceInfo
 
 # Global module locker
 logger = logging.getLogger(__name__)
-
-DEVICE_MODEL_REGISTRY: dict[str, type["PiezoDevice"]] = {}
 
 
 class PiezoDevice:
@@ -238,7 +236,7 @@ class PiezoDevice:
             - Discovery can take several seconds, especially for network scanning
             - Devices must be powered on and properly connected to be discovered
         """
-        discovered_devices = await DeviceDiscovery.discover_devices(flags, cls._is_device_type)
+        discovered_devices = await DeviceDiscovery.discover_devices(cls._is_device_type, flags)
         devices = []
 
         for device in discovered_devices:
@@ -248,7 +246,7 @@ class PiezoDevice:
 
 
     @classmethod
-    async def _is_device_type(cls, tp: TransportProtocol) -> bool:
+    async def _is_device_type(cls, tp: TransportProtocol) -> str | None:
         """Check if the device on the transport matches this device class type.
         
         This internal method is called during device discovery to verify that a
@@ -266,14 +264,14 @@ class PiezoDevice:
             tp: TransportProtocol instance with an open connection to the device
 
         Returns:
-            True if the device matches this class's device type, False otherwise
+            Device ID string if the device matches this class type, None otherwise.
         
         Example (subclass implementation):
             >>> @classmethod
             >>> async def _is_device_type(cls, tp: TransportProtocol) -> bool:
             ...     await tp.write('identify' + tp.CRLF)
             ...     response = await tp.read_message()
-            ...     return cls.DEVICE_ID in response
+            ...     return cls.DEVICE_ID if cls.DEVICE_ID in response else None
         
         Note:
             - Base class checks all registered subclasses if DEVICE_ID is None
@@ -284,10 +282,12 @@ class PiezoDevice:
 
         if cls.DEVICE_ID is None:
             for subclass in DEVICE_MODEL_REGISTRY.values():
-                if subclass._is_device_type(tp):
-                    return True
+                id = await subclass._is_device_type(tp)
 
-            return False
+                if id is not None:
+                    return id
+
+            return None
 
     @property
     def lock(self) -> _ReentrantAsyncLock:
@@ -356,7 +356,7 @@ class PiezoDevice:
             comes from the class's DEVICE_ID attribute, while transport_info is
             provided by the active transport protocol.
         """
-        if self._transport is None or not self._transport.is_connected:
+        if self._transport is None:
             raise DeviceUnavailableException("Cannot access device_info: transport is not initialized or device is not connected.")
 
         return DeviceInfo(
@@ -438,7 +438,6 @@ class PiezoDevice:
             - Error responses halt execution by raising exceptions
         """
         # Check if the response indicates an error
-        # TODO: Check d-drive error behavior
         if response.startswith("error"):
             self._raise_error(response)
             return  # This line will never be reached due to the exception being raised
@@ -674,8 +673,8 @@ class PiezoDevice:
             logger.debug("Device is already connected.")
             return
 
-        await self._transport.connect(auto_adjust_comm_params, self)
-        is_match = await self._is_device_type()
+        await self._transport.connect(auto_adjust_comm_params=auto_adjust_comm_params)
+        is_match = await self._is_device_type(self._transport)
         
         if not is_match:
             await self._transport.close()
@@ -706,7 +705,7 @@ class PiezoDevice:
 
         logger.debug("Reading string values for command: %s", cmd)
 
-        values = await self._write_and_parse(cmd, timeout=timeout)[1]
+        values = await self._write_and_parse(cmd, timeout=timeout)
 
         for i in range(len(values)):
             values[i] = values[i].rstrip()  # strip trailing whitespace - some strings like units may contain trailing spaces
@@ -871,10 +870,10 @@ class PiezoDevice:
 
         async with self.lock:
             try:
-                await self._transport.write(cmd + self.FRAME_DELIMITER_WRITE)
+                await self._transport.write(cmd + self.FRAME_DELIMITER_WRITE.decode("utf-8"))
                 response = await self._transport.read_message(timeout=timeout)
             except Exception as e:
-                raise DeviceUnavailableException(f"Failed to write/read from device: {e}") from e
+                raise DeviceUnavailableException(f"Failed to write/read from device: {repr(e)}") from e
 
         return response
 

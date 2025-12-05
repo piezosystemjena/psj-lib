@@ -149,17 +149,17 @@ class SerialProtocol(TransportProtocol):
         async def detect_on_port(port_name: str) -> DetectedDevice | None:
             protocol = SerialProtocol(port_name)
             try:
-                detected_device = DetectedDevice(
+                await protocol.connect()
+                device_id = await discovery_cb(protocol)
+
+                if device_id is None:
+                    return None
+                
+                return DetectedDevice(
+                    device_id=device_id,
                     transport=TransportType.SERIAL,
                     identifier=port_name
                 )
-                await protocol.connect()
-                is_type = await discovery_cb(protocol, detected_device)
-
-                if not is_type:
-                    return None
-                
-                return detected_device
             except Exception as e:
                 # We do ignore the exception - if it is not possible to connect to the device, we just return None
                 logger.info(f"Error on port {port_name}: {e.__class__.__name__} {e}")

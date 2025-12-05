@@ -15,6 +15,7 @@ For detailed hardware specifications, refer to the d-Drive Instruction Manual.
 (https://www.piezosystem.com/products/amplifiers/modular/50ma-300ma-ddrive-digital-systems/)
 """
 
+from ..base.exceptions import ErrorCode
 from ..base.piezo_device import PiezoDevice
 from ..transport_protocol import TransportProtocol
 from .d_drive_channel import DDriveChannel
@@ -129,9 +130,16 @@ class DDriveDevice(PiezoDevice):
     change frequently. Caching reduces communication overhead for reads.
     """
 
+    FRAME_DELIMITER_READ = TransportProtocol.XON
+
+    ERROR_MAP = {
+        "command not found": ErrorCode.UNKNOWN_COMMAND,
+        "command mismatch": ErrorCode.COMMAND_PARAMETER_COUNT_EXCEEDED,
+        " not present": ErrorCode.UNKNOWN_CHANNEL,
+    }
 
     @classmethod
-    async def _is_device_type(cls, tp: TransportProtocol) -> bool:
+    async def _is_device_type(cls, tp: TransportProtocol) -> str | None:
         """Check if connected device is a d-Drive amplifier.
         
         Sends a probe command and checks the response for d-Drive identification.
@@ -141,7 +149,7 @@ class DDriveDevice(PiezoDevice):
             tp: Transport protocol instance connected to device
 
         Returns:
-            True if device responds as d-Drive system, False otherwise
+            Device ID string if device responds as d-Drive system, None otherwise
         
         Note:
             - Checks for string "DSM V" in response
@@ -149,11 +157,22 @@ class DDriveDevice(PiezoDevice):
         """
         # Check if the device returns the expected device string
         try:
-            await tp.write("\n")
+            await tp.write("\r\n")
             msg = await tp.read_message()
-            return "DSM V" in msg
-        except Exception:
-            return False
+            return cls.DEVICE_ID if "DSM V" in msg else None
+        except TimeoutError as e:
+            return None
+        
+    def _parse_response(self, response: str) -> list[str]:
+        """"""
+        # Check for error strings in response
+        for err_str, err_code in self.ERROR_MAP.items():
+            if err_str in response.lower():
+                raise ErrorCode.get_exception_class(err_code)(f"Device error: {err_str}")
+
+        # Default parsing (comma-separated values)
+        return super()._parse_response(response)
+
 
     async def _discover_channels(self):
         """Discover and initialize all available amplifier channels.
@@ -169,6 +188,11 @@ class DDriveDevice(PiezoDevice):
         """
         response = await self.write_raw("stat")
         self._parse_channel_status(response)
+
+        # Set channel output to scientific notation for accuracy
+        for channel in self._channels.values():
+            await channel._write("setf", [1])
+            await channel._write("setg", [1])
 
     def _parse_channel_status(self, response: str):
         """Parse device status response to identify active channels.

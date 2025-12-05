@@ -47,7 +47,7 @@ async def main():
             info = device.device_info
             print(f"Device {i + 1}:")
             print(f"  Type:       {info.device_id}")
-            print(f"  Transport:  {info.transport_info.transport_type.name}")
+            print(f"  Transport:  {info.transport_info.transport.name}")
             print(f"  Identifier: {info.transport_info.identifier}")
             print()
         
@@ -69,7 +69,7 @@ async def main():
         print("\n[3] Connected device Information:")
         info = device.device_info
         print(f"  Device Type: {info.device_id}")
-        print(f"  Connection:  {info.transport_info.transport_type.name} "
+        print(f"  Connection:  {info.transport_info.transport.name} "
               f"on {info.transport_info.identifier}")
         
         # Step 5: Display available channels
@@ -85,13 +85,6 @@ async def main():
         if device.channels:
             print("\n[5] Querying Channel 0 Information:")
             channel = device.channels[0]
-            
-            # Read actuator description
-            try:
-                actuator_desc = await channel.actuator_description.get()
-                print(f"  Actuator: {actuator_desc}")
-            except Exception as e:
-                print(f"  Actuator: (not available - {e})")
             
             # Read temperature
             try:

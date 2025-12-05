@@ -95,7 +95,7 @@ class PiezoChannel:
         if not self._write_cb:
             raise RuntimeError("No write callback defined for this channel.")
 
-        return await self._write_cb(cmd, params, self._channel_id)
+        return await self._write_cb(self._channel_id, cmd, params)
 
     async def _capability_write(
         self,
@@ -134,7 +134,7 @@ class PiezoChannel:
             logger.warning(f"Capability requested to send unknown command: {cmd}.")
             return
         
-        return await self._write(cmd, params)
+        return await self._write(device_commands[cmd], params)
 
     async def backup(self) -> dict[str, list[str]]:
         """Backup current channel configuration by reading all backup commands.
