@@ -104,7 +104,7 @@ class TelnetProtocol(TransportProtocol):
             - Identifier is validated on connect, not during init
             - MAC addresses must have Lantronix prefix (00:80:A3)
         """
-        super().__init__()
+        super().__init__(identifier=identifier)
         self.__host: str = is_valid_ip(identifier) or ""
         self.__port: int = port
         self.__MAC: str = is_valid_mac(identifier) or ""
@@ -420,7 +420,7 @@ class TelnetProtocol(TransportProtocol):
     
         async def detect_on_endpoint(network_endpoint: NetworkEndpoint) -> DetectedDevice | None:
             logger.debug("Connecting to network endpoint: %s", network_endpoint)
-            protocol = TelnetProtocol(host=network_endpoint.ip)
+            protocol = TelnetProtocol(identifier=network_endpoint.ip)
             try:
                 detected_device = DetectedDevice(
                     transport=TransportType.TELNET,

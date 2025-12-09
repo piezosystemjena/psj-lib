@@ -144,7 +144,7 @@ class SerialProtocol(TransportProtocol):
             - Ports are tested concurrently for better performance
         """
         ports = serial.tools.list_ports.comports()
-        valid_ports = [p.device for p in ports if p.manufacturer == "FTDI"]
+        valid_ports = [p.device for p in ports]
 
         async def detect_on_port(port_name: str) -> DetectedDevice | None:
             protocol = SerialProtocol(port_name)
