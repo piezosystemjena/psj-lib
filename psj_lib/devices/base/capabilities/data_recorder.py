@@ -262,3 +262,12 @@ class DataRecorder(PiezoCapability):
             >>> print(f"Base sample period: {period} µs")
         """
         return self._sample_period
+    
+    @property
+    def sample_rate(self) -> float:
+        """Get base sample rate in Hz.
+        
+        Returns:
+            Sample rate in Hz
+        """
+        return 1000000 / self._sample_period

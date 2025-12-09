@@ -308,9 +308,17 @@ The :class:`~psj_lib.devices.base.capabilities.data_recorder.DataRecorder` recor
 
 See :doc:`base_capabilities` for base data recorder documentation.
 
-**Important Notes:**
-* ``get_memory_length()`` always returns 500000 (maximum length) as d-Drive does not support reading back this value
-* ``get_stride()`` always returns 0 as d-Drive does not support reading back this value
+**d-Drive Data Format:**
+
+The d-Drive recorder returns data that is automatically parsed by :class:`~psj_lib.devices.d_drive.capabilities.d_drive_data_recorder.DDriveDataRecorder`:
+
+* **Position Channel**: Returns percentage of full closed-loop motion range (includes ±30% overshoot capability)
+* **Voltage Channel**: Returns output voltage in Volts
+
+**Configuration Notes:**
+
+* ``get_memory_length()`` returns 500000 (maximum hardware capacity)
+* ``get_stride()`` returns 0 (d-Drive doesn't support reading this back)
 
 d-Drive Closed-Loop Controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

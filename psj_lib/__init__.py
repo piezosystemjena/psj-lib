@@ -43,6 +43,8 @@ from .devices.base import (
     ParameterTooLow,
     Underload,
     Overload,
+    UnknownChannel,
+    ActuatorNotConnected,
 )
 from .devices.base.capabilities import (
     ActuatorDescription,
@@ -119,6 +121,8 @@ __all__ = [
     "ParameterTooLow",
     "Underload",
     "Overload",
+    "UnknownChannel",
+    "ActuatorNotConnected",
 
     # Base Capabilities
     "ActuatorDescription",

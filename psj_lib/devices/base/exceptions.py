@@ -191,8 +191,8 @@ class ErrorCode(Enum):
         OVERLOAD (int): Device detected overload condition (code 8)
         PARAMETER_TOO_LOW (int): Parameter below minimum value (code 9)
         PARAMETER_TOO_HIGH (int): Parameter above maximum value (code 10)
+        ACTUATOR_NOT_CONNECTED (int): Actuator not physically connected (code 98)
         UNKNOWN_CHANNEL (int): Specified channel does not exist (code 99)
-        DESCRIPTIONS (dict): Mapping of error codes to human-readable descriptions
     
     Example:
         >>> error_code = ErrorCode.from_value(2)

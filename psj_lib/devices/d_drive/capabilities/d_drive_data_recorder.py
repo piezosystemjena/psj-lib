@@ -84,12 +84,13 @@ class DDriveDataRecorder(DataRecorder):
         """Get configured recording length.
         
         Returns:
-            Always returns 500000 (max length) as d-Drive does not support reading back
-            this configuration value. Track the value you set manually.
+            Always returns 500000 (hardware maximum) as d-Drive does not support
+            reading back this configuration value.
         
         Note:
             The d-Drive hardware does not provide a read command for
-            memory length. Use the value you configured with set().
+            memory length. This returns the maximum hardware capacity.
+            Use recorder.sample_rate to calculate recording duration.
         """
         return 500000
     
@@ -153,6 +154,72 @@ class DDriveDataRecorder(DataRecorder):
         # - 1: Return single value
         result = await self._write(cmd, [0, 1])
         
-        # Result is ["value"] - extract and convert to float
-        return float(result[0])
+        # Result is ["value"] - parse to appropriate type
+        if channel_idx == DDriveDataRecorderChannel.POSITION.value:
+            return self._parse_pos_value(result[0])
+
+
+        return self._parse_voltage_value(result[0])
+
+    def _parse_pos_value(self, raw_str: str) -> float:
+        """Parse hexadecimal position value from d-Drive.
+        
+        The d-Drive returns position as hexadecimal values (0x0000-0xFFFF)
+        representing percentage of full range with ±30% overshoot capability.
+        
+        Args:
+            raw_str: Hexadecimal string from device (e.g., "8000")
+        
+        Returns:
+            Position as percentage of full range (-30% to +130%)
+            - 0x0000 → -30% (max negative overshoot)
+            - 0x8000 → 50% (center position)
+            - 0xFFFF → 130% (max positive overshoot)
+        
+        Formula:
+            position = (160 / 65535) * hex_value - 30
+        
+        Example:
+            >>> pos = self._parse_pos_value("8000")  # 0x8000 = 32768
+            >>> print(f"{pos:.1f}%")  # 50.0%
+        """
+        # Parse value as hex integer
+        value = int(raw_str, 16)
+
+        # Convert to percentage of full closed loop motion range (with overshoot of +30%/-30%)
+        pos = (160 / 65535) * value - 30
+
+        return pos
     
+    def _parse_voltage_value(self, raw_str: str) -> float:
+        """Parse hexadecimal voltage value from d-Drive.
+        
+        The d-Drive returns voltage as hexadecimal values (0x0000-0xFFFF)
+        representing the actuator output voltage.
+        
+        Args:
+            raw_str: Hexadecimal string from device (e.g., "8000")
+        
+        Returns:
+            Voltage in volts (-27.5V to +137.5V, 165V total span)
+            - 0x0000 → -27.5V (minimum)
+            - 0x8000 → 55V (mid-range)
+            - 0xFFFF → 137.5V (maximum)
+        
+        Formula:
+            voltage = (165 / 65535) * hex_value - 27.5
+        
+        Example:
+            >>> voltage = self._parse_voltage_value("8000")  # 0x8000 = 32768
+            >>> print(f"{voltage:.1f}V")  # 55.0V
+        
+        Note:
+            This includes a debug print statement for development.
+        """
+        # Parse value as hex integer
+        value = int(raw_str, 16)
+
+        # Convert to voltage in volts (Range: -27.5V to +137.5V)
+        voltage = (165 / 65535) * value - 27.5
+
+        return voltage

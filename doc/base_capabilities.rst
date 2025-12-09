@@ -305,6 +305,11 @@ The data recorder captures device signals (position, setpoint, voltage, etc.) at
         callback=progress
     )
     print(f"Captured {len(data)} samples")
+    
+    # Check recorder specifications
+    sample_rate = recorder.sample_rate  # Hz
+    sample_period = recorder.sample_period  # microseconds
+    print(f"Recording at {sample_rate/1000:.0f} kHz")
 
 **Key Points:**
 
@@ -312,6 +317,7 @@ The data recorder captures device signals (position, setpoint, voltage, etc.) at
 * Memory length limits total capture time
 * Stride (decimation) allows longer time spans at lower data rate
 * Large data transfers may take several seconds
+* Use ``sample_rate`` property to get base recording frequency
 
 
 Trigger Output

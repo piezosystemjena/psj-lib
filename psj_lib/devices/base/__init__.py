@@ -13,7 +13,9 @@ from .exceptions import (
     ParameterTooHigh,
     ParameterTooLow,
     Underload,
-    Overload
+    Overload,
+    UnknownChannel,
+    ActuatorNotConnected,
 )
 
 __all__ = [
@@ -33,5 +35,7 @@ __all__ = [
     "ParameterTooLow",
     "Underload",
     "Overload",
+    "UnknownChannel",
+    "ActuatorNotConnected",
     "capabilities",
 ]
