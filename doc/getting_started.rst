@@ -152,9 +152,7 @@ Open-loop control sets output voltage directly:
     # Set output voltage (0-100V for typical piezo)
     await channel.setpoint.set(50.0)  # 50V
     
-    # Read actual voltage
-    voltage = await channel.setpoint.get()
-    print(f"Output voltage: {voltage:.2f} V")
+    # Note: For d-Drive, you can read back via channel.setpoint.get() (returns cached value)
 
 **Use Cases:**
 

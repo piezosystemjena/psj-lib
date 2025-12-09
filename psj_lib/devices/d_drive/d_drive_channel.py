@@ -6,7 +6,10 @@ providing high-precision positioning with 20-bit resolution and 50 kHz sampling.
 
 from ..base.piezo_channel import PiezoChannel
 from ..base.capabilities import *
+from .capabilities.d_drive_closed_loop_controller import DDriveClosedLoopController
+from .capabilities.d_drive_data_recorder import DDriveDataRecorder
 from .capabilities.d_drive_modulation_source import DDriveModulationSourceTypes
+from .capabilities.d_drive_setpoint import DDriveSetpoint
 from .capabilities.d_drive_status_register import DDriveStatusRegister
 from .capabilities.d_drive_trigger_out import DDriveTriggerOut
 from .capabilities.d_drive_waveform_generator import DDriveWaveformGenerator
@@ -100,7 +103,6 @@ class DDriveChannel(PiezoChannel):
     """
 
     BACKUP_COMMANDS: set[str] = {
-        "fan",
         "modon",
         "monsrc",
         "cl",
@@ -142,9 +144,6 @@ class DDriveChannel(PiezoChannel):
         "trgedge",
         "trgsrc",
         "trgos",
-        "recstride",
-        "reclen",
-        "bright",
     }
     """d-Drive commands to include in backup operations.
     
@@ -200,9 +199,9 @@ class DDriveChannel(PiezoChannel):
         >>> print(f"Actuator: {desc}")
     """
 
-    setpoint: Setpoint = CapabilityDescriptor(
-        Setpoint, {
-            Setpoint.CMD_SETPOINT: "set"
+    setpoint: DDriveSetpoint = CapabilityDescriptor(
+        DDriveSetpoint, {
+            DDriveSetpoint.CMD_SETPOINT: "set"
         }
     )
     """Target position control (commanded position).
@@ -306,9 +305,10 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    closed_loop_controller: ClosedLoopController = CapabilityDescriptor(
-        ClosedLoopController, {
-            ClosedLoopController.CMD_ENABLE: "cloop"
+    closed_loop_controller: DDriveClosedLoopController = CapabilityDescriptor(
+        DDriveClosedLoopController, {
+            DDriveClosedLoopController.CMD_ENABLE: "cl",
+            DDriveClosedLoopController.CMD_STATUS: "stat"
         },
         sample_period=SAMPLE_PERIOD
     )
@@ -459,8 +459,8 @@ class DDriveChannel(PiezoChannel):
         ... )
     """
 
-    data_recorder: DataRecorder = CapabilityDescriptor(
-        DataRecorder, {
+    data_recorder: DDriveDataRecorder = CapabilityDescriptor(
+        DDriveDataRecorder, {
             DataRecorder.CMD_START_RECORDING: "recstart",
             DataRecorder.CMD_STRIDE: "recstride",
             DataRecorder.CMD_MEMORY_LENGTH: "reclen",
@@ -601,3 +601,11 @@ class DDriveChannel(PiezoChannel):
         - Scan function provides automated scanning sequences
         - Check status with get_waveform_type() or is_scan_running()
     """
+
+    async def backup(self) -> dict[str, list[str]]:
+        data = await super().backup()
+
+        # Override cl command to use status register
+        data["cl"] = [str(int(await self.closed_loop_controller.get_enabled()))]
+
+        return data

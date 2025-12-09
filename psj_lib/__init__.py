@@ -82,6 +82,8 @@ from .devices.base.piezo_types import (
 )
 from .devices.d_drive import (
     DDriveChannel,
+    DDriveClosedLoopController,
+    DDriveDataRecorder,
     DDriveDataRecorderChannel,
     DDriveDevice,
     DDriveModulationSourceTypes,
@@ -156,6 +158,8 @@ __all__ = [
 
     # DDrive Device Classes
     "DDriveChannel",
+    "DDriveClosedLoopController",
+    "DDriveDataRecorder",
     "DDriveDataRecorderChannel",
     "DDriveDevice",
     "DDriveModulationSourceTypes",

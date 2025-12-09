@@ -130,12 +130,61 @@ class DDriveDevice(PiezoDevice):
     change frequently. Caching reduces communication overhead for reads.
     """
 
+    DEFAULT_TIMEOUT_SECS = 0.5
+    FRAME_DELIMITER_WRITE = TransportProtocol.CRLF
     FRAME_DELIMITER_READ = TransportProtocol.XON
 
     ERROR_MAP = {
         "command not found": ErrorCode.UNKNOWN_COMMAND,
         "command mismatch": ErrorCode.COMMAND_PARAMETER_COUNT_EXCEEDED,
         " not present": ErrorCode.UNKNOWN_CHANNEL,
+        "unit not available": ErrorCode.ACTUATOR_NOT_CONNECTED,
+    }
+
+    FRAME_DELIMITER_MAP = {
+        "ktemp": TransportProtocol.CR,
+        "m": TransportProtocol.CR,
+        "u": TransportProtocol.CR,
+        "modon": TransportProtocol.CR,
+        "monsrc": TransportProtocol.CR,
+        "pcf": TransportProtocol.CR,
+        "errlpf": TransportProtocol.CR,
+        "elpor": TransportProtocol.CR,
+        "sr": TransportProtocol.CR,
+        "kp": TransportProtocol.CR,
+        "ki": TransportProtocol.CR,
+        "kd": TransportProtocol.CR,
+        "tf": TransportProtocol.CR,
+        "notchon": TransportProtocol.CR,
+        "notchf": TransportProtocol.CR,
+        "notchb": TransportProtocol.CR,
+        "lpon": TransportProtocol.CR,
+        "lpf": TransportProtocol.CR,
+        "gfkt": TransportProtocol.CR,
+        "gasin": TransportProtocol.CR,
+        "gosin": TransportProtocol.CR,
+        "gfsin": TransportProtocol.CR,
+        "gatri": TransportProtocol.CR,
+        "gotri": TransportProtocol.CR,
+        "gftri": TransportProtocol.CR,
+        "gstri": TransportProtocol.CR,
+        "garec": TransportProtocol.CR,
+        "gorec": TransportProtocol.CR,
+        "gfrec": TransportProtocol.CR,
+        "gsrec": TransportProtocol.CR,
+        "ganoi": TransportProtocol.CR,
+        "gonoi": TransportProtocol.CR,
+        "gaswe": TransportProtocol.CR,
+        "goswe": TransportProtocol.CR,
+        "gtswe": TransportProtocol.CR,
+        "sct": TransportProtocol.CR,
+        "trgss": TransportProtocol.CR,
+        "trgse": TransportProtocol.CR,
+        "trgsi": TransportProtocol.CR,
+        "trglen": TransportProtocol.CR,
+        "trgedge": TransportProtocol.CR,
+        "trgsrc": TransportProtocol.CR,
+        "trgos": TransportProtocol.CR,
     }
 
     @classmethod
@@ -168,11 +217,10 @@ class DDriveDevice(PiezoDevice):
         # Check for error strings in response
         for err_str, err_code in self.ERROR_MAP.items():
             if err_str in response.lower():
-                raise ErrorCode.get_exception_class(err_code)(f"Device error: {err_str}")
+                ErrorCode.raise_error(err_code)
 
         # Default parsing (comma-separated values)
         return super()._parse_response(response)
-
 
     async def _discover_channels(self):
         """Discover and initialize all available amplifier channels.
@@ -230,6 +278,20 @@ class DDriveDevice(PiezoDevice):
                 self._write_channel
             )
 
+    async def write_raw(
+        self, 
+        cmd, 
+        timeout: float = DEFAULT_TIMEOUT_SECS, 
+        rx_delimiter: bytes = FRAME_DELIMITER_READ
+    ) -> str:
+        # Override frame delimiter if command has specific mapping (but only for reading)
+        if cmd.count(",") <= 1:
+            raw_cmd = cmd.split(",")[0].lower()
+        
+            if raw_cmd in self.FRAME_DELIMITER_MAP:
+                rx_delimiter = self.FRAME_DELIMITER_MAP[raw_cmd]
+        
+        return await super().write_raw(cmd, timeout, rx_delimiter)
 
     # Override to provide typed channels
     @property

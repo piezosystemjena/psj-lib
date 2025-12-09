@@ -41,3 +41,118 @@ class DDriveDataRecorderChannel(DataRecorderChannel):
     """
     POSITION = DataRecorder.CHANNEL_1_IDX
     VOLTAGE = DataRecorder.CHANNEL_2_IDX
+
+
+class DDriveDataRecorder(DataRecorder):
+    """d-Drive specific data recorder implementation.
+    
+    The d-Drive data recorder captures two channels simultaneously:
+    - Channel 1 (POSITION): Position sensor signal in device units (µm, mrad, etc.)
+    - Channel 2 (VOLTAGE): Actuator voltage in volts
+    
+    Recording specifications:
+    - Maximum 500,000 samples per channel
+    - 50 kHz sample rate (20 µs period) maximum
+    - Stride (decimation) from 1 to 65535
+    - Both channels always record the same length
+    
+    The d-Drive returns data in a device-specific format that requires
+    special parsing, which this class handles automatically.
+    
+    Example:
+        >>> recorder = channel.data_recorder
+        >>> # Configure for 1 second at full rate
+        >>> await recorder.set(memory_length=50000, stride=1)
+        >>> await recorder.start()
+        >>> # ... perform motion ...
+        >>> # Get position data
+        >>> pos_data = await recorder.get_all_data(
+        ...     DDriveDataRecorderChannel.POSITION
+        ... )
+        >>> # Get voltage data
+        >>> vol_data = await recorder.get_all_data(
+        ...     DDriveDataRecorderChannel.VOLTAGE
+        ... )
+    
+    Note:
+        - get_memory_length() and get_stride() not supported by d-Drive
+        - Use the values you configured with set() to track settings
+        - Data format is automatically parsed from d-Drive response
+    """
+    
+    async def get_memory_length(self) -> int:
+        """Get configured recording length.
+        
+        Returns:
+            Always returns 500000 (max length) as d-Drive does not support reading back
+            this configuration value. Track the value you set manually.
+        
+        Note:
+            The d-Drive hardware does not provide a read command for
+            memory length. Use the value you configured with set().
+        """
+        return 500000
+    
+    async def get_stride(self) -> int:
+        """Get decimation stride factor.
+        
+        Returns:
+            Always returns 0 as d-Drive does not support reading back
+            this configuration value. Track the value you set manually.
+        
+        Note:
+            The d-Drive hardware does not provide a read command for
+            stride. Use the value you configured with set().
+        """
+        return 0
+    
+    async def get_data(
+        self,
+        channel: DataRecorderChannel,
+        index: int | None = None
+    ) -> float:
+        """Read a single data sample from specified channel.
+        
+        The d-Drive returns data in format "m,value" (position) or
+        "u,value" (voltage) which is automatically parsed.
+        
+        Args:
+            channel: Which channel to read (POSITION or VOLTAGE)
+            index: Sample index (0 to memory_length-1), or None for
+                  next sequential sample
+        
+        Returns:
+            Single data sample value as float
+        
+        Example:
+            >>> # Read position at index 100
+            >>> pos = await recorder.get_data(
+            ...     DDriveDataRecorderChannel.POSITION,
+            ...     index=100
+            ... )
+            >>> # Read next voltage sample
+            >>> voltage = await recorder.get_data(
+            ...     DDriveDataRecorderChannel.VOLTAGE
+            ... )
+        
+        Note:
+            The d-Drive returns "m,value" or "u,value" format.
+            This method automatically extracts the numeric value.
+        """
+        # Check if index pointer needs to be set
+        if index is not None:
+            await self._write(self.CMD_PTR, [index])
+
+        channel_idx = channel.value
+
+        # Select appropriate command for channel
+        cmd = self.CMD_GET_DATA_1 if channel_idx == self.CHANNEL_1_IDX else self.CMD_GET_DATA_2
+        
+        # d-Drive specific parameters:
+        # - 0: Return full command with prefix ("m,xxx" or "u,xxx")
+        # - 1: Return single value
+        result = await self._write(cmd, [0, 1])
+        
+        # Result is ["value"] - extract and convert to float
+        return float(result[0])
+    

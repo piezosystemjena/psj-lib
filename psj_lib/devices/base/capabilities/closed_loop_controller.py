@@ -38,10 +38,10 @@ class ClosedLoopController(PiezoCapability):
         self, 
         write_cb, 
         device_commands,
-        sampling_period: int
+        sample_period: int
     ):
         super().__init__(write_cb, device_commands)
-        self._sampling_period = sampling_period
+        self._sample_period = sample_period
 
     async def set(self, enabled: bool) -> None:
         """Enable or disable closed-loop control.
@@ -77,7 +77,7 @@ class ClosedLoopController(PiezoCapability):
         return bool(int(result[0]))
     
     @property
-    def sampling_period(self) -> int:
+    def sample_period(self) -> int:
         """Get the closed-loop controller sampling period in microseconds.
         
         The sampling period defines how often the controller updates its
@@ -88,7 +88,9 @@ class ClosedLoopController(PiezoCapability):
             Sampling period in microseconds
         
         Example:
-            >>> period = channel.closed_loop_controller.sampling_period
+            >>> period = channel.closed_loop_controller.sample_period
             >>> print(f"Controller sampling period: {period} µs")
+            >>> freq = 1000000 / period
+            >>> print(f"Control loop frequency: {freq:.0f} Hz")
         """
-        return self._sampling_period
+        return self._sample_period

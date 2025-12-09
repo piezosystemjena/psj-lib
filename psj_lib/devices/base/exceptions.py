@@ -158,6 +158,17 @@ class UnknownChannel(DeviceError):
     pass
 
 
+class ActuatorNotConnected(DeviceError):
+    """Piezo actuator is not physically connected to the device.
+    
+    Raised when the device detects that the piezo actuator is not
+    plugged in or properly connected. This may prevent certain
+    operations that require an active actuator connection.
+    """
+
+    pass
+
+
 class ErrorCode(Enum):
     """Enumeration of device error codes with exception class mapping.
     
@@ -198,22 +209,8 @@ class ErrorCode(Enum):
     OVERLOAD = 8
     PARAMETER_TOO_LOW = 9
     PARAMETER_TOO_HIGH = 10
+    ACTUATOR_NOT_CONNECTED = 98
     UNKNOWN_CHANNEL = 99
-
-    DESCRIPTIONS = {
-        ERROR_NOT_SPECIFIED: "Error not specified",
-        UNKNOWN_COMMAND: "Unknown command",
-        PARAMETER_MISSING: "Parameter missing",
-        ADMISSIBLE_PARAMETER_RANGE_EXCEEDED: "Admissible parameter range exceeded",
-        COMMAND_PARAMETER_COUNT_EXCEEDED: "Command's parameter count exceeded",
-        PARAMETER_LOCKED_OR_READ_ONLY: "Parameter is locked or read only",
-        UNDERLOAD: "Underload",
-        OVERLOAD: "Overload",
-        PARAMETER_TOO_LOW: "Parameter too low",
-        PARAMETER_TOO_HIGH: "Parameter too high",
-        UNKNOWN_CHANNEL: "Channel does not exist"
-    }
-
 
     @classmethod
     def from_value(cls, value: int) -> 'ErrorCode':
@@ -261,6 +258,7 @@ class ErrorCode(Enum):
             cls.OVERLOAD: Overload,
             cls.PARAMETER_TOO_LOW: ParameterTooLow,
             cls.PARAMETER_TOO_HIGH: ParameterTooHigh,
+            cls.ACTUATOR_NOT_CONNECTED: ActuatorNotConnected,
             cls.UNKNOWN_CHANNEL: UnknownChannel,
         }
 
@@ -278,11 +276,27 @@ class ErrorCode(Enum):
         Raises:
             DeviceError: The specific exception corresponding to the error code.
         """
+        
+        descriptions = {
+            ErrorCode.ERROR_NOT_SPECIFIED: "Error not specified",
+            ErrorCode.UNKNOWN_COMMAND: "Unknown command",
+            ErrorCode.PARAMETER_MISSING: "Parameter missing",
+            ErrorCode.ADMISSIBLE_PARAMETER_RANGE_EXCEEDED: "Admissible parameter range exceeded",
+            ErrorCode.COMMAND_PARAMETER_COUNT_EXCEEDED: "Command's parameter count exceeded",
+            ErrorCode.PARAMETER_LOCKED_OR_READ_ONLY: "Parameter is locked or read only",
+            ErrorCode.UNDERLOAD: "Underload",
+            ErrorCode.OVERLOAD: "Overload",
+            ErrorCode.PARAMETER_TOO_LOW: "Parameter too low",
+            ErrorCode.PARAMETER_TOO_HIGH: "Parameter too high",
+            ErrorCode.ACTUATOR_NOT_CONNECTED: "Actuator not connected",
+            ErrorCode.UNKNOWN_CHANNEL: "Channel does not exist"
+        }
+
         # Convert int to ErrorCode if needed
         if isinstance(error_code, int):
             error_code = cls.from_value(error_code)
 
-        actual_message = message or cls.DESCRIPTIONS.get(error_code, "Unknown error")
+        actual_message = message or descriptions.get(error_code, "Unknown error")
 
         exception_class = cls.get_exception_class(error_code)
         raise exception_class(actual_message)

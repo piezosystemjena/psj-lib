@@ -44,18 +44,3 @@ class Setpoint(PiezoCapability):
             - In closed-loop mode, position is actively controlled by the amplifier
         """
         await self._write(self.CMD_SETPOINT, [setpoint])
-
-    async def get(self) -> float:
-        """Get the current target setpoint.
-        
-        Returns:
-            Current setpoint value in device units (typically µm)
-        
-        Example:
-            >>> target = await channel.setpoint.get()
-            >>> actual = await channel.position.get()
-            >>> error = target - actual
-            >>> print(f"Position error: {error:.3f} µm")
-        """
-        result = await self._write(self.CMD_SETPOINT)
-        return float(result[0])

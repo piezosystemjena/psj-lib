@@ -32,7 +32,7 @@ class DataRecorder(PiezoCapability):
     2. Start recording with start() or by using device specific autostart modes 
        (setpoint, waveform generator)
     3. Wait for recording to complete
-    4. Retrieve data with get_all_data() or get_single_data()
+    4. Retrieve data with get_all_data() or get_data()
     
     Example:
         >>> recorder = device.data_recorder
@@ -153,7 +153,7 @@ class DataRecorder(PiezoCapability):
         """
         await self._write(self.CMD_START_RECORDING, None)
 
-    async def get_single_data(
+    async def get_data(
         self,
         channel: DataRecorderChannel,
         index: int | None = None
@@ -170,12 +170,12 @@ class DataRecorder(PiezoCapability):
         
         Example:
             >>> # Read sample at index 100
-            >>> value = await recorder.get_single_data(
+            >>> value = await recorder.get_data(
             ...     DataRecorderChannel.CHANNEL_1,
             ...     index=100
             ... )
             >>> # Read next sequential sample
-            >>> value2 = await recorder.get_single_data(
+            >>> value2 = await recorder.get_data(
             ...     DataRecorderChannel.CHANNEL_1
             ... )
         
@@ -196,7 +196,8 @@ class DataRecorder(PiezoCapability):
     async def get_all_data(
         self,
         channel: DataRecorderChannel,
-        callback: ProgressCallback | None = None
+        max_length: int | None = None,
+        callback: ProgressCallback | None = None,
     ) -> list[float]:
         """Retrieve all recorded data from specified channel.
         
@@ -205,6 +206,8 @@ class DataRecorder(PiezoCapability):
         
         Args:
             channel: Which channel to retrieve
+            max_length: Maximum number of samples to retrieve. If None,
+                        retrieves full configured length.
             callback: Optional progress callback function(current, total)
         
         Returns:
@@ -234,12 +237,12 @@ class DataRecorder(PiezoCapability):
             - Units depend on recorded signal type
         """
         # Get total length of recorded data
-        length = await self.get_memory_length()
+        length = max_length if max_length is not None else await self.get_memory_length()
         data = []
 
         # Retrieve all data points for the specified channel
         for i in range(length):
-            data.append(await self.get_single_data(channel, 0 if i == 0 else None))
+            data.append(await self.get_data(channel, 0 if i == 0 else None))
 
             # Call progress callback if provided
             if callback is not None:

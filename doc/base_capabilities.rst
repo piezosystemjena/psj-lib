@@ -93,7 +93,7 @@ Enables or disables closed-loop position control. When enabled, the controller u
     print(f"Mode: {'Closed-loop' if is_closed_loop else 'Open-loop'}")
     
     # Get controller sampling period
-    period_us = channel.closed_loop_controller.sampling_period
+    period_us = channel.closed_loop_controller.sample_period
     print(f"Control rate: {1e6/period_us:.0f} Hz")
 
 **Key Points:**

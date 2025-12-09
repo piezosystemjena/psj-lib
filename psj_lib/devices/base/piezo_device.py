@@ -567,7 +567,12 @@ class PiezoDevice:
             - Automatically formats command with channel ID
             - Command format: "command,channel_id[,param1,param2,...]"
         """
-        full_cmd = f"{cmd},{channel_id}"
+        cmd_list = cmd.split(",")
+        full_cmd = f"{cmd_list[0]},{channel_id}"
+
+        # If channel command has additional parts after comma, append them as parameters
+        if len(cmd_list) > 1:
+            params = cmd_list[1:] + (params if params is not None else [])
 
         response = await self.write(full_cmd, params)
 
@@ -814,7 +819,8 @@ class PiezoDevice:
     async def write_raw(
         self,
         cmd: str,
-        timeout: float = DEFAULT_TIMEOUT_SECS
+        timeout: float = DEFAULT_TIMEOUT_SECS,
+        rx_delimiter: bytes = FRAME_DELIMITER_READ
     ) -> Awaitable[str]:
         """Send a raw command string and return unparsed device response.
         
@@ -837,6 +843,8 @@ class PiezoDevice:
                 Frame delimiters are added automatically.
             timeout: Maximum time to wait for device response in seconds.
                 Default: 0.6 seconds
+            rx_delimiter: Optional custom receive delimiter bytes.
+                Default: Device configured FRAME_DELIMITER_READ
 
         Returns:
             Raw response string from device including any delimiters or control characters
@@ -871,7 +879,7 @@ class PiezoDevice:
         async with self.lock:
             try:
                 await self._transport.write(cmd + self.FRAME_DELIMITER_WRITE.decode("utf-8"))
-                response = await self._transport.read_message(timeout=timeout)
+                response = await self._transport.read_until(expected=rx_delimiter, timeout=timeout)
             except Exception as e:
                 raise DeviceUnavailableException(f"Failed to write/read from device: {repr(e)}") from e
 

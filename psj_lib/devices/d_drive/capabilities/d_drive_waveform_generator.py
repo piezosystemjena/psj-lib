@@ -161,8 +161,7 @@ class DDriveWaveformGenerator(PiezoCapability):
                 StaticWaveformGenerator.CMD_AMPLITUDE: self._device_commands[self.CMD_SINE_AMPLITUDE],
                 StaticWaveformGenerator.CMD_OFFSET: self._device_commands[self.CMD_SINE_OFFSET],
                 StaticWaveformGenerator.CMD_FREQUENCY: self._device_commands[self.CMD_SINE_FREQUENCY],
-            },
-            DDriveWaveformType.SINE,
+            }
         )
 
         self._triangle = StaticWaveformGenerator(
@@ -172,8 +171,7 @@ class DDriveWaveformGenerator(PiezoCapability):
                 StaticWaveformGenerator.CMD_OFFSET: self._device_commands[self.CMD_TRI_OFFSET],
                 StaticWaveformGenerator.CMD_FREQUENCY: self._device_commands[self.CMD_TRI_FREQUENCY],
                 StaticWaveformGenerator.CMD_DUTY_CYCLE: self._device_commands[self.CMD_TRI_DUTY_CYCLE],
-            },
-            DDriveWaveformType.TRIANGLE,
+            }
         )
 
         self._rectangle = StaticWaveformGenerator(
@@ -183,8 +181,7 @@ class DDriveWaveformGenerator(PiezoCapability):
                 StaticWaveformGenerator.CMD_OFFSET: self._device_commands[self.CMD_REC_OFFSET],
                 StaticWaveformGenerator.CMD_FREQUENCY: self._device_commands[self.CMD_REC_FREQUENCY],
                 StaticWaveformGenerator.CMD_DUTY_CYCLE: self._device_commands[self.CMD_REC_DUTY_CYCLE],
-            },
-            DDriveWaveformType.RECTANGLE,
+            }
         )
 
         self._noise = StaticWaveformGenerator(
@@ -192,8 +189,7 @@ class DDriveWaveformGenerator(PiezoCapability):
             {
                 StaticWaveformGenerator.CMD_AMPLITUDE: self._device_commands[self.CMD_NOISE_AMPLITUDE],
                 StaticWaveformGenerator.CMD_OFFSET: self._device_commands[self.CMD_NOISE_OFFSET],
-            },
-            DDriveWaveformType.NOISE,
+            }
         )
 
         self._sweep = StaticWaveformGenerator(
@@ -202,8 +198,7 @@ class DDriveWaveformGenerator(PiezoCapability):
                 StaticWaveformGenerator.CMD_AMPLITUDE: self._device_commands[self.CMD_SWEEP_AMPLITUDE],
                 StaticWaveformGenerator.CMD_OFFSET: self._device_commands[self.CMD_SWEEP_OFFSET],
                 StaticWaveformGenerator.CMD_FREQUENCY: self._device_commands[self.CMD_SWEEP_TIME],
-            },
-            DDriveWaveformType.SWEEP,
+            }
         )
 
     async def set_waveform_type(self, waveform_type: DDriveWaveformType) -> None:

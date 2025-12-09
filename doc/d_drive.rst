@@ -118,7 +118,7 @@ All d-Drive channel capabilities with API references:
      - Amplifier electronics temperature monitoring
    * - ``fan``
      - :class:`~psj_lib.devices.base.capabilities.fan.Fan`
-     - Cooling fan enable/disable control
+     - Cooling fan enable/disable control (Presence of fan is hardware dependent)
    * - ``closed_loop_controller``
      - :class:`~psj_lib.devices.base.capabilities.closed_loop_controller.ClosedLoopController`
      - Feedback control enable/disable
@@ -307,6 +307,76 @@ The :class:`~psj_lib.devices.base.capabilities.data_recorder.DataRecorder` recor
         )
 
 See :doc:`base_capabilities` for base data recorder documentation.
+
+**Important Notes:**
+* ``get_memory_length()`` always returns 500000 (maximum length) as d-Drive does not support reading back this value
+* ``get_stride()`` always returns 0 as d-Drive does not support reading back this value
+
+d-Drive Closed-Loop Controller
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_closed_loop_controller.DDriveClosedLoopController` extends the base controller with d-Drive specific status reading:
+
+.. code-block:: python
+
+    from psj_lib import DDriveDevice, TransportType
+    
+    device = DDriveDevice(TransportType.SERIAL, "COM3")
+    async with device:
+        channel = device.channels[0]
+        controller = channel.closed_loop_controller
+        
+        # Enable closed-loop control
+        await controller.set(True)
+        
+        # Check status via status register (d-Drive specific)
+        is_enabled = await controller.get_enabled()
+        print(f"Closed-loop active: {is_enabled}")
+        
+        # Get control loop frequency
+        period = controller.sample_period  # 20 µs for d-Drive
+        frequency = 1000000 / period  # 50 kHz
+        print(f"Control loop: {frequency:.0f} Hz")
+
+**Key Features:**
+
+* Reads closed-loop state from hardware status register (bit 7)
+* 50 kHz control loop (20 µs sample period)
+* Integrated with PID controller for precise position control
+
+
+d-Drive Setpoint
+^^^^^^^^^^^^^^^^
+
+The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_setpoint.DDriveSetpoint` provides setpoint control with client-side caching:
+
+.. code-block:: python
+
+    from psj_lib import DDriveDevice, TransportType
+    
+    device = DDriveDevice(TransportType.SERIAL, "COM3")
+    async with device:
+        channel = device.channels[0]
+        
+        # Set target position
+        await channel.setpoint.set(50.0)  # 50 µm
+        
+        # Read back cached value (not from hardware)
+        target = await channel.setpoint.get()
+        print(f"Target: {target} µm")
+        
+        # Compare with actual position
+        actual = await channel.position.get()
+        error = target - actual
+        print(f"Position error: {error:.3f} µm")
+
+**Important Notes:**
+
+* ``get()`` returns the **cached** value, not a hardware read
+* d-Drive hardware does not support reading back setpoint
+* Cache is updated only when ``set()`` is called
+* If setpoint is changed by another application, cache will be stale
+* Initial cache value is 0.0 before first ``set()`` call
 
 
 Multi-Channel Coordination
