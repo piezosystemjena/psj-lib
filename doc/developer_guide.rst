@@ -112,13 +112,15 @@ Here's the minimal steps to add a new device type:
         async def _is_device_type(
             cls,
             transport: TransportProtocol
-        ) -> bool:
+        ) -> str | None:
             """Check if connected device is this type."""
             try:
                 response = await transport.send_command("idn?")
-                return "MyDevice" in response
+                if "MyDevice" in response:
+                    return cls.DEVICE_ID
+                return None
             except Exception:
-                return False
+                return None
         
         async def _discover_channels(self) -> list[PiezoChannel]:
             """Discover available channels."""

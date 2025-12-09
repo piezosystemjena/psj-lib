@@ -268,7 +268,7 @@ class PiezoDevice:
         
         Example (subclass implementation):
             >>> @classmethod
-            >>> async def _is_device_type(cls, tp: TransportProtocol) -> bool:
+            >>> async def _is_device_type(cls, tp: TransportProtocol) -> str | None:
             ...     await tp.write('identify' + tp.CRLF)
             ...     response = await tp.read_message()
             ...     return cls.DEVICE_ID if cls.DEVICE_ID in response else None

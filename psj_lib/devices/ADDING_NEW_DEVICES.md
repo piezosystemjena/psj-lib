@@ -500,7 +500,7 @@ class YourDeviceDevice(PiezoDevice):
     """Commands whose responses can be cached for performance optimization."""
 
     @classmethod
-    async def _is_device_type(cls, tp: TransportProtocol) -> bool:
+    async def _is_device_type(cls, tp: TransportProtocol) -> str | None:
         """Check if connected device is a YourDevice amplifier.
         
         Sends a probe command and checks the response for device identification.
@@ -510,7 +510,7 @@ class YourDeviceDevice(PiezoDevice):
             tp: Transport protocol instance connected to device
 
         Returns:
-            True if device responds as YourDevice, False otherwise
+            Device ID string if device responds as YourDevice, None otherwise
         
         Example response format:
             "YourDevice V2.0 S/N:12345"
@@ -523,13 +523,14 @@ class YourDeviceDevice(PiezoDevice):
             if response and len(response) > 0:
                 device_string = response[0].upper()
                 # Adjust this check for your device's response
-                return "YOURDEVICE" in device_string
+                if "YOURDEVICE" in device_string:
+                    return cls.DEVICE_ID
                 
         except Exception:
             pass
         
-        return False
-
+        return None
+        
     async def _discover_channels(self) -> None:
         """Discover and initialize all available amplifier channels.
         
@@ -935,14 +936,16 @@ class YourDeviceWaveformGenerator(PiezoCapability):
 2. **Verify `_is_device_type()` works:**
    ```python
    @classmethod
-   async def _is_device_type(cls, tp: TransportProtocol) -> bool:
+   async def _is_device_type(cls, tp: TransportProtocol) -> str | None:
        try:
            response = await tp.write("*IDN?", None)
            print(f"Device response: {response}")  # Debug output
-           return "YOURDEVICE" in response[0].upper()
+           if "YOURDEVICE" in response[0].upper():
+               return cls.DEVICE_ID
+           return None
        except Exception as e:
            print(f"Error: {e}")
-           return False
+           return None
    ```
 
 3. **Check device is imported:**
