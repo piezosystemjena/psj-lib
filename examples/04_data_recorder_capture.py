@@ -32,13 +32,13 @@ async def main():
         
         # Configure data recorder
         print("[1] Configuring data recorder...")
-        sample_rate = 50000  # 50 kHz max
-        duration_sec = 1.0
+        sample_rate = 10000  # 10 kHz
+        duration_sec = 0.1
         num_samples = int(sample_rate * duration_sec)
         
         await channel.data_recorder.set(
-            memory_length=num_samples,  # 50k samples = 1 second
-            stride=1  # No decimation (full 50 kHz)
+            memory_length=num_samples,  # 1k samples = 0.1 seconds
+            stride=channel.data_recorder.sample_rate // sample_rate
         )
         print(f"  ✓ Configured: {num_samples} samples at {sample_rate} Hz")
         print(f"  Duration: {duration_sec} seconds\n")
@@ -48,9 +48,9 @@ async def main():
         # Alternatively, you could start it manually with start()
         print("\n[3] Performing position step (30µm → 70µm)...")
         await channel.setpoint.set(30.0)
-        await asyncio.sleep(0.3)
+        await asyncio.sleep(1)
         await channel.setpoint.set(70.0)
-        await asyncio.sleep(0.7)
+        await asyncio.sleep(1)
         print("  ✓ Motion complete")
         
         # Retrieve recorded data
@@ -63,12 +63,16 @@ async def main():
 
 
         print("\n[4] Retrieving recorded data...")
+        print("    Retrieving position data...")
         position_data = await channel.data_recorder.get_all_data(
             DDriveDataRecorderChannel.POSITION,
+            num_samples,
             progress_cb
         )
+        print("\n    Retrieving voltage data...")
         voltage_data = await channel.data_recorder.get_all_data(
             DDriveDataRecorderChannel.VOLTAGE,
+            num_samples,
             progress_cb
         )
         print(f"  ✓ Retrieved {len(position_data)} position samples")
@@ -80,7 +84,7 @@ async def main():
 
         with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(['Time (s)', 'Position (µm)', 'Voltage (V)'])
+            writer.writerow(['Time (s)', 'Position (%)', 'Voltage (V)'])
 
             for i in range(len(position_data)):
                 time = i / sample_rate
@@ -92,7 +96,7 @@ async def main():
         print("\n[6] Data Statistics:")
         print(f"  Position: min={min(position_data):.2f}, "
               f"max={max(position_data):.2f}, "
-              f"avg={sum(position_data)/len(position_data):.2f} µm")
+              f"avg={sum(position_data)/len(position_data):.2f} %")
         print(f"  Voltage:  min={min(voltage_data):.2f}, "
               f"max={max(voltage_data):.2f}, "
               f"avg={sum(voltage_data)/len(voltage_data):.2f} V")
@@ -107,7 +111,7 @@ async def main():
             fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6))
             
             ax1.plot(time_axis, position_data, 'b-', linewidth=0.5)
-            ax1.set_ylabel('Position (µm)')
+            ax1.set_ylabel('Position (%)')
             ax1.set_title('d-Drive Data Recorder Capture')
             ax1.grid(True)
             
