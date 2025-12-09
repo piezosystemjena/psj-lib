@@ -17,7 +17,7 @@ async def main():
     print("=" * 60)
     
     # Connect to device (adjust COM port as needed)
-    device = DDriveDevice(TransportType.SERIAL, 'COM3')
+    device = DDriveDevice(TransportType.SERIAL, 'COM1')
     await device.connect()
     print(f"✓ Connected to device with {len(device.channels)} channel(s)\n")
     
@@ -40,8 +40,8 @@ async def main():
         
         # Set new PID settings
         print("[3] Set new PID settings...")
-        await channel.pid_controller.set(p=5.0, i=2.0, d=0.01)
-        print("  Set: P=5.0, I=2.0, D=0.01\n")
+        await channel.pid_controller.set(p=0.0, i=0.0, d=0.0)
+        print("  Set: P=0.0, I=0.0, D=0.0\n")
 
         # Set to a test position
         print("[4] Moving to test position (50 µm)...")

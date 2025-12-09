@@ -19,7 +19,7 @@ async def main():
     print("=" * 60)
     
     # Connect to device
-    device = DDriveDevice(TransportType.SERIAL, 'COM3')
+    device = DDriveDevice(TransportType.SERIAL, 'COM1')
     await device.connect()
     print(f"✓ Connected to device\n")
     
@@ -34,25 +34,25 @@ async def main():
         print("[1] Generating Sine Wave...")
         await wfg.sine.set(
             amplitude=20.0,  # 20 µm amplitude
-            offset=50.0,     # Centered at 50 µm
+            offset=20.0,     # Centered at 20 µm
             frequency=5.0    # 5 Hz
         )
         await wfg.set_waveform_type(DDriveWaveformType.SINE)
-        print("  ✓ Sine: 20µm amplitude, 50µm offset, 5Hz")
+        print("  ✓ Sine: 20µm amplitude, 20µm offset, 5Hz")
         
         # Let it run briefly
-        await asyncio.sleep(2)
+        await asyncio.sleep(20)
         
         # Test 2: Triangle wave
         print("[2] Generating Triangle Wave...")
         await wfg.triangle.set(
             amplitude=30.0,
-            offset=50.0,
+            offset=20.0,
             frequency=2.0,
             duty_cycle=50.0  # Symmetric triangle
         )
         await wfg.set_waveform_type(DDriveWaveformType.TRIANGLE)
-        print("  ✓ Triangle: 30µm amplitude, 50µm offset, 2Hz, 50% duty")
+        print("  ✓ Triangle: 30µm amplitude, 20µm offset, 2Hz, 50% duty")
         
         await asyncio.sleep(2)
         

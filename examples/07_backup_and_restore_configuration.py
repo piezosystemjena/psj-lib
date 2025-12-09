@@ -8,11 +8,12 @@ This example demonstrates how to:
 
 Configuration management is useful for reproducible experiments and quick setting changes.
 """
-
+import logging
 import asyncio
 import json
 from psj_lib import DDriveDevice, TransportType
 
+logging.basicConfig(level=logging.DEBUG)
 
 async def main():
     print("=" * 60)
@@ -20,7 +21,7 @@ async def main():
     print("=" * 60)
     
     # Connect to device
-    device = DDriveDevice(TransportType.SERIAL, 'COM3')
+    device = DDriveDevice(TransportType.SERIAL, 'COM1')
     await device.connect()
     print(f"✓ Connected to device\n")
     
@@ -54,11 +55,11 @@ async def main():
         
         # Step 3: Modify settings for an experiment
         print("[3] Modifying settings for experiment...")
-        await channel.pid_controller.set(p=15.0, i=8.0, d=0.1)
+        await channel.pid_controller.set(p=0, i=0, d=0)
         await channel.slew_rate.set(5.0)
         await channel.notch.set(enabled=True, frequency=500.0, bandwidth=50.0)
         print("  ✓ Applied experimental settings:")
-        print("    PID: P=15.0, I=8.0, D=0.1")
+        print("    PID: P=0, I=0, D=0")
         print("    Slew Rate: 5.0 V/ms")
         print("    Notch Filter: Enabled at 500 Hz\n")
         

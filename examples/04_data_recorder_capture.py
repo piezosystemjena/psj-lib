@@ -20,7 +20,7 @@ async def main():
     print("=" * 60)
     
     # Connect to device
-    device = DDriveDevice(TransportType.SERIAL, 'COM3')
+    device = DDriveDevice(TransportType.SERIAL, 'COM1')
     await device.connect()
     print(f"✓ Connected to device\n")
     

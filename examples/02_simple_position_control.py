@@ -20,7 +20,7 @@ async def main():
     print("=" * 60)
     
     # Connect to device (adjust COM port as needed)
-    device = DDriveDevice(TransportType.SERIAL, 'COM3')
+    device = DDriveDevice(TransportType.SERIAL, 'COM1')
     await device.connect()
     print(f"✓ Connected to device with {len(device.channels)} channel(s)\n")
     
@@ -41,7 +41,7 @@ async def main():
         
         # In open-loop, setpoint directly controls voltage
         await channel.setpoint.set(50.0)
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(1)
         
         setpoint = await channel.setpoint.get()
         position = await channel.position.get()

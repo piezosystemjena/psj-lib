@@ -19,7 +19,7 @@ async def main():
     print("=" * 60)
     
     # Connect to device
-    device = DDriveDevice(TransportType.SERIAL, 'COM3')
+    device = DDriveDevice(TransportType.SERIAL, 'COM1')
     await device.connect()
     print(f"✓ Connected to device\n")
     
@@ -46,7 +46,7 @@ async def main():
         # Test position step with notch filter
         print("  Testing with notch filter enabled...")
         await channel.setpoint.set(50.0)
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(1)
         pos = await channel.position.get()
         print(f"  Position: {pos:.2f} µm\n")
         
@@ -65,7 +65,7 @@ async def main():
         # Test position step with LPF
         print("  Testing with low-pass filter enabled...")
         await channel.setpoint.set(70.0)
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(1)
         pos = await channel.position.get()
         print(f"  Position: {pos:.2f} µm\n")
         
@@ -83,7 +83,7 @@ async def main():
         # Test position step with error filter
         print("  Testing with error filter enabled...")
         await channel.setpoint.set(30.0)
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(1)
         pos = await channel.position.get()
         print(f"  Position: {pos:.2f} µm\n")
         
@@ -94,7 +94,7 @@ async def main():
         # Note: Error LPF typically stays enabled
         
         await channel.setpoint.set(50.0)
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(1)
         pos = await channel.position.get()
         print(f"  Position: {pos:.2f} µm")
         print("  (Compare response stability with filters off)\n")
