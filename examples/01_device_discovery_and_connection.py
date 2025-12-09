@@ -81,30 +81,32 @@ async def main():
             for channel_id, channel in device.channels.items():
                 print(f"    - Channel {channel_id}")
         
-        # Step 6: Query basic information from first channel
+        # Step 6: Query basic information from channels
         if device.channels:
-            print("\n[5] Querying Channel 0 Information:")
-            channel = device.channels[0]
-            
-            # Read temperature
-            try:
-                temp = await channel.temperature.get()
-                print(f"  Temperature: {temp:.1f}°C")
-            except Exception as e:
-                print(f"  Temperature: (error - {e})")
-            
-            # Read status
-            try:
-                status = await channel.status_register.get()
-                print(f"  Status:")
-                print(f"    - Actuator plugged: {status.actor_plugged}")
-                print(f"    - Sensor type: {status.sensor_type.name}")
-                print(f"    - Closed-loop: {status.closed_loop}")
-                print(f"    - Voltage enabled: {status.piezo_voltage_enabled}")
-            except Exception as e:
-                print(f"  Status: (error - {e})")
+            for channel_id, channel in device.channels.items():
+                print(f"\n[5] Querying Channel {channel_id} Information:")
+                
+                # Read temperature
+                try:
+                    temp = await channel.temperature.get()
+                    print(f"  Temperature: {temp:.1f}°C")
+                except Exception as e:
+                    print(f"  Temperature: (error - {e})")
+                
+                # Read status
+                try:
+                    status = await channel.status_register.get()
+                    print(f"  Status:")
+                    print(f"    - Actuator plugged: {status.actor_plugged}")
+                    print(f"    - Sensor type: {status.sensor_type.name}")
+                    print(f"    - Closed-loop: {status.closed_loop}")
+                    print(f"    - Voltage enabled: {status.piezo_voltage_enabled}")
+                except Exception as e:
+                    print(f"  Status: (error - {e})")
+
+                print()
         
-        print("\n[6] Disconnecting...")
+        print("[6] Disconnecting...")
         await device.close()
         print("✓ Disconnected successfully!")
         
