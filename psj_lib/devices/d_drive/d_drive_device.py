@@ -120,7 +120,7 @@ class DDriveDevice(PiezoDevice):
         "trglen",
         "trgedge",
         "trgsrc",
-        "trgoffs",
+        "trgos",
         "recstride",
         "bright",
     }
@@ -192,7 +192,6 @@ class DDriveDevice(PiezoDevice):
         # Set channel output to scientific notation for accuracy
         for channel in self._channels.values():
             await channel._write("setf", [1])
-            await channel._write("setg", [1])
 
     def _parse_channel_status(self, response: str):
         """Parse device status response to identify active channels.

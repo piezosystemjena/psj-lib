@@ -141,7 +141,7 @@ class DDriveChannel(PiezoChannel):
         "trglen",
         "trgedge",
         "trgsrc",
-        "trgoffs",
+        "trgos",
         "recstride",
         "reclen",
         "bright",
