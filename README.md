@@ -1,39 +1,41 @@
 ![logo](doc/_static/piezosystem_logo.svg)
 
-# psj-lib
+# psj-lib ⚡
 
 [![Python Version](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 
 TODO: ADD PyPI BADGE
 
-A comprehensive Python library for controlling piezoelectric amplifiers and control devices manufactured by [piezosystem jena GmbH](https://www.piezosystem.com).
+A comprehensive Python library for controlling piezoelectric amplifiers and control devices manufactured by [piezosystem jena GmbH](https://www.piezosystem.com). 🎛️
 
-## Features
+## ✨ Features
 
-- **Asynchronous Architecture** - Built on Python's `asyncio` for efficient, non-blocking device communication
-- **Multi-Device Support** - Extensible framework supporting multiple device families (currently d-Drive)
-- **Comprehensive Capabilities** - Full access to position control, PID tuning, waveform generation, data recording, and filtering
-- **Multiple Transport Protocols** - Connect via Serial (USB) or Telnet (Ethernet)
-- **Type-Safe API** - Complete type hints for excellent IDE autocomplete and type checking
-- **Extensive Documentation** - Comprehensive docstrings, examples, and developer guides
+- **⚡ Asynchronous Architecture** - Built on Python's `asyncio` for efficient, non-blocking device communication
+- **🔌 Multi-Device Support** - Extensible framework supporting multiple device families (currently d-Drive)
+- **🎯 Comprehensive Capabilities** - Full access to position control, PID tuning, waveform generation, data recording, and filtering
+- **🌐 Multiple Transport Protocols** - Connect via Serial (USB) or Telnet (Ethernet)
+- **🛡️ Type-Safe API** - Complete type hints for excellent IDE autocomplete and type checking
+- **📚 Extensive Documentation** - Comprehensive docstrings, examples, and developer guides
 
-## Supported Devices
+## 🔧 Supported Devices
 
-### d-Drive Modular Amplifier
+### 🎚️ d-Drive Modular Amplifier
 
 The d-Drive series represents piezosystem jena's modular piezo amplifier family:
 
-- **High Resolution**: 20-bit DAC/ADC for precision control
-- **Fast Sampling**: 50 kHz (20 µs period) for responsive control
-- **Modular Design**: 1-6 channel configurations in compact enclosure
-- **Advanced Control**: Integrated PID controller with configurable filters
-- **Waveform Generation**: Built-in function generator with scan modes
-- **Data Acquisition**: 2-channel recorder with 500,000 samples per channel
-- **Hardware Triggers**: Precise timing and synchronization
+- **📊 High Resolution**: 20-bit DAC/ADC for precision control
+- **⚡ Fast Sampling**: 50 kHz (20 µs period) for responsive control
+- **🧩 Modular Design**: 1-6 channel configurations in compact enclosure
+- **🎛️ Advanced Control**: Integrated PID controller with configurable filters
+- **🌊 Waveform Generation**: Built-in function generator with scan modes
+- **💾 Data Acquisition**: 2-channel recorder with 500,000 samples per channel
+- **⏱️ Hardware Triggers**: Precise timing and synchronization
 
-## Installation
+**Note**: For NV200 please use the [nv200-python-lib](https://github.com/piezosystemjena/nv200-python-lib).
 
-### From PyPI (Recommended)
+## 📦 Installation
+
+### From PyPI (Recommended) ⭐
 
 ```bash
 pip install psj-lib
@@ -52,9 +54,9 @@ pip install -e .
 - Python 3.12 or higher
 - Windows 10/11, Linux, or macOS 10.15+
 
-## Quick Start
+## 🚀 Quick Start
 
-### Basic Position Control
+### 🎯 Basic Position Control
 
 ```python
 import asyncio
@@ -82,7 +84,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### Device Discovery
+### 🔍 Device Discovery
 
 ```python
 from psj_lib import PiezoDevice, DiscoverFlags
@@ -97,7 +99,7 @@ for device in devices:
     print(f"Found: {info.device_id} on {info.transport_info.identifier}")
 ```
 
-### PID Control Configuration
+### ⚙️ PID Control Configuration
 
 ```python
 # Configure PID parameters for closed-loop control
@@ -116,7 +118,7 @@ await channel.notch.set(
 )
 ```
 
-### Waveform Generation
+### 🌊 Waveform Generation
 
 ```python
 # Generate 10 Hz sine wave for scanning
@@ -128,7 +130,7 @@ await channel.waveform_generator.sine.set(
 await channel.waveform_generator.set_waveform_type(WaveformType.SINE)
 ```
 
-### Data Recording
+### 📊 Data Recording
 
 ```python
 # Configure data recorder for 1 second capture at 50 kHz
@@ -148,7 +150,7 @@ data = await channel.data_recorder.get_all_data(
 )
 ```
 
-## Architecture
+## 🏗️ Architecture
 
 psj-lib uses a three-layer hierarchical architecture:
 
@@ -159,23 +161,23 @@ PiezoDevice (e.g., DDriveDevice)
       └─ Capabilities (Position, PID, WaveformGenerator, etc.)
 ```
 
-### Key Design Patterns
+### 🎨 Key Design Patterns
 
-- **Capability-Based Architecture**: Features are modular `PiezoCapability` subclasses
-- **Async/Await**: All I/O operations use Python's asyncio
-- **Command Caching**: Reduces latency for frequently read values
-- **Type Safety**: Full type hints for IDE support and type checking
+- **🧩 Capability-Based Architecture**: Features are modular `PiezoCapability` subclasses
+- **⚡ Async/Await**: All I/O operations use Python's asyncio
+- **💨 Command Caching**: Reduces latency for frequently read values
+- **🛡️ Type Safety**: Full type hints for IDE support and type checking
 
-## Documentation
+## 📖 Documentation
 
 Comprehensive documentation is available at TODO: Link github page (or locally in `doc/_build/index.html`):
 
-- **Getting Started** - Tutorials and basic usage
-- **API Reference** - Complete API documentation
-- **Device Documentation** - Device-specific guides (d-Drive)
-- **Base Capabilities** - Common capabilities across all devices
-- **Examples** - Practical usage examples
-- **Developer Guide** - Extending the library
+- **🎓 Getting Started** - Tutorials and basic usage
+- **📘 API Reference** - Complete API documentation
+- **🔧 Device Documentation** - Device-specific guides (d-Drive)
+- **⚙️ Base Capabilities** - Common capabilities across all devices
+- **💡 Examples** - Practical usage examples
+- **👨‍💻 Developer Guide** - Extending the library
 
 ### Building Documentation Locally
 
@@ -186,7 +188,7 @@ poetry run sphinx-build -b html . _build/
 
 Then open `doc/_build/index.html` in your browser.
 
-## Examples
+## 💡 Examples
 
 The `examples/` directory contains practical examples:
 
@@ -204,9 +206,9 @@ Run an example:
 poetry run python examples/01_device_discovery_and_connection.py
 ```
 
-## Development
+## 👨‍💻 Development
 
-### Setup Development Environment
+### 🛠️ Setup Development Environment
 
 ```bash
 # Clone repository
@@ -220,13 +222,13 @@ poetry install
 poetry run pytest
 ```
 
-### Adding New Devices
+### ➕ Adding New Devices
 
 For a complete guide on adding support for new devices, see:
 - [`psj_lib/devices/ADDING_NEW_DEVICES.md`](psj_lib/devices/ADDING_NEW_DEVICES.md) (1200+ line comprehensive guide)
 - Developer Guide in documentation
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please:
 
@@ -236,8 +238,8 @@ Contributions are welcome! Please:
 4. Update documentation as needed
 5. Submit a pull request
 
-## Support
+## 💬 Support
 
-- **Documentation**: TODO: Link to documentation
-- **Issues**: [GitHub Issues](https://github.com/piezosystemjena/psj-lib/issues)
-- **Website**: [piezosystem jena GmbH](https://www.piezosystem.com)
+- **📖 Documentation**: TODO: Link to documentation
+- **🐛 Issues**: [GitHub Issues](https://github.com/piezosystemjena/psj-lib/issues)
+- **🌐 Website**: [piezosystem jena GmbH](https://www.piezosystem.com)
