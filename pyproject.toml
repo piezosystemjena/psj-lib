@@ -11,7 +11,7 @@
 [tool.poetry]
 name = "psj-lib"
 version = "0.0.1"
-description = "Python library for amplifiers and control devices of piezosystem jena"
+description = "Python library for amplifiers and other devices of piezosystem jena"
 packages = [{include = "psj_lib"}]
 authors = ["piezosystem jena GmbH"]
 readme = "README_PYPI.md"
@@ -25,7 +25,10 @@ classifiers = [
 
 
 [tool.poetry.urls]
-# TODO Add URLs
+Homepage = "https://github.com/piezosystemjena/psj-lib"
+Source = "https://github.com/piezosystemjena/psj-lib"
+"Bug Tracker" = "https://github.com/piezosystemjena/psj-lib/issues"
+Documentation = "https://piezosystemjena.github.io/psj-lib/"
 
 
 # This section defines the dependencies for the project using Poetry.
