@@ -1,4 +1,4 @@
-# psj-lib ⚡
+# psj-lib
 
 [![PyPI version](https://img.shields.io/pypi/v/psj-lib)](https://pypi.org/project/psj-lib/)
 [![Python Version](https://img.shields.io/pypi/pyversions/psj-lib)](https://www.python.org/downloads/)
@@ -8,12 +8,12 @@ A comprehensive Python library for controlling piezoelectric amplifiers and cont
 
 ## ✨ Features
 
-- **⚡ Asynchronous Architecture** - Built on Python's `asyncio` for efficient, non-blocking device communication
-- **🔌 Multi-Device Support** - Extensible framework supporting multiple device families (currently d-Drive)
-- **🎯 Comprehensive Capabilities** - Full access to position control, PID tuning, waveform generation, data recording, and filtering
-- **🌐 Multiple Transport Protocols** - Connect via Serial (USB) or Telnet (Ethernet)
-- **🛡️ Type-Safe API** - Complete type hints for excellent IDE autocomplete and type checking
-- **📚 Extensive Documentation** - Comprehensive docstrings, examples, and developer guides
+- **Asynchronous Architecture** - Built on Python's `asyncio` for efficient, non-blocking device communication
+- **Multi-Device Support** - Extensible framework supporting multiple device families (currently d-Drive)
+- **Comprehensive Capabilities** - Full access to position control, PID tuning, waveform generation, data recording, and filtering
+- **Multiple Transport Protocols** - Connect via Serial (USB) or Telnet (Ethernet)
+- **Type-Safe API** - Complete type hints for excellent IDE autocomplete and type checking
+- **Extensive Documentation** - Comprehensive docstrings, examples, and developer guides
 
 ## 🔧 Supported Devices
 
@@ -21,13 +21,13 @@ A comprehensive Python library for controlling piezoelectric amplifiers and cont
 
 The d-Drive series represents piezosystem jena's modular piezo amplifier family:
 
-- **📊 High Resolution**: 20-bit DAC/ADC for precision control
-- **⚡ Fast Sampling**: 50 kHz (20 µs period) for responsive control
-- **🧩 Modular Design**: 1-6 channel configurations in compact enclosure
-- **🎛️ Advanced Control**: Integrated PID controller with configurable filters
-- **🌊 Waveform Generation**: Built-in function generator with scan modes
-- **💾 Data Acquisition**: 2-channel recorder with 500,000 samples per channel
-- **⏱️ Hardware Triggers**: Precise timing and synchronization
+- **High Resolution**: 20-bit DAC/ADC for precision control
+- **Fast Sampling**: 50 kHz (20 µs period) for responsive control
+- **Modular Design**: 1-6 channel configurations in compact enclosure
+- **Advanced Control**: Integrated PID controller with configurable filters
+- **Waveform Generation**: Built-in function generator with scan modes
+- **Data Acquisition**: 2-channel recorder with 500,000 samples per channel
+- **Hardware Triggers**: Precise timing and synchronization
 
 **Note**: For NV200 please use the [nv200-python-lib](https://github.com/piezosystemjena/nv200-python-lib).
 
@@ -44,7 +44,7 @@ pip install psj-lib
 
 ## 🚀 Quick Start
 
-### 🎯 Basic Position Control
+### Basic Position Control
 
 ```python
 import asyncio
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 🔍 Device Discovery
+### Device Discovery
 
 ```python
 from psj_lib import PiezoDevice, DiscoverFlags
@@ -87,7 +87,7 @@ for device in devices:
     print(f"Found: {info.device_id} on {info.transport_info.identifier}")
 ```
 
-### ⚙️ PID Control Configuration
+### PID Control Configuration
 
 ```python
 # Configure PID parameters for closed-loop control
@@ -106,7 +106,7 @@ await channel.notch.set(
 )
 ```
 
-### 🌊 Waveform Generation
+### Waveform Generation
 
 ```python
 from psj_lib import DDriveWaveformType
@@ -120,7 +120,7 @@ await channel.waveform_generator.sine.set(
 await channel.waveform_generator.set_waveform_type(DDriveWaveformType.SINE)
 ```
 
-### 📊 Data Recording
+### Data Recording
 
 ```python
 from psj_lib import DDriveDataRecorderChannel
@@ -149,12 +149,12 @@ voltage_data = await channel.data_recorder.get_all_data(
 
 Full documentation is available at: [GitHub Repository](https://github.com/piezosystemjena/psj-lib)
 
-- **🎓 Getting Started** - Tutorials and basic usage
-- **📘 API Reference** - Complete API documentation
-- **🔧 Device Documentation** - Device-specific guides (d-Drive)
-- **⚙️ Base Capabilities** - Common capabilities across all devices
-- **💡 Examples** - Practical usage examples
-- **👨‍💻 Developer Guide** - Extending the library
+- **Getting Started** - Tutorials and basic usage
+- **API Reference** - Complete API documentation
+- **Device Documentation** - Device-specific guides (d-Drive)
+- **Base Capabilities** - Common capabilities across all devices
+- **Examples** - Practical usage examples
+- **Developer Guide** - Extending the library
 
 ## 💡 Examples
 
@@ -179,12 +179,12 @@ PiezoDevice (e.g., DDriveDevice)
       └─ Capabilities (Position, PID, WaveformGenerator, etc.)
 ```
 
-### 🎨 Key Design Patterns
+### Key Design Patterns
 
-- **🧩 Capability-Based Architecture**: Features are modular `PiezoCapability` subclasses
-- **⚡ Async/Await**: All I/O operations use Python's asyncio
-- **💨 Command Caching**: Reduces latency for frequently read values
-- **🛡️ Type Safety**: Full type hints for IDE support and type checking
+- **Capability-Based Architecture**: Features are modular `PiezoCapability` subclasses
+- **Async/Await**: All I/O operations use Python's asyncio
+- **Command Caching**: Reduces latency for frequently read values
+- **Type Safety**: Full type hints for IDE support and type checking
 
 ## 🤝 Contributing
 
@@ -192,9 +192,9 @@ Contributions are welcome! Please visit the [GitHub repository](https://github.c
 
 ## 💬 Support
 
-- **📖 Documentation**: [GitHub Repository](https://github.com/piezosystemjena/psj-lib)
-- **🐛 Issues**: [GitHub Issues](https://github.com/piezosystemjena/psj-lib/issues)
-- **🌐 Website**: [piezosystem jena GmbH](https://www.piezosystem.com)
+- **Documentation**: [GitHub Repository](https://github.com/piezosystemjena/psj-lib)
+- **Issues**: [GitHub Issues](https://github.com/piezosystemjena/psj-lib/issues)
+- **Website**: [piezosystem jena GmbH](https://www.piezosystem.com)
 
 ## 📄 License
 
