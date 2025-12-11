@@ -240,6 +240,6 @@ Contributions are welcome! Please:
 
 ## 💬 Support
 
-- **Documentation**: TODO: Link to documentation
+- **Documentation**: [GitHub Pages](https://piezosystemjena.github.io/psj-lib)
 - **Issues**: [GitHub Issues](https://github.com/piezosystemjena/psj-lib/issues)
 - **Website**: [piezosystem jena GmbH](https://www.piezosystem.com)

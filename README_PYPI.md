@@ -192,7 +192,7 @@ Contributions are welcome! Please visit the [GitHub repository](https://github.c
 
 ## 💬 Support
 
-- **Documentation**: [GitHub Repository](https://github.com/piezosystemjena/psj-lib)
+- **Documentation**: [GitHub Pages](https://piezosystemjena.github.io/psj-lib)
 - **Issues**: [GitHub Issues](https://github.com/piezosystemjena/psj-lib/issues)
 - **Website**: [piezosystem jena GmbH](https://www.piezosystem.com)
 
