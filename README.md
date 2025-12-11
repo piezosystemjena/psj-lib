@@ -2,7 +2,9 @@
 
 # psj-lib ⚡
 
-[![Python Version](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![PyPI version](https://img.shields.io/pypi/v/psj-lib)](https://pypi.org/project/psj-lib/)
+[![Python Version](https://img.shields.io/pypi/pyversions/psj-lib)](https://www.python.org/downloads/)
+[![Docs](https://img.shields.io/badge/docs-online-success)](https://piezosystemjena.github.io/psj-lib/)
 
 TODO: ADD PyPI BADGE
 
