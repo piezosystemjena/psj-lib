@@ -19,7 +19,7 @@ A comprehensive Python library for controlling piezoelectric amplifiers and cont
 
 ## 🔧 Supported Devices
 
-### 🎚️ d-Drive Modular Amplifier
+### d-Drive Modular Amplifier
 
 The d-Drive series represents piezosystem jena's modular piezo amplifier family:
 
