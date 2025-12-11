@@ -4,7 +4,7 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/psj-lib)](https://www.python.org/downloads/)
 [![Docs](https://img.shields.io/badge/docs-online-success)](https://piezosystemjena.github.io/psj-lib/)
 
-A comprehensive Python library for controlling piezoelectric amplifiers and control devices manufactured by [piezosystem jena GmbH](https://www.piezosystem.com). 🎛️
+A comprehensive Python library for controlling piezoelectric amplifiers and control devices manufactured by [piezosystem jena GmbH](https://www.piezosystem.com).
 
 ## ✨ Features
 
