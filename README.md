@@ -161,7 +161,7 @@ PiezoDevice (e.g., DDriveDevice)
       └─ Capabilities (Position, PID, WaveformGenerator, etc.)
 ```
 
-### 🎨 Key Design Patterns
+### Key Design Patterns
 
 - **Capability-Based Architecture**: Features are modular `PiezoCapability` subclasses
 - **Async/Await**: All I/O operations use Python's asyncio
