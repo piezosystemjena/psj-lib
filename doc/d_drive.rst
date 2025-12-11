@@ -35,7 +35,6 @@ Status and Monitoring
 * **Status Register**: Real-time hardware state flags
 * **Temperature**: Internal amplifier temperature monitoring
 * **Actuator Description**: Connected piezo description readout
-* **Units**: Measurement unit readout
 * **Fan Control**: Active cooling fan management
 
 Position Control
@@ -109,7 +108,7 @@ All d-Drive channel capabilities with API references:
      - Actuator identification and specifications
    * - ``setpoint``
      - :class:`~psj_lib.devices.base.capabilities.setpoint.Setpoint`
-     - Target position control (write)
+     - Target position control (write-only, readback is cached client-side)
    * - ``position``
      - :class:`~psj_lib.devices.base.capabilities.position.Position`
      - Actual position readback (read-only, updates every 500ms)
@@ -155,9 +154,6 @@ All d-Drive channel capabilities with API references:
    * - ``trigger_out``
      - :class:`~psj_lib.devices.d_drive.capabilities.d_drive_trigger_out.DDriveTriggerOut`
      - Hardware trigger output with d-Drive specific offset parameter
-   * - ``units``
-     - :class:`~psj_lib.devices.base.capabilities.units.Units`
-     - Measurement unit information (read-only)
 
 
 d-Drive Status Register

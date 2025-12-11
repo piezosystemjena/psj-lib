@@ -504,22 +504,6 @@ class DDriveChannel(PiezoChannel):
         - Use stride for longer durations at lower rate
     """
 
-    units: Units = CapabilityDescriptor(
-        Units, {
-            Units.CMD_UNIT_POSITION: "acclmas",
-            Units.CMD_UNIT_VOLTAGE: "acolmas"
-        }
-    )
-    """Measurement unit information.
-    
-    Query units used for position and voltage measurements.
-    
-    Example:
-        >>> pos_unit = await channel.units.get_position_unit()
-        >>> vol_unit = await channel.units.get_voltage_unit()
-        >>> print(f"Position: {pos_unit}, Voltage: {vol_unit}")
-    """
-
     waveform_generator: DDriveWaveformGenerator = CapabilityDescriptor(
         DDriveWaveformGenerator, {
             DDriveWaveformGenerator.CMD_WFG_TYPE: "gfkt",
