@@ -12,12 +12,16 @@ from .capabilities.d_drive_waveform_generator import (
     DDriveWaveformGenerator,
     DDriveWaveformType,
 )
-from .d_drive_channel import DDriveChannel
-from .d_drive_device import DDriveDevice
+from .d_drive.d_drive_channel import DDriveChannel
+from .d_drive.d_drive_device import DDriveDevice
+from .psj_30dv.psj_30dv_device import PSJ30DVDevice
+from .psj_30dv.psj_30dv_channel import PSJ30DVChannel
 
 __all__ = [
     "DDriveDevice",
     "DDriveChannel",
+    "PSJ30DVDevice",
+    "PSJ30DVChannel",
     "DDriveClosedLoopController",
     "DDriveDataRecorder",
     "DDriveDataRecorderChannel",

@@ -11,8 +11,7 @@ This is the starting point for all d-Drive operations.
 """
 
 import asyncio
-from psj_lib import PiezoDevice, DDriveDevice
-from psj_lib.devices.transport_protocol import DiscoverFlags
+from psj_lib import PiezoDevice, DDriveDevice, DiscoverFlags, PSJ30DVDevice
 
 
 async def main():

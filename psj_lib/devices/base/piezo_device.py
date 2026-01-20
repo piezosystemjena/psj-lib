@@ -186,8 +186,19 @@ class PiezoDevice:
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
-        if cls.DEVICE_ID:
-            DEVICE_MODEL_REGISTRY[cls.DEVICE_ID] = cls
+        cls._register_device_class(cls)
+        cls._register_descendant_devices(cls)
+
+    @staticmethod
+    def _register_device_class(device_cls: type["PiezoDevice"]) -> None:
+        if device_cls.DEVICE_ID:
+            DEVICE_MODEL_REGISTRY[device_cls.DEVICE_ID] = device_cls
+
+    @classmethod
+    def _register_descendant_devices(cls, base_cls: type["PiezoDevice"]) -> None:
+        for subclass in base_cls.__subclasses__():
+            cls._register_device_class(subclass)
+            cls._register_descendant_devices(subclass)
 
 
     @classmethod
@@ -279,11 +290,9 @@ class PiezoDevice:
             - Should be fast to avoid slowing down discovery process
             - Should handle communication errors gracefully (return False)
         """
-
         if cls.DEVICE_ID is None:
             for subclass in DEVICE_MODEL_REGISTRY.values():
                 id = await subclass._is_device_type(tp)
-
                 if id is not None:
                     return id
 
@@ -539,7 +548,7 @@ class PiezoDevice:
 
     async def _write_channel(
         self,
-        channel_id: int,
+        channel_id: int | None,
         cmd: str,
         params: list[int | float | str | bool] | None = None
     ) -> list[str]:
@@ -550,7 +559,7 @@ class PiezoDevice:
         method. It's used as the write callback for PiezoChannel instances.
 
         Args:
-            channel_id: Numeric ID of the target channel (typically 0-based)
+            channel_id: Numeric ID of the target channel (typically 0-based) or None for single-channel devices
             cmd: Command name to send
             params: Optional list of parameters for the command. None for read operations.
 
@@ -568,7 +577,7 @@ class PiezoDevice:
             - Command format: "command,channel_id[,param1,param2,...]"
         """
         cmd_list = cmd.split(",")
-        full_cmd = f"{cmd_list[0]},{channel_id}"
+        full_cmd = f"{cmd_list[0]},{channel_id}" if channel_id is not None else cmd_list[0]
 
         # If channel command has additional parts after comma, append them as parameters
         if len(cmd_list) > 1:
@@ -577,7 +586,11 @@ class PiezoDevice:
         response = await self.write(full_cmd, params)
 
         # Strip channel ID (first param) from response
-        return response[1:]
+        if channel_id is not None and len(response) > 0:
+            return response[1:]
+        
+        # If no channel ID, return full response
+        return response
 
     async def _capability_write(
         self,

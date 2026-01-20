@@ -18,10 +18,10 @@ For detailed hardware specifications, refer to the d-Drive Instruction Manual.
 from ..base.exceptions import ErrorCode
 from ..base.piezo_device import PiezoDevice
 from ..transport_protocol import TransportProtocol
-from .d_drive_channel import DDriveChannel
+from .d_drive_family_channel import DDriveFamilyChannel
 
 
-class DDriveDevice(PiezoDevice):
+class DDriveFamilyDevice(PiezoDevice):
     """Piezosystem Jena d-Drive modular amplifier system.
     
     Represents a complete d-Drive system with 1-6 amplifier channels.
@@ -68,11 +68,14 @@ class DDriveDevice(PiezoDevice):
         - Use device.channels dict to access available channels
     """
 
-    DEVICE_ID = "D-Drive"
+    DEVICE_ID = "d-Drive Family Device"
     """Device type identifier used for device discovery and type checking."""
 
     BACKUP_COMMANDS = set()
     """Global device commands to include in backup operations (currently none for d-Drive)."""
+
+    D_DRIVE_IDENTIFIER = "INVALID_STRING"
+    """Internal identifier string used to recognize different d-Drive family devices. Overridden in subclasses."""
     
     CACHEABLE_COMMANDS = {
         "acdescr",
@@ -208,7 +211,7 @@ class DDriveDevice(PiezoDevice):
         try:
             await tp.write("\r\n")
             msg = await tp.read_message()
-            return cls.DEVICE_ID if "DSM V" in msg else None
+            return cls.DEVICE_ID if (cls.D_DRIVE_IDENTIFIER + " V") in msg else None
         except TimeoutError as e:
             return None
         
@@ -222,62 +225,6 @@ class DDriveDevice(PiezoDevice):
         # Default parsing (comma-separated values)
         return super()._parse_response(response)
 
-    async def _discover_channels(self):
-        """Discover and initialize all available amplifier channels.
-        
-        Queries the device for channel status and creates DDriveChannel
-        instances for each detected amplifier module.
-        
-        Note:
-            - Called automatically during device connection
-            - Detects channels 0-5 (hardware dependent)
-            - Only populated slots are initialized
-            - Internal method, not typically called by users
-        """
-        response = await self.write_raw("stat")
-        self._parse_channel_status(response)
-
-        # Set channel output to scientific notation for accuracy
-        for channel in self._channels.values():
-            await channel._write("setf", [1])
-
-    def _parse_channel_status(self, response: str):
-        """Parse device status response to identify active channels.
-        
-        Args:
-            response: Raw status command response from device
-        
-        Note:
-            - Parses "stat,X" patterns where X is channel number (0-5)
-            - Initializes DDriveChannel objects for detected channels
-            - Clears channel dict before populating with discovered channels
-        """
-        lines = response.split("\n")
-
-        # Reset all channels
-        self._channels = {}
-
-        # Go through every line in the response
-        for line in lines:
-            # Check if line is empty
-            if len(line) == 0:
-                continue
-
-            index = line.find("stat,")
-
-            # Check if channel was not detected
-            if index < 0:
-                continue
-
-            # Extract channel number from detected channel
-            index += len("stat,")
-            channel_number = int(line[index])
-
-            self.channels[channel_number] = DDriveChannel(
-                channel_number, 
-                self._write_channel
-            )
-
     async def write_raw(
         self, 
         cmd, 
@@ -290,16 +237,16 @@ class DDriveDevice(PiezoDevice):
         
             if raw_cmd in self.FRAME_DELIMITER_MAP:
                 rx_delimiter = self.FRAME_DELIMITER_MAP[raw_cmd]
-        
+
         return await super().write_raw(cmd, timeout, rx_delimiter)
 
     # Override to provide typed channels
     @property
-    def channels(self) -> dict[int, DDriveChannel]:
+    def channels(self) -> dict[int, DDriveFamilyChannel]:
         """Get dictionary of available d-Drive amplifier channels.
         
         Returns:
-            Dictionary mapping channel number (0-5) to DDriveChannel instance,
+            Dictionary mapping channel number (0-5) to DDriveFamilyChannel instance,
             or None for unpopulated slots
         
         Example:
