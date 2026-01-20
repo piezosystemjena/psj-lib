@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connecting to Devices &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Connecting to Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connection-overview">Connection Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-discovery">Device Discovery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-device-discovery">Automatic Device Discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-discovery-with-connection">Using Discovery with Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serial-connection">Serial Connection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#serial-port-identification">Serial Port Identification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-serial-connection">Creating a Serial Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-connection-management">Manual Connection Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#serial-port-settings">Serial Port Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connection-patterns">Connection Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#context-manager-pattern-recommended">Context Manager Pattern (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#long-running-connection">Long-Running Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-devices">Multiple Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#connection-failures">Connection Failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timeout-configuration">Timeout Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reconnection-logic">Reconnection Logic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#device-not-found">“Device Not Found”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#permission-denied-linux-serial">“Permission Denied” (Linux Serial)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connection-timeout">“Connection Timeout”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port-already-in-use">“Port Already in Use”</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Connecting to Devices</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="connecting-to-devices">
+<h1>Connecting to Devices<a class="headerlink" href="#connecting-to-devices" title="Link to this heading"></a></h1>
+<p>This guide explains how to discover and connect to piezosystem jena devices using psj-lib.</p>
+<section id="connection-overview">
+<h2>Connection Overview<a class="headerlink" href="#connection-overview" title="Link to this heading"></a></h2>
+<p>psj-lib supports two connection methods:</p>
+<ul class="simple">
+<li><p><strong>Serial (USB)</strong>: Direct USB connection using virtual COM port</p></li>
+<li><p><strong>Telnet (Ethernet)</strong>: Network connection via Telnet protocol</p></li>
+</ul>
+<p>The same high-level API is used regardless of transport type,
+allowing seamless switching between connection methods.</p>
+<p>Final connectivity support depends on the specific device model.</p>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<p>The fastest way to connect:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Connect via Serial</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>  <span class="c1"># Windows</span>
+    <span class="c1"># device = DDriveDevice(TransportType.SERIAL, &quot;/dev/ttyUSB0&quot;)  # Linux</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+        <span class="c1"># Device is now connected</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="device-discovery">
+<h2>Device Discovery<a class="headerlink" href="#device-discovery" title="Link to this heading"></a></h2>
+<section id="automatic-device-discovery">
+<h3>Automatic Device Discovery<a class="headerlink" href="#automatic-device-discovery" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">discover_devices()</span></code> method automatically finds connected devices:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">DiscoverFlags</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">discover</span><span class="p">():</span>
+    <span class="c1"># Discover all connected d-Drive devices</span>
+    <span class="n">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DDriveDevice</span><span class="o">.</span><span class="n">discover_devices</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device: </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Address: </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">address</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type: </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">transport_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">discover</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>Example Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Device: d-Drive
+Address: COM3
+Type: TransportType.SERIAL
+---
+</pre></div>
+</div>
+</section>
+<section id="using-discovery-with-connection">
+<h3>Using Discovery with Connection<a class="headerlink" href="#using-discovery-with-connection" title="Link to this heading"></a></h3>
+<p>Complete discovery and connection example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">discover_and_connect</span><span class="p">():</span>
+    <span class="c1"># Discover devices</span>
+    <span class="n">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DDriveDevice</span><span class="o">.</span><span class="n">discover_devices</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">devices</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No devices found&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Get first device (already created and ready to connect)</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Method 1: Connect with async context manager</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Available channels: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Method 2: Manual open/close</span>
+    <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Use device...</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="serial-connection">
+<h2>Serial Connection<a class="headerlink" href="#serial-connection" title="Link to this heading"></a></h2>
+<section id="serial-port-identification">
+<h3>Serial Port Identification<a class="headerlink" href="#serial-port-identification" title="Link to this heading"></a></h3>
+<p><strong>Windows:</strong></p>
+<p>Ports are named <code class="docutils literal notranslate"><span class="pre">COM1</span></code>, <code class="docutils literal notranslate"><span class="pre">COM2</span></code>, <code class="docutils literal notranslate"><span class="pre">COM3</span></code>, etc.</p>
+<p>Check Device Manager → Ports (COM &amp; LPT) to find your device.</p>
+<p><strong>Linux:</strong></p>
+<p>Ports are typically <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code>, <code class="docutils literal notranslate"><span class="pre">/dev/ttyACM0</span></code>, etc.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/dev/ttyUSB*</span> <span class="pre">/dev/ttyACM*</span></code> to list ports.</p>
+<p><strong>macOS:</strong></p>
+<p>Ports appear as <code class="docutils literal notranslate"><span class="pre">/dev/cu.usbserial-*</span></code> or <code class="docutils literal notranslate"><span class="pre">/dev/tty.usbserial-*</span></code>.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/dev/cu.*</span> <span class="pre">/dev/tty.*</span></code> to list ports.</p>
+</section>
+<section id="creating-a-serial-connection">
+<h3>Creating a Serial Connection<a class="headerlink" href="#creating-a-serial-connection" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect_serial</span><span class="p">():</span>
+    <span class="c1"># Create device (not connected yet)</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Connect using context manager (recommended)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+        <span class="c1"># Device is now open and connected</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Access channels</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">status_register</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Device automatically disconnected when exiting context</span>
+</pre></div>
+</div>
+</section>
+<section id="manual-connection-management">
+<h3>Manual Connection Management<a class="headerlink" href="#manual-connection-management" title="Link to this heading"></a></h3>
+<p>If you need manual control over connection lifecycle:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">manual_connection</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Manually open connection</span>
+        <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Device opened&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Use device...</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># Always close when done</span>
+        <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Device closed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="serial-port-settings">
+<h3>Serial Port Settings<a class="headerlink" href="#serial-port-settings" title="Link to this heading"></a></h3>
+<p>psj-lib automatically configures serial port settings:</p>
+<ul class="simple">
+<li><p><strong>Baud Rate</strong>: 115200</p></li>
+<li><p><strong>Data Bits</strong>: 8</p></li>
+<li><p><strong>Stop Bits</strong>: 1</p></li>
+<li><p><strong>Parity</strong>: None</p></li>
+<li><p><strong>Flow Control</strong>: None</p></li>
+</ul>
+<p>These settings are optimized for piezosystem jena devices and typically don’t need adjustment.</p>
+</section>
+</section>
+<section id="connection-patterns">
+<h2>Connection Patterns<a class="headerlink" href="#connection-patterns" title="Link to this heading"></a></h2>
+<section id="context-manager-pattern-recommended">
+<h3>Context Manager Pattern (Recommended)<a class="headerlink" href="#context-manager-pattern-recommended" title="Link to this heading"></a></h3>
+<p>The context manager automatically handles connection lifecycle:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">safe_connection</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+        <span class="c1"># Connection opens here</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span>
+
+        <span class="c1"># Do work with device</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Connection closes here (even if exception occurs)</span>
+</pre></div>
+</div>
+</section>
+<section id="long-running-connection">
+<h3>Long-Running Connection<a class="headerlink" href="#long-running-connection" title="Link to this heading"></a></h3>
+<p>For applications that keep device connected:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControlSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;System started&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;System stopped&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">move_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="n">channel_id</span><span class="p">]</span>
+        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+
+<span class="c1"># Usage</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">ControlSystem</span><span class="p">(</span><span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">system</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Use system...</span>
+<span class="k">await</span> <span class="n">system</span><span class="o">.</span><span class="n">move_channel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
+
+<span class="c1"># Clean shutdown</span>
+<span class="k">await</span> <span class="n">system</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-devices">
+<h3>Multiple Devices<a class="headerlink" href="#multiple-devices" title="Link to this heading"></a></h3>
+<p>Managing multiple devices simultaneously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">multi_device</span><span class="p">():</span>
+    <span class="c1"># Create multiple devices</span>
+    <span class="n">device1</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+    <span class="n">device2</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">TELNET</span><span class="p">,</span> <span class="s2">&quot;192.168.1.100&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Connect both</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device1</span><span class="p">,</span> <span class="n">device2</span><span class="p">:</span>
+        <span class="c1"># Both devices connected</span>
+
+        <span class="c1"># Parallel operations</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+            <span class="n">device1</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">30.0</span><span class="p">),</span>
+            <span class="n">device2</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">60.0</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
+<section id="connection-failures">
+<h3>Connection Failures<a class="headerlink" href="#connection-failures" title="Link to this heading"></a></h3>
+<p>Handle connection errors gracefully:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceError</span><span class="p">,</span> <span class="n">ProtocolError</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">safe_connect</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connected successfully&quot;</span><span class="p">)</span>
+            <span class="c1"># Use device...</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">DeviceError</span><span class="p">,</span> <span class="n">ProtocolError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to connect: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Try alternative port or notify user</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="timeout-configuration">
+<h3>Timeout Configuration<a class="headerlink" href="#timeout-configuration" title="Link to this heading"></a></h3>
+<p>Set timeout for connection attempts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect_with_timeout</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Wait up to 5 seconds for connection</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="mf">5.0</span><span class="p">):</span>
+            <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connected&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connection timeout - check device power and cables&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="reconnection-logic">
+<h3>Reconnection Logic<a class="headerlink" href="#reconnection-logic" title="Link to this heading"></a></h3>
+<p>Implement automatic reconnection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect_with_retry</span><span class="p">(</span><span class="n">port</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected on attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">device</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="n">DeviceError</span><span class="p">,</span> <span class="n">ProtocolError</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> failed&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_attempts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># Wait before retry</span>
+
+    <span class="k">raise</span> <span class="n">DeviceConnectionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed after </span><span class="si">{</span><span class="n">max_attempts</span><span class="si">}</span><span class="s2"> attempts&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Link to this heading"></a></h2>
+<p>After connecting, verify device is ready:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">verify_connection</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device Info: </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check channels discovered</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channels: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Read status from each channel</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">status_register</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Closed loop: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">closed_loop_state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Temperature: </span><span class="si">{</span><span class="k">await</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Use Context Managers</strong>: Always use <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">with</span></code> for automatic cleanup</p></li>
+<li><p><strong>Check Discovery</strong>: Use discovery before hardcoding ports/addresses</p></li>
+<li><p><strong>Handle Errors</strong>: Always catch and handle connection errors</p></li>
+<li><p><strong>Verify Connection</strong>: Read device info after connecting</p></li>
+<li><p><strong>Clean Shutdown</strong>: Ensure <code class="docutils literal notranslate"><span class="pre">close()</span></code> is called or use context manager</p></li>
+<li><p><strong>Network Stability</strong>: Use Telnet for permanent installations, Serial for development</p></li>
+<li><p><strong>Timeout Protection</strong>: Set reasonable timeouts for all operations</p></li>
+<li><p><strong>Single Connection</strong>: Don’t open multiple connections to same device</p></li>
+</ol>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="device-not-found">
+<h3>“Device Not Found”<a class="headerlink" href="#device-not-found" title="Link to this heading"></a></h3>
+<p><strong>Symptom</strong>: Discovery returns empty list</p>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li><p>Check device is powered on</p></li>
+<li><p>Verify cable connections</p></li>
+<li><p>Check correct transport type (Serial vs Telnet)</p></li>
+<li><p>Try manual port/address specification</p></li>
+<li><p>Verify drivers installed (Serial)</p></li>
+<li><p>Check network connectivity (Telnet)</p></li>
+</ul>
+</section>
+<section id="permission-denied-linux-serial">
+<h3>“Permission Denied” (Linux Serial)<a class="headerlink" href="#permission-denied-linux-serial" title="Link to this heading"></a></h3>
+<p><strong>Symptom</strong>: Cannot open serial port</p>
+<p><strong>Solution</strong>: Add user to dialout group:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>dialout<span class="w"> </span><span class="nv">$USER</span>
+<span class="c1"># Log out and back in</span>
+</pre></div>
+</div>
+</section>
+<section id="connection-timeout">
+<h3>“Connection Timeout”<a class="headerlink" href="#connection-timeout" title="Link to this heading"></a></h3>
+<p><strong>Symptom</strong>: Connection attempts timeout</p>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li><p>Verify device is not already connected by another application</p></li>
+<li><p>Check baud rate (should be auto-detected)</p></li>
+<li><p>Try power cycling the device</p></li>
+<li><p>For Telnet: verify IP address and network connectivity</p></li>
+</ul>
+</section>
+<section id="port-already-in-use">
+<h3>“Port Already in Use”<a class="headerlink" href="#port-already-in-use" title="Link to this heading"></a></h3>
+<p><strong>Symptom</strong>: Serial port locked by another application</p>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li><p>Close any other applications using the device</p></li>
+<li><p>Check for zombie processes: <code class="docutils literal notranslate"><span class="pre">lsof</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">ttyUSB</span></code> (Linux)</p></li>
+<li><p>Disconnect and reconnect USB cable</p></li>
+<li><p>Restart computer as last resort</p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<p>Now that you can connect to devices:</p>
+<ul class="simple">
+<li><p>Learn basic operations: <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a></p></li>
+<li><p>Explore d-Drive features: <a class="reference internal" href="d_drive.html"><span class="doc">d-Drive and 30DV50/300</span></a></p></li>
+<li><p>See working examples: <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

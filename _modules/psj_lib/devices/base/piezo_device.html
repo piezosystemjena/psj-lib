@@ -1,0 +1,1321 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.base.piezo_device &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.base.piezo_device</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.base.piezo_device</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Base classes for piezoelectric device communication and control.</span>
+
+<span class="sd">This module provides the generic PiezoDevice base class that handles low-level</span>
+<span class="sd">communication, command caching, synchronization, and channel management for</span>
+<span class="sd">piezoelectric amplifiers and controllers.</span>
+
+<span class="sd">The PiezoDevice class is designed to be subclassed by device-specific</span>
+<span class="sd">implementations (e.g., d-Drive, NV200) which define their specific command</span>
+<span class="sd">sets, capabilities, and behaviors.</span>
+
+<span class="sd">Key Features:</span>
+<span class="sd">    - Async command execution with automatic response parsing</span>
+<span class="sd">    - Optional command caching to reduce communication overhead  </span>
+<span class="sd">    - Reentrant async locking for thread-safe access</span>
+<span class="sd">    - Multi-channel device support</span>
+<span class="sd">    - Backup/restore of device configurations</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Awaitable</span><span class="p">,</span> <span class="n">Self</span><span class="p">,</span> <span class="n">Type</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..._internal._reentrant_lock</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ReentrantAsyncLock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..transport_protocol</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DeviceDiscovery</span><span class="p">,</span>
+    <span class="n">DeviceUnavailableException</span><span class="p">,</span>
+    <span class="n">DiscoverFlags</span><span class="p">,</span>
+    <span class="n">TransportFactory</span><span class="p">,</span>
+    <span class="n">TransportProtocol</span><span class="p">,</span>
+    <span class="n">TransportType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.command_cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommandCache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.device_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceFactory</span><span class="p">,</span> <span class="n">DEVICE_MODEL_REGISTRY</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ErrorCode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.piezo_channel</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoChannel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.piezo_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceInfo</span>
+
+<span class="c1"># Global module locker</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PiezoDevice">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PiezoDevice</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic base class for piezoelectric amplifier and controller devices.</span>
+
+<span class="sd">    PiezoDevice provides a comprehensive async interface for communicating with</span>
+<span class="sd">    piezoelectric devices over various transport protocols (serial or Telnet).</span>
+<span class="sd">    It encapsulates low-level device commands, response parsing, synchronization,</span>
+<span class="sd">    and optional result caching.</span>
+
+<span class="sd">    This class is designed to be subclassed by concrete device implementations</span>
+<span class="sd">    (e.g., DDriveDevice, NV200Device) which define specific command sets,</span>
+<span class="sd">    capabilities, and channel configurations.</span>
+
+<span class="sd">    Command Caching:</span>
+<span class="sd">        PiezoDevice supports intelligent caching of command parameters/values to</span>
+<span class="sd">        reduce latency from frequent read operations. Each read over serial/Telnet</span>
+<span class="sd">        can add several milliseconds of latency, so caching significantly improves performance</span>
+<span class="sd">        for applications that repeatedly query device state (e.g., GUI monitoring).</span>
+<span class="sd">        </span>
+<span class="sd">        Caching behavior:</span>
+<span class="sd">        - Only commands in CACHEABLE_COMMANDS set are cached</span>
+<span class="sd">        - Cache is automatically invalidated on write operations</span>
+<span class="sd">        - Enable/disable per-instance via enable_cmd_cache() method</span>
+<span class="sd">    </span>
+<span class="sd">    Thread Safety:</span>
+<span class="sd">        All device operations use a reentrant async lock, ensuring safe concurrent</span>
+<span class="sd">        access from multiple async tasks or threads. Use `async with device.lock:`</span>
+<span class="sd">        to group multiple operations atomically.</span>
+
+<span class="sd">    Multi-Channel Support:</span>
+<span class="sd">        Devices with multiple actuator channels expose them via the `channels`</span>
+<span class="sd">        property. Each channel can be controlled independently.</span>
+
+<span class="sd">    Important:</span>
+<span class="sd">        Caching should ONLY be used when the device has exclusive access (no other</span>
+<span class="sd">        applications modifying device state). If multiple applications can access</span>
+<span class="sd">        the device (e.g., both serial and Telnet), disable caching to prevent stale</span>
+<span class="sd">        data issues (e.g. by calling enable_cmd_cache(False)).</span>
+
+<span class="sd">    Class Attributes:</span>
+<span class="sd">        DEVICE_ID (str | None): Unique identifier for this device model. Subclasses</span>
+<span class="sd">            must set this to auto-register with the DeviceFactory.</span>
+<span class="sd">        CACHEABLE_COMMANDS (set[str]): Commands whose results can be cached.</span>
+<span class="sd">        BACKUP_COMMANDS (set[str]): Commands to include in device backup operations.</span>
+<span class="sd">        DEFAULT_TIMEOUT_SECS (float): Default timeout for command operations (0.6s).</span>
+<span class="sd">        FRAME_DELIMITER_WRITE (bytes): Byte sequence appended to commands (default: CRLF).</span>
+<span class="sd">        FRAME_DELIMITER_READ (bytes): Byte sequence expected at end of responses (default: CRLF).</span>
+
+<span class="sd">    Instance Attributes:</span>
+<span class="sd">        _transport: TransportProtocol instance handling low-level communication</span>
+<span class="sd">        _cache: CommandCache instance for caching read operations</span>
+<span class="sd">        _lock: Reentrant async lock for thread-safe access</span>
+<span class="sd">        _channels: Dictionary mapping channel IDs to PiezoChannel instances</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Discover and connect to a device</span>
+<span class="sd">        &gt;&gt;&gt; devices = await PiezoDevice.discover_devices()</span>
+<span class="sd">        &gt;&gt;&gt; device = devices[0]</span>
+<span class="sd">        &gt;&gt;&gt; await device.connect()</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Access device information</span>
+<span class="sd">        &gt;&gt;&gt; info = device.device_info</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Device: {info.device_id} on {info.transport_info.identifier}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Execute commands with caching</span>
+<span class="sd">        &gt;&gt;&gt; voltage = await device.write(&#39;voltage&#39;, None)  # Read (cached)</span>
+<span class="sd">        &gt;&gt;&gt; await device.write(&#39;voltage&#39;, [10.5])  # Write (invalidates cache)</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Thread-safe grouped operations</span>
+<span class="sd">        &gt;&gt;&gt; async with device.lock:</span>
+<span class="sd">        ...     await device.write(&#39;cmd1&#39;, [100])</span>
+<span class="sd">        ...     await device.write(&#39;cmd2&#39;, [200])</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Backup and restore configuration</span>
+<span class="sd">        &gt;&gt;&gt; backup = await device.backup([&#39;voltage&#39;, &#39;frequency&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; # ... change settings ...</span>
+<span class="sd">        &gt;&gt;&gt; await device.restore(backup)</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Clean shutdown</span>
+<span class="sd">        &gt;&gt;&gt; await device.close()</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        Subclasses must implement:</span>
+<span class="sd">        - _discover_channels(): Initialize the _channels dictionary</span>
+<span class="sd">        - _is_device_type(): Verify connected device matches expected type</span>
+<span class="sd">        - Set DEVICE_ID to a unique string for factory registration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DEVICE_ID</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Placeholder for device ID, to be set in subclasses</span>
+
+    <span class="n">CACHEABLE_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># set of commands that can be cached</span>
+    <span class="n">BACKUP_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># set of commands to backup device settings</span>
+
+    <span class="n">DEFAULT_TIMEOUT_SECS</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">FRAME_DELIMITER_WRITE</span> <span class="o">=</span> <span class="n">TransportProtocol</span><span class="o">.</span><span class="n">CRLF</span>  <span class="c1"># Default frame delimiter for writing commands</span>
+    <span class="n">FRAME_DELIMITER_READ</span> <span class="o">=</span> <span class="n">TransportProtocol</span><span class="o">.</span><span class="n">CRLF</span>
+
+    <span class="n">_channels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">PiezoChannel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Dictionary to store channels by their number</span>
+
+
+<div class="viewcode-block" id="PiezoDevice.__init__">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">transport_type</span><span class="p">:</span> <span class="n">TransportType</span><span class="p">,</span>
+        <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a piezo device with the specified transport connection.</span>
+<span class="sd">        </span>
+<span class="sd">        Creates a new device instance configured to communicate via the specified</span>
+<span class="sd">        transport protocol. The device is not connected until connect() is called.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            transport_type: Communication protocol to use (SERIAL or TELNET).</span>
+<span class="sd">                SERIAL: Direct connection via RS-232, USB-serial adapter</span>
+<span class="sd">                TELNET: Network connection via TCP/IP (typically using Lantronix adapter)</span>
+<span class="sd">            identifier: Connection identifier specific to the transport type:</span>
+<span class="sd">                For SERIAL: Port name (e.g., &#39;COM3&#39;, &#39;/dev/ttyUSB0&#39;)</span>
+<span class="sd">                For TELNET: IP address or hostname (e.g., &#39;192.168.1.100&#39;)</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Create device with serial connection</span>
+<span class="sd">            &gt;&gt;&gt; device = DDriveDevice(</span>
+<span class="sd">            ...     transport_type=TransportType.SERIAL,</span>
+<span class="sd">            ...     identifier=&#39;/dev/ttyUSB0&#39;</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Create device with Telnet connection</span>
+<span class="sd">            &gt;&gt;&gt; device = DDriveDevice(</span>
+<span class="sd">            ...     transport_type=TransportType.TELNET,</span>
+<span class="sd">            ...     identifier=&#39;192.168.1.100&#39;</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Must call connect() before using</span>
+<span class="sd">            &gt;&gt;&gt; await device.connect()</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            The device is not connected after initialization. Call connect()</span>
+<span class="sd">            to establish communication before issuing commands.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize transport</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">:</span> <span class="n">TransportProtocol</span> <span class="o">=</span> <span class="n">TransportFactory</span><span class="o">.</span><span class="n">from_transport_type</span><span class="p">(</span>
+            <span class="n">transport_type</span><span class="p">,</span>
+            <span class="n">identifier</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">:</span> <span class="n">CommandCache</span> <span class="o">=</span> <span class="n">CommandCache</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CACHEABLE_COMMANDS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">_ReentrantAsyncLock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">rx_delimiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FRAME_DELIMITER_READ</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_register_device_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_register_descendant_devices</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_register_device_class</span><span class="p">(</span><span class="n">device_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="s2">&quot;PiezoDevice&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">device_cls</span><span class="o">.</span><span class="n">DEVICE_ID</span><span class="p">:</span>
+            <span class="n">DEVICE_MODEL_REGISTRY</span><span class="p">[</span><span class="n">device_cls</span><span class="o">.</span><span class="n">DEVICE_ID</span><span class="p">]</span> <span class="o">=</span> <span class="n">device_cls</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_register_descendant_devices</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="s2">&quot;PiezoDevice&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">base_cls</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_register_device_class</span><span class="p">(</span><span class="n">subclass</span><span class="p">)</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_register_descendant_devices</span><span class="p">(</span><span class="n">subclass</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PiezoDevice.discover_devices">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.discover_devices">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">discover_devices</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">flags</span><span class="p">:</span> <span class="n">DiscoverFlags</span> <span class="o">=</span> <span class="n">DiscoverFlags</span><span class="o">.</span><span class="n">ALL_INTERFACES</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Self</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Discover and create instances of devices accessible via available transports.</span>
+
+<span class="sd">        This class method scans for devices using the specified discovery flags,</span>
+<span class="sd">        identifies devices matching the class&#39;s DEVICE_ID, and returns a list of</span>
+<span class="sd">        ready-to-connect device instances.</span>
+<span class="sd">        </span>
+<span class="sd">        The discovery process:</span>
+<span class="sd">        1. Scans serial ports and/or network interfaces based on flags</span>
+<span class="sd">        2. Attempts basic communication to identify device type</span>
+<span class="sd">        3. Filters for devices matching this class&#39;s DEVICE_ID (if defined)</span>
+<span class="sd">        4. Creates appropriate device instances via DeviceFactory</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            flags: Discovery scope controlling which interfaces to scan.</span>
+<span class="sd">                DiscoverFlags.ALL_INTERFACES: Scan both serial and network</span>
+<span class="sd">                DiscoverFlags.SERIAL_ONLY: Scan only serial/USB ports</span>
+<span class="sd">                DiscoverFlags.TELNET_ONLY: Scan only network interfaces</span>
+<span class="sd">                Default: ALL_INTERFACES</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of device instances found during discovery. Each device is</span>
+<span class="sd">            created but not connected (call connect() on each device to establish</span>
+<span class="sd">            communication).</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Discover all available devices</span>
+<span class="sd">            &gt;&gt;&gt; devices = await DDriveDevice.discover_devices()</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Found {len(devices)} devices&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Discover only network-connected devices</span>
+<span class="sd">            &gt;&gt;&gt; network_devices = await DDriveDevice.discover_devices(</span>
+<span class="sd">            ...     flags=DiscoverFlags.TELNET_ONLY</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Connect to first discovered device</span>
+<span class="sd">            &gt;&gt;&gt; if devices:</span>
+<span class="sd">            ...     await devices[0].connect()</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Base PiezoDevice class discovers all registered device types</span>
+<span class="sd">            - Subclasses only discover devices matching their DEVICE_ID</span>
+<span class="sd">            - Discovery can take several seconds, especially for network scanning</span>
+<span class="sd">            - Devices must be powered on and properly connected to be discovered</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">discovered_devices</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DeviceDiscovery</span><span class="o">.</span><span class="n">discover_devices</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_is_device_type</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+        <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">discovered_devices</span><span class="p">:</span>
+            <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DeviceFactory</span><span class="o">.</span><span class="n">from_detected_device</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">devices</span></div>
+
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_is_device_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tp</span><span class="p">:</span> <span class="n">TransportProtocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the device on the transport matches this device class type.</span>
+<span class="sd">        </span>
+<span class="sd">        This internal method is called during device discovery to verify that a</span>
+<span class="sd">        detected device matches the expected device type. The base implementation</span>
+<span class="sd">        checks all registered subclasses if DEVICE_ID is None (discovery of any</span>
+<span class="sd">        device type).</span>
+<span class="sd">        </span>
+<span class="sd">        Subclasses should override this method to implement device-specific</span>
+<span class="sd">        identification logic, typically by:</span>
+<span class="sd">        1. Sending an identification command (e.g., &#39;identify&#39;, &#39;version&#39;)</span>
+<span class="sd">        2. Parsing the response</span>
+<span class="sd">        3. Comparing against expected device ID or version string</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tp: TransportProtocol instance with an open connection to the device</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Device ID string if the device matches this class type, None otherwise.</span>
+<span class="sd">        </span>
+<span class="sd">        Example (subclass implementation):</span>
+<span class="sd">            &gt;&gt;&gt; @classmethod</span>
+<span class="sd">            &gt;&gt;&gt; async def _is_device_type(cls, tp: TransportProtocol) -&gt; str | None:</span>
+<span class="sd">            ...     await tp.write(&#39;identify&#39; + tp.CRLF)</span>
+<span class="sd">            ...     response = await tp.read_message()</span>
+<span class="sd">            ...     return cls.DEVICE_ID if cls.DEVICE_ID in response else None</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Base class checks all registered subclasses if DEVICE_ID is None</span>
+<span class="sd">            - Called during discovery with temporary transport connections</span>
+<span class="sd">            - Should be fast to avoid slowing down discovery process</span>
+<span class="sd">            - Should handle communication errors gracefully (return False)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">DEVICE_ID</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">DEVICE_MODEL_REGISTRY</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">subclass</span><span class="o">.</span><span class="n">_is_device_type</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="nb">id</span>
+
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lock</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_ReentrantAsyncLock</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reentrant async lock for thread-safe device access.</span>
+<span class="sd">        </span>
+<span class="sd">        This lock ensures that device operations are atomic and thread-safe when</span>
+<span class="sd">        multiple async tasks or threads access the device concurrently. The lock</span>
+<span class="sd">        is reentrant, meaning the same task can acquire it multiple times.</span>
+<span class="sd">        </span>
+<span class="sd">        All internal write/read operations automatically use this lock. Use it</span>
+<span class="sd">        explicitly when you need to group multiple operations atomically.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Reentrant async context manager lock</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Atomic multi-command sequence</span>
+<span class="sd">            &gt;&gt;&gt; async with device.lock:</span>
+<span class="sd">            ...     await device.write(&#39;mode&#39;, [1])  # Switch to mode 1</span>
+<span class="sd">            ...     await device.write(&#39;voltage&#39;, [10.0])  # Set voltage</span>
+<span class="sd">            ...     await device.write(&#39;enable&#39;, [True])  # Enable output</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Guarantees no other task can execute commands between these</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Lock is automatically used by write(), write_raw(), and other methods</span>
+<span class="sd">            - Explicit locking is only needed for grouping multiple operations</span>
+<span class="sd">            - Lock is reentrant: nested acquisitions from same task are allowed</span>
+<span class="sd">            - Always use with async context manager (async with)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">device_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DeviceInfo</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get comprehensive information about the connected device.</span>
+
+<span class="sd">        Provides a DeviceInfo object containing the device&#39;s model identifier</span>
+<span class="sd">        and transport connection details. This property is useful for logging,</span>
+<span class="sd">        diagnostics, and displaying device information in user interfaces.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DeviceInfo object containing:</span>
+<span class="sd">                - device_id: Model identifier (e.g., &#39;d-drive&#39;, &#39;nv200&#39;)</span>
+<span class="sd">                - transport_info: TransportProtocolInfo with connection details</span>
+<span class="sd">                    (transport type, identifier, etc.)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceUnavailableException: If the transport is not initialized or</span>
+<span class="sd">                the device is not connected. Call connect() before accessing.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await device.connect()</span>
+<span class="sd">            &gt;&gt;&gt; info = device.device_info</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Connected to {info.device_id}&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;  Transport: {info.transport_info.transport_type.name}&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;  Identifier: {info.transport_info.identifier}&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Example output:</span>
+<span class="sd">            &gt;&gt;&gt; # Connected to d-drive</span>
+<span class="sd">            &gt;&gt;&gt; #   Transport: SERIAL</span>
+<span class="sd">            &gt;&gt;&gt; #   Identifier: COM3</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Device must be connected before accessing this property. The device_id</span>
+<span class="sd">            comes from the class&#39;s DEVICE_ID attribute, while transport_info is</span>
+<span class="sd">            provided by the active transport protocol.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DeviceUnavailableException</span><span class="p">(</span><span class="s2">&quot;Cannot access device_info: transport is not initialized or device is not connected.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">DeviceInfo</span><span class="p">(</span>
+            <span class="n">device_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE_ID</span><span class="p">,</span>
+            <span class="n">transport_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">get_info</span><span class="p">()</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">PiezoChannel</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get dictionary of available device channels.</span>
+
+<span class="sd">        Multi-channel devices expose their channels through this property,</span>
+<span class="sd">        allowing independent control of each actuator output. Channel IDs</span>
+<span class="sd">        are typically 0-based integers (0, 1, 2, etc.).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping channel IDs (int) to PiezoChannel instances.</span>
+<span class="sd">            Returns empty dict before channels are discovered during connect().</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await device.connect()  # Discovers channels</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Access specific channel</span>
+<span class="sd">            &gt;&gt;&gt; channel_0 = device.channels[0]</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Channel ID: {channel_0.id}&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Iterate all channels</span>
+<span class="sd">            &gt;&gt;&gt; for ch_id, channel in device.channels.items():</span>
+<span class="sd">            ...     print(f&quot;Channel {ch_id}: {channel}&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Check number of channels</span>
+<span class="sd">            &gt;&gt;&gt; num_channels = len(device.channels)</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Device has {num_channels} channels&quot;)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Channels are populated during connect() via _discover_channels()</span>
+<span class="sd">            - Single-channel devices may only have one channel (ID 0)</span>
+<span class="sd">            - Channel objects provide access to channel-specific capabilities</span>
+<span class="sd">            - Each channel can be controlled independently</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
+    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse device response and extract parameter values.</span>
+<span class="sd">        </span>
+<span class="sd">        This internal method processes raw device responses, checks for error</span>
+<span class="sd">        conditions, and extracts parameter values. Device responses typically</span>
+<span class="sd">        have the format: &quot;command,param1,param2,...&quot; or &quot;error,code&quot;.</span>
+<span class="sd">        </span>
+<span class="sd">        Error Handling:</span>
+<span class="sd">            If the response starts with &quot;error&quot;, raises the appropriate DeviceError</span>
+<span class="sd">            exception based on the error code. See ErrorCode enum for all possible</span>
+<span class="sd">            error types.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response: Raw response string from the device</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of parameter strings from the response (command name is stripped).</span>
+<span class="sd">            Returns empty list if no parameters were included in the response.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceError: If the response indicates an error condition. Specific</span>
+<span class="sd">                exception type depends on the error code (see exceptions.py).</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Successful response with parameters</span>
+<span class="sd">            &gt;&gt;&gt; result = self._parse_response(&quot;voltage,10.5,V&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; # result = [&#39;10.5&#39;, &#39;V&#39;]</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Error response</span>
+<span class="sd">            &gt;&gt;&gt; result = self._parse_response(&quot;error,2&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; # Raises UnknownCommand exception</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Internal method for use by write operations</span>
+<span class="sd">            - Trailing whitespace and control characters are stripped from parameters</span>
+<span class="sd">            - Error responses halt execution by raising exceptions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if the response indicates an error</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_error</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="k">return</span>  <span class="c1"># This line will never be reached due to the exception being raised</span>
+            
+        <span class="c1"># Else, Normal response, split the command and parameters</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\x01\n\r\x00</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">parameters</span>
+    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_raise_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse error response and raise appropriate DeviceError exception.</span>
+<span class="sd">        </span>
+<span class="sd">        This internal method extracts the error code from a device error response</span>
+<span class="sd">        and raises the corresponding typed exception. Error responses have the</span>
+<span class="sd">        format: &quot;error,code&quot; where code is an integer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response: Error response string from device (e.g., &quot;error,2&quot;)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceError: Specific subclass based on error code:</span>
+<span class="sd">                - ErrorNotSpecified: Code 1 or invalid/missing code</span>
+<span class="sd">                - UnknownCommand: Code 2</span>
+<span class="sd">                - ParameterMissing: Code 3</span>
+<span class="sd">                - AdmissibleParameterRangeExceeded: Code 4</span>
+<span class="sd">                - CommandParameterCountExceeded: Code 5</span>
+<span class="sd">                - ParameterLockedOrReadOnly: Code 6</span>
+<span class="sd">                - Underload: Code 7</span>
+<span class="sd">                - Overload: Code 8</span>
+<span class="sd">                - ParameterTooLow: Code 9</span>
+<span class="sd">                - ParameterTooHigh: Code 10</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Internal method called by _parse_response when errors detected</span>
+<span class="sd">            - Always raises an exception (never returns normally)</span>
+<span class="sd">            - Malformed error responses default to ErrorNotSpecified</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># Check if error code is present</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">raise_error</span><span class="p">(</span><span class="n">ErrorCode</span><span class="o">.</span><span class="n">ERROR_NOT_SPECIFIED</span><span class="p">)</span>  <span class="c1"># Default error: Error not specified</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Try to parse the error code</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">error_code</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\x01\n\r\x00</span><span class="s2">&quot;</span><span class="p">))</span>
+
+            <span class="c1"># Raise a DeviceError with the error code</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">raise_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># In case the error code isn&#39;t valid</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">raise_error</span><span class="p">(</span><span class="n">ErrorCode</span><span class="o">.</span><span class="n">ERROR_NOT_SPECIFIED</span><span class="p">)</span>  <span class="c1"># Default error: Error not specified</span>
+            <span class="k">return</span>
+        
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_discover_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Discover and initialize device channels.</span>
+
+<span class="sd">        This abstract method must be implemented by subclasses to detect and</span>
+<span class="sd">        create PiezoChannel instances for the device. It is called automatically</span>
+<span class="sd">        during connect() after device type verification.</span>
+<span class="sd">        </span>
+<span class="sd">        Subclasses should:</span>
+<span class="sd">        1. Query the device to determine number of available channels</span>
+<span class="sd">        2. Create PiezoChannel (or subclass) instances for each channel</span>
+<span class="sd">        3. Populate the _channels dictionary with channel_id -&gt; channel mapping</span>
+<span class="sd">        4. (Optional) Initialize channel-specific capabilities</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: If called on base class without subclass override</span>
+<span class="sd">        </span>
+<span class="sd">        Example (subclass implementation):</span>
+<span class="sd">            &gt;&gt;&gt; async def _discover_channels(self):</span>
+<span class="sd">            ...     # Query device for channel count</span>
+<span class="sd">            ...     response = await self.write(&#39;numchannels&#39;, None)</span>
+<span class="sd">            ...     num_channels = int(response[0])</span>
+<span class="sd">            ...     </span>
+<span class="sd">            ...     # Create channel instances</span>
+<span class="sd">            ...     for ch_id in range(num_channels):</span>
+<span class="sd">            ...         self._channels[ch_id] = DDriveChannel(</span>
+<span class="sd">            ...             channel_id=ch_id,</span>
+<span class="sd">            ...             write_cb=self._write_channel</span>
+<span class="sd">            ...         )</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Called automatically during connect(), not by user code</span>
+<span class="sd">            - Subclasses can query device for dynamic channel configuration</span>
+<span class="sd">            - Some devices may have fixed channel counts</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Channel discovery must be implemented in subclasses.&quot;</span><span class="p">)</span>
+    
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_write_channel</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal method to write a command to a specific channel.</span>
+<span class="sd">        </span>
+<span class="sd">        This helper method constructs a channel-specific command by appending</span>
+<span class="sd">        the channel ID to the command string, then delegates to the main write()</span>
+<span class="sd">        method. It&#39;s used as the write callback for PiezoChannel instances.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel_id: Numeric ID of the target channel (typically 0-based) or None for single-channel devices</span>
+<span class="sd">            cmd: Command name to send</span>
+<span class="sd">            params: Optional list of parameters for the command. None for read operations.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Device response as a list of string values</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Called internally by channel objects:</span>
+<span class="sd">            &gt;&gt;&gt; result = await self._write_channel(0, &#39;voltage&#39;, [10.5])</span>
+<span class="sd">            &gt;&gt;&gt; # Sends: &quot;voltage,0,10.5&quot; to device</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Internal method used by PiezoChannel write callback</span>
+<span class="sd">            - Automatically formats command with channel ID</span>
+<span class="sd">            - Command format: &quot;command,channel_id[,param1,param2,...]&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd_list</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">full_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cmd_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">channel_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">cmd_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># If channel command has additional parts after comma, append them as parameters</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">cmd_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">(</span><span class="n">params</span> <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[])</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">full_cmd</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Strip channel ID (first param) from response</span>
+        <span class="k">if</span> <span class="n">channel_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        
+        <span class="c1"># If no channel ID, return full response</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_capability_write</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">device_commands</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write method for capabilities with command name validation.</span>
+<span class="sd">        </span>
+<span class="sd">        This helper method is used by capability implementations to send commands</span>
+<span class="sd">        with validation against the device&#39;s supported command set. Capabilities</span>
+<span class="sd">        can remain device-agnostic by using generic command names that are mapped</span>
+<span class="sd">        to actual device commands via the device_commands dictionary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            device_commands: Dictionary mapping generic capability command names</span>
+<span class="sd">                to device-specific command strings</span>
+<span class="sd">            cmd: Generic command name from capability</span>
+<span class="sd">            params: List of parameters for the command</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Device response as list of strings, or None if command not supported</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # In a capability implementation:</span>
+<span class="sd">            &gt;&gt;&gt; commands = {&#39;set_voltage&#39;: &#39;xsvoltage&#39;, &#39;get_voltage&#39;: &#39;xgvoltage&#39;}</span>
+<span class="sd">            &gt;&gt;&gt; result = await self._capability_write(commands, &#39;set_voltage&#39;, [10.0])</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Logs warning if command not found in device_commands dictionary</span>
+<span class="sd">            - Returns None instead of raising exception for unsupported commands</span>
+<span class="sd">            - Allows capabilities to gracefully handle device capability differences</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if command can be found in cmd dictionary</span>
+        <span class="k">if</span> <span class="n">cmd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">device_commands</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Capability requested to send unknown command: </span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">device_commands</span><span class="p">[</span><span class="n">cmd</span><span class="p">],</span> <span class="n">params</span><span class="p">)</span>
+    
+
+<div class="viewcode-block" id="PiezoDevice.connect">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.connect">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auto_adjust_comm_params</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Establish connection to the device and initialize channels.</span>
+
+<span class="sd">        This method connects to the device via the transport layer, verifies</span>
+<span class="sd">        the device type matches expectations, and discovers available channels.</span>
+<span class="sd">        After successful connection, the device is ready for command execution.</span>
+<span class="sd">        </span>
+<span class="sd">        Connection Process:</span>
+<span class="sd">        1. Check if already connected (skip if yes)</span>
+<span class="sd">        2. Establish transport-layer connection</span>
+<span class="sd">        3. Auto-adjust communication parameters if enabled (Telnet only)</span>
+<span class="sd">        4. Verify device type matches expected DEVICE_ID</span>
+<span class="sd">        5. Discover and initialize device channels</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            auto_adjust_comm_params: For Telnet connections only, automatically</span>
+<span class="sd">                configure the internal Lantronix XPORT ethernet module for communication. </span>
+<span class="sd">                Sets flow control to XON_XOFF_PASS_TO_HOST mode,</span>
+<span class="sd">                which is required for library to function correctly.</span>
+<span class="sd">                Default: True (recommended)</span>
+<span class="sd">                </span>
+<span class="sd">                Set to False only if:</span>
+<span class="sd">                - Using serial connection (parameter is ignored)</span>
+<span class="sd">                - XPORT is already properly configured</span>
+<span class="sd">                - Manual configuration is preferred</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceUnavailableException: If:</span>
+<span class="sd">                - Transport is not initialized</span>
+<span class="sd">                - Connection to device fails</span>
+<span class="sd">                - Device type verification fails (wrong device connected)</span>
+<span class="sd">            TransportException: If transport-specific connection errors occur</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Standard connection (recommended)</span>
+<span class="sd">            &gt;&gt;&gt; device = DDriveDevice(TransportType.SERIAL, &#39;COM3&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; await device.connect()</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Connect without auto-configuration</span>
+<span class="sd">            &gt;&gt;&gt; device = DDriveDevice(TransportType.TELNET, &#39;192.168.1.100&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; await device.connect(auto_adjust_comm_params=False)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Verify connection</span>
+<span class="sd">            &gt;&gt;&gt; info = device.device_info</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Connected to {info.device_id}&quot;)</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Safe to call multiple times (idempotent if already connected)</span>
+<span class="sd">            - Device type mismatch causes connection to be closed</span>
+<span class="sd">            - Must be called before any device commands</span>
+<span class="sd">            - Channels are not available until connection completes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DeviceUnavailableException</span><span class="p">(</span><span class="s2">&quot;Cannot connect: transport is not initialized.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">is_connected</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Device is already connected.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">auto_adjust_comm_params</span><span class="o">=</span><span class="n">auto_adjust_comm_params</span><span class="p">)</span>
+        <span class="n">is_match</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_device_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_match</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">DeviceUnavailableException</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Device type mismatch. Expected device ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE_ID</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="s2">&quot;Please check the device connection and ensure the correct device is connected.&quot;</span>
+            <span class="p">)</span>
+        
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_discover_channels</span><span class="p">()</span></div>
+
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_write_and_parse</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT_SECS</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_raw</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_read_with_cache</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT_SECS</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">values</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Reading string values for command: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+
+        <span class="n">values</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_and_parse</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+            <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>  <span class="c1"># strip trailing whitespace - some strings like units may contain trailing spaces</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">values</span>
+    
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_write_with_cache</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">],</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT_SECS</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">str_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Convert all values to strings, handling booleans as integers</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="n">str_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">str_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_and_parse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_values</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">invalidate</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span>
+    
+
+<div class="viewcode-block" id="PiezoDevice.write">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.write">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT_SECS</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute a device command with optional parameters and caching.</span>
+<span class="sd">        </span>
+<span class="sd">        This is the primary method for device interaction. It automatically handles:</span>
+<span class="sd">        - Read vs write operations (based on params being None or not)</span>
+<span class="sd">        - Command result caching for read operations</span>
+<span class="sd">        - Cache invalidation for write operations  </span>
+<span class="sd">        - Parameter type conversion (bool -&gt; int, all -&gt; str)</span>
+<span class="sd">        - Response parsing and error handling</span>
+<span class="sd">        </span>
+<span class="sd">        Read Operation (params=None):</span>
+<span class="sd">            - Checks cache first, returns cached value if available</span>
+<span class="sd">            - If cache miss, sends command to device</span>
+<span class="sd">            - Caches result if command is cacheable</span>
+<span class="sd">            - Returns response parameter values</span>
+<span class="sd">        </span>
+<span class="sd">        Write Operation (params provided):</span>
+<span class="sd">            - Converts parameters to proper string format</span>
+<span class="sd">            - Sends command with parameters to device</span>
+<span class="sd">            - Caches written values if command is cacheable</span>
+<span class="sd">            - Returns device response</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cmd: Command name to execute (e.g., &#39;voltage&#39;, &#39;position&#39;, &#39;identify&#39;)</span>
+<span class="sd">            params: Parameters for the command. Pass None for read operations,</span>
+<span class="sd">                list of values for write operations. Boolean values are automatically</span>
+<span class="sd">                converted to integers (True=1, False=0).</span>
+<span class="sd">            timeout: Maximum time to wait for device response in seconds.</span>
+<span class="sd">                Default: 0.6 seconds</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of response strings from the device. The command name is stripped,</span>
+<span class="sd">            only parameter values are returned.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceUnavailableException: If device is not connected or transport fails</span>
+<span class="sd">            DeviceError: If device returns an error response (see exceptions.py)</span>
+<span class="sd">            TimeoutException: If device does not respond within timeout period</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Read operation (returns cached value if available)</span>
+<span class="sd">            &gt;&gt;&gt; voltage = await device.write(&#39;voltage&#39;, None)</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Voltage: {voltage[0]} {voltage[1]}&quot;)  # [&#39;10.5&#39;, &#39;V&#39;]</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Write operation (invalidates cache)</span>
+<span class="sd">            &gt;&gt;&gt; await device.write(&#39;voltage&#39;, [12.5])</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Boolean parameters (converted to 0/1)</span>
+<span class="sd">            &gt;&gt;&gt; await device.write(&#39;enable&#39;, [True])  # Sends &#39;enable,1&#39;</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Multiple parameters</span>
+<span class="sd">            &gt;&gt;&gt; await device.write(&#39;pid&#39;, [5.0, 0.1, 0.2])  # P, I, D values</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Custom timeout for slow operations</span>
+<span class="sd">            &gt;&gt;&gt; result = await device.write(&#39;calibrate&#39;, None, timeout=5.0)</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Caching only applies to commands in CACHEABLE_COMMANDS set</span>
+<span class="sd">            - Cache is automatically invalidated on write operations</span>
+<span class="sd">            - All operations use the device&#39;s reentrant lock for thread safety</span>
+<span class="sd">            - Boolean parameters: True becomes &#39;1&#39;, False becomes &#39;0&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If params is None, perform a read operation</span>
+        <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_with_cache</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        
+        <span class="c1"># Else, perform a write operation</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_with_cache</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
+
+        
+        
+<div class="viewcode-block" id="PiezoDevice.write_raw">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.write_raw">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">write_raw</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT_SECS</span><span class="p">,</span>
+        <span class="n">rx_delimiter</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">FRAME_DELIMITER_READ</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send a raw command string and return unparsed device response.</span>
+<span class="sd">        </span>
+<span class="sd">        This low-level method sends a command directly to the device without:</span>
+<span class="sd">        - Parameter formatting or conversion</span>
+<span class="sd">        - Response parsing or error checking</span>
+<span class="sd">        - Caching of any kind</span>
+<span class="sd">        </span>
+<span class="sd">        Use this method when you need direct access to raw device responses,</span>
+<span class="sd">        such as during device identification, debugging, or when implementing</span>
+<span class="sd">        new command support.</span>
+<span class="sd">        </span>
+<span class="sd">        The method automatically:</span>
+<span class="sd">        - Adds the appropriate frame delimiter (CRLF by default)</span>
+<span class="sd">        - Uses the device lock for thread safety</span>
+<span class="sd">        - Waits for complete device response with timeout</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cmd: Complete command string to send (e.g., &#39;identify&#39; or &#39;voltage,0,10.5&#39;).</span>
+<span class="sd">                Frame delimiters are added automatically.</span>
+<span class="sd">            timeout: Maximum time to wait for device response in seconds.</span>
+<span class="sd">                Default: 0.6 seconds</span>
+<span class="sd">            rx_delimiter: Optional custom receive delimiter bytes.</span>
+<span class="sd">                Default: Device configured FRAME_DELIMITER_READ</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Raw response string from device including any delimiters or control characters</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceUnavailableException: If device is not connected or transport error occurs</span>
+<span class="sd">            TimeoutException: If device does not respond within timeout period</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Send raw identification command</span>
+<span class="sd">            &gt;&gt;&gt; response = await device.write_raw(&#39;identify&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Raw response: {repr(response)}&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; # Raw response: &#39;identify,d-drive,v1.2.3\r\n&#39;</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Debugging - see exact device response</span>
+<span class="sd">            &gt;&gt;&gt; raw = await device.write_raw(&#39;voltage,0&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Response bytes: {raw.encode()}&quot;)</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Prefer write() method for normal operations</span>
+<span class="sd">            - No error checking is performed on responses</span>
+<span class="sd">            - Response must be manually parsed</span>
+<span class="sd">            - Useful for device discovery and debugging</span>
+<span class="sd">            - Thread-safe via automatic lock acquisition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Writing cmd.: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">is_connected</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DeviceUnavailableException</span><span class="p">(</span><span class="s2">&quot;Cannot write to device: transport is not initialized or device is not connected.&quot;</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cmd</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">FRAME_DELIMITER_WRITE</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="n">expected</span><span class="o">=</span><span class="n">rx_delimiter</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DeviceUnavailableException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to write/read from device: </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+
+<div class="viewcode-block" id="PiezoDevice.close">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.close">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Close the connection to the device and release resources.</span>
+
+<span class="sd">        This method properly shuts down the transport connection and releases</span>
+<span class="sd">        any associated resources (serial ports, network sockets, etc.). Always</span>
+<span class="sd">        call this when finished with the device to prevent resource leaks.</span>
+<span class="sd">        </span>
+<span class="sd">        The method is idempotent - it&#39;s safe to call multiple times or on</span>
+<span class="sd">        an already-closed connection.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: May propagate transport-specific exceptions if close fails</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; device = await DDriveDevice.connect(TransportType.SERIAL, &#39;COM3&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; try:</span>
+<span class="sd">            ...     await device.write(&#39;voltage&#39;, [10.0])</span>
+<span class="sd">            ... finally:</span>
+<span class="sd">            ...     await device.close()  # Always close in finally block</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Or use async context manager (preferred)</span>
+<span class="sd">            &gt;&gt;&gt; async with DDriveDevice(...) as device:</span>
+<span class="sd">            ...     await device.connect()</span>
+<span class="sd">            ...     await device.write(&#39;voltage&#39;, [10.0])</span>
+<span class="sd">            &gt;&gt;&gt; # Automatically closed on exit</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Safe to call on already-closed or non-initialized transport</span>
+<span class="sd">            - Logs debug message if already closed</span>
+<span class="sd">            - Recommended to use in finally block or async context manager</span>
+<span class="sd">            - Automatically clears command cache on close</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">is_connected</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Transport is already closed or not initialized.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_cmd_cache</span><span class="p">()</span></div>
+
+
+    
+<div class="viewcode-block" id="PiezoDevice.clear_cmd_cache">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.clear_cmd_cache">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_cmd_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear all cached command results.</span>
+<span class="sd">        </span>
+<span class="sd">        Removes all entries from the command cache, forcing subsequent read</span>
+<span class="sd">        operations to query the device hardware. Use this when:</span>
+<span class="sd">        - Device state may have changed externally</span>
+<span class="sd">        - Recovering from errors</span>
+<span class="sd">        - Switching operation modes</span>
+<span class="sd">        - Debugging cache-related issues</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # After external device modification</span>
+<span class="sd">            &gt;&gt;&gt; device.clear_cmd_cache()</span>
+<span class="sd">            &gt;&gt;&gt; voltage = await device.write(&#39;voltage&#39;, None)  # Fresh read</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # In error recovery</span>
+<span class="sd">            &gt;&gt;&gt; try:</span>
+<span class="sd">            ...     await device.write(&#39;something&#39;, [val])</span>
+<span class="sd">            ... except DeviceError:</span>
+<span class="sd">            ...     device.clear_cmd_cache()  # Start fresh</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Does not disable caching, only clears current entries</span>
+<span class="sd">            - Next read operations will rebuild cache as normal</span>
+<span class="sd">            - To disable caching entirely, use enable_cmd_cache(False)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Command cache cleared.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PiezoDevice.enable_cmd_cache">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.enable_cmd_cache">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_cmd_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enable</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable or disable command caching for this device instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Controls whether command results are cached. Disabling cache also</span>
+<span class="sd">        automatically clears all cached entries.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            enable: True to enable caching, False to disable and clear cache</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Disable caching for debugging</span>
+<span class="sd">            &gt;&gt;&gt; device.enable_cmd_cache(False)</span>
+<span class="sd">            &gt;&gt;&gt; voltage = await device.write(&#39;voltage&#39;, None)  # Always fresh</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Re-enable for better performance</span>
+<span class="sd">            &gt;&gt;&gt; device.enable_cmd_cache(True)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Temporarily disable for critical operations</span>
+<span class="sd">            &gt;&gt;&gt; device.enable_cmd_cache(False)</span>
+<span class="sd">            &gt;&gt;&gt; await perform_calibration()</span>
+<span class="sd">            &gt;&gt;&gt; device.enable_cmd_cache(True)</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Disabling cache automatically clears all cached values</span>
+<span class="sd">            - Setting to False is important when other apps access device</span>
+<span class="sd">            - Per-instance setting (doesn&#39;t affect other device instances)</span>
+<span class="sd">            - See CommandCache class for detailed caching behavior</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="n">enable</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command cache enabled: </span><span class="si">{</span><span class="n">enable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PiezoDevice.backup">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.backup">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">backup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">backup_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+        <span class="n">backup_channels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a backup of device and channel settings.</span>
+<span class="sd">        </span>
+<span class="sd">        Reads and stores current values of specified commands and all channel</span>
+<span class="sd">        settings. The backup can later be restored using restore() method.</span>
+<span class="sd">        Cache is automatically cleared before backup to ensure fresh values.</span>
+<span class="sd">        </span>
+<span class="sd">        The backup includes:</span>
+<span class="sd">        1. All channel-specific settings (from each channel&#39;s BACKUP_COMMANDS)</span>
+<span class="sd">        2. Device-level commands specified in backup_list</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backup_list: List of device-level command names to backup.</span>
+<span class="sd">                If None, the default BACKUP_COMMANDS list of the device is used.</span>
+<span class="sd">                Example: [&#39;modsrc&#39;, &#39;notchon&#39;, &#39;sr&#39;, &#39;reclen&#39;]</span>
+<span class="sd">            backup_channels: If True, backs up all channel settings automatically. (Default: True)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping command strings to their response values.</span>
+<span class="sd">            Channel commands are formatted as &#39;command,channel_id&#39;.</span>
+<span class="sd">            Can be passed to restore() to recreate this configuration.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Backup specific device settings</span>
+<span class="sd">            &gt;&gt;&gt; backup = await device.backup([&#39;voltage&#39;, &#39;frequency&#39;, &#39;mode&#39;])</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Make changes</span>
+<span class="sd">            &gt;&gt;&gt; await device.write(&#39;voltage&#39;, [15.0])</span>
+<span class="sd">            &gt;&gt;&gt; await device.write(&#39;mode&#39;, [2])</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Restore original settings</span>
+<span class="sd">            &gt;&gt;&gt; await device.restore(backup)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Backup includes all channels automatically</span>
+<span class="sd">            &gt;&gt;&gt; backup = await device.backup([&#39;global_setting&#39;])</span>
+<span class="sd">            &gt;&gt;&gt; # backup contains: {&#39;voltage,0&#39;: [&#39;10.0&#39;], &#39;voltage,1&#39;: [&#39;12.0&#39;], ...}</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Cache is cleared before backup to ensure fresh values</span>
+<span class="sd">            - Channel settings are backed up automatically</span>
+<span class="sd">            - Backup format matches restore() input requirements</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">backup</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="n">backup_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">backup_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">BACKUP_COMMANDS</span>
+
+        <span class="c1"># Invalidate cache to make sure we read fresh values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_cmd_cache</span><span class="p">()</span>
+
+        <span class="c1"># Go through every command in the backup list and read its value</span>
+        <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">backup_list</span><span class="p">:</span>
+            <span class="n">backup</span><span class="p">[</span><span class="n">cmd</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">backup_channels</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">backup</span>
+
+        <span class="c1"># Backup every channel</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">channel_backup</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">backup</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">channel_backup</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">backup</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+
+
+        <span class="k">return</span> <span class="n">backup</span></div>
+
+
+<div class="viewcode-block" id="PiezoDevice.restore">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_device.PiezoDevice.restore">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">restore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backup</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Restore device settings from a backup created with backup().</span>
+<span class="sd">        </span>
+<span class="sd">        Iterates through the backup dictionary and writes each command with</span>
+<span class="sd">        its saved values back to the device. This restores both device-level</span>
+<span class="sd">        and channel-specific settings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            backup: Dictionary created by backup() method, mapping command</span>
+<span class="sd">                strings to their parameter value lists.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceError: If any command in the backup fails to restore</span>
+<span class="sd">                (e.g., parameter out of range, read-only parameter)</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Create backup before experiment</span>
+<span class="sd">            &gt;&gt;&gt; backup = await device.backup([&#39;voltage&#39;, &#39;frequency&#39;])</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Run experiment with different settings</span>
+<span class="sd">            &gt;&gt;&gt; await device.write(&#39;voltage&#39;, [20.0])</span>
+<span class="sd">            &gt;&gt;&gt; await device.write(&#39;frequency&#39;, [100])</span>
+<span class="sd">            &gt;&gt;&gt; # ... perform measurements ...</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Restore original configuration</span>
+<span class="sd">            &gt;&gt;&gt; await device.restore(backup)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # All settings now back to original values</span>
+<span class="sd">            &gt;&gt;&gt; voltage = await device.write(&#39;voltage&#39;, None)</span>
+<span class="sd">            &gt;&gt;&gt; # voltage matches original backed-up value</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            - Commands are restored in dictionary iteration order</span>
+<span class="sd">            - If a command fails, the exception propagates immediately</span>
+<span class="sd">            - Works with backups containing both device and channel commands</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">backup</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Async context manager entry - connects and returns the device instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Allows using the device with async context manager syntax for</span>
+<span class="sd">        automatic connection and resource cleanup. The device is automatically</span>
+<span class="sd">        connected when entering the context.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The connected device instance (self)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceUnavailableException: If connection fails or device type mismatch</span>
+<span class="sd">            TransportException: If transport-specific connection errors occur</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; async with DDriveDevice(TransportType.SERIAL, &#39;COM3&#39;) as device:</span>
+<span class="sd">            ...     await device.write(&#39;voltage&#39;, [10.0])</span>
+<span class="sd">            &gt;&gt;&gt; # Automatically closed on exit</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Automatically calls connect() with default parameters</span>
+<span class="sd">            - Device is closed automatically on context exit</span>
+<span class="sd">            - Exceptions during connection propagate normally</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Async context manager exit - closes device connection.</span>
+<span class="sd">        </span>
+<span class="sd">        Automatically called when exiting the async context manager block.</span>
+<span class="sd">        Ensures proper cleanup of device resources even if exceptions occur.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            exc_type: Exception type if an exception occurred, None otherwise</span>
+<span class="sd">            exc_val: Exception value if an exception occurred, None otherwise</span>
+<span class="sd">            exc_tb: Exception traceback if an exception occurred, None otherwise</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            False to allow exceptions to propagate (not suppressed)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Always closes device connection</span>
+<span class="sd">            - Does not suppress exceptions (returns False)</span>
+<span class="sd">            - Safe to call even if already closed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

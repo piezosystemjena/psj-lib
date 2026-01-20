@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.base.piezo_types &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.base.piezo_types</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.base.piezo_types</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..transport_protocol</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransportProtocolInfo</span>
+
+
+<div class="viewcode-block" id="SensorType">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_types.SensorType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SensorType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enumeration of position sensor types used in piezoelectric actuators.</span>
+<span class="sd">    </span>
+<span class="sd">    Different actuator models use different sensor technologies for position feedback</span>
+<span class="sd">    in closed-loop control systems. The sensor type affects measurement accuracy,</span>
+<span class="sd">    resolution, and environmental sensitivity.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        NONE (0): No position sensor present.</span>
+<span class="sd">            Actuator operates in open-loop mode only. Position control relies solely</span>
+<span class="sd">            on the voltage-displacement relationship of the piezo stack.</span>
+<span class="sd">            </span>
+<span class="sd">        STRAIN_GAUGE (1): Strain gauge based position sensor.</span>
+<span class="sd">            Measures mechanical deformation. Good for compact designs but can be</span>
+<span class="sd">            less accurate and more environmentally sensitive than other sensor types.</span>
+<span class="sd">            </span>
+<span class="sd">        CAPACITIVE (2): Capacitive position sensor.</span>
+<span class="sd">            Non-contact measurement with high resolution and excellent linearity.</span>
+<span class="sd">            Common in high-precision nanopositioning actuators.</span>
+<span class="sd">            </span>
+<span class="sd">        INDUCTIVE (3): Inductive position sensor.</span>
+<span class="sd">            Measures position through electromagnetic induction. Robust against</span>
+<span class="sd">            environmental disturbances but typically lower resolution than capacitive.</span>
+<span class="sd">            </span>
+<span class="sd">        UNKNOWN (99): Sensor type could not be determined.</span>
+<span class="sd">            Fallback value when sensor information is unavailable or unrecognized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">STRAIN_GAUGE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">CAPACITIVE</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">INDUCTIVE</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">99</span></div>
+
+
+
+<div class="viewcode-block" id="ActorType">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_types.ActorType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ActorType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enumeration of piezoelectric actuator connection types and geometries.</span>
+<span class="sd">    </span>
+<span class="sd">    Different actuator designs require different electrical driving schemes and have</span>
+<span class="sd">    different characteristics in terms of stroke, force, and response time.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        NANOX (0): piezosystem jena nanoX® actuators.</span>
+<span class="sd">            </span>
+<span class="sd">        PSH (1): PSH style piezo actuators (not used anymore).</span>
+<span class="sd">            </span>
+<span class="sd">        PARALLEL (2): Normal piezo actuators with parallel output stage configuration.</span>
+<span class="sd">            </span>
+<span class="sd">        UNKNOWN (99): Actuator type could not be determined.</span>
+<span class="sd">            Fallback value when actuator information is unavailable or unrecognized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NANOX</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">PSH</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">PARALLEL</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">99</span></div>
+
+
+
+<div class="viewcode-block" id="DeviceInfo">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_types.DeviceInfo">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DeviceInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete information about a connected piezoelectric device.</span>
+<span class="sd">    </span>
+<span class="sd">    This dataclass aggregates all identification and configuration information for a</span>
+<span class="sd">    connected device. It combines transport-layer information with device-specific</span>
+<span class="sd">    metadata, providing a complete picture of the device&#39;s identity and capabilities.</span>
+<span class="sd">    </span>
+<span class="sd">    This information is typically populated during device discovery or initial connection</span>
+<span class="sd">    and is used throughout the device&#39;s lifecycle for logging, identification, and</span>
+<span class="sd">    configuration management.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        transport_info (TransportProtocolInfo): Transport layer connection details.</span>
+<span class="sd">            Contains the transport type (SERIAL/TELNET), connection identifier</span>
+<span class="sd">            (COM port or IP address), and MAC address if applicable.</span>
+<span class="sd">            </span>
+<span class="sd">        device_id (Optional[str]): Device model or family identifier.</span>
+<span class="sd">            Examples:</span>
+<span class="sd">            - &quot;d-Drive&quot;: Modular d-Drive piezo amplifier</span>
+<span class="sd">            - &quot;NV200/D_NET&quot;: Network-enabled NV200 compact amplifier  </span>
+<span class="sd">            - &quot;SPI Controller Box&quot;: Multi-channel SPI controller</span>
+<span class="sd">            This field is None if device identification has not been performed.</span>
+<span class="sd">            </span>
+<span class="sd">        extended_info (Dict[str, str]): Device-specific metadata dictionary.</span>
+<span class="sd">            Additional information that varies by device type. Common keys include:</span>
+<span class="sd">            - &quot;actuator_name&quot;: Model name of connected actuator (e.g., &quot;PSH15SG_Y&quot;)</span>
+<span class="sd">            - &quot;actuator_serial&quot;: Serial number of connected actuator</span>
+<span class="sd">            - &quot;firmware_version&quot;: Device firmware version string</span>
+<span class="sd">            - &quot;channels&quot;: Number of available channels</span>
+<span class="sd">            - &quot;capabilities&quot;: List of supported features</span>
+<span class="sd">            Empty dict if extended information was not requested during discovery.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; device = await DDriveDevice.discover_devices()[0]</span>
+<span class="sd">        &gt;&gt;&gt; info = device.device_info</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Connected to {info.device_id} on {info.transport_info}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Actuator: {info.extended_info.get(&#39;actuator_name&#39;, &#39;Unknown&#39;)}&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">transport_info</span><span class="p">:</span> <span class="n">TransportProtocolInfo</span>
+    <span class="n">device_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Unique identifier for the device, if available</span>
+    <span class="n">extended_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a string representation of the transport type, capitalized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">device_info</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">transport_info</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_id</span><span class="p">:</span>
+            <span class="n">device_info</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extended_info</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">device_info</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">extended_info</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">device_info</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

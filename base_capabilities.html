@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base Capabilities &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="d-Drive and 30DV50/300" href="d_drive.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Base Capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#position-control">Position Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setpoint">Setpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#position">Position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#closed-loop-controller">Closed-Loop Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slew-rate">Slew Rate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#control-system">Control System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pid-controller">PID Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-control-factor-pcf">Pre-Control Factor (PCF)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#signal-filtering">Signal Filtering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#notch-filter">Notch Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#low-pass-filter">Low-Pass Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-low-pass-filter">Error Low-Pass Filter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-acquisition">Data Acquisition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-recorder">Data Recorder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trigger-output">Trigger Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#signal-generation">Signal Generation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#static-waveform-generator">Static Waveform Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#system-monitoring">System Monitoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#status-register">Status Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#temperature">Temperature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fan-control">Fan Control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#device-information">Device Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#actuator-description">Actuator Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#units">Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#signal-routing">Signal Routing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modulation-source">Modulation Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#monitor-output">Monitor Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-management">Configuration Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#factory-reset">Factory Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Base Capabilities</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="base-capabilities">
+<h1>Base Capabilities<a class="headerlink" href="#base-capabilities" title="Link to this heading"></a></h1>
+<p>This page documents the base capabilities that are available across each piezo device in psj-lib. These capabilities provide the core functionality for position control, signal processing, data acquisition, and system configuration.</p>
+<p>Device-specific implementations may extend these base capabilities with additional features or provide specialized versions. Refer to device-specific documentation (e.g., <a class="reference internal" href="d_drive.html"><span class="doc">d-Drive and 30DV50/300</span></a>) for device-specific capabilities and enhancements.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Capabilities are modular features accessed as properties of device channels. Each capability provides a focused set of operations for a specific aspect of device control.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+    <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Access capabilities as channel properties</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="position-control">
+<h2>Position Control<a class="headerlink" href="#position-control" title="Link to this heading"></a></h2>
+<section id="setpoint">
+<h3>Setpoint<a class="headerlink" href="#setpoint" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.setpoint.Setpoint" title="psj_lib.devices.base.capabilities.setpoint.Setpoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Setpoint</span></code></a></p>
+<p>The setpoint capability controls the target position or voltage for the actuator. In closed-loop mode, the controller drives the actuator to match this setpoint. In open-loop mode, the setpoint directly controls the output voltage.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set target position</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">75.5</span><span class="p">)</span>
+
+<span class="c1"># Read current setpoint</span>
+<span class="n">target</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target: </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Units match position units (typically µm in closed-loop, V in open-loop)</p></li>
+<li><p>Range limited by actuator specifications</p></li>
+<li><p>Movement speed affected by slew rate settings</p></li>
+</ul>
+</section>
+<section id="position">
+<h3>Position<a class="headerlink" href="#position" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.position.Position" title="psj_lib.devices.base.capabilities.position.Position"><code class="xref py py-class docutils literal notranslate"><span class="pre">Position</span></code></a></p>
+<p>Reads the current position of the actuator. In closed-loop systems, this represents the sensor feedback value. In open-loop systems, this may represent the output voltage.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get current position</span>
+<span class="n">current_pos</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position: </span><span class="si">{</span><span class="n">current_pos</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calculate position error</span>
+<span class="n">target</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">current_pos</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Read-only capability</p></li>
+<li><p>Update rate depends on device (typically every control loop cycle)</p></li>
+<li><p>Units depend on device configuration</p></li>
+</ul>
+</section>
+<section id="closed-loop-controller">
+<h3>Closed-Loop Controller<a class="headerlink" href="#closed-loop-controller" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.closed_loop_controller.ClosedLoopController" title="psj_lib.devices.base.capabilities.closed_loop_controller.ClosedLoopController"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClosedLoopController</span></code></a></p>
+<p>Enables or disables closed-loop position control. When enabled, the controller uses sensor feedback to actively maintain the actuator at the desired setpoint, compensating for drift, hysteresis, and external loads.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable closed-loop control</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Check control mode</span>
+<span class="n">is_closed_loop</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">get_enabled</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mode: </span><span class="si">{</span><span class="s1">&#39;Closed-loop&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_closed_loop</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Open-loop&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get controller sampling period</span>
+<span class="n">period_us</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">sample_period</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control rate: </span><span class="si">{</span><span class="mf">1e6</span><span class="o">/</span><span class="n">period_us</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> Hz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Requires position sensor for feedback</p></li>
+<li><p>Better accuracy and stability than open-loop</p></li>
+<li><p>PID parameters affect closed-loop performance</p></li>
+<li><p>Changing modes may cause position jumps</p></li>
+</ul>
+</section>
+<section id="slew-rate">
+<h3>Slew Rate<a class="headerlink" href="#slew-rate" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.slew_rate.SlewRate" title="psj_lib.devices.base.capabilities.slew_rate.SlewRate"><code class="xref py py-class docutils literal notranslate"><span class="pre">SlewRate</span></code></a></p>
+<p>Controls the maximum rate of change for actuator movement. Slew rate limiting prevents mechanical shock, reduces vibration, and protects delicate samples.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set gentle slew rate for smooth motion</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">slew_rate</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+
+<span class="c1"># Query current rate</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">slew_rate</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max speed: </span><span class="si">{</span><span class="n">rate</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> V/ms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Units typically V/ms or %/ms (device-specific)</p></li>
+<li><p>Lower values = smoother, slower movements</p></li>
+<li><p>Zero or maximum may disable rate limiting (device-specific)</p></li>
+</ul>
+</section>
+</section>
+<section id="control-system">
+<h2>Control System<a class="headerlink" href="#control-system" title="Link to this heading"></a></h2>
+<section id="pid-controller">
+<h3>PID Controller<a class="headerlink" href="#pid-controller" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.pid_controller.PIDController" title="psj_lib.devices.base.capabilities.pid_controller.PIDController"><code class="xref py py-class docutils literal notranslate"><span class="pre">PIDController</span></code></a></p>
+<p>Configures PID (Proportional-Integral-Derivative) controller parameters for closed-loop operation. The PID controller determines how the system responds to position errors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set PID parameters</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">p</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>      <span class="c1"># Proportional gain</span>
+    <span class="n">i</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>       <span class="c1"># Integral gain</span>
+    <span class="n">d</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>       <span class="c1"># Derivative gain</span>
+    <span class="n">diff_filter</span><span class="o">=</span><span class="mf">100.0</span>  <span class="c1"># Derivative filter</span>
+<span class="p">)</span>
+
+<span class="c1"># Read individual parameters</span>
+<span class="n">p_gain</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_p</span><span class="p">()</span>
+<span class="n">i_gain</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_i</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PID: P=</span><span class="si">{</span><span class="n">p_gain</span><span class="si">}</span><span class="s2">, I=</span><span class="si">{</span><span class="n">i_gain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p><strong>P (Proportional):</strong> Response proportional to error. Higher = faster but may overshoot</p></li>
+<li><p><strong>I (Integral):</strong> Eliminates steady-state error. Too high causes oscillation</p></li>
+<li><p><strong>D (Derivative):</strong> Dampens oscillation. Higher = more damping but noise sensitive</p></li>
+<li><p><strong>Diff Filter:</strong> Filters derivative term to reduce noise amplification</p></li>
+<li><p>Only active when closed-loop control is enabled</p></li>
+<li><p>Improper tuning can cause poor performance</p></li>
+</ul>
+</section>
+<section id="pre-control-factor-pcf">
+<h3>Pre-Control Factor (PCF)<a class="headerlink" href="#pre-control-factor-pcf" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.pcf.PreControlFactor" title="psj_lib.devices.base.capabilities.pcf.PreControlFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreControlFactor</span></code></a></p>
+<p>The Pre-Control Factor provides feedforward compensation to improve control system response. It anticipates required control action based on setpoint changes, reducing settling time and tracking error.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set moderate feedforward</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pcf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Query current value</span>
+<span class="n">value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pcf</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PCF: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Typical range: 0.0 (no feedforward) to 1.0 (full feedforward)</p></li>
+<li><p>Higher values = faster response but potential overshoot</p></li>
+<li><p>Only active in closed-loop mode</p></li>
+<li><p>Tune in conjunction with PID parameters</p></li>
+</ul>
+</section>
+</section>
+<section id="signal-filtering">
+<h2>Signal Filtering<a class="headerlink" href="#signal-filtering" title="Link to this heading"></a></h2>
+<section id="notch-filter">
+<h3>Notch Filter<a class="headerlink" href="#notch-filter" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.notch_filter.NotchFilter" title="psj_lib.devices.base.capabilities.notch_filter.NotchFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotchFilter</span></code></a></p>
+<p>Notch filters suppress specific frequency components to eliminate mechanical resonances that can cause instability or oscillation in closed-loop systems.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suppress 500 Hz resonance</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">notch_filter</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span>
+    <span class="n">bandwidth</span><span class="o">=</span><span class="mf">50.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Check configuration</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">notch_filter</span><span class="o">.</span><span class="n">get_frequency</span><span class="p">()</span>
+<span class="n">bw</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">notch_filter</span><span class="o">.</span><span class="n">get_bandwidth</span><span class="p">()</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">notch_filter</span><span class="o">.</span><span class="n">get_enabled</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Notch: </span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s2">±</span><span class="si">{</span><span class="n">bw</span><span class="o">/</span><span class="mi">2</span><span class="si">}</span><span class="s2"> Hz, </span><span class="si">{</span><span class="s1">&#39;On&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Off&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Center frequency should match mechanical resonance</p></li>
+<li><p>Narrow bandwidth = precise suppression</p></li>
+<li><p>Wide bandwidth = broader suppression, affects more frequencies</p></li>
+</ul>
+</section>
+<section id="low-pass-filter">
+<h3>Low-Pass Filter<a class="headerlink" href="#low-pass-filter" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.low_pass_filter.LowPassFilter" title="psj_lib.devices.base.capabilities.low_pass_filter.LowPassFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LowPassFilter</span></code></a></p>
+<p>Low-pass filters attenuate high-frequency noise while allowing low-frequency signals to pass. This improves signal quality and reduces noise in position measurements or control output.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable 100 Hz low-pass filter</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">lpf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cutoff_frequency</span><span class="o">=</span><span class="mf">100.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Check settings</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">lpf</span><span class="o">.</span><span class="n">get_cutoff_frequency</span><span class="p">()</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">lpf</span><span class="o">.</span><span class="n">get_enabled</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LPF: </span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s2"> Hz, </span><span class="si">{</span><span class="s1">&#39;Active&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Bypassed&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Lower cutoff = more filtering, slower response</p></li>
+<li><p>Higher cutoff = less filtering, faster response</p></li>
+<li><p>Adds phase lag proportional to filtering strength</p></li>
+</ul>
+</section>
+<section id="error-low-pass-filter">
+<h3>Error Low-Pass Filter<a class="headerlink" href="#error-low-pass-filter" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.error_low_pass_filter.ErrorLowPassFilter" title="psj_lib.devices.base.capabilities.error_low_pass_filter.ErrorLowPassFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorLowPassFilter</span></code></a></p>
+<p>Applies low-pass filtering specifically to the position error signal (setpoint - position) before it enters the PID controller. This reduces high-frequency noise that could cause unstable control behavior.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure 2nd-order error filter</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">error_lpf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">cutoff_frequency</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+<span class="c1"># Query settings</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">error_lpf</span><span class="o">.</span><span class="n">get_cutoff_frequency</span><span class="p">()</span>
+<span class="n">order</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">error_lpf</span><span class="o">.</span><span class="n">get_order</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">-order error filter at </span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s2"> Hz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Only affects closed-loop control</p></li>
+<li><p>Higher order = steeper rolloff, more phase lag</p></li>
+<li><p>Helps stabilize noisy systems</p></li>
+<li><p>Coordinate with PID tuning for best stability</p></li>
+</ul>
+</section>
+</section>
+<section id="data-acquisition">
+<h2>Data Acquisition<a class="headerlink" href="#data-acquisition" title="Link to this heading"></a></h2>
+<section id="data-recorder">
+<h3>Data Recorder<a class="headerlink" href="#data-recorder" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder" title="psj_lib.devices.base.capabilities.data_recorder.DataRecorder"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataRecorder</span></code></a></p>
+<p>The data recorder captures device signals (position, setpoint, voltage, etc.) at high speed into device memory for later retrieval and analysis.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recorder</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">data_recorder</span>
+
+<span class="c1"># Configure for 10000 samples, no decimation</span>
+<span class="k">await</span> <span class="n">recorder</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">memory_length</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Start recording</span>
+<span class="k">await</span> <span class="n">recorder</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># ... perform motion or measurements ...</span>
+
+<span class="c1"># Retrieve data with progress callback</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">progress</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">total</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloaded </span><span class="si">{</span><span class="n">current</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataRecorderChannel</span>
+<span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">recorder</span><span class="o">.</span><span class="n">get_all_data</span><span class="p">(</span>
+    <span class="n">DataRecorderChannel</span><span class="o">.</span><span class="n">CHANNEL_1</span><span class="p">,</span>
+    <span class="n">callback</span><span class="o">=</span><span class="n">progress</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Captured </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check recorder specifications</span>
+<span class="n">sample_rate</span> <span class="o">=</span> <span class="n">recorder</span><span class="o">.</span><span class="n">sample_rate</span>  <span class="c1"># Hz</span>
+<span class="n">sample_period</span> <span class="o">=</span> <span class="n">recorder</span><span class="o">.</span><span class="n">sample_period</span>  <span class="c1"># microseconds</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recording at </span><span class="si">{</span><span class="n">sample_rate</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> kHz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Multiple channels (device-dependent, typically 2)</p></li>
+<li><p>Memory length limits total capture time</p></li>
+<li><p>Stride (decimation) allows longer time spans at lower data rate</p></li>
+<li><p>Large data transfers may take several seconds</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">sample_rate</span></code> property to get base recording frequency</p></li>
+</ul>
+</section>
+<section id="trigger-output">
+<h3>Trigger Output<a class="headerlink" href="#trigger-output" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut" title="psj_lib.devices.base.capabilities.trigger_out.TriggerOut"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerOut</span></code></a></p>
+<p>Generates digital trigger pulses when monitored signals cross threshold values. Useful for synchronizing external equipment (cameras, data acquisition, etc.) with actuator movement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">TriggerEdge</span><span class="p">,</span> <span class="n">TriggerDataSource</span>
+
+<span class="c1"># Trigger every 10µm from 20µm to 80µm</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">trigger_out</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">start_value</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
+    <span class="n">stop_value</span><span class="o">=</span><span class="mf">80.0</span><span class="p">,</span>
+    <span class="n">interval</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c1"># Pulse duration in cycles</span>
+    <span class="n">edge</span><span class="o">=</span><span class="n">TriggerEdge</span><span class="o">.</span><span class="n">BOTH</span><span class="p">,</span>
+    <span class="n">src</span><span class="o">=</span><span class="n">TriggerDataSource</span><span class="o">.</span><span class="n">POSITION</span>
+<span class="p">)</span>
+
+<span class="c1"># Query configuration</span>
+<span class="n">start</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">trigger_out</span><span class="o">.</span><span class="n">get_start_value</span><span class="p">()</span>
+<span class="n">interval</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">trigger_out</span><span class="o">.</span><span class="n">get_interval</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Trigger every </span><span class="si">{</span><span class="n">interval</span><span class="si">}</span><span class="s2">µm from </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">µm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Output typically 0V/5V TTL signal</p></li>
+<li><p>Window mode: triggers when signal enters/exits range</p></li>
+<li><p>Interval mode: periodic triggers at fixed spacing</p></li>
+<li><p>Edge sensitivity: rising, falling, or both</p></li>
+</ul>
+</section>
+</section>
+<section id="signal-generation">
+<h2>Signal Generation<a class="headerlink" href="#signal-generation" title="Link to this heading"></a></h2>
+<section id="static-waveform-generator">
+<h3>Static Waveform Generator<a class="headerlink" href="#static-waveform-generator" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.static_waveform_generator.StaticWaveformGenerator" title="psj_lib.devices.base.capabilities.static_waveform_generator.StaticWaveformGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticWaveformGenerator</span></code></a></p>
+<p>Generates continuous periodic waveforms (sine, square, triangle, etc.) for scanning applications, vibration testing, frequency response characterization, and dynamic positioning.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wfg</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span>
+
+<span class="c1"># Generate 10 Hz sine wave, 20µm amplitude, centered at 50µm</span>
+<span class="k">await</span> <span class="n">wfg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">amplitude</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
+    <span class="n">offset</span><span class="o">=</span><span class="mf">50.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Create square wave with 30% duty cycle</span>
+<span class="k">await</span> <span class="n">wfg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+    <span class="n">duty_cycle</span><span class="o">=</span><span class="mf">30.0</span>
+<span class="p">)</span>
+
+<span class="c1"># Query current settings</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wfg</span><span class="o">.</span><span class="n">get_frequency</span><span class="p">()</span>
+<span class="n">amp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wfg</span><span class="o">.</span><span class="n">get_amplitude</span><span class="p">()</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wfg</span><span class="o">.</span><span class="n">get_offset</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s2"> Hz, ±</span><span class="si">{</span><span class="n">amp</span><span class="o">/</span><span class="mi">2</span><span class="si">}</span><span class="s2"> µm around </span><span class="si">{</span><span class="n">offset</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Configurable frequency, amplitude, offset, and duty cycle</p></li>
+<li><p>May require modulation source selection to use waveform output</p></li>
+<li><p>Frequency limited by device capabilities and actuator resonance</p></li>
+<li><p>Amplitude limited by actuator travel range</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Device-specific implementations may provide enhanced waveform generators with additional waveform types and features. See device-specific documentation for details.</p>
+</div>
+</section>
+</section>
+<section id="system-monitoring">
+<h2>System Monitoring<a class="headerlink" href="#system-monitoring" title="Link to this heading"></a></h2>
+<section id="status-register">
+<h3>Status Register<a class="headerlink" href="#status-register" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.status.Status" title="psj_lib.devices.base.capabilities.status.Status"><code class="xref py py-class docutils literal notranslate"><span class="pre">Status</span></code></a></p>
+<p>Queries the device status register to retrieve real-time hardware state information, error conditions, and operational flags. The status register format is device-specific.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">status_register</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># Access device-specific status properties</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raw status: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">raw</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Device-specific implementations provide interpreted properties</span>
+<span class="c1"># (see device-specific documentation)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Status format is device-specific</p></li>
+<li><p>Provides real-time device state information</p></li>
+<li><p>Device implementations decode raw status into meaningful properties</p></li>
+</ul>
+</section>
+<section id="temperature">
+<h3>Temperature<a class="headerlink" href="#temperature" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.temperature.Temperature" title="psj_lib.devices.base.capabilities.temperature.Temperature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Temperature</span></code></a></p>
+<p>Monitors the internal temperature of device electronics or power stages. Temperature monitoring helps prevent overheating and can be used for thermal management.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device temperature: </span><span class="si">{</span><span class="n">temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: High temperature&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Temperature typically in degrees Celsius</p></li>
+<li><p>Sensor location varies by device (electronics, power stage)</p></li>
+<li><p>Use for thermal monitoring and diagnostics</p></li>
+</ul>
+</section>
+<section id="fan-control">
+<h3>Fan Control<a class="headerlink" href="#fan-control" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.fan.Fan" title="psj_lib.devices.base.capabilities.fan.Fan"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fan</span></code></a></p>
+<p>Enables or disables the internal cooling fan for thermal management. The fan helps dissipate heat from power electronics during operation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable cooling fan</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">fan</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Check fan status</span>
+<span class="n">is_running</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">fan</span><span class="o">.</span><span class="n">get_enabled</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fan: </span><span class="si">{</span><span class="s1">&#39;On&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_running</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Off&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Not all devices have controllable fans</p></li>
+<li><p>Some fans run automatically based on temperature</p></li>
+<li><p>Disabling may cause thermal shutdown under heavy load</p></li>
+</ul>
+</section>
+</section>
+<section id="device-information">
+<h2>Device Information<a class="headerlink" href="#device-information" title="Link to this heading"></a></h2>
+<section id="actuator-description">
+<h3>Actuator Description<a class="headerlink" href="#actuator-description" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.actuator_description.ActuatorDescription" title="psj_lib.devices.base.capabilities.actuator_description.ActuatorDescription"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActuatorDescription</span></code></a></p>
+<p>Retrieves a human-readable description of the piezoelectric actuator connected to a channel. This may include model number, specifications, or identifying information.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">desc</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">actuator_description</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected actuator: </span><span class="si">{</span><span class="n">desc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Example output: &quot;MIPOS 100&quot;</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Description format is actuator-specific</p></li>
+<li><p>May include model, travel range, resolution</p></li>
+<li><p>Some devices return empty string if not configured</p></li>
+</ul>
+</section>
+<section id="units">
+<h3>Units<a class="headerlink" href="#units" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.units.Units" title="psj_lib.devices.base.capabilities.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a></p>
+<p>Queries device measurement units for voltage and position values. Units may vary by device configuration or hardware model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">voltage_unit</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">get_voltage_unit</span><span class="p">()</span>
+<span class="n">position_unit</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">get_position_unit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Voltage: </span><span class="si">{</span><span class="n">voltage_unit</span><span class="si">}</span><span class="s2">, Position: </span><span class="si">{</span><span class="n">position_unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Example output: &quot;Voltage: V, Position: µm&quot;</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Common voltage units: V, mV</p></li>
+<li><p>Common position units: µm, mrad</p></li>
+<li><p>Units may be configurable on some devices</p></li>
+</ul>
+</section>
+</section>
+<section id="signal-routing">
+<h2>Signal Routing<a class="headerlink" href="#signal-routing" title="Link to this heading"></a></h2>
+<section id="modulation-source">
+<h3>Modulation Source<a class="headerlink" href="#modulation-source" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.modulation_source.ModulationSource" title="psj_lib.devices.base.capabilities.modulation_source.ModulationSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModulationSource</span></code></a></p>
+<p>Configures which signal source is used to modulate the actuator position or voltage. Common sources include external analog input, internal waveform generator, or serial commands.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device-specific enum (example for d-Drive)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveModulationSourceTypes</span>
+
+<span class="c1"># Use internal waveform generator</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">modulation_source</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span>
+    <span class="n">DDriveModulationSourceTypes</span><span class="o">.</span><span class="n">INTERNAL_WAVEFORM</span>
+<span class="p">)</span>
+
+<span class="c1"># Check current source</span>
+<span class="n">source</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">modulation_source</span><span class="o">.</span><span class="n">get_source</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Modulation from: </span><span class="si">{</span><span class="n">source</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Source enum is device-specific</p></li>
+<li><p>External input typically 0-10V</p></li>
+<li><p>May need to enable modulation mode separately</p></li>
+</ul>
+</section>
+<section id="monitor-output">
+<h3>Monitor Output<a class="headerlink" href="#monitor-output" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.monitor_output.MonitorOutput" title="psj_lib.devices.base.capabilities.monitor_output.MonitorOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MonitorOutput</span></code></a></p>
+<p>Configures which internal signal is routed to the device’s analog monitor output connector. This allows real-time observation using an oscilloscope or data acquisition system.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device-specific enum (example for d-Drive)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveMonitorOutputSource</span>
+
+<span class="c1"># Route position to monitor output</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">monitor_output</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span>
+    <span class="n">DDriveMonitorOutputSource</span><span class="o">.</span><span class="n">POSITION</span>
+<span class="p">)</span>
+
+<span class="c1"># Check current source</span>
+<span class="n">source</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">monitor_output</span><span class="o">.</span><span class="n">get_source</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monitoring: </span><span class="si">{</span><span class="n">source</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>Output typically 0-10V</p></li>
+<li><p>Scaling depends on device and selected source</p></li>
+<li><p>Source enum is device-specific</p></li>
+<li><p>Useful for debugging and real-time monitoring</p></li>
+</ul>
+</section>
+</section>
+<section id="configuration-management">
+<h2>Configuration Management<a class="headerlink" href="#configuration-management" title="Link to this heading"></a></h2>
+<section id="factory-reset">
+<h3>Factory Reset<a class="headerlink" href="#factory-reset" title="Link to this heading"></a></h3>
+<p><strong>API Reference:</strong> <a class="reference internal" href="api.html#psj_lib.devices.base.capabilities.factory_reset.FactoryReset" title="psj_lib.devices.base.capabilities.factory_reset.FactoryReset"><code class="xref py py-class docutils literal notranslate"><span class="pre">FactoryReset</span></code></a></p>
+<p>Resets the device to factory default settings. This restores all parameters (PID, filters, control modes, etc.) to their original values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IMPORTANT: Backup first!</span>
+<span class="n">backup</span> <span class="o">=</span> <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">backup</span><span class="p">()</span>
+
+<span class="c1"># Reset to factory defaults</span>
+<span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">factory_reset</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Device reset to factory defaults&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p><strong>All custom settings are permanently lost</strong></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">device.backup()</span></code> to save configuration first</p></li>
+<li><p>Cannot be undone</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Factory reset is irreversible. Always backup your configuration before performing a factory reset.</p>
+</div>
+</section>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="d_drive.html"><span class="doc">d-Drive and 30DV50/300</span></a> - d-Drive specific capabilities and enhancements</p></li>
+<li><p><a class="reference internal" href="api.html"><span class="doc">API Reference</span></a> - Complete API reference</p></li>
+<li><p><a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> - Usage examples and tutorials</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="d_drive.html" class="btn btn-neutral float-left" title="d-Drive and 30DV50/300" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

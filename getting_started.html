@@ -1,0 +1,646 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="d-Drive and 30DV50/300" href="d_drive.html" />
+    <link rel="prev" title="Connecting to Devices" href="connecting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#your-first-program">Your First Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-the-basics">Understanding the Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#async-await-pattern">Async/Await Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-hierarchy">Device Hierarchy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-channels">Working with Channels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-channels">Accessing Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#channel-information">Channel Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#position-control">Position Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#open-loop-control">Open-Loop Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#closed-loop-control">Closed-Loop Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#position-control-example">Position Control Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-status">Reading Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#status-register">Status Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#temperature-monitoring">Temperature Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuator-information">Actuator Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-control-patterns">Basic Control Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sequential-movement">Sequential Movement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-channel-control">Parallel Channel Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#continuous-monitoring">Continuous Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#handling-device-errors">Handling Device Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timeout-protection">Timeout Protection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialization-routine">Initialization Routine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-example">Complete Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting Started</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<p>This tutorial guides you through the basics of using psj-lib to control piezosystem jena devices.</p>
+<section id="your-first-program">
+<h2>Your First Program<a class="headerlink" href="#your-first-program" title="Link to this heading"></a></h2>
+<p>Let’s start with a complete, minimal example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Connect to device</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+        <span class="c1"># Get first channel</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Read current position</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current position: </span><span class="si">{</span><span class="n">position</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Enable closed-loop control</span>
+        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Move to target position</span>
+        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Moved to 50.0 µm&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Read final position</span>
+        <span class="n">final_pos</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final position: </span><span class="si">{</span><span class="n">final_pos</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>What This Does:</strong></p>
+<ol class="arabic simple">
+<li><p>Connects to a d-Drive device on COM3</p></li>
+<li><p>Gets the first channel</p></li>
+<li><p>Reads the current position</p></li>
+<li><p>Enables closed-loop control</p></li>
+<li><p>Moves to 50 µm</p></li>
+<li><p>Verifies the final position</p></li>
+</ol>
+</section>
+<section id="understanding-the-basics">
+<h2>Understanding the Basics<a class="headerlink" href="#understanding-the-basics" title="Link to this heading"></a></h2>
+<section id="async-await-pattern">
+<h3>Async/Await Pattern<a class="headerlink" href="#async-await-pattern" title="Link to this heading"></a></h3>
+<p>psj-lib uses Python’s <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> for non-blocking operations. Key points:</p>
+<ul class="simple">
+<li><p>All device operations are <code class="docutils literal notranslate"><span class="pre">async</span></code> functions</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">await</span></code> when calling device methods</p></li>
+<li><p>Run your async code with <code class="docutils literal notranslate"><span class="pre">asyncio.run()</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✓ Correct</span>
+<span class="n">position</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># ✗ Wrong - missing await</span>
+<span class="n">position</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>  <span class="c1"># Returns coroutine, not value</span>
+</pre></div>
+</div>
+</section>
+<section id="device-hierarchy">
+<h3>Device Hierarchy<a class="headerlink" href="#device-hierarchy" title="Link to this heading"></a></h3>
+<p>psj-lib uses a three-level structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Device (DDriveDevice)
+└── Channels (DDriveChannel)
+    └── Capabilities (Position, Status, PID, etc.)
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access pattern</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># First channel</span>
+<span class="n">position_capability</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span>
+
+<span class="c1"># Use capability</span>
+<span class="n">value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">position_capability</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-channels">
+<h2>Working with Channels<a class="headerlink" href="#working-with-channels" title="Link to this heading"></a></h2>
+<section id="accessing-channels">
+<h3>Accessing Channels<a class="headerlink" href="#accessing-channels" title="Link to this heading"></a></h3>
+<p>Devices may have multiple channels:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+    <span class="c1"># Get all channels</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span><span class="si">}</span><span class="s2"> channels&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Access by index</span>
+    <span class="n">channel0</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">channel1</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Iterate over channels</span>
+    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="channel-information">
+<h3>Channel Information<a class="headerlink" href="#channel-information" title="Link to this heading"></a></h3>
+<p>Each channel provides identification and status:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Channel ID</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel ID: </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read status register</span>
+<span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">status_register</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Closed-loop enabled: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">closed_loop_state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No overload: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">no_overload</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setpoint reached: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">setpoint_reached</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="position-control">
+<h2>Position Control<a class="headerlink" href="#position-control" title="Link to this heading"></a></h2>
+<section id="open-loop-control">
+<h3>Open-Loop Control<a class="headerlink" href="#open-loop-control" title="Link to this heading"></a></h3>
+<p>Open-loop control sets output voltage directly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disable closed-loop for open-loop control</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Set output voltage (0-100V for typical piezo)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>  <span class="c1"># 50V</span>
+
+<span class="c1"># Note: For d-Drive, you can read back via channel.setpoint.get() (returns cached value)</span>
+</pre></div>
+</div>
+<p><strong>Use Cases:</strong></p>
+<ul class="simple">
+<li><p>Testing piezo response</p></li>
+<li><p>Maximum speed movement (no feedback delay)</p></li>
+<li><p>Applications where position feedback unavailable</p></li>
+</ul>
+</section>
+<section id="closed-loop-control">
+<h3>Closed-Loop Control<a class="headerlink" href="#closed-loop-control" title="Link to this heading"></a></h3>
+<p>Depending on the amplifier and connected actuator,
+closed-loop control might be available.
+It uses sensor feedback for precise positioning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable closed-loop control</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Move to target position (in µm)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+
+<span class="c1"># Read actual position</span>
+<span class="n">actual_pos</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position: </span><span class="si">{</span><span class="n">actual_pos</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Precise positioning regardless of load</p></li>
+<li><p>Automatic compensation for drift and hysteresis</p></li>
+<li><p>Repeatable positioning</p></li>
+</ul>
+</section>
+<section id="position-control-example">
+<h3>Position Control Example<a class="headerlink" href="#position-control-example" title="Link to this heading"></a></h3>
+<p>Complete example with error checking:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">move_to_position</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Move to target position and verify arrival.&quot;&quot;&quot;</span>
+    <span class="c1"># Enable closed-loop</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Set target</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+    <span class="c1"># Wait briefly for settling</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Verify position</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">actual</span> <span class="o">-</span> <span class="n">target</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">error</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Reached </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm (error: </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> µm)&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Position error: </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># Use it</span>
+<span class="n">success</span> <span class="o">=</span> <span class="k">await</span> <span class="n">move_to_position</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="reading-status">
+<h2>Reading Status<a class="headerlink" href="#reading-status" title="Link to this heading"></a></h2>
+<section id="status-register">
+<h3>Status Register<a class="headerlink" href="#status-register" title="Link to this heading"></a></h3>
+<p>Depending on the device, a status register might be available.
+The status register provides real-time device state:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">status_register</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># Check individual flags</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Closed-loop: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">closed_loop</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actor plugged: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">actor_plugged</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actor type: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">actor_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sensor type: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">sensor_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="temperature-monitoring">
+<h3>Temperature Monitoring<a class="headerlink" href="#temperature-monitoring" title="Link to this heading"></a></h3>
+<p>Monitor amplifier temperature:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read temperature</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if overheating</span>
+<span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mf">60.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: High temperature!&quot;</span><span class="p">)</span>
+    <span class="c1"># Take action (reduce duty cycle, enable cooling, etc.)</span>
+</pre></div>
+</div>
+</section>
+<section id="actuator-information">
+<h3>Actuator Information<a class="headerlink" href="#actuator-information" title="Link to this heading"></a></h3>
+<p>Read actuator description string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get actuator description</span>
+<span class="n">actuator</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">actuator_description</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actuator description: </span><span class="si">{</span><span class="n">actuator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="basic-control-patterns">
+<h2>Basic Control Patterns<a class="headerlink" href="#basic-control-patterns" title="Link to this heading"></a></h2>
+<section id="sequential-movement">
+<h3>Sequential Movement<a class="headerlink" href="#sequential-movement" title="Link to this heading"></a></h3>
+<p>Move through a sequence of positions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">sequential_scan</span><span class="p">():</span>
+    <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># Dwell time</span>
+
+        <span class="n">actual</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position: </span><span class="si">{</span><span class="n">actual</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parallel-channel-control">
+<h3>Parallel Channel Control<a class="headerlink" href="#parallel-channel-control" title="Link to this heading"></a></h3>
+<p>Control multiple channels simultaneously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">move_all_channels</span><span class="p">():</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span>
+
+    <span class="c1"># Enable closed-loop on all channels</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="p">[</span>
+        <span class="n">ch</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">channels</span>
+    <span class="p">])</span>
+
+    <span class="c1"># Move all channels to different positions</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="mf">30.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">]</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="p">[</span>
+        <span class="n">ch</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ch</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="continuous-monitoring">
+<h3>Continuous Monitoring<a class="headerlink" href="#continuous-monitoring" title="Link to this heading"></a></h3>
+<p>Monitor position over time:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">monitor_position</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor position for specified duration.&quot;&quot;&quot;</span>
+    <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">duration</span>
+
+    <span class="k">while</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">end_time</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position: </span><span class="si">{</span><span class="n">pos</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm, Temp: </span><span class="si">{</span><span class="n">temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
+<section id="handling-device-errors">
+<h3>Handling Device Errors<a class="headerlink" href="#handling-device-errors" title="Link to this heading"></a></h3>
+<p>Always handle potential errors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceError</span><span class="p">,</span> <span class="n">DeviceUnavailableException</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">safe_operation</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+            <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">DeviceUnavailableException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">DeviceError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="timeout-protection">
+<h3>Timeout Protection<a class="headerlink" href="#timeout-protection" title="Link to this heading"></a></h3>
+<p>Protect against hanging operations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">safe_move_with_timeout</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Move with timeout protection.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
+            <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Moved to </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Move timeout after </span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+        <span class="c1"># Could implement recovery here</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-patterns">
+<h2>Common Patterns<a class="headerlink" href="#common-patterns" title="Link to this heading"></a></h2>
+<section id="initialization-routine">
+<h3>Initialization Routine<a class="headerlink" href="#initialization-routine" title="Link to this heading"></a></h3>
+<p>Standard initialization pattern:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">initialize_channel</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize channel for operation.&quot;&quot;&quot;</span>
+    <span class="c1"># Read and display current state</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">status_register</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Enable closed-loop</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closed-loop enabled&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Move to zero position</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Homed to 0.0 µm&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="complete-example">
+<h2>Complete Example<a class="headerlink" href="#complete-example" title="Link to this heading"></a></h2>
+<p>Here’s a complete application template:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceError</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Configuration</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;COM3&quot;</span>
+    <span class="n">target_positions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Connect</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Get channel</span>
+            <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Initialize</span>
+            <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Execute movement sequence</span>
+            <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">target_positions</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Settling time</span>
+
+                <span class="n">actual</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">actual</span> <span class="o">-</span> <span class="n">target</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target: </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> µm, Actual: </span><span class="si">{</span><span class="n">actual</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm, &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Return to zero</span>
+            <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Returned to zero&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">DeviceError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completed successfully&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">exit_code</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">exit_code</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Always Use Context Managers</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+    <span class="c1"># Device operations here</span>
+<span class="c1"># Automatically closes</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Enable Closed-Loop for Precision</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Check Status After Critical Operations</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+<span class="n">actual</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Handle Errors Appropriately</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">DeviceError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Handle error</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Monitor Temperature Under Load</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mf">60.0</span><span class="p">:</span>
+    <span class="c1"># Reduce duty cycle or wait</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<p>Now that you understand the basics:</p>
+<ul class="simple">
+<li><p>Learn about d-Drive specific features: <a class="reference internal" href="d_drive.html"><span class="doc">d-Drive and 30DV50/300</span></a></p></li>
+<li><p>Explore base capabilities: <a class="reference internal" href="base_capabilities.html"><span class="doc">Base Capabilities</span></a></p></li>
+<li><p>See complete examples: <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="connecting.html" class="btn btn-neutral float-left" title="Connecting to Devices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="d_drive.html" class="btn btn-neutral float-right" title="d-Drive and 30DV50/300" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

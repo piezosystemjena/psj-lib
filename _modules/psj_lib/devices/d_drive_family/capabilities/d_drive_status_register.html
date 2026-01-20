@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.d_drive_family.capabilities.d_drive_status_register &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.d_drive_family.capabilities.d_drive_status_register</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.d_drive_family.capabilities.d_drive_status_register</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">...base.capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">StatusRegister</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...base.piezo_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SensorType</span>
+
+
+<div class="viewcode-block" id="DDriveWaveformGeneratorStatus">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_status_register.DDriveWaveformGeneratorStatus">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveWaveformGeneratorStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive waveform generator status from hardware status register.</span>
+<span class="sd">    </span>
+<span class="sd">    Indicates which waveform type is currently active in the waveform</span>
+<span class="sd">    generator. This is read from bits 9-11 of the d-Drive status register.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        INACTIVE: No waveform generation active</span>
+<span class="sd">        SINE: Sinusoidal waveform active</span>
+<span class="sd">        TRIANGLE: Triangle waveform active</span>
+<span class="sd">        RECTANGLE: Rectangle/square waveform active</span>
+<span class="sd">        NOISE: Noise waveform active</span>
+<span class="sd">        SWEEP: Sweep/ramp waveform active</span>
+<span class="sd">        UNKNOWN: Status value not recognized (error condition)</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; status = await channel.status_register.get()</span>
+<span class="sd">        &gt;&gt;&gt; if status.waveform_generator_status == DDriveWaveformGeneratorStatus.SINE:</span>
+<span class="sd">        ...     print(&quot;Sine wave is running&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">INACTIVE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SINE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">TRIANGLE</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">RECTANGLE</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">NOISE</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">SWEEP</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">99</span></div>
+
+
+
+<div class="viewcode-block" id="DDriveStatusRegister">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_status_register.DDriveStatusRegister">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveStatusRegister</span><span class="p">(</span><span class="n">StatusRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive hardware status register with bit-mapped state information.</span>
+<span class="sd">    </span>
+<span class="sd">    Decodes the d-Drive status register word into individual boolean and</span>
+<span class="sd">    enumerated properties representing the amplifier channel&#39;s current state.</span>
+<span class="sd">    </span>
+<span class="sd">    The status register provides real-time information about:</span>
+<span class="sd">    - Actuator connection status</span>
+<span class="sd">    - Position sensor type</span>
+<span class="sd">    - Output voltage enable state</span>
+<span class="sd">    - Closed-loop control activation</span>
+<span class="sd">    - Active waveform type</span>
+<span class="sd">    - Filter enable states</span>
+<span class="sd">    </span>
+<span class="sd">    Properties:</span>
+<span class="sd">        actor_plugged (bool): Actuator physically connected</span>
+<span class="sd">        sensor_type (SensorType): Position sensor type (STRAIN_GAUGE, CAPACITIVE, etc.)</span>
+<span class="sd">        piezo_voltage_enabled (bool): High voltage output enabled</span>
+<span class="sd">        closed_loop (bool): Closed-loop control active</span>
+<span class="sd">        waveform_generator_status (DDriveWaveformGeneratorStatus): Active waveform type</span>
+<span class="sd">        notch_filter_active (bool): Notch filter enabled</span>
+<span class="sd">        low_pass_filter_active (bool): Low-pass filter enabled</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; status = await channel.status_register.get()</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Actuator plugged: {status.actor_plugged}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Sensor type: {status.sensor_type.name}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Closed-loop: {status.closed_loop}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Waveform: {status.waveform_generator_status.name}&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Notch filter: {status.notch_filter_active}&quot;)</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Status is read-only (reports hardware state)</span>
+<span class="sd">        - Decoded from 16-bit status register word</span>
+<span class="sd">        - Bit positions defined by d-Drive firmware</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">actor_plugged</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Actuator connection status (bit 0).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if piezo actuator is physically connected and detected.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            The d-Drive automatically detects actuator connection on power-up</span>
+<span class="sd">            or when an actuator is plugged in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x0001</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sensor_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SensorType</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Position sensor type identification (bits 1-2).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            SensorType: Type of position sensor in connected actuator.</span>
+<span class="sd">                Common types: STRAIN_GAUGE, CAPACITIVE, LVDT, etc.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Sensor type is auto-detected from actuator&#39;s identification.</span>
+<span class="sd">            Different sensor types may have different characteristics</span>
+<span class="sd">            (resolution, linearity, temperature sensitivity).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">SensorType</span><span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x0006</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">piezo_voltage_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;High voltage output enable status (bit 6).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if amplifier output stage is enabled and driving</span>
+<span class="sd">                the piezo actuator.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            When False, the output is disabled for safety. This may occur:</span>
+<span class="sd">            - After power-up when no actuator is detected</span>
+<span class="sd">            - On error conditions</span>
+<span class="sd">            - When explicitly disabled by user</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x0040</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">closed_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Closed-loop control activation status (bit 7).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if sensor-based feedback control is active.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - When True: PID controller drives actuator to match setpoint</span>
+<span class="sd">            - When False: Open-loop operation (direct voltage control)</span>
+<span class="sd">            - Requires valid sensor signal to enable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x0080</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">waveform_generator_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DDriveWaveformGeneratorStatus</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Active waveform generator type (bits 9-11).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            DDriveWaveformGeneratorStatus: Currently active waveform type.</span>
+<span class="sd">                INACTIVE if no waveform is running, otherwise SINE, TRIANGLE,</span>
+<span class="sd">                RECTANGLE, NOISE, or SWEEP.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; status = await channel.status_register.get()</span>
+<span class="sd">            &gt;&gt;&gt; wfg = status.waveform_generator_status</span>
+<span class="sd">            &gt;&gt;&gt; if wfg != DDriveWaveformGeneratorStatus.INACTIVE:</span>
+<span class="sd">            ...     print(f&quot;Active waveform: {wfg.name}&quot;)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Returns UNKNOWN if hardware reports unrecognized value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">wg_status</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x0E00</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">9</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DDriveWaveformGeneratorStatus</span><span class="p">(</span><span class="n">wg_status</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DDriveWaveformGeneratorStatus</span><span class="o">.</span><span class="n">UNKNOWN</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">notch_filter_active</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Notch filter enable status (bit 12).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if notch filter is enabled and actively filtering.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Notch filter suppresses specific frequencies (typically</span>
+<span class="sd">            mechanical resonances) to improve closed-loop stability.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1000</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">low_pass_filter_active</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low-pass filter enable status (bit 13).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if low-pass filter is enabled and actively filtering.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Low-pass filter reduces high-frequency noise in position or</span>
+<span class="sd">            control signals for smoother operation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x2000</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

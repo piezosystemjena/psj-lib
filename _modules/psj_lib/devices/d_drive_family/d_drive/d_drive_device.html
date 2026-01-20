@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.d_drive_family.d_drive.d_drive_device &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.d_drive_family.d_drive.d_drive_device</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.d_drive_family.d_drive.d_drive_device</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Piezosystem Jena d-Drive modular piezo amplifier device implementation.</span>
+
+<span class="sd">The d-Drive is a modular, expandable piezoelectric amplifier system designed</span>
+<span class="sd">for high-precision nanopositioning. It features:</span>
+
+<span class="sd">- 20-bit resolution with 50 kHz sampling rate (50 kSPS)</span>
+<span class="sd">- 1 to 6 amplifier channels per system</span>
+<span class="sd">- Digital PID controllers with several filter stages</span>
+<span class="sd">- Integrated waveform generator (sine, triangle, rectangle, sweep, noise)</span>
+<span class="sd">- Two-channel data recorder (500k maximum samples per channel)</span>
+<span class="sd">- Modular architecture with hot-swappable amplifier modules</span>
+<span class="sd">- RS-232/USB connectivity options</span>
+
+<span class="sd">For detailed hardware specifications, refer to the d-Drive Instruction Manual.</span>
+<span class="sd">(https://www.piezosystem.com/products/amplifiers/modular/50ma-300ma-ddrive-digital-systems/)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..d_drive_family_device</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveFamilyDevice</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.d_drive_channel</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveChannel</span>
+
+
+<div class="viewcode-block" id="DDriveDevice">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.d_drive.d_drive_device.DDriveDevice">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveDevice</span><span class="p">(</span><span class="n">DDriveFamilyDevice</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Piezosystem Jena d-Drive modular amplifier system.</span>
+<span class="sd">    </span>
+<span class="sd">    Represents a complete d-Drive system with 1-6 amplifier channels.</span>
+<span class="sd">    Each channel provides independent control of a piezoelectric actuator</span>
+<span class="sd">    with digital PID control, waveform generation, and data recording.</span>
+<span class="sd">    </span>
+<span class="sd">    The d-Drive system features:</span>
+<span class="sd">    - 20-bit resolution</span>
+<span class="sd">    - 50 kHz sampling rate (20µs control loop period)</span>
+<span class="sd">    - Digital PID controllers with feedforward</span>
+<span class="sd">    - Multiple filter stages (notch, low-pass, error filter)</span>
+<span class="sd">    - Integrated waveform generator (sine, triangle, rectangle, sweep, noise)</span>
+<span class="sd">    - Two-channel data recorder (500k samples per channel)</span>
+<span class="sd">    - Hardware trigger output</span>
+<span class="sd">    - Analog monitor output</span>
+<span class="sd">    - Modulation input</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        DEVICE_ID: Device type identifier string</span>
+<span class="sd">        BACKUP_COMMANDS: Commands excluded from backup operations</span>
+<span class="sd">        CACHEABLE_COMMANDS: Commands whose responses can be cached</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveDevice, TransportType</span>
+<span class="sd">        &gt;&gt;&gt; # Connect to d-Drive via serial port</span>
+<span class="sd">        &gt;&gt;&gt; device = DDriveDevice(TransportType.SERIAL, &#39;COM3&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; await device.connect()</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Found {len(device.channels)} channels&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Access channel 0</span>
+<span class="sd">        &gt;&gt;&gt; channel = device.channels[0]</span>
+<span class="sd">        &gt;&gt;&gt; # Enable closed-loop control</span>
+<span class="sd">        &gt;&gt;&gt; await channel.closed_loop_controller.set(True)</span>
+<span class="sd">        &gt;&gt;&gt; # Move to position</span>
+<span class="sd">        &gt;&gt;&gt; await channel.setpoint.set(50.0)  # 50 µm</span>
+<span class="sd">        &gt;&gt;&gt; # Read actual position</span>
+<span class="sd">        &gt;&gt;&gt; pos = await channel.position.get()</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Position: {pos:.3f} µm&quot;)</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - System supports 1-6 channels (hardware dependent)</span>
+<span class="sd">        - Channels are numbered 0-5</span>
+<span class="sd">        - Not all channel numbers may be populated</span>
+<span class="sd">        - Use device.channels dict to access available channels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">DEVICE_ID</span> <span class="o">=</span> <span class="s2">&quot;d-Drive&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Device type identifier used for device discovery and type checking.&quot;&quot;&quot;</span>
+
+    <span class="n">D_DRIVE_IDENTIFIER</span> <span class="o">=</span> <span class="s2">&quot;DSM&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Internal identifier string used to recognize different d-Drive family devices.&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_discover_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Discover and initialize all available amplifier channels.</span>
+<span class="sd">        </span>
+<span class="sd">        Queries the device for channel status and creates DDriveChannel</span>
+<span class="sd">        instances for each detected amplifier module.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Called automatically during device connection</span>
+<span class="sd">            - Detects channels 0-5 (hardware dependent)</span>
+<span class="sd">            - Only populated slots are initialized</span>
+<span class="sd">            - Internal method, not typically called by users</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_raw</span><span class="p">(</span><span class="s2">&quot;stat&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_channel_status</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="c1"># Set channel output to scientific notation for accuracy</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="s2">&quot;setf&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_channel_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse device status response to identify active channels.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            response: Raw status command response from device</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Parses &quot;stat,X&quot; patterns where X is channel number (0-5)</span>
+<span class="sd">            - Initializes DDriveChannel objects for detected channels</span>
+<span class="sd">            - Clears channel dict before populating with discovered channels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Reset all channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Go through every line in the response</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="c1"># Check if line is empty</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">index</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;stat,&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Check if channel was not detected</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Extract channel number from detected channel</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;stat,&quot;</span><span class="p">)</span>
+            <span class="n">channel_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="n">channel_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">DDriveChannel</span><span class="p">(</span>
+                <span class="n">channel_number</span><span class="p">,</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_channel</span>
+            <span class="p">)</span>
+
+    <span class="c1"># Override to provide typed channels</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">DDriveChannel</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get dictionary of available d-Drive amplifier channels.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping channel number (0-5) to DDriveChannel instance,</span>
+<span class="sd">            or None for unpopulated slots</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Iterate over all available channels</span>
+<span class="sd">            &gt;&gt;&gt; for ch_num, channel in device.channels.items():</span>
+<span class="sd">            ...     if channel is not None:</span>
+<span class="sd">            ...         pos = await channel.position.get()</span>
+<span class="sd">            ...         print(f&quot;Channel {ch_num}: {pos} µm&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # Access specific channel</span>
+<span class="sd">            &gt;&gt;&gt; if device.channels[0] is not None:</span>
+<span class="sd">            ...     await device.channels[0].setpoint.set(75.0)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Channel numbers 0-5</span>
+<span class="sd">            - None values indicate empty amplifier slots</span>
+<span class="sd">            - Check for None before accessing channel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

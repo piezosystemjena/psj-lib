@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer Guide" href="developer_guide.html" />
+    <link rel="prev" title="API Reference" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-scripts">Example Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#device-discovery-and-connection">01 - Device Discovery and Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-position-control">02 - Simple Position Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pid-tuning">03 - PID Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-recorder-capture">04 - Data Recorder Capture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#waveform-generation-basics">05 - Waveform Generation Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-configuration">06 - Filter Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#backup-and-restore-configuration">07 - Backup and Restore Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#common-patterns">Common Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#connection-pattern">Connection Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-handling-pattern">Error Handling Pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-examples">Running Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-an-example">Running an Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modifying-examples">Modifying Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
+<p>This page demonstrates common use cases with complete, working examples.</p>
+<section id="example-scripts">
+<h2>Example Scripts<a class="headerlink" href="#example-scripts" title="Link to this heading"></a></h2>
+<p>All examples are available in the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory of the repository.</p>
+<section id="device-discovery-and-connection">
+<h3>01 - Device Discovery and Connection<a class="headerlink" href="#device-discovery-and-connection" title="Link to this heading"></a></h3>
+<p>Demonstrates device discovery, connection, and basic information retrieval.</p>
+<p><strong>What You’ll Learn:</strong></p>
+<ul class="simple">
+<li><p>How to discover devices on Serial and Telnet</p></li>
+<li><p>Connecting to a device</p></li>
+<li><p>Displaying device information</p></li>
+<li><p>Listing available channels</p></li>
+</ul>
+<p><strong>Code:</strong> <code class="docutils literal notranslate"><span class="pre">examples/01_device_discovery_and_connection.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoDevice</span><span class="p">,</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">DiscoverFlags</span>
+
+<span class="c1"># Discover devices on all interfaces</span>
+<span class="n">devices</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DDriveDevice</span><span class="o">.</span><span class="n">discover_devices</span><span class="p">(</span>
+    <span class="n">flags</span><span class="o">=</span><span class="n">DiscoverFlags</span><span class="o">.</span><span class="n">ALL_INTERFACES</span>
+<span class="p">)</span>
+
+<span class="c1"># Display discovered devices</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">device</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">devices</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">address</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Connect to first device</span>
+<span class="k">if</span> <span class="n">devices</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Already a DDriveDevice instance</span>
+    <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># Display channels</span>
+    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="simple-position-control">
+<h3>02 - Simple Position Control<a class="headerlink" href="#simple-position-control" title="Link to this heading"></a></h3>
+<p>Basic position control with open-loop and closed-loop modes.</p>
+<p><strong>What You’ll Learn:</strong></p>
+<ul class="simple">
+<li><p>Reading current position</p></li>
+<li><p>Setting target positions</p></li>
+<li><p>Open-loop vs closed-loop control</p></li>
+<li><p>Position error checking</p></li>
+</ul>
+<p><strong>Code:</strong> <code class="docutils literal notranslate"><span class="pre">examples/02_simple_position_control.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable closed-loop control</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Move to target positions</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="mf">30.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># Settling time</span>
+
+    <span class="n">actual</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">actual</span> <span class="o">-</span> <span class="n">target</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target: </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> µm, Actual: </span><span class="si">{</span><span class="n">actual</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pid-tuning">
+<h3>03 - PID Tuning<a class="headerlink" href="#pid-tuning" title="Link to this heading"></a></h3>
+<p>Configure and test PID controller parameters.</p>
+<p><strong>What You’ll Learn:</strong></p>
+<ul class="simple">
+<li><p>Setting P, I, D parameters</p></li>
+<li><p>Reading current PID configuration</p></li>
+<li><p>Testing step response</p></li>
+</ul>
+<p><strong>Code:</strong> <code class="docutils literal notranslate"><span class="pre">examples/03_pid_tuning.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set PID parameters</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set_p</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set_i</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set_d</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="c1"># Read back settings</span>
+<span class="n">p</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_p</span><span class="p">()</span>
+<span class="n">i</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_i</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_d</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PID Parameters: P=</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, I=</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, D=</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-recorder-capture">
+<h3>04 - Data Recorder Capture<a class="headerlink" href="#data-recorder-capture" title="Link to this heading"></a></h3>
+<p>Record position and voltage data at high sample rates.</p>
+<p><strong>What You’ll Learn:</strong></p>
+<ul class="simple">
+<li><p>Configuring sample rate and buffer</p></li>
+<li><p>Starting and stopping recording</p></li>
+<li><p>Retrieving and saving data</p></li>
+<li><p>Optional plotting with matplotlib</p></li>
+</ul>
+<p><strong>Code:</strong> <code class="docutils literal notranslate"><span class="pre">examples/04_data_recorder_capture.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure recorder</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">data_recorder</span><span class="o">.</span><span class="n">set_sample_rate</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>  <span class="c1"># 10 kHz</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">data_recorder</span><span class="o">.</span><span class="n">set_num_samples</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>   <span class="c1"># 0.5 seconds</span>
+
+<span class="c1"># Start recording</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">data_recorder</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Perform movement</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+
+<span class="c1"># Wait for recording</span>
+<span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1"># Get data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">data_recorder</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+
+<span class="c1"># Export to CSV</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;recording.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Time,Position,Voltage</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">])):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">10000</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">,&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;voltage&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="waveform-generation-basics">
+<h3>05 - Waveform Generation Basics<a class="headerlink" href="#waveform-generation-basics" title="Link to this heading"></a></h3>
+<p>Generate periodic waveforms for scanning and testing.</p>
+<p><strong>What You’ll Learn:</strong></p>
+<ul class="simple">
+<li><p>Configuring different waveform types</p></li>
+<li><p>Setting frequency and amplitude</p></li>
+<li><p>Starting and stopping waveforms</p></li>
+</ul>
+<p><strong>Code:</strong> <code class="docutils literal notranslate"><span class="pre">examples/05_waveform_generation_basics.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sine wave</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">sine</span><span class="o">.</span><span class="n">set_frequency</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">sine</span><span class="o">.</span><span class="n">set_amplitude</span><span class="p">(</span><span class="mf">20.0</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">sine</span><span class="o">.</span><span class="n">set_offset</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="c1"># Triangle wave (for scanning)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">triangle</span><span class="o">.</span><span class="n">set_frequency</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">triangle</span><span class="o">.</span><span class="n">set_amplitude</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="c1"># Sweep (frequency response)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">sweep</span><span class="o">.</span><span class="n">set_start_frequency</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">sweep</span><span class="o">.</span><span class="n">set_stop_frequency</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">sweep</span><span class="o">.</span><span class="n">set_duration</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">waveform_generator</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="filter-configuration">
+<h3>06 - Filter Configuration<a class="headerlink" href="#filter-configuration" title="Link to this heading"></a></h3>
+<p>Configure notch filter, LPF, and error LPF for optimal performance.</p>
+<p><strong>What You’ll Learn:</strong></p>
+<ul class="simple">
+<li><p>Enabling and configuring notch filter</p></li>
+<li><p>Setting low-pass filter cutoff</p></li>
+<li><p>Error low-pass filter setup</p></li>
+</ul>
+<p><strong>Code:</strong> <code class="docutils literal notranslate"><span class="pre">examples/06_filter_configuration.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Notch filter (suppress resonance)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">notch</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">frequency</span><span class="o">=</span><span class="mf">2500.0</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">250.0</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Low-pass filter (reduce noise)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">lpf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cutoff_frequency</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Error low-pass filter (PID stability)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">error_lpf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cutoff_frequency</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="backup-and-restore-configuration">
+<h3>07 - Backup and Restore Configuration<a class="headerlink" href="#backup-and-restore-configuration" title="Link to this heading"></a></h3>
+<p>Save and restore device configuration to/from files.</p>
+<p><strong>What You’ll Learn:</strong></p>
+<ul class="simple">
+<li><p>Backing up channel configuration</p></li>
+<li><p>Saving to JSON file</p></li>
+<li><p>Restoring configuration from file</p></li>
+</ul>
+<p><strong>Code:</strong> <code class="docutils literal notranslate"><span class="pre">examples/07_backup_and_restore_configuration.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Backup configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># PID parameters</span>
+<span class="n">config</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_p</span><span class="p">(),</span>
+    <span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_i</span><span class="p">(),</span>
+    <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">get_d</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1"># Filter settings</span>
+<span class="n">config</span><span class="p">[</span><span class="s1">&#39;notch_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">notch</span><span class="o">.</span><span class="n">get_frequency</span><span class="p">()</span>
+<span class="n">config</span><span class="p">[</span><span class="s1">&#39;lpf_cutoff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">lpf</span><span class="o">.</span><span class="n">get_cutoff_frequency</span><span class="p">()</span>
+
+<span class="c1"># Save to file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;device_config.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Restore from file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;device_config.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set_p</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">])</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set_i</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">][</span><span class="s1">&#39;i&#39;</span><span class="p">])</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set_d</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">][</span><span class="s1">&#39;d&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-patterns">
+<h2>Common Patterns<a class="headerlink" href="#common-patterns" title="Link to this heading"></a></h2>
+<section id="connection-pattern">
+<h3>Connection Pattern<a class="headerlink" href="#connection-pattern" title="Link to this heading"></a></h3>
+<p>All examples follow this pattern:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Create device instance</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s1">&#39;COM3&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Connect</span>
+    <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Use device</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># ... operations ...</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># Always disconnect</span>
+        <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handling-pattern">
+<h3>Error Handling Pattern<a class="headerlink" href="#error-handling-pattern" title="Link to this heading"></a></h3>
+<p>Robust error handling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceError</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s1">&#39;COM3&#39;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># Operations...</span>
+
+<span class="k">except</span> <span class="n">DeviceError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">device</span><span class="o">.</span><span class="n">is_connected</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">device</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-examples">
+<h2>Running Examples<a class="headerlink" href="#running-examples" title="Link to this heading"></a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Install psj-lib:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>psj-lib
+</pre></div>
+</div>
+</li>
+<li><p>Connect your d-Drive device via USB or Ethernet</p></li>
+<li><p>Note the connection details (COM port or IP address)</p></li>
+</ol>
+</section>
+<section id="running-an-example">
+<h3>Running an Example<a class="headerlink" href="#running-an-example" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to examples directory</span>
+<span class="nb">cd</span><span class="w"> </span>examples
+
+<span class="c1"># Run example</span>
+python<span class="w"> </span>01_device_discovery_and_connection.py
+</pre></div>
+</div>
+<p><strong>Note</strong>: Adjust the COM port or IP address in each example to match your setup.</p>
+</section>
+<section id="modifying-examples">
+<h3>Modifying Examples<a class="headerlink" href="#modifying-examples" title="Link to this heading"></a></h3>
+<p>Each example is self-contained and can be modified:</p>
+<ol class="arabic simple">
+<li><p>Open example file in your editor</p></li>
+<li><p>Adjust connection parameters (port, IP address)</p></li>
+<li><p>Modify parameters (positions, PID values, etc.)</p></li>
+<li><p>Run and observe results</p></li>
+</ol>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Review full API documentation: <a class="reference internal" href="api.html"><span class="doc">API Reference</span></a></p></li>
+<li><p>Learn about advanced features: <span class="xref std std-doc">advanced_topics</span></p></li>
+<li><p>Read developer guide: <a class="reference internal" href="developer_guide.html"><span class="doc">Developer Guide</span></a></p></li>
+<li><p>Explore device-specific docs: <a class="reference internal" href="d_drive.html"><span class="doc">d-Drive and 30DV50/300</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="developer_guide.html" class="btn btn-neutral float-right" title="Developer Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

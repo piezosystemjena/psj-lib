@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.base.capabilities.data_recorder &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.base.capabilities.data_recorder</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.base.capabilities.data_recorder</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data recorder capability for capturing device signals.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.piezo_capability</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoCapability</span><span class="p">,</span> <span class="n">ProgressCallback</span>
+
+
+<div class="viewcode-block" id="DataRecorderChannel">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorderChannel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataRecorderChannel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data recorder input channels.</span>
+<span class="sd">    </span>
+<span class="sd">    Identifies which recorder channel to access for configuration</span>
+<span class="sd">    or data retrieval.</span>
+
+<span class="sd">    Subclasses may define specific channel meanings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="DataRecorder">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataRecorder</span><span class="p">(</span><span class="n">PiezoCapability</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Record device signals to internal memory for later retrieval.</span>
+<span class="sd">    </span>
+<span class="sd">    The data recorder captures signals (position, setpoint, voltage, etc.)</span>
+<span class="sd">    at high speed into device memory. Data can be retrieved after</span>
+<span class="sd">    recording completes for analysis and plotting.</span>
+<span class="sd">    </span>
+<span class="sd">    Features:</span>
+<span class="sd">    - Multiple channels (device dependent, typically 2)</span>
+<span class="sd">    - Configurable memory length</span>
+<span class="sd">    - Stride (decimation) for longer time spans</span>
+<span class="sd">    </span>
+<span class="sd">    Typical workflow:</span>
+<span class="sd">    1. Configure memory length and stride</span>
+<span class="sd">    2. Start recording with start() or by using device specific autostart modes </span>
+<span class="sd">       (setpoint, waveform generator)</span>
+<span class="sd">    3. Wait for recording to complete</span>
+<span class="sd">    4. Retrieve data with get_all_data() or get_data()</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; recorder = device.data_recorder</span>
+<span class="sd">        &gt;&gt;&gt; # Configure for 10000 samples, no decimation</span>
+<span class="sd">        &gt;&gt;&gt; await recorder.set(memory_length=10000, stride=1)</span>
+<span class="sd">        &gt;&gt;&gt; # Start recording</span>
+<span class="sd">        &gt;&gt;&gt; await recorder.start()</span>
+<span class="sd">        &gt;&gt;&gt; # ... perform motion ...</span>
+<span class="sd">        &gt;&gt;&gt; # Retrieve channel 1 data with progress callback</span>
+<span class="sd">        &gt;&gt;&gt; def progress(current, total):</span>
+<span class="sd">        ...     print(f&quot;Downloaded {current}/{total} samples&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; data = await recorder.get_all_data(</span>
+<span class="sd">        ...     DataRecorderChannel.CHANNEL_1,</span>
+<span class="sd">        ...     callback=progress</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Captured {len(data)} samples&quot;)</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Memory length limits total capture time</span>
+<span class="sd">        - Stride reduces data rate (stride=10 keeps only every 10th sample)</span>
+<span class="sd">        - Channels record different signals (device-specific)</span>
+<span class="sd">        - Data units depend on recorded signal type</span>
+<span class="sd">        - Large data transfers may take several seconds</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">CMD_MEMORY_LENGTH</span> <span class="o">=</span> <span class="s2">&quot;DATA_RECORDER_MEMORY_LENGTH&quot;</span>
+    <span class="n">CMD_STRIDE</span> <span class="o">=</span> <span class="s2">&quot;DATA_RECORDER_RECORD_STRIDE&quot;</span>
+    <span class="n">CMD_START_RECORDING</span> <span class="o">=</span> <span class="s2">&quot;DATA_RECORDER_START_RECORDING&quot;</span>
+    <span class="n">CMD_PTR</span> <span class="o">=</span> <span class="s2">&quot;DATA_RECORDER_POINTER&quot;</span>
+    <span class="n">CMD_GET_DATA_1</span> <span class="o">=</span> <span class="s2">&quot;DATA_RECORDER_GET_DATA_1&quot;</span>
+    <span class="n">CMD_GET_DATA_2</span> <span class="o">=</span> <span class="s2">&quot;DATA_RECORDER_GET_DATA_2&quot;</span>
+
+    <span class="n">CHANNEL_1_IDX</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">CHANNEL_2_IDX</span> <span class="o">=</span> <span class="mi">2</span>
+
+<div class="viewcode-block" id="DataRecorder.__init__">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">write_cb</span><span class="p">,</span> 
+        <span class="n">device_commands</span><span class="p">,</span>
+        <span class="n">sample_period</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">write_cb</span><span class="p">,</span> <span class="n">device_commands</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_period</span> <span class="o">=</span> <span class="n">sample_period</span>  <span class="c1"># in microseconds</span></div>
+
+
+<div class="viewcode-block" id="DataRecorder.set">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder.set">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">memory_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">stride</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Configure data recorder parameters.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            memory_length: Number of samples to record per channel</span>
+<span class="sd">            stride: Decimation factor (1=all samples, 10=every 10th sample)</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Record 5000 samples at full rate</span>
+<span class="sd">            &gt;&gt;&gt; await recorder.set(memory_length=5000, stride=1)</span>
+<span class="sd">            &gt;&gt;&gt; # Record 50000 samples, keeping every 100th</span>
+<span class="sd">            &gt;&gt;&gt; await recorder.set(memory_length=50000, stride=100)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Maximum memory_length is device-specific</span>
+<span class="sd">            - Stride&gt;1 allows longer time spans at lower data rate</span>
+<span class="sd">            - Effective sample period = sample_period * stride</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">memory_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_MEMORY_LENGTH</span><span class="p">,</span> <span class="p">[</span><span class="n">memory_length</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">stride</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_STRIDE</span><span class="p">,</span> <span class="p">[</span><span class="n">stride</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="DataRecorder.get_memory_length">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder.get_memory_length">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_memory_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get configured recording length.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of samples per channel</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; length = await recorder.get_memory_length()</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Will record {length} samples&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_MEMORY_LENGTH</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="DataRecorder.get_stride">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder.get_stride">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_stride</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get decimation stride factor.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Current stride value (1=no decimation)</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; stride = await recorder.get_stride()</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Recording every {stride} sample(s)&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_STRIDE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="DataRecorder.start">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder.start">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start data recording.</span>
+<span class="sd">        </span>
+<span class="sd">        Begins capturing data to device memory. Recording continues</span>
+<span class="sd">        until memory is full or device is reset.</span>
+
+<span class="sd">        Some devices may support automatic recording start based on</span>
+<span class="sd">        setpoint changes or waveform generator activity.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await recorder.start()</span>
+<span class="sd">            &gt;&gt;&gt; # Recording now active</span>
+<span class="sd">            &gt;&gt;&gt; await asyncio.sleep(1.0)  # Record for 1 second</span>
+<span class="sd">            &gt;&gt;&gt; # Retrieve data...</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Previous recording data is overwritten</span>
+<span class="sd">            - Recording may stop automatically when buffer full</span>
+<span class="sd">            - Check device status to determine if still recording</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_START_RECORDING</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataRecorder.get_data">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder.get_data">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">channel</span><span class="p">:</span> <span class="n">DataRecorderChannel</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read a single data sample from specified channel.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            channel: Which channel to read from</span>
+<span class="sd">            index: Sample index (0 to memory_length-1), or None to read</span>
+<span class="sd">                  next sequential sample</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Single data sample value</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Read sample at index 100</span>
+<span class="sd">            &gt;&gt;&gt; value = await recorder.get_data(</span>
+<span class="sd">            ...     DataRecorderChannel.CHANNEL_1,</span>
+<span class="sd">            ...     index=100</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; # Read next sequential sample</span>
+<span class="sd">            &gt;&gt;&gt; value2 = await recorder.get_data(</span>
+<span class="sd">            ...     DataRecorderChannel.CHANNEL_1</span>
+<span class="sd">            ... )</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Setting index resets read pointer</span>
+<span class="sd">            - Omitting index reads sequentially</span>
+<span class="sd">            - More efficient to use get_all_data() for bulk retrieval</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if index pointer needs to be set</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_PTR</span><span class="p">,</span> <span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+        <span class="n">channel_idx</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="n">cmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CMD_GET_DATA_1</span> <span class="k">if</span> <span class="n">channel_idx</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">CHANNEL_1_IDX</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">CMD_GET_DATA_2</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">cmd</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="DataRecorder.get_all_data">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.data_recorder.DataRecorder.get_all_data">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_all_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">channel</span><span class="p">:</span> <span class="n">DataRecorderChannel</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">callback</span><span class="p">:</span> <span class="n">ProgressCallback</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve all recorded data from specified channel.</span>
+<span class="sd">        </span>
+<span class="sd">        Downloads entire recording buffer from device memory. This may</span>
+<span class="sd">        take several seconds for large datasets.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            channel: Which channel to retrieve</span>
+<span class="sd">            max_length: Maximum number of samples to retrieve. If None,</span>
+<span class="sd">                        retrieves full configured length.</span>
+<span class="sd">            callback: Optional progress callback function(current, total)</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            List of all recorded samples</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Simple retrieval</span>
+<span class="sd">            &gt;&gt;&gt; data = await recorder.get_all_data(</span>
+<span class="sd">            ...     DataRecorderChannel.CHANNEL_1</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; # With progress updates</span>
+<span class="sd">            &gt;&gt;&gt; def show_progress(current, total):</span>
+<span class="sd">            ...     percent = 100 * current / total</span>
+<span class="sd">            ...     print(f&quot;\rDownload: {percent:.0f}%&quot;, end=&quot;&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; data = await recorder.get_all_data(</span>
+<span class="sd">            ...     DataRecorderChannel.CHANNEL_2,</span>
+<span class="sd">            ...     callback=show_progress</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;\nRetrieved {len(data)} samples&quot;)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Transfer time depends on memory_length</span>
+<span class="sd">            - Progress callback useful for long transfers</span>
+<span class="sd">            - Returns data in chronological order</span>
+<span class="sd">            - Units depend on recorded signal type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get total length of recorded data</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">max_length</span> <span class="k">if</span> <span class="n">max_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_memory_length</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Retrieve all data points for the specified channel</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span><span class="p">))</span>
+
+            <span class="c1"># Call progress callback if provided</span>
+            <span class="k">if</span> <span class="n">callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">callback</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample_period</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get base sample period in microseconds.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Sample period in microseconds</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; period = recorder.sample_period</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Base sample period: {period} µs&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_period</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get base sample rate in Hz.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Sample rate in Hz</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">1000000</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_period</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

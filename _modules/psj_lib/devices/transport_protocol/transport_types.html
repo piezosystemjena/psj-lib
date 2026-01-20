@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.transport_protocol.transport_types &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.transport_protocol.transport_types</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.transport_protocol.transport_types</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+
+<div class="viewcode-block" id="ProtocolException">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.transport_protocol.transport_types.ProtocolException">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ProtocolException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base exception class for transport protocol communication errors.</span>
+<span class="sd">    </span>
+<span class="sd">    This exception serves as the parent class for all protocol-related exceptions,</span>
+<span class="sd">    allowing users to catch any transport protocol error with a single except clause.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when there are general communication errors that don&#39;t fit into</span>
+<span class="sd">    more specific exception categories.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="DeviceUnavailableException">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.transport_protocol.transport_types.DeviceUnavailableException">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DeviceUnavailableException</span><span class="p">(</span><span class="n">ProtocolException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exception raised when a device cannot be accessed or is unavailable.</span>
+<span class="sd">    </span>
+<span class="sd">    This exception is typically raised when:</span>
+<span class="sd">    - A device cannot be found on the specified port or network address</span>
+<span class="sd">    - A device is physically disconnected during operation</span>
+<span class="sd">    - Network connectivity to a device is lost</span>
+<span class="sd">    - A serial port cannot be opened due to permissions or other issues</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; try:</span>
+<span class="sd">        ...     device = DDriveDevice(TransportType.SERIAL, &quot;COM99&quot;)</span>
+<span class="sd">        ...     await device.connect()</span>
+<span class="sd">        ... except DeviceUnavailableException:</span>
+<span class="sd">        ...     print(&quot;Device not found on COM99&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="TimeoutException">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.transport_protocol.transport_types.TimeoutException">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TimeoutException</span><span class="p">(</span><span class="n">ProtocolException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exception raised when a communication operation times out.</span>
+<span class="sd">    </span>
+<span class="sd">    This exception occurs when a read or write operation does not complete</span>
+<span class="sd">    within the specified timeout period. This typically indicates:</span>
+<span class="sd">    - The device is not responding</span>
+<span class="sd">    - The device is busy processing another command</span>
+<span class="sd">    - Communication interference or hardware issues</span>
+<span class="sd">    - Incorrect communication parameters</span>
+<span class="sd">    </span>
+<span class="sd">    The default timeout for most operations is 0.6 seconds, but this can be</span>
+<span class="sd">    adjusted based on the specific operation and device response time.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="TransportType">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.transport_protocol.transport_types.TransportType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransportType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enumeration of supported transport layer protocols for device communication.</span>
+<span class="sd">    </span>
+<span class="sd">    This enum defines the available methods for communicating with piezosystem jena</span>
+<span class="sd">    devices. Each transport type has its own characteristics, advantages, and use cases.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        TELNET: Network communication via Telnet protocol (TCP/IP).</span>
+<span class="sd">            - Used for Ethernet-connected devices</span>
+<span class="sd">            - Supports remote operation over LAN/WAN</span>
+<span class="sd">            - Typical identifier: IP address (e.g., &quot;192.168.1.100&quot;)</span>
+<span class="sd">            - Default port: 23</span>
+<span class="sd">            </span>
+<span class="sd">        SERIAL: Direct serial communication (RS-232/USB-Serial).</span>
+<span class="sd">            - Used for USB or RS-232 connected devices</span>
+<span class="sd">            - Lower latency than network communication</span>
+<span class="sd">            - Typical identifier: COM port (Windows) or /dev/ttyUSB* (Linux)</span>
+<span class="sd">            - Default baud rate: 115200</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Connect via serial</span>
+<span class="sd">        &gt;&gt;&gt; device = DDriveDevice(TransportType.SERIAL, &quot;COM3&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; # Connect via network</span>
+<span class="sd">        &gt;&gt;&gt; device = DDriveDevice(TransportType.TELNET, &quot;192.168.1.100&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TELNET</span> <span class="o">=</span> <span class="s2">&quot;telnet&quot;</span>
+    <span class="n">SERIAL</span> <span class="o">=</span> <span class="s2">&quot;serial&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a string representation of the transport type, capitalized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="TransportProtocolInfo">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.transport_protocol.transport_types.TransportProtocolInfo">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransportProtocolInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Container for transport protocol metadata and connection information.</span>
+<span class="sd">    </span>
+<span class="sd">    This class encapsulates the essential information needed to identify and</span>
+<span class="sd">    describe a transport protocol connection to a device. It is used throughout</span>
+<span class="sd">    the library to pass connection information between discovery, connection,</span>
+<span class="sd">    and device management functions.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        transport (TransportType): The type of transport protocol in use.</span>
+<span class="sd">        identifier (str): The connection identifier specific to the transport type.</span>
+<span class="sd">            - For SERIAL: COM port name (e.g., &quot;COM3&quot;, &quot;/dev/ttyUSB0&quot;)</span>
+<span class="sd">            - For TELNET: IP address (e.g., &quot;192.168.1.100&quot;)</span>
+<span class="sd">        mac (Optional[str]): MAC address of the device, if available and applicable.</span>
+<span class="sd">            Only relevant for network-connected devices (TELNET transport).</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; info = TransportProtocolInfo(</span>
+<span class="sd">        ...     transport=TransportType.TELNET,</span>
+<span class="sd">        ...     identifier=&quot;192.168.1.100&quot;,</span>
+<span class="sd">        ...     mac=&quot;00:80:A3:12:34:56&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; print(info)  # &quot;Telnet @ 192.168.1.100&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">transport</span><span class="p">:</span> <span class="n">TransportType</span>
+    <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># e.g., IP or serial port</span>
+    <span class="n">mac</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a string representation of the TransportProtocolInfo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="si">}</span><span class="s2"> @ </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="DetectedDevice">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.transport_protocol.transport_types.DetectedDevice">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DetectedDevice</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Information about a device discovered during network or serial scanning.</span>
+<span class="sd">    </span>
+<span class="sd">    This class represents a device that has been found during the discovery process.</span>
+<span class="sd">    It contains all the information needed to identify the device and establish a</span>
+<span class="sd">    connection. After discovery, this information can be used to create a device</span>
+<span class="sd">    instance and connect to it.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        transport (TransportType): The transport protocol type for this device.</span>
+<span class="sd">            Indicates whether the device was found via serial or network.</span>
+<span class="sd">            </span>
+<span class="sd">        identifier (str): Transport-specific connection identifier.</span>
+<span class="sd">            - For SERIAL: COM port or device path (e.g., &quot;COM3&quot;, &quot;/dev/ttyUSB0&quot;)</span>
+<span class="sd">            - For TELNET: IP address (e.g., &quot;192.168.1.100&quot;)</span>
+<span class="sd">            </span>
+<span class="sd">        mac (Optional[str]): MAC address for network devices.</span>
+<span class="sd">            Only populated for TELNET transport. Used for unique device identification</span>
+<span class="sd">            in network environments. Format: &quot;XX:XX:XX:XX:XX:XX&quot;</span>
+<span class="sd">            </span>
+<span class="sd">        device_id (Optional[str]): Device model identifier if detected.</span>
+<span class="sd">            Examples: &quot;d-Drive&quot;, &quot;SPI Controller Box&quot;</span>
+<span class="sd">            This is only available if device identification was requested during discovery.</span>
+<span class="sd">            </span>
+<span class="sd">        device_info (Dict[str, str]): Extended device information dictionary.</span>
+<span class="sd">            May contain keys such as:</span>
+<span class="sd">            - &quot;actuator_name&quot;: Connected actuator model</span>
+<span class="sd">            - &quot;actuator_serial&quot;: Actuator serial number</span>
+<span class="sd">            - &quot;firmware_version&quot;: Device firmware version</span>
+<span class="sd">            Only populated if DiscoverFlags.READ_DEVICE_INFO was used.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveDevice</span>
+<span class="sd">        &gt;&gt;&gt; devices = await DDriveDevice.discover_devices()</span>
+<span class="sd">        &gt;&gt;&gt; if devices:</span>
+<span class="sd">        ...     print(devices[0])  # &quot;Serial @ COM3 - d-Drive - {...}&quot;</span>
+<span class="sd">        ...     device = DDriveDevice.from_detected_device(devices[0])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">transport</span><span class="p">:</span> <span class="n">TransportType</span>
+    <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># e.g., IP or serial port</span>
+    <span class="n">mac</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">device_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Unique identifier for the device, if available</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a string representation of the transport type, capitalized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="si">}</span><span class="s2"> @ </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; (MAC: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_id</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

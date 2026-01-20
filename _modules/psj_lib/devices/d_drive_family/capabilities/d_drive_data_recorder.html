@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">...base.capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataRecorderChannel</span><span class="p">,</span> <span class="n">DataRecorder</span>
+
+
+<div class="viewcode-block" id="DDriveDataRecorderChannel">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder.DDriveDataRecorderChannel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveDataRecorderChannel</span><span class="p">(</span><span class="n">DataRecorderChannel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive data recorder channel aliases with semantic names.</span>
+<span class="sd">    </span>
+<span class="sd">    Provides meaningful names for the two hardware data recorder channels</span>
+<span class="sd">    in d-Drive amplifiers. The d-Drive always records position on channel 1</span>
+<span class="sd">    and actuator voltage on channel 2.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        POSITION: Position sensor signal (alias for CHANNEL_1).</span>
+<span class="sd">            Records actual measured position from the sensor.</span>
+<span class="sd">        VOLTAGE: Actuator voltage signal (alias for CHANNEL_2).</span>
+<span class="sd">            Records the output voltage applied to the piezo actuator.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveDataRecorderChannel</span>
+<span class="sd">        &gt;&gt;&gt; # Configure recorder</span>
+<span class="sd">        &gt;&gt;&gt; await channel.data_recorder.set(</span>
+<span class="sd">        ...     memory_length=50000,  # 1 second at 50 kHz</span>
+<span class="sd">        ...     stride=1</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; await channel.data_recorder.start()</span>
+<span class="sd">        &gt;&gt;&gt; # ... perform motion ...</span>
+<span class="sd">        &gt;&gt;&gt; # Retrieve position data using semantic name</span>
+<span class="sd">        &gt;&gt;&gt; pos_data = await channel.data_recorder.get_all_data(</span>
+<span class="sd">        ...     DDriveDataRecorderChannel.POSITION</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; # Retrieve voltage data</span>
+<span class="sd">        &gt;&gt;&gt; vol_data = await channel.data_recorder.get_all_data(</span>
+<span class="sd">        ...     DDriveDataRecorderChannel.VOLTAGE</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; print(f\&quot;Recorded {len(pos_data)} position samples\&quot;)\n        &gt;&gt;&gt; print(f\&quot;Recorded {len(vol_data)} voltage samples\&quot;)</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Both channels always record simultaneously</span>
+<span class="sd">        - Sample rate: 50 kHz (20 µs period) maximum</span>
+<span class="sd">        - Maximum 500,000 samples per channel</span>
+<span class="sd">        - POSITION and VOLTAGE are semantic aliases for hardware channels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">POSITION</span> <span class="o">=</span> <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CHANNEL_1_IDX</span>
+    <span class="n">VOLTAGE</span> <span class="o">=</span> <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CHANNEL_2_IDX</span></div>
+
+
+
+<div class="viewcode-block" id="DDriveDataRecorder">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder.DDriveDataRecorder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveDataRecorder</span><span class="p">(</span><span class="n">DataRecorder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive specific data recorder implementation.</span>
+<span class="sd">    </span>
+<span class="sd">    The d-Drive data recorder captures two channels simultaneously:</span>
+<span class="sd">    - Channel 1 (POSITION): Position sensor signal in device units (µm, mrad, etc.)</span>
+<span class="sd">    - Channel 2 (VOLTAGE): Actuator voltage in volts</span>
+<span class="sd">    </span>
+<span class="sd">    Recording specifications:</span>
+<span class="sd">    - Maximum 500,000 samples per channel</span>
+<span class="sd">    - 50 kHz sample rate (20 µs period) maximum</span>
+<span class="sd">    - Stride (decimation) from 1 to 65535</span>
+<span class="sd">    - Both channels always record the same length</span>
+<span class="sd">    </span>
+<span class="sd">    The d-Drive returns data in a device-specific format that requires</span>
+<span class="sd">    special parsing, which this class handles automatically.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; recorder = channel.data_recorder</span>
+<span class="sd">        &gt;&gt;&gt; # Configure for 1 second at full rate</span>
+<span class="sd">        &gt;&gt;&gt; await recorder.set(memory_length=50000, stride=1)</span>
+<span class="sd">        &gt;&gt;&gt; await recorder.start()</span>
+<span class="sd">        &gt;&gt;&gt; # ... perform motion ...</span>
+<span class="sd">        &gt;&gt;&gt; # Get position data</span>
+<span class="sd">        &gt;&gt;&gt; pos_data = await recorder.get_all_data(</span>
+<span class="sd">        ...     DDriveDataRecorderChannel.POSITION</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; # Get voltage data</span>
+<span class="sd">        &gt;&gt;&gt; vol_data = await recorder.get_all_data(</span>
+<span class="sd">        ...     DDriveDataRecorderChannel.VOLTAGE</span>
+<span class="sd">        ... )</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - get_memory_length() and get_stride() not supported by d-Drive</span>
+<span class="sd">        - Use the values you configured with set() to track settings</span>
+<span class="sd">        - Data format is automatically parsed from d-Drive response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="DDriveDataRecorder.get_memory_length">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder.DDriveDataRecorder.get_memory_length">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_memory_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get configured recording length.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Always returns 500000 (hardware maximum) as d-Drive does not support</span>
+<span class="sd">            reading back this configuration value.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            The d-Drive hardware does not provide a read command for</span>
+<span class="sd">            memory length. This returns the maximum hardware capacity.</span>
+<span class="sd">            Use recorder.sample_rate to calculate recording duration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">500000</span></div>
+
+    
+<div class="viewcode-block" id="DDriveDataRecorder.get_stride">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder.DDriveDataRecorder.get_stride">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_stride</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get decimation stride factor.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Always returns 0 as d-Drive does not support reading back</span>
+<span class="sd">            this configuration value. Track the value you set manually.</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            The d-Drive hardware does not provide a read command for</span>
+<span class="sd">            stride. Use the value you configured with set().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+    
+<div class="viewcode-block" id="DDriveDataRecorder.get_data">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder.DDriveDataRecorder.get_data">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">channel</span><span class="p">:</span> <span class="n">DataRecorderChannel</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read a single data sample from specified channel.</span>
+<span class="sd">        </span>
+<span class="sd">        The d-Drive returns data in format &quot;m,value&quot; (position) or</span>
+<span class="sd">        &quot;u,value&quot; (voltage) which is automatically parsed.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            channel: Which channel to read (POSITION or VOLTAGE)</span>
+<span class="sd">            index: Sample index (0 to memory_length-1), or None for</span>
+<span class="sd">                  next sequential sample</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Single data sample value as float</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Read position at index 100</span>
+<span class="sd">            &gt;&gt;&gt; pos = await recorder.get_data(</span>
+<span class="sd">            ...     DDriveDataRecorderChannel.POSITION,</span>
+<span class="sd">            ...     index=100</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; # Read next voltage sample</span>
+<span class="sd">            &gt;&gt;&gt; voltage = await recorder.get_data(</span>
+<span class="sd">            ...     DDriveDataRecorderChannel.VOLTAGE</span>
+<span class="sd">            ... )</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            The d-Drive returns &quot;m,value&quot; or &quot;u,value&quot; format.</span>
+<span class="sd">            This method automatically extracts the numeric value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if index pointer needs to be set</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_PTR</span><span class="p">,</span> <span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+        <span class="n">channel_idx</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="c1"># Select appropriate command for channel</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CMD_GET_DATA_1</span> <span class="k">if</span> <span class="n">channel_idx</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">CHANNEL_1_IDX</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">CMD_GET_DATA_2</span>
+        
+        <span class="c1"># d-Drive specific parameters:</span>
+        <span class="c1"># - 0: Return full command with prefix (&quot;m,xxx&quot; or &quot;u,xxx&quot;)</span>
+        <span class="c1"># - 1: Return single value</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        
+        <span class="c1"># Result is [&quot;value&quot;] - parse to appropriate type</span>
+        <span class="k">if</span> <span class="n">channel_idx</span> <span class="o">==</span> <span class="n">DDriveDataRecorderChannel</span><span class="o">.</span><span class="n">POSITION</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_pos_value</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_voltage_value</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_pos_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse hexadecimal position value from d-Drive.</span>
+<span class="sd">        </span>
+<span class="sd">        The d-Drive returns position as hexadecimal values (0x0000-0xFFFF)</span>
+<span class="sd">        representing percentage of full range with ±30% overshoot capability.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            raw_str: Hexadecimal string from device (e.g., &quot;8000&quot;)</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Position as percentage of full range (-30% to +130%)</span>
+<span class="sd">            - 0x0000 → -30% (max negative overshoot)</span>
+<span class="sd">            - 0x8000 → 50% (center position)</span>
+<span class="sd">            - 0xFFFF → 130% (max positive overshoot)</span>
+<span class="sd">        </span>
+<span class="sd">        Formula:</span>
+<span class="sd">            position = (160 / 65535) * hex_value - 30</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; pos = self._parse_pos_value(&quot;8000&quot;)  # 0x8000 = 32768</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;{pos:.1f}%&quot;)  # 50.0%</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Parse value as hex integer</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">raw_str</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="c1"># Convert to percentage of full closed loop motion range (with overshoot of +30%/-30%)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">160</span> <span class="o">/</span> <span class="mi">65535</span><span class="p">)</span> <span class="o">*</span> <span class="n">value</span> <span class="o">-</span> <span class="mi">30</span>
+
+        <span class="k">return</span> <span class="n">pos</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_voltage_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse hexadecimal voltage value from d-Drive.</span>
+<span class="sd">        </span>
+<span class="sd">        The d-Drive returns voltage as hexadecimal values (0x0000-0xFFFF)</span>
+<span class="sd">        representing the actuator output voltage.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            raw_str: Hexadecimal string from device (e.g., &quot;8000&quot;)</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Voltage in volts (-27.5V to +137.5V, 165V total span)</span>
+<span class="sd">            - 0x0000 → -27.5V (minimum)</span>
+<span class="sd">            - 0x8000 → 55V (mid-range)</span>
+<span class="sd">            - 0xFFFF → 137.5V (maximum)</span>
+<span class="sd">        </span>
+<span class="sd">        Formula:</span>
+<span class="sd">            voltage = (165 / 65535) * hex_value - 27.5</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; voltage = self._parse_voltage_value(&quot;8000&quot;)  # 0x8000 = 32768</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;{voltage:.1f}V&quot;)  # 55.0V</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            This includes a debug print statement for development.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Parse value as hex integer</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">raw_str</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="c1"># Convert to voltage in volts (Range: -27.5V to +137.5V)</span>
+        <span class="n">voltage</span> <span class="o">=</span> <span class="p">(</span><span class="mi">165</span> <span class="o">/</span> <span class="mi">65535</span><span class="p">)</span> <span class="o">*</span> <span class="n">value</span> <span class="o">-</span> <span class="mf">27.5</span>
+
+        <span class="k">return</span> <span class="n">voltage</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

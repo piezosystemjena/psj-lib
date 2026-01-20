@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.base.piezo_channel &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.base.piezo_channel</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.base.piezo_channel</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Awaitable</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="c1"># Global module locker</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PiezoChannel">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_channel.PiezoChannel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PiezoChannel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class representing a single channel in a multi-channel piezo device.</span>
+<span class="sd">    </span>
+<span class="sd">    A PiezoChannel encapsulates the functionality for a single actuator channel</span>
+<span class="sd">    in devices that support multiple independent piezo outputs. Each channel can</span>
+<span class="sd">    typically be controlled independently with its own voltage, position, PID</span>
+<span class="sd">    settings, and other parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    The channel communicates with the parent device via a write callback function,</span>
+<span class="sd">    which handles the low-level command transmission. This design allows channels</span>
+<span class="sd">    to be device-agnostic while providing a consistent interface.</span>
+
+<span class="sd">    Specific device implementations typically define PiezoCapability instances</span>
+<span class="sd">    as attributes of the channel class to expose functionality like setpoint, </span>
+<span class="sd">    position, and PID control.</span>
+
+<span class="sd">    Type Aliases:</span>
+<span class="sd">        ChannelID: Integer identifier for the channel (typically 0-based)</span>
+<span class="sd">        Command: String representing a device command name</span>
+<span class="sd">        Param: Union type for command parameters (float | int | bool | str)</span>
+<span class="sd">        WriteCallback: Async function signature for sending commands to the device</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        BACKUP_COMMANDS: Set of command names that should be backed up when</span>
+<span class="sd">            saving channel configuration. Subclasses should override this to</span>
+<span class="sd">            specify which commands preserve channel state.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Typically created by device class, not directly by users</span>
+<span class="sd">        &gt;&gt;&gt; channel = device.channels[0]  # Get first channel</span>
+<span class="sd">        &gt;&gt;&gt; backup = await channel.backup()  # Save channel settings</span>
+<span class="sd">        &gt;&gt;&gt; channel_id = channel.id  # Get channel identifier</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        This is a base class. Device-specific implementations should inherit</span>
+<span class="sd">        from this and add capability-specific methods and properties.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">type</span> <span class="n">ChannelID</span> <span class="o">=</span> <span class="nb">int</span>
+    <span class="nb">type</span> <span class="n">Command</span> <span class="o">=</span> <span class="nb">str</span>
+    <span class="nb">type</span> <span class="n">Param</span> <span class="o">=</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">str</span>
+    <span class="nb">type</span> <span class="n">WriteCallback</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[</span>
+        <span class="p">[</span><span class="n">Command</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Param</span><span class="p">],</span> <span class="n">ChannelID</span><span class="p">],</span> 
+        <span class="n">Awaitable</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Param</span><span class="p">]]</span>
+    <span class="p">]</span>
+
+    <span class="n">BACKUP_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># Commands to backup channel settings</span>
+
+<div class="viewcode-block" id="PiezoChannel.__init__">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_channel.PiezoChannel.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">write_cb</span><span class="p">:</span> <span class="n">WriteCallback</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a piezo channel.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            channel_id: Numeric identifier for this channel. Typically corresponds</span>
+<span class="sd">                to the physical channel number on the device (0-based indexing).</span>
+<span class="sd">            write_cb: Async callback function that transmits commands to the device.</span>
+<span class="sd">                The callback receives the command string, parameter list, and channel</span>
+<span class="sd">                ID, and returns the device&#39;s response as a list of strings.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; async def device_write(cmd, params, ch_id):</span>
+<span class="sd">            ...     return await device.write_channel(ch_id, cmd, params)</span>
+<span class="sd">            &gt;&gt;&gt; channel = PiezoChannel(channel_id=0, write_cb=device_write)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_channel_id</span> <span class="o">=</span> <span class="n">channel_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span> <span class="o">=</span> <span class="n">write_cb</span></div>
+
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Param</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal method to send a command through the channel&#39;s write callback.</span>
+<span class="sd">        </span>
+<span class="sd">        This is the primary communication method used by capabilities and channel</span>
+<span class="sd">        methods to interact with the device. It delegates to the write callback</span>
+<span class="sd">        provided during initialization.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            cmd: Command name to send to the device</span>
+<span class="sd">            params: Optional list of parameters for the command. Pass None for</span>
+<span class="sd">                commands that have no parameters (typically read operations).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Device response as a list of string values</span>
+<span class="sd">        </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            RuntimeError: If no write callback was provided during initialization</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            This is an internal method (indicated by _ prefix). Capabilities and</span>
+<span class="sd">            subclasses should use this for device communication.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;No write callback defined for this channel.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channel_id</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_capability_write</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">device_commands</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">cmd</span><span class="p">:</span> <span class="n">Command</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Param</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write method for capabilities with command validation.</span>
+<span class="sd">        </span>
+<span class="sd">        This helper method is used by capability implementations to send commands</span>
+<span class="sd">        with automatic validation against a device&#39;s supported command set. If the</span>
+<span class="sd">        command is not found in the device_commands dictionary, it logs a warning</span>
+<span class="sd">        and returns None instead of raising an exception.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            device_commands: Dictionary mapping capability command names to actual</span>
+<span class="sd">                device command strings. This allows capabilities to remain generic</span>
+<span class="sd">                while device-specific implementations map to actual hardware commands.</span>
+<span class="sd">            cmd: The capability-level command name to send</span>
+<span class="sd">            params: List of parameters for the command</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Device response as a list of strings, or None if command not supported</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # In a capability implementation:</span>
+<span class="sd">            &gt;&gt;&gt; commands = {&#39;set_voltage&#39;: &#39;xsvoltage&#39;, &#39;get_voltage&#39;: &#39;xgvoltage&#39;}</span>
+<span class="sd">            &gt;&gt;&gt; result = await self._capability_write(commands, &#39;set_voltage&#39;, [10.0])</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            This is designed for use by capability classes that may be used with</span>
+<span class="sd">            different device types having different command sets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if command can be found in cmd dictionary</span>
+        <span class="k">if</span> <span class="n">cmd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">device_commands</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Capability requested to send unknown command: </span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">device_commands</span><span class="p">[</span><span class="n">cmd</span><span class="p">],</span> <span class="n">params</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PiezoChannel.backup">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.piezo_channel.PiezoChannel.backup">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">backup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Backup current channel configuration by reading all backup commands.</span>
+<span class="sd">        </span>
+<span class="sd">        This method queries all commands listed in the BACKUP_COMMANDS class attribute</span>
+<span class="sd">        and returns their current values as a dictionary. The backup can later be</span>
+<span class="sd">        restored using the parent device class&#39;s restore functionality.</span>
+<span class="sd">        </span>
+<span class="sd">        The BACKUP_COMMANDS set should be defined in device-specific channel subclasses</span>
+<span class="sd">        and typically includes commands for:</span>
+<span class="sd">        - Voltage/position setpoints</span>
+<span class="sd">        - PID controller parameters</span>
+<span class="sd">        - Filter settings</span>
+<span class="sd">        - Control mode configurations</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping command names to their response values (as string lists).</span>
+<span class="sd">            The dictionary can be passed to the device&#39;s restore method to recreate</span>
+<span class="sd">            this channel configuration.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; backup = await channel.backup()</span>
+<span class="sd">            &gt;&gt;&gt; # backup = {&#39;voltage&#39;: [&#39;10.5&#39;], &#39;pid_p&#39;: [&#39;5.0&#39;], ...}</span>
+<span class="sd">            &gt;&gt;&gt; # ... later, restore the configuration ...</span>
+<span class="sd">            &gt;&gt;&gt; await device.restore_channel(channel.id, backup)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Base class has an empty BACKUP_COMMANDS set. Subclasses must override</span>
+<span class="sd">            this attribute to specify which commands should be backed up.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">backup</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">BACKUP_COMMANDS</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">backup</span><span class="p">[</span><span class="n">cmd</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">backup</span></div>
+
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the numeric identifier for this channel.</span>
+<span class="sd">        </span>
+<span class="sd">        The channel ID typically corresponds to the physical channel number on</span>
+<span class="sd">        the device hardware. Most devices use 0-based indexing (0, 1, 2, etc.).</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Integer channel identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; channel = device.channels[0]</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Channel ID: {channel.id}&quot;)  # Channel ID: 0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channel_id</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

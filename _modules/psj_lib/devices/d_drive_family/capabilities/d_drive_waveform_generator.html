@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">...base.capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoCapability</span><span class="p">,</span> <span class="n">StaticWaveformGenerator</span>
+
+
+<div class="viewcode-block" id="DDriveWaveformType">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveWaveformType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive waveform generator output types.</span>
+<span class="sd">    </span>
+<span class="sd">    Defines the types of waveforms available from the d-Drive&#39;s built-in</span>
+<span class="sd">    waveform generator for scanning and modulation applications.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        NONE: No waveform output (generator disabled)</span>
+<span class="sd">        SINE: Sinusoidal waveform</span>
+<span class="sd">        TRIANGLE: Triangular waveform</span>
+<span class="sd">        RECTANGLE: Square/rectangular waveform</span>
+<span class="sd">        NOISE: Random noise</span>
+<span class="sd">        SWEEP: Linear frequency sweep/ramp</span>
+<span class="sd">        UNKNOWN: Unrecognized waveform type (error condition)</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveWaveformType</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.set_waveform_type(</span>
+<span class="sd">        ...     DDriveWaveformType.SINE</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SINE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">TRIANGLE</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">RECTANGLE</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">NOISE</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">SWEEP</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">99</span></div>
+
+
+
+<div class="viewcode-block" id="DDriveScanType">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveScanType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveScanType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive automated scan patterns.</span>
+<span class="sd">    </span>
+<span class="sd">    Defines automated scan sequences for the waveform generator, providing</span>
+<span class="sd">    single or double scan cycles with different waveform shapes.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        OFF: No automated scanning</span>
+<span class="sd">        SINE_ONCE: Single sinusoidal scan (one complete cycle)</span>
+<span class="sd">        TRIANGLE_ONCE: Single triangular scan (up and down)</span>
+<span class="sd">        SINE_TWICE: Double sinusoidal scan (two complete cycles)</span>
+<span class="sd">        TRIANGLE_TWICE: Double triangular scan (two up/down cycles)</span>
+<span class="sd">        UNKNOWN: Unrecognized scan type (error condition)</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveScanType</span>
+<span class="sd">        &gt;&gt;&gt; # Start single triangle scan</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.start_scan(</span>
+<span class="sd">        ...     DDriveScanType.TRIANGLE_ONCE</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; # Wait for completion</span>
+<span class="sd">        &gt;&gt;&gt; while await channel.waveform_generator.is_scan_running():</span>
+<span class="sd">        ...     await asyncio.sleep(0.1)</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        Scan automatically stops after completing specified cycles.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">OFF</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SINE_ONCE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">TRIANGLE_ONCE</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">SINE_TWICE</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">TRIANGLE_TWICE</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">99</span></div>
+
+
+
+<div class="viewcode-block" id="DDriveWaveformGenerator">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveWaveformGenerator</span><span class="p">(</span><span class="n">PiezoCapability</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive multi-waveform generator for scanning and modulation.</span>
+<span class="sd">    </span>
+<span class="sd">    Provides built-in waveform generation with multiple waveform types for</span>
+<span class="sd">    automated scanning, periodic motion, and signal modulation. Each waveform</span>
+<span class="sd">    type has independent parameter configuration.</span>
+<span class="sd">    </span>
+<span class="sd">    Available waveforms:</span>
+<span class="sd">    - SINE: Sinusoidal motion with amplitude, offset, and frequency control</span>
+<span class="sd">    - TRIANGLE: Triangular scanning with adjustable duty cycle</span>
+<span class="sd">    - RECTANGLE: Square wave with duty cycle control</span>
+<span class="sd">    - NOISE: Random noise</span>
+<span class="sd">    - SWEEP: Linear frequency sweep/ramp</span>
+<span class="sd">    </span>
+<span class="sd">    Features:</span>
+<span class="sd">    - Multiple waveform types with independent parameters</span>
+<span class="sd">    - Sub-generator properties for each waveform type</span>
+<span class="sd">    - Automated scan sequences (single or double cycles)</span>
+<span class="sd">    - Synchronous with 50 kHz control loop</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveWaveformType, DDriveScanType</span>
+<span class="sd">        &gt;&gt;&gt; wfg = channel.waveform_generator</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Configure sine wave for 10 Hz scanning</span>
+<span class="sd">        &gt;&gt;&gt; await wfg.sine.set(</span>
+<span class="sd">        ...     amplitude=20.0,  # 20 µm peak-to-peak</span>
+<span class="sd">        ...     offset=50.0,     # Center at 50 µm</span>
+<span class="sd">        ...     frequency=10.0   # 10 Hz</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; await wfg.set_waveform_type(DDriveWaveformType.SINE)</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Configure triangle with asymmetric duty cycle</span>
+<span class="sd">        &gt;&gt;&gt; await wfg.triangle.set(</span>
+<span class="sd">        ...     amplitude=30.0,</span>
+<span class="sd">        ...     offset=50.0,</span>
+<span class="sd">        ...     frequency=5.0,</span>
+<span class="sd">        ...     duty_cycle=70.0  # 70% rise, 30% fall</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; await wfg.set_waveform_type(DDriveWaveformType.TRIANGLE)</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Start automated single scan</span>
+<span class="sd">        &gt;&gt;&gt; await wfg.start_scan(DDriveScanType.TRIANGLE_ONCE)</span>
+<span class="sd">        &gt;&gt;&gt; while await wfg.is_scan_running():</span>
+<span class="sd">        ...     await asyncio.sleep(0.1)</span>
+<span class="sd">    </span>
+<span class="sd">    Properties:</span>
+<span class="sd">        sine: Sine waveform sub-generator configuration</span>
+<span class="sd">        triangle: Triangle waveform sub-generator configuration</span>
+<span class="sd">        rectangle: Rectangle waveform sub-generator configuration</span>
+<span class="sd">        noise: Noise generator configuration</span>
+<span class="sd">        sweep: Sweep/ramp generator configuration</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Configure waveform parameters before activating type</span>
+<span class="sd">        - Only one waveform type active at a time</span>
+<span class="sd">        - Waveform generation rate synchronized with control loop (50 kHz)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">CMD_WFG_TYPE</span> <span class="o">=</span> <span class="s2">&quot;WFG_TYPE&quot;</span>
+    <span class="n">CMD_SINE_AMPLITUDE</span> <span class="o">=</span> <span class="s2">&quot;WFG_SINE_AMPLITUDE&quot;</span>
+    <span class="n">CMD_SINE_OFFSET</span> <span class="o">=</span> <span class="s2">&quot;WFG_SINE_OFFSET&quot;</span>
+    <span class="n">CMD_SINE_FREQUENCY</span> <span class="o">=</span> <span class="s2">&quot;WFG_SINE_FREQUENCY&quot;</span>
+    <span class="n">CMD_TRI_AMPLITUDE</span> <span class="o">=</span> <span class="s2">&quot;WFG_TRIANGLE_AMPLITUDE&quot;</span>
+    <span class="n">CMD_TRI_OFFSET</span> <span class="o">=</span> <span class="s2">&quot;WFG_TRIANGLE_OFFSET&quot;</span>
+    <span class="n">CMD_TRI_FREQUENCY</span> <span class="o">=</span> <span class="s2">&quot;WFG_TRIANGLE_FREQUENCY&quot;</span>
+    <span class="n">CMD_TRI_DUTY_CYCLE</span> <span class="o">=</span> <span class="s2">&quot;WFG_TRIANGLE_DUTY_CYCLE&quot;</span>
+    <span class="n">CMD_REC_AMPLITUDE</span> <span class="o">=</span> <span class="s2">&quot;WFG_RECTANGLE_AMPLITUDE&quot;</span>
+    <span class="n">CMD_REC_OFFSET</span> <span class="o">=</span> <span class="s2">&quot;WFG_RECTANGLE_OFFSET&quot;</span>
+    <span class="n">CMD_REC_FREQUENCY</span> <span class="o">=</span> <span class="s2">&quot;WFG_RECTANGLE_FREQUENCY&quot;</span>
+    <span class="n">CMD_REC_DUTY_CYCLE</span> <span class="o">=</span> <span class="s2">&quot;WFG_RECTANGLE_DUTY_CYCLE&quot;</span>
+    <span class="n">CMD_NOISE_AMPLITUDE</span> <span class="o">=</span> <span class="s2">&quot;WFG_NOISE_AMPLITUDE&quot;</span>
+    <span class="n">CMD_NOISE_OFFSET</span> <span class="o">=</span> <span class="s2">&quot;WFG_NOISE_OFFSET&quot;</span>
+    <span class="n">CMD_SWEEP_AMPLITUDE</span> <span class="o">=</span> <span class="s2">&quot;WFG_SWEEP_AMPLITUDE&quot;</span>
+    <span class="n">CMD_SWEEP_OFFSET</span> <span class="o">=</span> <span class="s2">&quot;WFG_SWEEP_OFFSET&quot;</span>
+    <span class="n">CMD_SWEEP_TIME</span> <span class="o">=</span> <span class="s2">&quot;WFG_SWEEP_TIME&quot;</span>
+    <span class="n">CMD_SCAN_START</span> <span class="o">=</span> <span class="s2">&quot;WFG_SCAN_START&quot;</span>
+    <span class="n">CMD_SCAN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;WFG_SCAN_TYPE&quot;</span>
+
+
+<div class="viewcode-block" id="DDriveWaveformGenerator.__init__">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">write_cb</span><span class="p">,</span>
+        <span class="n">device_commands</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">write_cb</span><span class="p">,</span> <span class="n">device_commands</span><span class="p">)</span>
+
+        <span class="c1"># Register waveform types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sine</span> <span class="o">=</span> <span class="n">StaticWaveformGenerator</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_AMPLITUDE</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SINE_AMPLITUDE</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_OFFSET</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SINE_OFFSET</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_FREQUENCY</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SINE_FREQUENCY</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_triangle</span> <span class="o">=</span> <span class="n">StaticWaveformGenerator</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_AMPLITUDE</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_TRI_AMPLITUDE</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_OFFSET</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_TRI_OFFSET</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_FREQUENCY</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_TRI_FREQUENCY</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_DUTY_CYCLE</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_TRI_DUTY_CYCLE</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rectangle</span> <span class="o">=</span> <span class="n">StaticWaveformGenerator</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_AMPLITUDE</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_REC_AMPLITUDE</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_OFFSET</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_REC_OFFSET</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_FREQUENCY</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_REC_FREQUENCY</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_DUTY_CYCLE</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_REC_DUTY_CYCLE</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_noise</span> <span class="o">=</span> <span class="n">StaticWaveformGenerator</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_AMPLITUDE</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_NOISE_AMPLITUDE</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_OFFSET</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_NOISE_OFFSET</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sweep</span> <span class="o">=</span> <span class="n">StaticWaveformGenerator</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_AMPLITUDE</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SWEEP_AMPLITUDE</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_OFFSET</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SWEEP_OFFSET</span><span class="p">],</span>
+                <span class="n">StaticWaveformGenerator</span><span class="o">.</span><span class="n">CMD_FREQUENCY</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_commands</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SWEEP_TIME</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DDriveWaveformGenerator.set_waveform_type">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator.set_waveform_type">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set_waveform_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">waveform_type</span><span class="p">:</span> <span class="n">DDriveWaveformType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Activate specific waveform type.</span>
+<span class="sd">        </span>
+<span class="sd">        Switches the active waveform generator to the specified type. The</span>
+<span class="sd">        waveform parameters should be configured via the corresponding</span>
+<span class="sd">        sub-generator property before activation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            waveform_type: Type of waveform to activate (SINE, TRIANGLE,</span>
+<span class="sd">                RECTANGLE, NOISE, SWEEP, or NONE to disable).</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; from psj_lib import DDriveWaveformType</span>
+<span class="sd">            &gt;&gt;&gt; # Configure then activate sine wave</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.sine.set(amplitude=20.0, offset=50.0, frequency=10.0)</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.set_waveform_type(DDriveWaveformType.SINE)</span>
+<span class="sd">            &gt;&gt;&gt; # Disable waveform</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.set_waveform_type(DDriveWaveformType.NONE)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            Setting to NONE disables waveform generation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_WFG_TYPE</span><span class="p">,</span> <span class="p">[</span><span class="n">waveform_type</span><span class="o">.</span><span class="n">value</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="DDriveWaveformGenerator.get_waveform_type">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator.get_waveform_type">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_waveform_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DDriveWaveformType</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Query currently active waveform type.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            DDriveWaveformType: Currently active waveform type, or NONE</span>
+<span class="sd">                if generator is disabled.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; wfg_type = await wfg.get_waveform_type()</span>
+<span class="sd">            &gt;&gt;&gt; print(f&quot;Active waveform: {wfg_type.name}&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_WFG_TYPE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">DDriveWaveformType</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="DDriveWaveformGenerator.start_scan">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator.start_scan">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scan_type</span><span class="p">:</span> <span class="n">DDriveScanType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start automated scan sequence.</span>
+<span class="sd">        </span>
+<span class="sd">        Initiates an automated scan with the specified pattern. The scan</span>
+<span class="sd">        uses the currently configured waveform parameters and runs for</span>
+<span class="sd">        the specified number of cycles before stopping automatically.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            scan_type: Type of scan to perform (SINE_ONCE, TRIANGLE_ONCE,</span>
+<span class="sd">                SINE_TWICE, TRIANGLE_TWICE, or OFF to stop).</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; from psj_lib import DDriveScanType</span>
+<span class="sd">            &gt;&gt;&gt; # Configure triangle waveform first</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.triangle.set(</span>
+<span class="sd">            ...     amplitude=40.0,</span>
+<span class="sd">            ...     offset=50.0,</span>
+<span class="sd">            ...     frequency=2.0</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.set_waveform_type(DDriveWaveformType.TRIANGLE)</span>
+<span class="sd">            &gt;&gt;&gt; # Start single scan</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.start_scan(DDriveScanType.TRIANGLE_ONCE)</span>
+<span class="sd">            &gt;&gt;&gt; # Monitor progress</span>
+<span class="sd">            &gt;&gt;&gt; while await wfg.is_scan_running():</span>
+<span class="sd">            ...     pos = await channel.position.get()</span>
+<span class="sd">            ...     print(f&quot;Position: {pos:.2f}&quot;)</span>
+<span class="sd">            ...     await asyncio.sleep(0.1)</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Scan stops automatically after completing cycles</span>
+<span class="sd">            - Check status with is_scan_running()</span>
+<span class="sd">            - Waveform must be configured before starting scan</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SCAN_TYPE</span><span class="p">,</span> <span class="p">[</span><span class="n">scan_type</span><span class="o">.</span><span class="n">value</span><span class="p">])</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SCAN_START</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="DDriveWaveformGenerator.is_scan_running">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator.is_scan_running">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">is_scan_running</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if automated scan is currently active.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if scan is running, False if idle or completed.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.start_scan(DDriveScanType.SINE_ONCE)</span>
+<span class="sd">            &gt;&gt;&gt; # Wait for scan to complete</span>
+<span class="sd">            &gt;&gt;&gt; while await wfg.is_scan_running():</span>
+<span class="sd">            ...     await asyncio.sleep(0.05)</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;Scan completed&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SCAN_START</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sine</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StaticWaveformGenerator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sine waveform sub-generator configuration.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            StaticWaveformGenerator: Configuration interface for sinusoidal</span>
+<span class="sd">                waveform with amplitude, offset, and frequency parameters.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.sine.set(</span>
+<span class="sd">            ...     amplitude=15.0,  # 15 µm amplitude</span>
+<span class="sd">            ...     offset=50.0,     # Centered at 50 µm</span>
+<span class="sd">            ...     frequency=20.0   # 20 Hz</span>
+<span class="sd">            ... )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sine</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">triangle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StaticWaveformGenerator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Triangle waveform sub-generator configuration.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            StaticWaveformGenerator: Configuration interface for triangular</span>
+<span class="sd">                waveform with amplitude, offset, frequency, and duty cycle.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.triangle.set(</span>
+<span class="sd">            ...     amplitude=30.0,</span>
+<span class="sd">            ...     offset=50.0,</span>
+<span class="sd">            ...     frequency=5.0,</span>
+<span class="sd">            ...     duty_cycle=70.0  # 70% rise time, 30% fall time</span>
+<span class="sd">            ... )</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            duty_cycle controls asymmetry: 50% is symmetric, &gt;50% is</span>
+<span class="sd">            slower rise, &lt;50% is faster rise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangle</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rectangle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StaticWaveformGenerator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rectangle waveform sub-generator configuration.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            StaticWaveformGenerator: Configuration interface for rectangular</span>
+<span class="sd">                (square) waveform with amplitude, offset, frequency, and duty cycle.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.rectangle.set(</span>
+<span class="sd">            ...     amplitude=25.0,</span>
+<span class="sd">            ...     offset=50.0,</span>
+<span class="sd">            ...     frequency=10.0,</span>
+<span class="sd">            ...     duty_cycle=30.0  # 30% high, 70% low</span>
+<span class="sd">            ... )</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            duty_cycle controls high/low ratio: 50% is square wave.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rectangle</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">noise</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StaticWaveformGenerator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Noise generator configuration.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            StaticWaveformGenerator: Configuration interface for random</span>
+<span class="sd">                noise with amplitude and offset parameters.</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.noise.set(</span>
+<span class="sd">            ...     amplitude=2.0,  # ±2 µm random variation</span>
+<span class="sd">            ...     offset=50.0     # Centered at 50 µm</span>
+<span class="sd">            ... )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sweep</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StaticWaveformGenerator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sweep (ramp) generator configuration.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            StaticWaveformGenerator: Configuration interface for linear</span>
+<span class="sd">                sweep with amplitude, offset, and time (instead of frequency).</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; await wfg.sweep.set(</span>
+<span class="sd">            ...     amplitude=80.0,  # Sweep range 80 µm</span>
+<span class="sd">            ...     offset=10.0,     # Start at 10 µm</span>
+<span class="sd">            ...     frequency=2.0    # Actually sweep time: 2 seconds</span>
+<span class="sd">            ... )</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            For sweep, &#39;frequency&#39; parameter actually represents sweep</span>
+<span class="sd">            time in seconds (linear ramp duration).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sweep</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

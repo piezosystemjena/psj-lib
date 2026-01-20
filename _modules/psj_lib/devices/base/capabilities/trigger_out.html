@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.base.capabilities.trigger_out &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.base.capabilities.trigger_out</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.base.capabilities.trigger_out</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Trigger output generation capability.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.piezo_capability</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoCapability</span>
+
+
+<div class="viewcode-block" id="TriggerDataSource">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerDataSource">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TriggerDataSource</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data source for trigger generation.</span>
+<span class="sd">    </span>
+<span class="sd">    Determines which signal is monitored for trigger condition.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        POSITION: Monitor actual position sensor value</span>
+<span class="sd">        SETPOINT: Monitor commanded setpoint value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">POSITION</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SETPOINT</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="TriggerEdge">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerEdge">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TriggerEdge</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trigger edge detection mode.</span>
+<span class="sd">    </span>
+<span class="sd">    Configures which signal transitions generate trigger pulses.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        DISABLED: No trigger output</span>
+<span class="sd">        RISING: Trigger on upward crossings only</span>
+<span class="sd">        FALLING: Trigger on downward crossings only</span>
+<span class="sd">        BOTH: Trigger on both upward and downward crossings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DISABLED</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">RISING</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">FALLING</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">BOTH</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+
+
+<div class="viewcode-block" id="TriggerOut">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TriggerOut</span><span class="p">(</span><span class="n">PiezoCapability</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure hardware trigger output generation.</span>
+<span class="sd">    </span>
+<span class="sd">    Generates digital trigger pulses when monitored signal crosses</span>
+<span class="sd">    threshold values. Useful for synchronizing external equipment</span>
+<span class="sd">    (cameras, data acquisition, etc.) with actuator movement.</span>
+<span class="sd">    </span>
+<span class="sd">    Trigger Options:</span>
+<span class="sd">    - Window: Triggers when signal enters/exits range [start, stop]</span>
+<span class="sd">    - Interval: Periodic triggers at fixed intervals within window</span>
+<span class="sd">    - Edge sensitivity: Rising, falling, or both edges</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; trigger = channel.trigger_out</span>
+<span class="sd">        &gt;&gt;&gt; # Trigger every 10µm from 20µm to 80µm</span>
+<span class="sd">        &gt;&gt;&gt; await trigger.set(</span>
+<span class="sd">        ...     start_value=20.0,</span>
+<span class="sd">        ...     stop_value=80.0,</span>
+<span class="sd">        ...     interval=10.0,</span>
+<span class="sd">        ...     length=100,  # 100 cycles pulse</span>
+<span class="sd">        ...     edge=TriggerEdge.BOTH,</span>
+<span class="sd">        ...     src=TriggerDataSource.POSITION</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; # Query configuration</span>
+<span class="sd">        &gt;&gt;&gt; start = await trigger.get_start_value()</span>
+<span class="sd">        &gt;&gt;&gt; interval = await trigger.get_interval()</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Trigger every {interval}µm from {start}µm&quot;)</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Trigger output is typically 0V/5V TTL signal</span>
+<span class="sd">        - Pulse length in cycles (device-specific)</span>
+<span class="sd">        - Interval generates periodic pulses in window</span>
+<span class="sd">        - DISABLED edge stops all trigger output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">CMD_START</span> <span class="o">=</span> <span class="s2">&quot;TRIGGER_OUT_START&quot;</span>
+    <span class="n">CMD_STOP</span> <span class="o">=</span> <span class="s2">&quot;TRIGGER_OUT_STOP&quot;</span>
+    <span class="n">CMD_INTERVAL</span> <span class="o">=</span> <span class="s2">&quot;TRIGGER_OUT_INTERVAL&quot;</span>
+    <span class="n">CMD_LENGTH</span> <span class="o">=</span> <span class="s2">&quot;TRIGGER_OUT_LENGTH&quot;</span>
+    <span class="n">CMD_EDGE</span> <span class="o">=</span> <span class="s2">&quot;TRIGGER_OUT_EDGE&quot;</span>
+    <span class="n">CMD_SRC</span> <span class="o">=</span> <span class="s2">&quot;TRIGGER_OUT_SRC&quot;</span>
+    
+<div class="viewcode-block" id="TriggerOut.set">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut.set">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">stop_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">edge</span><span class="p">:</span> <span class="n">TriggerEdge</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">src</span><span class="p">:</span> <span class="n">TriggerDataSource</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Configure trigger output parameters.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            start_value: Window start threshold (units match source)</span>
+<span class="sd">            stop_value: Window stop threshold (units match source)</span>
+<span class="sd">            interval: Periodic trigger spacing within window</span>
+<span class="sd">            length: Trigger pulse duration cycles</span>
+<span class="sd">            edge: Trigger edge detection mode</span>
+<span class="sd">            src: Data source to monitor (position or setpoint)</span>
+<span class="sd">        </span>
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # Periodic triggers every 5µm</span>
+<span class="sd">            &gt;&gt;&gt; await channel.trigger_out.set(</span>
+<span class="sd">            ...     start_value=0.0,</span>
+<span class="sd">            ...     stop_value=100.0,</span>
+<span class="sd">            ...     interval=5.0,</span>
+<span class="sd">            ...     length=500  # 500 cycles pulse</span>
+<span class="sd">            ... )</span>
+<span class="sd">        </span>
+<span class="sd">        Note:</span>
+<span class="sd">            - Only provided parameters are updated</span>
+<span class="sd">            - start_value should be less than stop_value</span>
+<span class="sd">            - interval=0 disables periodic triggers</span>
+<span class="sd">            - Units depend on selected source (typically µm or V)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">start_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_START</span><span class="p">,</span> <span class="p">[</span><span class="n">start_value</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">stop_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_STOP</span><span class="p">,</span> <span class="p">[</span><span class="n">stop_value</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_INTERVAL</span><span class="p">,</span> <span class="p">[</span><span class="n">interval</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_LENGTH</span><span class="p">,</span> <span class="p">[</span><span class="n">length</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">edge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_EDGE</span><span class="p">,</span> <span class="p">[</span><span class="n">edge</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">src</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SRC</span><span class="p">,</span> <span class="p">[</span><span class="n">src</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TriggerOut.get_start_value">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut.get_start_value">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_start_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get trigger window start threshold.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Start value in source signal units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_START</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TriggerOut.get_stop_value">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut.get_stop_value">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_stop_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get trigger window stop threshold.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Stop value in source signal units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_STOP</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TriggerOut.get_interval">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut.get_interval">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get periodic trigger interval.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Interval spacing in source signal units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_INTERVAL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TriggerOut.get_length">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut.get_length">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get trigger pulse duration.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Pulse length in cycles</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_LENGTH</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TriggerOut.get_edge">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut.get_edge">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TriggerEdge</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get trigger edge detection mode.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Current edge detection mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_EDGE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">TriggerEdge</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="TriggerOut.get_src">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.base.capabilities.trigger_out.TriggerOut.get_src">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_src</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TriggerDataSource</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get trigger data source.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Current monitored signal source</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CMD_SRC</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">TriggerDataSource</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

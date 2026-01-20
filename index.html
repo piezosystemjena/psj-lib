@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj-lib: Piezosystem Jena Device Library &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            psj-lib Python Library
+              <img src="_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">psj-lib: Piezosystem Jena Device Library</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="psj-lib-piezosystem-jena-device-library">
+<h1>psj-lib: Piezosystem Jena Device Library<a class="headerlink" href="#psj-lib-piezosystem-jena-device-library" title="Link to this heading"></a></h1>
+<img alt="_images/psj-lib-header.png" src="_images/psj-lib-header.png" />
+<p><strong>psj-lib</strong> is a comprehensive Python library for controlling piezoelectric amplifiers and control
+devices manufactured by <a class="reference external" href="https://www.piezosystem.com">piezosystem jena GmbH</a>. The library provides
+an intuitive, asynchronous interface for precision position control, waveform generation, data
+acquisition, and advanced control system configuration.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple">
+<li><p><strong>Asynchronous Architecture</strong>: Built on Python’s asyncio for efficient, non-blocking device communication</p></li>
+<li><p><strong>Multi-Device Support</strong>: Extensible framework supporting multiple device families (currently d-Drive and 30DV50/300)</p></li>
+<li><p><strong>Comprehensive Capabilities</strong>: Full access to position control, PID tuning, waveform generation, data recording, and filtering</p></li>
+<li><p><strong>Multiple Transport Protocols</strong>: Connect via Serial (USB) or Telnet (Ethernet)</p></li>
+<li><p><strong>Type-Safe API</strong>: Complete type hints for excellent IDE autocomplete and type checking</p></li>
+<li><p><strong>Extensive Documentation</strong>: Comprehensive docstrings, examples, and developer guides</p></li>
+</ul>
+<p><strong>Currently Supported Devices:</strong></p>
+<ul class="simple">
+<li><p><strong>d-Drive</strong>: Modular piezo amplifiers with 20-bit resolution, 50 kHz sampling, and advanced control features</p></li>
+<li><p><strong>30DV50/300</strong>: Single-channel, standalone amplifier</p></li>
+</ul>
+<p><strong>Quick Start:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">device</span><span class="p">:</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position: </span><span class="si">{</span><span class="k">await</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> µm&quot;</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#welcome-to-psj-lib">Welcome to psj-lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#what-is-psj-lib">What is psj-lib?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#supported-devices">Supported Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#design-philosophy">Design Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#community-and-support">Community and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#license-and-attribution">License and Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#what-s-next">What’s Next?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-methods">Installation Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#verifying-installation">Verifying Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#platform-specific-setup">Platform-Specific Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#setting-up-for-development">Setting Up for Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#connection-overview">Connection Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#device-discovery">Device Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#serial-connection">Serial Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#connection-patterns">Connection Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#error-handling">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#your-first-program">Your First Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#understanding-the-basics">Understanding the Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#working-with-channels">Working with Channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#position-control">Position Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#reading-status">Reading Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#basic-control-patterns">Basic Control Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#error-handling">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#common-patterns">Common Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#complete-example">Complete Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="d_drive.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d_drive.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d_drive.html#channel-capabilities">Channel Capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d_drive.html#accessing-capabilities">Accessing Capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d_drive.html#multi-channel-coordination">Multi-Channel Coordination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="d_drive.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base_capabilities.html">Base Capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#position-control">Position Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#control-system">Control System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#signal-filtering">Signal Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#data-acquisition">Data Acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#signal-generation">Signal Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#system-monitoring">System Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#device-information">Device Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#signal-routing">Signal Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#configuration-management">Configuration Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base_capabilities.html#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#quick-navigation">Quick Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#package-structure">Package Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#core-modules">Core Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#common-patterns">Common Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#type-hints">Type Hints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#async-patterns">Async Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#index">Index</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#example-scripts">Example Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#common-patterns">Common Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#running-examples">Running Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide.html#adding-new-device-types">Adding New Device Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide.html#creating-custom-capabilities">Creating Custom Capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide.html#documentation-standards">Documentation Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide.html#contributing-guidelines">Contributing Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide.html#resources">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

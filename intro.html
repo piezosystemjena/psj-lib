@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="psj-lib: Piezosystem Jena Device Library" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#welcome-to-psj-lib">Welcome to psj-lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-psj-lib">What is psj-lib?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-devices">Supported Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#d-drive-modular-amplifiers">d-Drive Modular Amplifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dv50-300-standalone-amplifier">30DV50/300 Standalone Amplifier</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-philosophy">Design Philosophy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#capability-based-architecture">Capability-Based Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-by-default">Asynchronous by Default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transport-abstraction">Transport Abstraction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#community-and-support">Community and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license-and-attribution">License and Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-s-next">What’s Next?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<img alt="_images/psj-lib-header.png" src="_images/psj-lib-header.png" />
+<section id="welcome-to-psj-lib">
+<h2>Welcome to psj-lib<a class="headerlink" href="#welcome-to-psj-lib" title="Link to this heading"></a></h2>
+<p><strong>psj-lib</strong> is a comprehensive Python library for controlling piezoelectric amplifiers and control devices
+manufactured by <a class="reference external" href="https://www.piezosystem.com">piezosystem jena GmbH</a>. The library provides an intuitive,
+asynchronous interface for precise position control, waveform generation, data acquisition, and advanced
+control system configuration.</p>
+</section>
+<section id="what-is-psj-lib">
+<h2>What is psj-lib?<a class="headerlink" href="#what-is-psj-lib" title="Link to this heading"></a></h2>
+<p>psj-lib is designed to provide researchers, engineers, and developers with a powerful yet easy-to-use
+Python interface for piezosystem jena devices. The library abstracts the complexity of low-level device
+communication while exposing the full capabilities of the hardware.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple">
+<li><p><strong>Asynchronous Architecture</strong>: Built on Python’s asyncio for efficient, non-blocking device communication</p></li>
+<li><p><strong>Multi-Device Support</strong>: Extensible framework supporting multiple device families (d-Drive and 30DV50/300)</p></li>
+<li><p><strong>Comprehensive Capabilities</strong>: Full access to position control, PID tuning, waveform generation, data recording, and filtering</p></li>
+<li><p><strong>Multiple Transport Protocols</strong>: Connect via Serial (USB) or Telnet (Ethernet)</p></li>
+<li><p><strong>Type-Safe API</strong>: Complete type hints for excellent IDE autocomplete and type checking</p></li>
+<li><p><strong>Extensive Documentation</strong>: Comprehensive docstrings, examples, and developer guides</p></li>
+</ul>
+</section>
+<section id="supported-devices">
+<h2>Supported Devices<a class="headerlink" href="#supported-devices" title="Link to this heading"></a></h2>
+<section id="d-drive-modular-amplifiers">
+<h3>d-Drive Modular Amplifiers<a class="headerlink" href="#d-drive-modular-amplifiers" title="Link to this heading"></a></h3>
+<p>The <strong>d-Drive</strong> series represents piezosystem jena’s modular piezo amplifier family, offering:</p>
+<ul class="simple">
+<li><p><strong>High Resolution</strong>: 20-bit DAC/ADC for precision control</p></li>
+<li><p><strong>Fast Sampling</strong>: 50 kHz (20 µs period) for responsive control</p></li>
+<li><p><strong>Modular Design</strong>: 1-6 channel configurations in compact enclosure</p></li>
+<li><p><strong>Advanced Control</strong>: Integrated PID controller with configurable filters</p></li>
+<li><p><strong>Waveform Generation</strong>: Built-in function generator with scan modes</p></li>
+<li><p><strong>Data Acquisition</strong>: 2-channel recorder with 500,000 samples per channel</p></li>
+<li><p><strong>Hardware Triggers</strong>: Precise timing and synchronization</p></li>
+</ul>
+</section>
+<section id="dv50-300-standalone-amplifier">
+<h3>30DV50/300 Standalone Amplifier<a class="headerlink" href="#dv50-300-standalone-amplifier" title="Link to this heading"></a></h3>
+<p>The <strong>30DV50/300</strong> is a single-channel amplifier designed
+for compact setups that only require one axis. It supports the same command
+set and capabilities as d-Drive channels, including PID control, waveform
+generation, and data recording.</p>
+</section>
+</section>
+<section id="architecture-overview">
+<h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Link to this heading"></a></h2>
+<p>The psj-lib library follows a hierarchical architecture:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PiezoDevice (Base Class)
+├── Device-level operations
+├── Channel discovery
+└── Transport protocol management
+    │
+    └── PiezoChannel (Base Class)
+        ├── Channel-level operations
+        └── Capability management
+            │
+            └── Capabilities (Features)
+                ├── Status and monitoring
+                ├── Position control
+                ├── Closed-loop controller
+                ├── PID tuning
+                ├── Filter configuration
+                ├── Waveform generation
+                └── Data recording
+</pre></div>
+</div>
+<p><strong>Three-Layer Design:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Device Layer</strong>: Manages device connection, discovery, and channel enumeration</p></li>
+<li><p><strong>Channel Layer</strong>: Provides access to individual amplifier channels</p></li>
+<li><p><strong>Capability Layer</strong>: Exposes specific hardware features as composable capabilities</p></li>
+</ol>
+</section>
+<section id="design-philosophy">
+<h2>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Link to this heading"></a></h2>
+<section id="capability-based-architecture">
+<h3>Capability-Based Architecture<a class="headerlink" href="#capability-based-architecture" title="Link to this heading"></a></h3>
+<p>Instead of a monolithic device class, psj-lib uses <strong>capabilities</strong> to represent hardware features.
+Each capability is a focused module that encapsulates related functionality:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access capabilities as channel attributes</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">pid_controller</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This design provides:</p>
+<ul class="simple">
+<li><p><strong>Clarity</strong>: Clear separation of concerns</p></li>
+<li><p><strong>Discoverability</strong>: Easy to explore available features via autocomplete</p></li>
+<li><p><strong>Maintainability</strong>: Easy to extend with new capabilities</p></li>
+<li><p><strong>Type Safety</strong>: Each capability has proper type hints</p></li>
+</ul>
+</section>
+<section id="asynchronous-by-default">
+<h3>Asynchronous by Default<a class="headerlink" href="#asynchronous-by-default" title="Link to this heading"></a></h3>
+<p>All device communication is asynchronous, enabling:</p>
+<ul class="simple">
+<li><p><strong>Concurrent Operations</strong>: Control multiple channels simultaneously</p></li>
+<li><p><strong>Non-blocking</strong>: Keep UI responsive while waiting for device responses</p></li>
+<li><p><strong>Efficient</strong>: Minimize idle time in complex sequences</p></li>
+<li><p><strong>Scalable</strong>: Handle multiple devices without threading complexity</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Concurrent channel control</span>
+<span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+    <span class="n">channel1</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">30.0</span><span class="p">),</span>
+    <span class="n">channel2</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">60.0</span><span class="p">),</span>
+    <span class="n">channel3</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="transport-abstraction">
+<h3>Transport Abstraction<a class="headerlink" href="#transport-abstraction" title="Link to this heading"></a></h3>
+<p>The library abstracts transport protocols, allowing seamless switching between Serial and Telnet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Serial connection</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">SERIAL</span><span class="p">,</span> <span class="s2">&quot;COM3&quot;</span><span class="p">)</span>
+
+<span class="c1"># Or Telnet connection</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">DDriveDevice</span><span class="p">(</span><span class="n">TransportType</span><span class="o">.</span><span class="n">TELNET</span><span class="p">,</span> <span class="s2">&quot;192.168.1.100&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The same API works regardless of transport type.</p>
+</section>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<p>Ready to start using psj-lib? Here’s what to do next:</p>
+<ol class="arabic simple">
+<li><p><strong>Installation</strong>: See <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a> for setup instructions</p></li>
+<li><p><strong>Connecting</strong>: Learn how to connect to your device in <a class="reference internal" href="connecting.html"><span class="doc">Connecting to Devices</span></a></p></li>
+<li><p><strong>Basic Usage</strong>: Follow the tutorial in <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a></p></li>
+<li><p><strong>Examples</strong>: Explore practical examples in <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a></p></li>
+<li><p><strong>API Reference</strong>: Browse the complete API in <a class="reference internal" href="api.html"><span class="doc">API Reference</span></a></p></li>
+</ol>
+</section>
+<section id="community-and-support">
+<h2>Community and Support<a class="headerlink" href="#community-and-support" title="Link to this heading"></a></h2>
+<p><strong>Documentation</strong>: You’re reading it! This documentation covers everything from basic usage to advanced topics.</p>
+<p><strong>Examples</strong>: The library includes 10+ working examples demonstrating common tasks.</p>
+<p><strong>Developer Guide</strong>: See <a class="reference internal" href="developer_guide.html"><span class="doc">Developer Guide</span></a> if you want to extend the library or add support for new devices.</p>
+<p><strong>Contact</strong>: For support, contact <a class="reference external" href="https://www.piezosystem.com">piezosystem jena GmbH</a>.</p>
+</section>
+<section id="license-and-attribution">
+<h2>License and Attribution<a class="headerlink" href="#license-and-attribution" title="Link to this heading"></a></h2>
+<p>psj-lib is developed and maintained by piezosystem jena GmbH.</p>
+<p><strong>Authors</strong>: piezosystem jena GmbH</p>
+<p><strong>Version</strong>: 0.0.1</p>
+<p><strong>Python Version</strong>: 3.12+</p>
+</section>
+<section id="what-s-next">
+<h2>What’s Next?<a class="headerlink" href="#what-s-next" title="Link to this heading"></a></h2>
+<p>Continue to <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a> to set up psj-lib and start controlling your piezosystem jena devices.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="psj-lib: Piezosystem Jena Device Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

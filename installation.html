@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Connecting to Devices" href="connecting.html" />
+    <link rel="prev" title="Introduction" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#method-1-install-from-pypi-recommended">Method 1: Install from PyPI (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#method-2-install-with-poetry">Method 2: Install with Poetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#method-3-install-from-source">Method 3: Install from Source</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verifying-installation">Verifying Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#check-available-modules">Check Available Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-specific-setup">Platform-Specific Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows-setup">Windows Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux-setup">Linux Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macos-setup">macOS Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-for-development">Setting Up for Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clone-the-repository">Clone the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-with-development-dependencies">Install with Development Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-documentation-locally">Build Documentation Locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-examples">Running Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-errors">Import Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#serial-connection-issues">Serial Connection Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#telnet-connection-issues">Telnet Connection Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependency-conflicts">Dependency Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asyncio-compatibility">AsyncIO Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<p>This guide covers how to install psj-lib and set up your development environment.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p><strong>Python Version</strong></p>
+<p>psj-lib requires Python 3.12:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
+<span class="c1"># Should show Python 3.12.x or higher</span>
+</pre></div>
+</div>
+<p><strong>Operating Systems</strong></p>
+<p>psj-lib is cross-platform and works on:</p>
+<ul class="simple">
+<li><p>Windows 10/11</p></li>
+<li><p>Linux (Ubuntu, Debian, Fedora, etc.)</p></li>
+<li><p>macOS 10.15+</p></li>
+</ul>
+<p><strong>Hardware Requirements</strong></p>
+<ul class="simple">
+<li><p>For Serial (USB) connection: USB port and appropriate USB-to-Serial driver (depends on OS and device)</p></li>
+<li><p>For Telnet connection: Ethernet interface and network connectivity</p></li>
+<li><p>Piezosystem jena device (e.g., d-Drive amplifier or 30DV50/300)</p></li>
+</ul>
+</section>
+<section id="installation-methods">
+<h2>Installation Methods<a class="headerlink" href="#installation-methods" title="Link to this heading"></a></h2>
+<section id="method-1-install-from-pypi-recommended">
+<h3>Method 1: Install from PyPI (Recommended)<a class="headerlink" href="#method-1-install-from-pypi-recommended" title="Link to this heading"></a></h3>
+<p>Once published, you can install psj-lib directly from PyPI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>psj-lib
+</pre></div>
+</div>
+<p>This will automatically install all required dependencies.</p>
+</section>
+<section id="method-2-install-with-poetry">
+<h3>Method 2: Install with Poetry<a class="headerlink" href="#method-2-install-with-poetry" title="Link to this heading"></a></h3>
+<p>If you’re using Poetry for dependency management:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>add<span class="w"> </span>psj-lib
+</pre></div>
+</div>
+</section>
+<section id="method-3-install-from-source">
+<h3>Method 3: Install from Source<a class="headerlink" href="#method-3-install-from-source" title="Link to this heading"></a></h3>
+<p>To install the latest development version from source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/piezosystemjena/psj-lib.git
+<span class="nb">cd</span><span class="w"> </span>psj-lib
+
+<span class="c1"># Install with pip</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+
+<span class="c1"># Or with Poetry</span>
+poetry<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
+<p>psj-lib automatically installs the following dependencies:</p>
+<p><strong>Core Dependencies:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aioserial</span> <span class="pre">&gt;=</span> <span class="pre">1.3.1</span></code>: Asynchronous serial communication</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">telnetlib3</span> <span class="pre">&gt;=</span> <span class="pre">2.0.4</span></code>: Asynchronous Telnet client</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">psutil</span> <span class="pre">&gt;=</span> <span class="pre">7.0.0</span></code>: System utilities (for port detection)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy</span> <span class="pre">&gt;=</span> <span class="pre">1.16.0</span></code>: Scientific computing utilities</p></li>
+</ul>
+<p><strong>Development Dependencies</strong> (optional):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx</span> <span class="pre">&gt;=</span> <span class="pre">8.2.3</span></code>: Documentation generation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-rtd-theme</span> <span class="pre">&gt;=</span> <span class="pre">3.0.2</span></code>: Documentation theme</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span> <span class="pre">&gt;=</span> <span class="pre">3.10.1</span></code>: Plotting for examples</p></li>
+</ul>
+</section>
+<section id="verifying-installation">
+<h2>Verifying Installation<a class="headerlink" href="#verifying-installation" title="Link to this heading"></a></h2>
+<p>After installation, verify that psj-lib is installed correctly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">psj_lib</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">psj_lib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="c1"># Should print: 0.0.1 (or later)</span>
+</pre></div>
+</div>
+<section id="check-available-modules">
+<h3>Check Available Modules<a class="headerlink" href="#check-available-modules" title="Link to this heading"></a></h3>
+<p>Verify core imports work:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psj_lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDevice</span><span class="p">,</span> <span class="n">TransportType</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All imports successful!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="platform-specific-setup">
+<h2>Platform-Specific Setup<a class="headerlink" href="#platform-specific-setup" title="Link to this heading"></a></h2>
+<section id="windows-setup">
+<h3>Windows Setup<a class="headerlink" href="#windows-setup" title="Link to this heading"></a></h3>
+<p><strong>Serial Driver Installation:</strong></p>
+<p>For USB-based serial communication, ensure proper drivers are installed:</p>
+<ol class="arabic simple">
+<li><p>Connect your piezo amplifier via USB</p></li>
+<li><p>Windows may automatically install drivers</p></li>
+<li><p>Verify in Device Manager under “Ports (COM &amp; LPT)”</p></li>
+<li><p>Note the COM port number (e.g., COM3)</p></li>
+</ol>
+</section>
+<section id="linux-setup">
+<h3>Linux Setup<a class="headerlink" href="#linux-setup" title="Link to this heading"></a></h3>
+<p><strong>Serial Permissions:</strong></p>
+<p>On Linux, you may need to add your user to the <code class="docutils literal notranslate"><span class="pre">dialout</span></code> group for serial access:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>dialout<span class="w"> </span><span class="nv">$USER</span>
+<span class="c1"># Log out and back in for changes to take effect</span>
+</pre></div>
+</div>
+<p><strong>Check Serial Ports:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/dev/ttyUSB*<span class="w"> </span>/dev/ttyACM*
+<span class="c1"># Lists available serial ports</span>
+</pre></div>
+</div>
+</section>
+<section id="macos-setup">
+<h3>macOS Setup<a class="headerlink" href="#macos-setup" title="Link to this heading"></a></h3>
+<p><strong>Serial Ports:</strong></p>
+<p>macOS typically detects USB-to-Serial devices automatically:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/dev/cu.*<span class="w"> </span>/dev/tty.*
+<span class="c1"># Lists available serial ports</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setting-up-for-development">
+<h2>Setting Up for Development<a class="headerlink" href="#setting-up-for-development" title="Link to this heading"></a></h2>
+<p>If you plan to develop with psj-lib or contribute to the project:</p>
+<section id="clone-the-repository">
+<h3>Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/piezosystemjena/psj-lib.git
+<span class="nb">cd</span><span class="w"> </span>psj-lib
+</pre></div>
+</div>
+</section>
+<section id="install-with-development-dependencies">
+<h3>Install with Development Dependencies<a class="headerlink" href="#install-with-development-dependencies" title="Link to this heading"></a></h3>
+<p>Using Poetry (recommended for development):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Poetry if not already installed</span>
+pip<span class="w"> </span>install<span class="w"> </span>poetry
+
+<span class="c1"># Install project with all dependencies</span>
+poetry<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+<section id="build-documentation-locally">
+<h3>Build Documentation Locally<a class="headerlink" href="#build-documentation-locally" title="Link to this heading"></a></h3>
+<p>To build and view documentation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>doc
+
+<span class="c1"># Build HTML documentation</span>
+poetry<span class="w"> </span>run<span class="w"> </span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>.<span class="w"> </span>_build/
+
+<span class="c1"># Open in browser (Windows)</span>
+start<span class="w"> </span>_build/html/index.html
+
+<span class="c1"># Open in browser (Linux)</span>
+xdg-open<span class="w"> </span>_build/html/index.html
+
+<span class="c1"># Open in browser (macOS)</span>
+open<span class="w"> </span>_build/html/index.html
+</pre></div>
+</div>
+</section>
+<section id="running-examples">
+<h3>Running Examples<a class="headerlink" href="#running-examples" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory contains ready-to-run example scripts:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure device is connected</span>
+python<span class="w"> </span>examples/01_device_discovery_and_connection.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="import-errors">
+<h3>Import Errors<a class="headerlink" href="#import-errors" title="Link to this heading"></a></h3>
+<p>If you get import errors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;psj_lib&#39;</span>
+</pre></div>
+</div>
+<p><strong>Solution</strong>: Ensure psj-lib is installed in your current Python environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>psj-lib
+</pre></div>
+</div>
+</section>
+<section id="serial-connection-issues">
+<h3>Serial Connection Issues<a class="headerlink" href="#serial-connection-issues" title="Link to this heading"></a></h3>
+<p><strong>Problem</strong>: Cannot connect to device via serial</p>
+<p><strong>Solutions</strong>:</p>
+<ol class="arabic simple">
+<li><p>Check cable is properly connected</p></li>
+<li><p>Verify correct COM port / device path</p></li>
+<li><p>Ensure no other application is using the port</p></li>
+<li><p>Check permissions (Linux: add user to <code class="docutils literal notranslate"><span class="pre">dialout</span></code> group)</p></li>
+</ol>
+</section>
+<section id="telnet-connection-issues">
+<h3>Telnet Connection Issues<a class="headerlink" href="#telnet-connection-issues" title="Link to this heading"></a></h3>
+<p><strong>Problem</strong>: Cannot connect via Telnet</p>
+<p><strong>Solutions</strong>:</p>
+<ol class="arabic">
+<li><p>Verify device IP address (check device display or network scan)</p></li>
+<li><p>Ensure device and computer are on same network</p></li>
+<li><p>Check firewall settings</p></li>
+<li><p>Verify Telnet port (default: 23 or device-specific)</p></li>
+<li><p>Try ping to verify network connectivity:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span><span class="m">192</span>.168.1.100
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="dependency-conflicts">
+<h3>Dependency Conflicts<a class="headerlink" href="#dependency-conflicts" title="Link to this heading"></a></h3>
+<p><strong>Problem</strong>: Dependency version conflicts</p>
+<p><strong>Solution</strong>: Use a virtual environment to isolate dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>psj_env
+<span class="nb">source</span><span class="w"> </span>psj_env/bin/activate<span class="w">  </span><span class="c1"># or psj_env\Scripts\activate on Windows</span>
+pip<span class="w"> </span>install<span class="w"> </span>psj-lib
+</pre></div>
+</div>
+</section>
+<section id="asyncio-compatibility">
+<h3>AsyncIO Compatibility<a class="headerlink" href="#asyncio-compatibility" title="Link to this heading"></a></h3>
+<p><strong>Problem</strong>: asyncio errors or event loop issues</p>
+<p><strong>Solution</strong>: Ensure you’re using Python 3.12+ and asyncio correctly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Your async code here</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Correct way to run</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h2>
+<p>If you encounter issues not covered here:</p>
+<ol class="arabic simple">
+<li><p>Check the <a class="reference internal" href="api.html"><span class="doc">API Reference</span></a> reference for detailed API documentation</p></li>
+<li><p>Review <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> for working code samples</p></li>
+<li><p>Check existing GitHub issues</p></li>
+<li><p>Contact piezosystem jena GmbH for support</p></li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<p>Now that psj-lib is installed, you can:</p>
+<ul class="simple">
+<li><p>Learn how to connect to devices: <a class="reference internal" href="connecting.html"><span class="doc">Connecting to Devices</span></a></p></li>
+<li><p>Follow the getting started tutorial: <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a></p></li>
+<li><p>Explore example scripts: <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a></p></li>
+<li><p>Read about d-Drive specifics: <a class="reference internal" href="d_drive.html"><span class="doc">d-Drive and 30DV50/300</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="connecting.html" class="btn btn-neutral float-right" title="Connecting to Devices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

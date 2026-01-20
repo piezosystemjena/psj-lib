@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.base.exceptions &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.base.exceptions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.base.exceptions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Type</span>
+
+
+<div class="viewcode-block" id="DeviceError">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.DeviceError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DeviceError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base exception class for all device-related errors.</span>
+<span class="sd">    </span>
+<span class="sd">    This is the parent exception for all errors that occur during device</span>
+<span class="sd">    communication and operation. Catch this exception to handle any device</span>
+<span class="sd">    error generically, or catch specific subclasses for targeted error handling.</span>
+<span class="sd">    </span>
+<span class="sd">    Device errors typically result from:</span>
+<span class="sd">    - Invalid commands or parameters sent to the device</span>
+<span class="sd">    - Hardware conditions (overload, underload)</span>
+<span class="sd">    - Communication protocol violations</span>
+<span class="sd">    - Device configuration issues</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; try:</span>
+<span class="sd">        ...     await device.write(&quot;invalid_command&quot;)</span>
+<span class="sd">        ... except DeviceError as e:</span>
+<span class="sd">        ...     print(f&quot;Device error occurred: {e}&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ErrorNotSpecified">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ErrorNotSpecified">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ErrorNotSpecified</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic error when the device does not provide specific error details.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when the device reports an error condition but does not provide</span>
+<span class="sd">    a specific error code. This typically indicates an internal device error</span>
+<span class="sd">    or a communication protocol issue.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="UnknownCommand">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.UnknownCommand">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnknownCommand</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The device does not recognize the command sent.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when attempting to send a command that is not supported by the</span>
+<span class="sd">    device or is not valid for the current device firmware version.</span>
+<span class="sd">    </span>
+<span class="sd">    Common causes:</span>
+<span class="sd">    - Typo in command name</span>
+<span class="sd">    - Command not supported by device model</span>
+<span class="sd">    - Firmware version incompatibility</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ParameterMissing">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ParameterMissing">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParameterMissing</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Required parameter was not provided with the command.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when a command that requires one or more parameters is sent</span>
+<span class="sd">    without the necessary parameter values.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        A command expecting a channel number was sent without specifying</span>
+<span class="sd">        which channel to operate on.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="AdmissibleParameterRangeExceeded">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.AdmissibleParameterRangeExceeded">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdmissibleParameterRangeExceeded</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameter value is outside the acceptable range for the command.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when a parameter value exceeds the valid range defined by the</span>
+<span class="sd">    device for that particular command. Check device documentation for</span>
+<span class="sd">    valid parameter ranges.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        Setting a voltage beyond the device&#39;s maximum output capability.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="CommandParameterCountExceeded">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.CommandParameterCountExceeded">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CommandParameterCountExceeded</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Too many parameters were provided for the command.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when more parameters are sent than the command expects.</span>
+<span class="sd">    Each command has a defined number of parameters; sending extra</span>
+<span class="sd">    parameters results in this error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ParameterLockedOrReadOnly">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ParameterLockedOrReadOnly">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParameterLockedOrReadOnly</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Attempted to modify a read-only or locked parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when trying to write to a parameter that:</span>
+<span class="sd">    - Is inherently read-only (e.g., hardware status, sensor values)</span>
+<span class="sd">    - Is currently locked by device configuration or security settings</span>
+<span class="sd">    - Cannot be changed in the current device operation mode</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        Attempting to change a factory calibration value that is locked.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="Underload">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.Underload">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Underload</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Device detected an underload condition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="Overload">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.Overload">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Overload</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Device detected an overload condition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ParameterTooLow">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ParameterTooLow">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParameterTooLow</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameter value is below the minimum acceptable value.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when a parameter value is below the lower bound of the</span>
+<span class="sd">    acceptable range for that parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    This is more specific than AdmissibleParameterRangeExceeded,</span>
+<span class="sd">    indicating specifically that the value is too low.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ParameterTooHigh">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ParameterTooHigh">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParameterTooHigh</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameter value exceeds the maximum acceptable value.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when a parameter value exceeds the upper bound of the</span>
+<span class="sd">    acceptable range for that parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    This is more specific than AdmissibleParameterRangeExceeded,</span>
+<span class="sd">    indicating specifically that the value is too high.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="UnknownChannel">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.UnknownChannel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnknownChannel</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Specified channel does not exist on the device.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when attempting to access or configure a channel number</span>
+<span class="sd">    that is not present on the connected device.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        Accessing channel 3 on a single-channel device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ActuatorNotConnected">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ActuatorNotConnected">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ActuatorNotConnected</span><span class="p">(</span><span class="n">DeviceError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Piezo actuator is not physically connected to the device.</span>
+<span class="sd">    </span>
+<span class="sd">    Raised when the device detects that the piezo actuator is not</span>
+<span class="sd">    plugged in or properly connected. This may prevent certain</span>
+<span class="sd">    operations that require an active actuator connection.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ErrorCode">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ErrorCode">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ErrorCode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumeration of device error codes with exception class mapping.</span>
+<span class="sd">    </span>
+<span class="sd">    This enum defines all possible error codes that can be returned by</span>
+<span class="sd">    piezoelectric devices. Each error code corresponds to a specific</span>
+<span class="sd">    DeviceError exception subclass.</span>
+<span class="sd">    </span>
+<span class="sd">    Error codes are returned by the device in response to invalid commands,</span>
+<span class="sd">    parameter violations, or hardware conditions. The ErrorCode class provides</span>
+<span class="sd">    utilities to convert error codes to exceptions and raise appropriate errors.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        ERROR_NOT_SPECIFIED (int): Generic unspecified error (code 1)</span>
+<span class="sd">        UNKNOWN_COMMAND (int): Command not recognized by device (code 2)</span>
+<span class="sd">        PARAMETER_MISSING (int): Required parameter not provided (code 3)</span>
+<span class="sd">        ADMISSIBLE_PARAMETER_RANGE_EXCEEDED (int): Parameter outside valid range (code 4)</span>
+<span class="sd">        COMMAND_PARAMETER_COUNT_EXCEEDED (int): Too many parameters provided (code 5)</span>
+<span class="sd">        PARAMETER_LOCKED_OR_READ_ONLY (int): Cannot modify locked/read-only parameter (code 6)</span>
+<span class="sd">        UNDERLOAD (int): Device detected underload condition (code 7)</span>
+<span class="sd">        OVERLOAD (int): Device detected overload condition (code 8)</span>
+<span class="sd">        PARAMETER_TOO_LOW (int): Parameter below minimum value (code 9)</span>
+<span class="sd">        PARAMETER_TOO_HIGH (int): Parameter above maximum value (code 10)</span>
+<span class="sd">        ACTUATOR_NOT_CONNECTED (int): Actuator not physically connected (code 98)</span>
+<span class="sd">        UNKNOWN_CHANNEL (int): Specified channel does not exist (code 99)</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; error_code = ErrorCode.from_value(2)</span>
+<span class="sd">        &gt;&gt;&gt; print(error_code)  # ErrorCode.UNKNOWN_COMMAND</span>
+<span class="sd">        &gt;&gt;&gt; ErrorCode.raise_error(error_code)  # Raises UnknownCommand exception</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ERROR_NOT_SPECIFIED</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">UNKNOWN_COMMAND</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">PARAMETER_MISSING</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">ADMISSIBLE_PARAMETER_RANGE_EXCEEDED</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">COMMAND_PARAMETER_COUNT_EXCEEDED</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">PARAMETER_LOCKED_OR_READ_ONLY</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">UNDERLOAD</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">OVERLOAD</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">PARAMETER_TOO_LOW</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">PARAMETER_TOO_HIGH</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">ACTUATOR_NOT_CONNECTED</span> <span class="o">=</span> <span class="mi">98</span>
+    <span class="n">UNKNOWN_CHANNEL</span> <span class="o">=</span> <span class="mi">99</span>
+
+<div class="viewcode-block" id="ErrorCode.from_value">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ErrorCode.from_value">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_value</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ErrorCode&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts an integer value to its corresponding ErrorCode enum member.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value (int): The integer value representing the error code.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ErrorCode: The corresponding ErrorCode enum member.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the value does not correspond to any ErrorCode member.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">cls</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">member</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No ErrorCode member with value </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrorCode.get_exception_class">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ErrorCode.get_exception_class">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_exception_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">error_code</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">DeviceError</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the appropriate exception class for a given error code.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            error_code (ErrorCode or int): The error code for which to get the exception class.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Type[DeviceError]: The exception class corresponding to the error code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert int to ErrorCode if needed</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">error_code</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_value</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+        <span class="n">exception_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">ERROR_NOT_SPECIFIED</span><span class="p">:</span> <span class="n">ErrorNotSpecified</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">UNKNOWN_COMMAND</span><span class="p">:</span> <span class="n">UnknownCommand</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">PARAMETER_MISSING</span><span class="p">:</span> <span class="n">ParameterMissing</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">ADMISSIBLE_PARAMETER_RANGE_EXCEEDED</span><span class="p">:</span> <span class="n">AdmissibleParameterRangeExceeded</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">COMMAND_PARAMETER_COUNT_EXCEEDED</span><span class="p">:</span> <span class="n">CommandParameterCountExceeded</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">PARAMETER_LOCKED_OR_READ_ONLY</span><span class="p">:</span> <span class="n">ParameterLockedOrReadOnly</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">UNDERLOAD</span><span class="p">:</span> <span class="n">Underload</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">OVERLOAD</span><span class="p">:</span> <span class="n">Overload</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">PARAMETER_TOO_LOW</span><span class="p">:</span> <span class="n">ParameterTooLow</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">PARAMETER_TOO_HIGH</span><span class="p">:</span> <span class="n">ParameterTooHigh</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">ACTUATOR_NOT_CONNECTED</span><span class="p">:</span> <span class="n">ActuatorNotConnected</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">UNKNOWN_CHANNEL</span><span class="p">:</span> <span class="n">UnknownChannel</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">exception_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span> <span class="n">ErrorNotSpecified</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrorCode.raise_error">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.base.exceptions.ErrorCode.raise_error">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">raise_error</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">error_code</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Raises the appropriate exception for a given error code.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            error_code (ErrorCode or int): The error code to raise.</span>
+<span class="sd">            message (str, optional): Custom error message. If not provided, uses default description.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DeviceError: The specific exception corresponding to the error code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">descriptions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">ERROR_NOT_SPECIFIED</span><span class="p">:</span> <span class="s2">&quot;Error not specified&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">UNKNOWN_COMMAND</span><span class="p">:</span> <span class="s2">&quot;Unknown command&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">PARAMETER_MISSING</span><span class="p">:</span> <span class="s2">&quot;Parameter missing&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">ADMISSIBLE_PARAMETER_RANGE_EXCEEDED</span><span class="p">:</span> <span class="s2">&quot;Admissible parameter range exceeded&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">COMMAND_PARAMETER_COUNT_EXCEEDED</span><span class="p">:</span> <span class="s2">&quot;Command&#39;s parameter count exceeded&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">PARAMETER_LOCKED_OR_READ_ONLY</span><span class="p">:</span> <span class="s2">&quot;Parameter is locked or read only&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">UNDERLOAD</span><span class="p">:</span> <span class="s2">&quot;Underload&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">OVERLOAD</span><span class="p">:</span> <span class="s2">&quot;Overload&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">PARAMETER_TOO_LOW</span><span class="p">:</span> <span class="s2">&quot;Parameter too low&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">PARAMETER_TOO_HIGH</span><span class="p">:</span> <span class="s2">&quot;Parameter too high&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">ACTUATOR_NOT_CONNECTED</span><span class="p">:</span> <span class="s2">&quot;Actuator not connected&quot;</span><span class="p">,</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">UNKNOWN_CHANNEL</span><span class="p">:</span> <span class="s2">&quot;Channel does not exist&quot;</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Convert int to ErrorCode if needed</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">error_code</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_value</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+
+        <span class="n">actual_message</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="n">descriptions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span> <span class="s2">&quot;Unknown error&quot;</span><span class="p">)</span>
+
+        <span class="n">exception_class</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_exception_class</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">exception_class</span><span class="p">(</span><span class="n">actual_message</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Jan 20, 2026 13:14.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
