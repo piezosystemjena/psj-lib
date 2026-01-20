@@ -11,6 +11,9 @@ The **d-Drive** is piezosystem jena's modular piezo amplifier series, designed f
 and high-dynamic control applications. Each d-Drive unit can contain 1-6 independent amplifier channels in a 
 compact enclosure.
 
+The **30DV50/300** is a single-channel amplifier that shares the same command set and
+capability model as d-Drive. It is ideal for compact, single-axis setups.
+
 
 Hardware Specifications
 -----------------------
@@ -87,6 +90,21 @@ and device-specific implementations.
         position = await channel.position.get()
         await channel.setpoint.set(50.0)
 
+    Using PSJ 30DV series
+    ^^^^^^^^^^^^^^^^^^^^^
+
+    The 30DV50/300 exposes a single channel (ID 0) with the same capabilities as a d-Drive channel:
+
+    .. code-block:: python
+
+      from psj_lib import PSJ30DVDevice, TransportType
+    
+      device = PSJ30DVDevice(TransportType.SERIAL, "COM3")
+      async with device:
+        channel = device.channels[0]
+        await channel.closed_loop_controller.set(True)
+        await channel.setpoint.set(10.0)
+
 
 Channel Capabilities Reference
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -141,25 +159,25 @@ All d-Drive channel capabilities with API references:
      - Error signal low-pass filter
    * - ``modulation_source``
      - :class:`~psj_lib.devices.base.capabilities.modulation_source.ModulationSource`
-     - Modulation input source selection (expects :class:`~psj_lib.devices.d_drive.capabilities.d_drive_modulation_source.DDriveModulationSourceTypes` enum)
+     - Modulation input source selection (expects :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_modulation_source.DDriveModulationSourceTypes` enum)
    * - ``monitor_output``
      - :class:`~psj_lib.devices.base.capabilities.monitor_output.MonitorOutput`
-     - Analog monitor output routing (expects :class:`~psj_lib.devices.d_drive.capabilities.d_drive_monitor_output.DDriveMonitorOutputSource` enum)
+     - Analog monitor output routing (expects :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_monitor_output.DDriveMonitorOutputSource` enum)
    * - ``waveform_generator``
-     - :class:`~psj_lib.devices.d_drive.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator`
+     - :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator`
      - Multi-waveform generator with 5 types (sine, triangle, rectangle, noise, sweep) and automated scan function
    * - ``data_recorder``
      - :class:`~psj_lib.devices.base.capabilities.data_recorder.DataRecorder`
      - Two-channel recorder: position + voltage, 500k samples max, 50 kHz sample rate
    * - ``trigger_out``
-     - :class:`~psj_lib.devices.d_drive.capabilities.d_drive_trigger_out.DDriveTriggerOut`
+    - :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_trigger_out.DDriveTriggerOut`
      - Hardware trigger output with d-Drive specific offset parameter
 
 
 d-Drive Status Register
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_status_register.DDriveStatusRegister` provides d-Drive specific hardware state information:
+The :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_status_register.DDriveStatusRegister` provides d-Drive specific hardware state information:
 
 .. code-block:: python
 
@@ -193,9 +211,9 @@ The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_status_register.DDrive
 d-Drive Waveform Generator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator` provides 5 waveform types and automated scanning:
+The :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformGenerator` provides 5 waveform types and automated scanning:
 
-**Waveform Types** (:class:`~psj_lib.devices.d_drive.capabilities.d_drive_waveform_generator.DDriveWaveformType`):
+**Waveform Types** (:class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveWaveformType`):
 
 * ``SINE``: Sinusoidal waveform
 * ``TRIANGLE``: Triangular waveform with adjustable duty cycle
@@ -244,7 +262,7 @@ The d-Drive supports automated single or double scan cycles:
     
     print("Scan completed")
 
-**Scan Types** (:class:`~psj_lib.devices.d_drive.capabilities.d_drive_waveform_generator.DDriveScanType`):
+**Scan Types** (:class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator.DDriveScanType`):
 
 * ``SINE_ONCE``: Single sine cycle
 * ``TRIANGLE_ONCE``: Single triangle cycle (up and down)
@@ -306,7 +324,7 @@ See :doc:`base_capabilities` for base data recorder documentation.
 
 **d-Drive Data Format:**
 
-The d-Drive recorder returns data that is automatically parsed by :class:`~psj_lib.devices.d_drive.capabilities.d_drive_data_recorder.DDriveDataRecorder`:
+The d-Drive recorder returns data that is automatically parsed by :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder.DDriveDataRecorder`:
 
 * **Position Channel**: Returns percentage of full closed-loop motion range (includes ±30% overshoot capability)
 * **Voltage Channel**: Returns output voltage in Volts
@@ -319,7 +337,7 @@ The d-Drive recorder returns data that is automatically parsed by :class:`~psj_l
 d-Drive Closed-Loop Controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_closed_loop_controller.DDriveClosedLoopController` extends the base controller with d-Drive specific status reading:
+The :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_closed_loop_controller.DDriveClosedLoopController` extends the base controller with d-Drive specific status reading:
 
 .. code-block:: python
 
@@ -352,7 +370,7 @@ The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_closed_loop_controller
 d-Drive Setpoint
 ^^^^^^^^^^^^^^^^
 
-The :class:`~psj_lib.devices.d_drive.capabilities.d_drive_setpoint.DDriveSetpoint` provides setpoint control with client-side caching:
+The :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_setpoint.DDriveSetpoint` provides setpoint control with client-side caching:
 
 .. code-block:: python
 

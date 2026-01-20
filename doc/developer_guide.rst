@@ -28,10 +28,14 @@ psj-lib follows a modular, capability-based architecture:
     │   │       ├── data_recorder.py
     │   │       └── ...
     │   │
-    │   ├── d_drive/                     # d-Drive implementation (all public)
-    │   │   ├── d_drive_device.py       # Device class
-    │   │   ├── d_drive_channel.py      # Channel class
-    │   │   └── capabilities/           # d-Drive-specific capabilities
+    │   ├── d_drive_family/              # d-Drive family (d-Drive + 30DV series)
+    │   │   ├── d_drive/                 # d-Drive modular system
+    │   │   │   ├── d_drive_device.py   # Device class
+    │   │   │   └── d_drive_channel.py  # Channel class
+    │   │   ├── psj_30dv/                # 30DV series single-channel device
+    │   │   │   ├── psj_30dv_device.py  # Device class
+    │   │   │   └── psj_30dv_channel.py # Channel class
+    │   │   └── capabilities/           # d-Drive family-specific capabilities
     │   │       ├── d_drive_status_register.py
     │   │       ├── d_drive_waveform_generator.py
     │   │       └── ...

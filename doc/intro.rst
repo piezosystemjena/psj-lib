@@ -22,7 +22,7 @@ communication while exposing the full capabilities of the hardware.
 **Key Features:**
 
 * **Asynchronous Architecture**: Built on Python's asyncio for efficient, non-blocking device communication
-* **Multi-Device Support**: Extensible framework supporting multiple device families (currently d-Drive)
+* **Multi-Device Support**: Extensible framework supporting multiple device families (d-Drive and 30DV50/300)
 * **Comprehensive Capabilities**: Full access to position control, PID tuning, waveform generation, data recording, and filtering
 * **Multiple Transport Protocols**: Connect via Serial (USB) or Telnet (Ethernet)
 * **Type-Safe API**: Complete type hints for excellent IDE autocomplete and type checking
@@ -44,6 +44,14 @@ The **d-Drive** series represents piezosystem jena's modular piezo amplifier fam
 * **Waveform Generation**: Built-in function generator with scan modes
 * **Data Acquisition**: 2-channel recorder with 500,000 samples per channel
 * **Hardware Triggers**: Precise timing and synchronization
+
+30DV50/300 Standalone Amplifier
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The **30DV50/300** is a single-channel amplifier designed
+for compact setups that only require one axis. It supports the same command
+set and capabilities as d-Drive channels, including PID control, waveform
+generation, and data recording.
 
 
 Architecture Overview

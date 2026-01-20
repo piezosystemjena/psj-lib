@@ -11,7 +11,7 @@ acquisition, and advanced control system configuration.
 **Key Features:**
 
 * **Asynchronous Architecture**: Built on Python's asyncio for efficient, non-blocking device communication
-* **Multi-Device Support**: Extensible framework supporting multiple device families (currently d-Drive)
+* **Multi-Device Support**: Extensible framework supporting multiple device families (currently d-Drive and 30DV50/300)
 * **Comprehensive Capabilities**: Full access to position control, PID tuning, waveform generation, data recording, and filtering
 * **Multiple Transport Protocols**: Connect via Serial (USB) or Telnet (Ethernet)
 * **Type-Safe API**: Complete type hints for excellent IDE autocomplete and type checking
@@ -20,6 +20,7 @@ acquisition, and advanced control system configuration.
 **Currently Supported Devices:**
 
 * **d-Drive**: Modular piezo amplifiers with 20-bit resolution, 50 kHz sampling, and advanced control features
+* **30DV50/300**: Single-channel, standalone amplifier
 
 **Quick Start:**
 

@@ -1,18 +1,17 @@
-"""Piezosystem Jena d-Drive modular piezo amplifier device implementation.
+"""Base classes for the piezosystem jena d-Drive device family.
 
-The d-Drive is a modular, expandable piezoelectric amplifier system designed
-for high-precision nanopositioning. It features:
+This module provides the shared implementation for d-Drive family devices,
+including the multi-channel d-Drive modular amplifiers and the single-channel
+30DV series (30DV50/300).
 
-- 20-bit resolution with 50 kHz sampling rate (50 kSPS)
-- 1 to 6 amplifier channels per system
-- Digital PID controllers with several filter stages
-- Integrated waveform generator (sine, triangle, rectangle, sweep, noise)
-- Two-channel data recorder (500k maximum samples per channel)
-- Modular architecture with hot-swappable amplifier modules
-- RS-232/USB connectivity options
+Common family traits:
+    - 20-bit resolution with 50 kHz sampling rate (50 kSPS)
+    - Digital PID controllers with filter stages
+    - Integrated waveform generator and data recorder
+    - RS-232/USB
 
-For detailed hardware specifications, refer to the d-Drive Instruction Manual.
-(https://www.piezosystem.com/products/amplifiers/modular/50ma-300ma-ddrive-digital-systems/)
+For detailed hardware specifications, refer to the d-Drive Instruction Manual:
+https://www.piezosystem.com/products/amplifiers/modular/50ma-300ma-ddrive-digital-systems/
 """
 
 from ..base.exceptions import ErrorCode
@@ -22,19 +21,18 @@ from .d_drive_family_channel import DDriveFamilyChannel
 
 
 class DDriveFamilyDevice(PiezoDevice):
-    """Piezosystem Jena d-Drive modular amplifier system.
+    """Base class for d-Drive family devices.
     
-    Represents a complete d-Drive system with 1-6 amplifier channels.
-    Each channel provides independent control of a piezoelectric actuator
-    with digital PID control, waveform generation, and data recording.
+    This class defines common behavior for d-Drive family devices, including
+    the multi-channel d-Drive modular amplifier and the single-channel 30DV series (30DV50/300).
+    Subclasses provide the concrete channel discovery and device identifiers.
     
-    The d-Drive system features:
+    Family features:
     - 20-bit resolution
-    - 50 kHz sampling rate (20µs control loop period)
+    - 50 kHz sampling rate (20 µs control loop period)
     - Digital PID controllers with feedforward
     - Multiple filter stages (notch, low-pass, error filter)
-    - Integrated waveform generator (sine, triangle, rectangle, sweep, noise)
-    - Two-channel data recorder (500k samples per channel)
+    - Integrated waveform generator and data recorder
     - Hardware trigger output
     - Analog monitor output
     - Modulation input
@@ -46,25 +44,19 @@ class DDriveFamilyDevice(PiezoDevice):
     
     Example:
         >>> from psj_lib import DDriveDevice, TransportType
-        >>> # Connect to d-Drive via serial port
         >>> device = DDriveDevice(TransportType.SERIAL, 'COM3')
         >>> await device.connect()
         >>> print(f"Found {len(device.channels)} channels")
-        >>> 
-        >>> # Access channel 0
         >>> channel = device.channels[0]
-        >>> # Enable closed-loop control
         >>> await channel.closed_loop_controller.set(True)
-        >>> # Move to position
-        >>> await channel.setpoint.set(50.0)  # 50 µm
-        >>> # Read actual position
+        >>> await channel.setpoint.set(50.0)
         >>> pos = await channel.position.get()
         >>> print(f"Position: {pos:.3f} µm")
     
     Note:
-        - System supports 1-6 channels (hardware dependent)
-        - Channels are numbered 0-5
-        - Not all channel numbers may be populated
+        - d-Drive modular systems support 1-6 channels (hardware dependent)
+        - PSJ 30DV devices expose a single channel (ID 0)
+        - Channels are numbered 0-5; not all IDs may be populated
         - Use device.channels dict to access available channels
     """
 

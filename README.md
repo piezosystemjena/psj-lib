@@ -11,13 +11,15 @@ A comprehensive Python library for controlling piezoelectric amplifiers and cont
 ## ✨ Features
 
 - **Asynchronous Architecture** - Built on Python's `asyncio` for efficient, non-blocking device communication
-- **Multi-Device Support** - Extensible framework supporting multiple device families (currently d-Drive)
+- **Multi-Device Support** - Extensible framework supporting multiple device families (currently d-Drive and 30DV50/300)
 - **Comprehensive Capabilities** - Full access to position control, PID tuning, waveform generation, data recording, and filtering
 - **Multiple Transport Protocols** - Connect via Serial (USB) or Telnet (Ethernet)
 - **Type-Safe API** - Complete type hints for excellent IDE autocomplete and type checking
 - **Extensive Documentation** - Comprehensive docstrings, examples, and developer guides
 
 ## 🔧 Supported Devices
+
+**Note**: For NV200 please use the [nv200-python-lib](https://github.com/piezosystemjena/nv200-python-lib).
 
 ### d-Drive Modular Amplifier
 
@@ -31,7 +33,14 @@ The d-Drive series represents piezosystem jena's modular piezo amplifier family:
 - **Data Acquisition**: 2-channel recorder with 500,000 samples per channel
 - **Hardware Triggers**: Precise timing and synchronization
 
-**Note**: For NV200 please use the [nv200-python-lib](https://github.com/piezosystemjena/nv200-python-lib).
+### PSJ 30DV50/300 (Standalone Amplifier)
+
+The **PSJ 30DV50/300** is a single-channel, d-Drive-compatible amplifier:
+
+- **Single Channel**: Standalone unit with one channel (ID 0)
+- **d-Drive Compatible**: Uses the same command set and capabilities
+- **Full Feature Set**: PID control, waveform generation, data recorder, filters
+
 
 ## 📦 Installation
 
