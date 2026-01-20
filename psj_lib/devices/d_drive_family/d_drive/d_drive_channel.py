@@ -76,5 +76,5 @@ class DDriveChannel(DDriveFamilyChannel):
     Note:
         - Sample period defines control loop and data recorder timing
         - Capabilities are accessed as properties (e.g., channel.setpoint)
-        - Hardware-specific enums defined in d_drive/capabilities/
+        - Hardware-specific enums defined in d_drive_family/capabilities/
     """

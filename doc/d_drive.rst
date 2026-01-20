@@ -170,7 +170,7 @@ All d-Drive channel capabilities with API references:
      - :class:`~psj_lib.devices.base.capabilities.data_recorder.DataRecorder`
      - Two-channel recorder: position + voltage, 500k samples max, 50 kHz sample rate
    * - ``trigger_out``
-    - :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_trigger_out.DDriveTriggerOut`
+     - :class:`~psj_lib.devices.d_drive_family.capabilities.d_drive_trigger_out.DDriveTriggerOut`
      - Hardware trigger output with d-Drive specific offset parameter
 
 
