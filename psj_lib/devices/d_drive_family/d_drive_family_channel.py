@@ -14,7 +14,7 @@ from .capabilities.d_drive_status_register import DDriveStatusRegister
 from .capabilities.d_drive_trigger_out import DDriveTriggerOut
 from .capabilities.d_drive_waveform_generator import DDriveWaveformGenerator
 
-class DDriveChannel(PiezoChannel):
+class DDriveFamilyChannel(PiezoChannel):
     """Single d-Drive amplifier channel with all control capabilities.
     
     Each d-Drive channel provides complete control of one piezoelectric

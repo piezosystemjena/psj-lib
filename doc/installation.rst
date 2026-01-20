@@ -30,7 +30,7 @@ psj-lib is cross-platform and works on:
 
 * For Serial (USB) connection: USB port and appropriate USB-to-Serial driver (depends on OS and device)
 * For Telnet connection: Ethernet interface and network connectivity
-* Piezosystem jena device (e.g., d-Drive amplifier)
+* Piezosystem jena device (e.g., d-Drive amplifier or 30DV50/300)
 
 
 Installation Methods

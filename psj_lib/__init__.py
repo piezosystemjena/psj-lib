@@ -82,7 +82,7 @@ from .devices.base.piezo_types import (
     DeviceInfo,
     SensorType,
 )
-from .devices.d_drive import (
+from .devices.d_drive_family import (
     DDriveChannel,
     DDriveClosedLoopController,
     DDriveDataRecorder,
@@ -94,6 +94,8 @@ from .devices.d_drive import (
     DDriveTriggerOut,
     DDriveWaveformGenerator,
     DDriveWaveformType,
+    PSJ30DVChannel,
+    PSJ30DVDevice,
 )
 from .devices.transport_protocol import (
     DiscoverFlags,
@@ -160,7 +162,7 @@ __all__ = [
     "DeviceInfo",
     "SensorType",
 
-    # DDrive Device Classes
+    # DDrive Family Classes
     "DDriveChannel",
     "DDriveClosedLoopController",
     "DDriveDataRecorder",
@@ -172,6 +174,8 @@ __all__ = [
     "DDriveTriggerOut",
     "DDriveWaveformGenerator",
     "DDriveWaveformType",
+    "PSJ30DVChannel",
+    "PSJ30DVDevice",
 
     # Transport Protocol
     "DiscoverFlags",

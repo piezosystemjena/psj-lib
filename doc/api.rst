@@ -44,10 +44,17 @@ Package Structure
     │   │   ├── piezo_channel.py
     │   │   ├── exceptions.py
     │   │   └── capabilities/        # Base capabilities (all public)
-    │   ├── d_drive/                 # d-Drive specific (public: DDriveDevice, DDriveChannel, etc.)
-    │   │   ├── d_drive_device.py
-    │   │   ├── d_drive_channel.py
-    │   │   └── capabilities/        # d-Drive capabilities (all public)
+    │   ├── d_drive_family/          # d-Drive family (d-Drive + 30DV series)
+    │   │   ├── d_drive/             # d-Drive modular system
+    │   │   │   ├── d_drive_device.py
+    │   │   │   └── d_drive_channel.py
+    │   │   ├── psj_30dv/             # PSJ 30DV single-channel device
+    │   │   │   ├── psj_30dv_device.py
+    │   │   │   └── psj_30dv_channel.py
+    │   │   └── capabilities/        # d-Drive family capabilities (all public)
+    │   │       ├── d_drive_status_register.py
+    │   │       ├── d_drive_waveform_generator.py
+    │   │       └── ...
     │   └── transport_protocol/      # Internal (only TransportType, DiscoverFlags, TransportProtocolInfo exported)
     └── _internal/                   # Internal utilities
 
@@ -95,12 +102,25 @@ Base Device Classes
 d-Drive Device
 ^^^^^^^^^^^^^^^
 
-.. automodule:: psj_lib.devices.d_drive.d_drive_device
+.. automodule:: psj_lib.devices.d_drive_family.d_drive.d_drive_device
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.d_drive.d_drive_channel
+.. automodule:: psj_lib.devices.d_drive_family.d_drive.d_drive_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PSJ 30DV Device
+^^^^^^^^^^^^^^^^
+
+.. automodule:: psj_lib.devices.d_drive_family.psj_30dv.psj_30dv_device
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.d_drive_family.psj_30dv.psj_30dv_channel
    :members:
    :undoc-members:
    :show-inheritance:
@@ -234,32 +254,32 @@ Configuration
 d-Drive Specific Capabilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: psj_lib.devices.d_drive.capabilities.d_drive_status_register
+.. automodule:: psj_lib.devices.d_drive_family.capabilities.d_drive_status_register
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.d_drive.capabilities.d_drive_waveform_generator
+.. automodule:: psj_lib.devices.d_drive_family.capabilities.d_drive_waveform_generator
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.d_drive.capabilities.d_drive_data_recorder
+.. automodule:: psj_lib.devices.d_drive_family.capabilities.d_drive_data_recorder
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.d_drive.capabilities.d_drive_trigger_out
+.. automodule:: psj_lib.devices.d_drive_family.capabilities.d_drive_trigger_out
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.d_drive.capabilities.d_drive_modulation_source
+.. automodule:: psj_lib.devices.d_drive_family.capabilities.d_drive_modulation_source
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.d_drive.capabilities.d_drive_monitor_output
+.. automodule:: psj_lib.devices.d_drive_family.capabilities.d_drive_monitor_output
    :members:
    :undoc-members:
    :show-inheritance:

@@ -46,7 +46,7 @@ async def main():
         # Perform a position step to capture transient response
         # This will trigger the data recorder automatically
         # Alternatively, you could start it manually with start()
-        print("\n[3] Performing position step (30µm → 70µm)...")
+        print("\n[2] Performing position step (30µm → 70µm)...")
         await channel.setpoint.set(30.0)
         await asyncio.sleep(1)
         await channel.setpoint.set(70.0)
@@ -62,7 +62,7 @@ async def main():
                 print(f"\r    Retrieving data... {percent:.1f}%", end='', flush=True)
 
 
-        print("\n[4] Retrieving recorded data...")
+        print("\n[3] Retrieving recorded data...")
         print("    Retrieving position data...")
         position_data = await channel.data_recorder.get_all_data(
             DDriveDataRecorderChannel.POSITION,
@@ -79,7 +79,7 @@ async def main():
         print(f"  ✓ Retrieved {len(voltage_data)} voltage samples")
         
         # Save to CSV file
-        print("\n[5] Saving data to CSV...")
+        print("\n[4] Saving data to CSV...")
         filename = "recorder_data.csv"
 
         with open(filename, 'w', newline='') as csvfile:
@@ -93,7 +93,7 @@ async def main():
         print(f"  ✓ Saved to {filename}")
         
         # Display statistics
-        print("\n[6] Data Statistics:")
+        print("\n[5] Data Statistics:")
         print(f"  Position: min={min(position_data):.2f}, "
               f"max={max(position_data):.2f}, "
               f"avg={sum(position_data)/len(position_data):.2f} %")
@@ -105,7 +105,7 @@ async def main():
         try:
             import matplotlib.pyplot as plt
             
-            print("\n[7] Generating plot...")
+            print("\n[6] Generating plot...")
             time_axis = [i / sample_rate for i in range(len(position_data))]
             
             fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6))
@@ -126,7 +126,7 @@ async def main():
             # plt.show()  # Uncomment to display plot
             
         except ImportError:
-            print("\n[7] Matplotlib not available (skipping plot)")
+            print("\n[6] Matplotlib not available (skipping plot)")
         
     finally:
         await device.close()
