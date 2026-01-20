@@ -1,4 +1,4 @@
-d-Drive Device
+d-Drive and 30DV50/300
 ==============
 
 This page covers the d-Drive modular amplifier family, its features, and how to use it with psj-lib.
