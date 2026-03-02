@@ -24,8 +24,8 @@ async def main():
     await device.connect()
     print(f"✓ Connected to device\n")
     
-    channel = device.channels[0]
-    
+    channel = next(iter(device.channels.values()))
+
     try:
         # Enable closed-loop control
         await channel.closed_loop_controller.set(True)

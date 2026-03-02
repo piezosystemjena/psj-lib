@@ -24,7 +24,7 @@ async def main():
     await device.connect()
     print(f"✓ Connected to device with {len(device.channels)} channel(s)\n")
     
-    channel = device.channels[0]
+    channel = next(iter(device.channels.values()))
     
     try:
         # Check current status

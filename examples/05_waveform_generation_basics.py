@@ -22,8 +22,9 @@ async def main():
     device = DDriveDevice(TransportType.SERIAL, 'COM1')
     await device.connect()
     print(f"✓ Connected to device\n")
-    
-    channel = device.channels[0]
+
+    # Get first available channel
+    channel = next(iter(device.channels.values()))
     wfg = channel.waveform_generator
     
     try:
