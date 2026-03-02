@@ -79,6 +79,7 @@ class PiezoDevice:
     Class Attributes:
         DEVICE_ID (str | None): Unique identifier for this device model. Subclasses
             must set this to auto-register with the DeviceFactory.
+        SINGLE_CHANNEL (bool): Indicates if the device is single-channel (True) or multi-channel (False).
         CACHEABLE_COMMANDS (set[str]): Commands whose results can be cached.
         BACKUP_COMMANDS (set[str]): Commands to include in device backup operations.
         DEFAULT_TIMEOUT_SECS (float): Default timeout for command operations (0.6s).
@@ -125,6 +126,8 @@ class PiezoDevice:
         - Set DEVICE_ID to a unique string for factory registration
     """
     DEVICE_ID = None  # Placeholder for device ID, to be set in subclasses
+
+    SINGLE_CHANNEL = False # Indicates if the device is single-channel (True) or multi-channel (False)
 
     CACHEABLE_COMMANDS: set[str] = set()  # set of commands that can be cached
     BACKUP_COMMANDS: set[str] = set()  # set of commands to backup device settings

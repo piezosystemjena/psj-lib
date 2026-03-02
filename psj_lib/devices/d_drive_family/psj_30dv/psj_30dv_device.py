@@ -29,6 +29,9 @@ class PSJ30DVDevice(DDriveFamilyDevice):
     D_DRIVE_IDENTIFIER = "AP"
     """Internal identifier string used to recognize different d-Drive family devices."""
 
+    SINGLE_CHANNEL = True
+    """Indicates that PSJ 30DV is a single-channel device."""
+
     async def _discover_channels(self):
         """Initialize the single channel for PSJ 30DV devices."""
         self._channels = {}
