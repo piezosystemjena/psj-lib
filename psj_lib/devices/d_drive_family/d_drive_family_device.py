@@ -223,8 +223,11 @@ class DDriveFamilyDevice(PiezoDevice):
         timeout: float = DEFAULT_TIMEOUT_SECS, 
         rx_delimiter: bytes = FRAME_DELIMITER_READ
     ) -> str:
+        is_single_channel = len(self.channels) == 1
+        is_read = (is_single_channel and cmd.count(",") == 0) or (not is_single_channel and cmd.count(",") <= 1)
+
         # Override frame delimiter if command has specific mapping (but only for reading or "m" or "u" commands)
-        if cmd.count(",") <= 1 or cmd.startswith(("m,", "u,")):
+        if is_read or cmd.startswith(("m,", "u,")):
             raw_cmd = cmd.split(",")[0].lower()
         
             if raw_cmd in self.FRAME_DELIMITER_MAP:

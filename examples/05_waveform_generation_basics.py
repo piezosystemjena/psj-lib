@@ -41,7 +41,7 @@ async def main():
         print("  ✓ Sine: 20µm amplitude, 20µm offset, 5Hz")
         
         # Let it run briefly
-        await asyncio.sleep(20)
+        await asyncio.sleep(2)
         
         # Test 2: Triangle wave
         print("[2] Generating Triangle Wave...")
