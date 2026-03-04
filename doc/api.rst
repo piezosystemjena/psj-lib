@@ -11,6 +11,7 @@ Quick Navigation
 
 * `Devices`_ - Device and channel classes
 * `Base Capabilities`_ - Common capabilities across all devices
+* `NV Family`_ - NV-series device and capability classes
 * `d-Drive Specific Capabilities`_ - d-Drive enhanced features
 * `Exceptions`_ - Error handling
 * `Type Definitions`_ - Type aliases and enums
@@ -23,7 +24,7 @@ Quick Navigation
 * `Filters`_ - Notch filter, low-pass filters, error filtering
 * `Signal Generation`_ - Modulation source, monitor output, waveform generation
 * `Data Acquisition`_ - Data recorder, trigger output
-* `Configuration`_ - Units, factory reset, fan control
+* `Configuration`_ - Unit, limits, display, factory reset, fan control
 
 **Usage Patterns**
 
@@ -55,6 +56,13 @@ Package Structure
     │   │       ├── d_drive_status_register.py
     │   │       ├── d_drive_waveform_generator.py
     │   │       └── ...
+   │   ├── nv_family/               # NV family (NV120/NV403, OL + CLE variants)
+   │   │   ├── nv_family_device.py
+   │   │   ├── nv_family_channel.py
+   │   │   ├── nv120/
+   │   │   ├── nv120_cle/
+   │   │   ├── nv403/
+   │   │   └── nv403_cle/
     │   └── transport_protocol/      # Internal (only TransportType, DiscoverFlags, TransportProtocolInfo exported)
     └── _internal/                   # Internal utilities
 
@@ -99,8 +107,18 @@ Base Device Classes
    :show-inheritance:
 
 
-d-Drive Device
+d-Drive Family
 ^^^^^^^^^^^^^^^
+
+.. automodule:: psj_lib.devices.d_drive_family.d_drive_family_device
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.d_drive_family.d_drive_family_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. automodule:: psj_lib.devices.d_drive_family.d_drive.d_drive_device
    :members:
@@ -112,15 +130,65 @@ d-Drive Device
    :undoc-members:
    :show-inheritance:
 
-PSJ 30DV Device
-^^^^^^^^^^^^^^^^
-
 .. automodule:: psj_lib.devices.d_drive_family.psj_30dv.psj_30dv_device
    :members:
    :undoc-members:
    :show-inheritance:
 
 .. automodule:: psj_lib.devices.d_drive_family.psj_30dv.psj_30dv_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+NV Family
+^^^^^^^^^
+
+.. automodule:: psj_lib.devices.nv_family.nv_family_device
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv_family_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv120.nv120_device
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv120.nv120_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv120_cle.nv120_cle_device
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv120_cle.nv120_cle_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv403.nv403_device
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv403.nv403_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv403_cle.nv403_cle_device
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.nv403_cle.nv403_cle_channel
    :members:
    :undoc-members:
    :show-inheritance:
@@ -235,7 +303,27 @@ Data Acquisition
 Configuration
 """""""""""""
 
-.. automodule:: psj_lib.devices.base.capabilities.units
+.. automodule:: psj_lib.devices.base.capabilities.unit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.base.capabilities.limits
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.base.capabilities.display
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.base.capabilities.multi_setpoint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.base.capabilities.multi_position
    :members:
    :undoc-members:
    :show-inheritance:
@@ -280,6 +368,39 @@ d-Drive Specific Capabilities
    :show-inheritance:
 
 .. automodule:: psj_lib.devices.d_drive_family.capabilities.d_drive_monitor_output
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+NV Specific Capabilities
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automodule:: psj_lib.devices.nv_family.capabilties.nv_display
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.capabilties.nv_knob
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.capabilties.nv_modulation_source
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.capabilties.nv_monitor_output
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.capabilties.nv_setpoint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: psj_lib.devices.nv_family.capabilties.nv_status_register
    :members:
    :undoc-members:
    :show-inheritance:

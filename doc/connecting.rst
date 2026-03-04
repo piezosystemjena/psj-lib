@@ -186,7 +186,7 @@ If you need manual control over connection lifecycle:
 Serial Port Settings
 ^^^^^^^^^^^^^^^^^^^^
 
-psj-lib automatically configures serial port settings:
+psj-lib automatically configures serial port settings. Most devices use:
 
 * **Baud Rate**: 115200
 * **Data Bits**: 8
@@ -194,7 +194,7 @@ psj-lib automatically configures serial port settings:
 * **Parity**: None
 * **Flow Control**: None
 
-These settings are optimized for piezosystem jena devices and typically don't need adjustment.
+For NV-family devices, identification is performed at 19200 baud and transport settings are adjusted by the driver as needed.
 
 .. TODO: When adding first network device, include this section.
 .. Telnet Connection

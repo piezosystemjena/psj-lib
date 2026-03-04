@@ -4,6 +4,19 @@ from ..capabilties.nv_knob import NVCLEKnob
 from .nv403_cle_channel import NV403CLEChannel
 
 class NV403CLEDevice(NVFamilyDevice):
+    """Device class for NV40/3CLE closed-loop 3-channel amplifier.
+
+    Provides three closed-loop capable channels and coordinated multi-channel
+    helper capabilities.
+
+    Example:
+        >>> device = NV403CLEDevice(TransportType.SERIAL, "COM10")
+        >>> async with device:
+        ...     ch0 = device.channels[0]
+        ...     await ch0.closed_loop_controller.set(True)
+        ...     await device.multi_setpoint.set([5.0, 10.0, 15.0])
+    """
+
     DEVICE_ID = "NV40/3CLE"
     
     NV_FAMILY_IDENTIFIER = "NV403CLE"
@@ -13,6 +26,7 @@ class NV403CLEDevice(NVFamilyDevice):
 
     @property
     def channels(self) -> dict[int, NV403CLEChannel]:
+        """Typed channel mapping for NV40/3CLE."""
         return self._channels
 
     knob: NVCLEKnob = CapabilityDescriptor(
@@ -25,6 +39,7 @@ class NV403CLEDevice(NVFamilyDevice):
             NVCLEKnob.CMD_STEP_CLOSED_LOOP: "encstcl",
         }
     )
+    """Front-panel encoder knob configuration including closed-loop step size."""
     
     multi_setpoint: MultiSetpoint = CapabilityDescriptor(
         MultiSetpoint, {
@@ -32,9 +47,11 @@ class NV403CLEDevice(NVFamilyDevice):
         },
         channel_count=MAX_CHANNEL_COUNT
     )
+    """Synchronous setpoint write for all three channels."""
 
     multi_position: MultiPosition = CapabilityDescriptor(
         MultiPosition, {
             MultiPosition.CMD_POSITIONS: "measure",
         },
     )
+    """Single-command position readback for all three channels."""

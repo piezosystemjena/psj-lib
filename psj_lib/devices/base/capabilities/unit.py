@@ -12,9 +12,9 @@ class Unit(PiezoCapability):
     
     Example:
         >>> units = device.units
-        >>> voltage_unit = await units.get_voltage_unit()
-        >>> position_unit = await units.get_position_unit()
-        >>> print(f"Voltage: {voltage_unit}, Position: {position_unit}")
+        >>> openloop_unit = await units.get_openloop_unit()
+        >>> closedloop_unit = await units.get_closedloop_unit()
+        >>> print(f"Voltage: {openloop_unit}, Position: {closedloop_unit}")
         >>> # Voltage: V, Position: µm
     
     Note:
@@ -40,5 +40,5 @@ class Unit(PiezoCapability):
         if not result:
             return "Unknown"
         
-        return result[0]
+        return result[0].strip()
     

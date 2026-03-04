@@ -1,6 +1,12 @@
 from .piezo_capability import PiezoCapability
 
 class Limits(PiezoCapability):
+    """Read-only lower/upper limit capability.
+
+    Used for commands that expose admissible parameter bounds, for example
+    voltage or position ranges.
+    """
+
     CMD_UPPER_LIMIT = "UPPER_LIMIT"
     CMD_LOWER_LIMIT = "LOWER_LIMIT"
 

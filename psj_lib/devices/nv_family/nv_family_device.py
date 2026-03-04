@@ -1,14 +1,33 @@
+"""NV family base device implementation.
+
+This module defines shared transport, discovery, error handling, and global
+capabilities for NV-series amplifiers.
+"""
+
 from ..base.capabilities import *
 from ..base.exceptions import *
 from ..base.piezo_device import PiezoDevice
 from ..transport_protocol import TransportProtocol
 from .capabilties.nv_display import NVDisplay
-from .capabilties.nv_knob import NVKnob
-from .capabilties.nv_modulation_source import NVModulationSourceTypes
-from .capabilties.nv_monitor_output import NVMonitorOutputSource
 from .nv_family_channel import NVFamilyChannel
 
 class NVFamilyDevice(PiezoDevice):
+    """Base class for all supported NV-series devices.
+
+    Implements shared NV-family behavior:
+    - Device identification at NV serial baudrate
+    - NV frame delimiters and error parsing
+    - Channel discovery from ``MAX_CHANNEL_COUNT``
+    - Common device-level capabilities
+
+    Example:
+        >>> device = NV403CLEDevice(TransportType.SERIAL, "COM10")
+        >>> async with device:
+        ...     await device.display.set(brightness=35.0)
+        ...     ch0 = device.channels[0]
+        ...     await ch0.setpoint.set(20.0)
+    """
+
     DEVICE_ID = "NV Family Device"
     """Device type identifier used for device discovery and type checking."""
 
@@ -33,6 +52,12 @@ class NVFamilyDevice(PiezoDevice):
         "encstol",
         "setk",
         "monwpa",
+        "dspclmin",
+        "dspclmax",
+        "dspvmin",
+        "dspvmax",
+        "unitol",
+        "unitcl",
     ]
     """Commands whose responses can be cached to optimize performance."""
 
@@ -62,6 +87,7 @@ class NVFamilyDevice(PiezoDevice):
 
     @classmethod
     async def _is_device_type(cls, tp: TransportProtocol) -> str | None:
+        """Probe transport and match against the configured NV family identifier."""
         initial_baudrate = tp.get_property("baudrate")
         tp.set_property("baudrate", cls.SERIAL_BAUDRATE)
 
@@ -78,12 +104,14 @@ class NVFamilyDevice(PiezoDevice):
             return None
     
     async def _discover_channels(self):
+        """Create channel instances from ``MAX_CHANNEL_COUNT``."""
         self._channels = {}
 
         for channel_id in range(self.MAX_CHANNEL_COUNT):
             self._channels[channel_id] = self.NV_CHANNEL_TYPE(channel_id, self._write_channel)
 
-    async def _handle_error(self, response):
+    def _handle_error(self, response):
+        """Parse NV error frames and raise matching ``DeviceError`` subclasses."""
         if not response.startswith("ErrorCode"):
             return
         
@@ -96,6 +124,12 @@ class NVFamilyDevice(PiezoDevice):
 
     @property
     def channels(self) -> dict[int, NVFamilyChannel]:
+        """Typed access to NV family channels.
+
+        Returns:
+            Dictionary mapping channel IDs to ``NVFamilyChannel`` instances
+            (or subclass instances on model-specific devices).
+        """
         return self._channels
 
     display: NVDisplay = CapabilityDescriptor(
@@ -103,3 +137,9 @@ class NVFamilyDevice(PiezoDevice):
             NVDisplay.CMD_BRIGHTNESS: "light",
         },
     )
+    """Front-panel display brightness capability.
+
+    Example:
+        >>> await device.display.set(brightness=50.0)
+        >>> current = await device.display.get_brightness()
+    """

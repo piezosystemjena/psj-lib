@@ -1,5 +1,3 @@
-from typing import List
-
 from .piezo_capability import PiezoCapability
 
 class MultiSetpoint(PiezoCapability):
@@ -20,10 +18,15 @@ class MultiSetpoint(PiezoCapability):
         channel_count: int,
         **kwargs
     ) -> None:
+        """Initialize multi-setpoint capability.
+
+        Args:
+            channel_count: Expected number of setpoint values for ``set()``.
+        """
         super().__init__(*args, **kwargs)
         self._channel_count = channel_count
 
-    async def set(self, setpoints: List[float]) -> None:
+    async def set(self, setpoints: list[float]) -> None:
         """Set multiple channel setpoints simultaneously.
         
         Args:

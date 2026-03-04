@@ -105,6 +105,9 @@ Here's the minimal steps to add a new device type:
         # Required: Unique device identifier
         DEVICE_ID = "MyDevice"
         
+        # Required: Maximum supported channels (set to 1 for single-channel devices)
+        MAX_CHANNEL_COUNT = 4
+
         # Optional: Cacheable commands for performance
         CACHEABLE_COMMANDS = {
             "idn?",
