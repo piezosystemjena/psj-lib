@@ -8,7 +8,7 @@ class NVModulationSourceTypes(ModulationSourceTypes):
     Defines available control sources for setpoint modulation on NV devices.
 
     Attributes:
-        ENCODER_ANALOG: Front-panel encoder / analog control path.
+        ENCODER_ANALOG: Front-panel encoder + analog control path.
         SERIAL: Serial command path.
 
     Example:

@@ -11,7 +11,7 @@ class NVMonitorOutputSource(MonitorOutputSource):
     Attributes:
         ACTUATOR_VOLTAGE: Actuator drive voltage signal.
         POSITION_VOLTAGE: Position-proportional voltage signal.
-        MODE_DEPENDENT: Source selected by current operation mode.
+        MODE_DEPENDENT: Source selected by current operation mode. Voltage in open loop, position in closed loop.
 
     Example:
         >>> from psj_lib import NVMonitorOutputSource
