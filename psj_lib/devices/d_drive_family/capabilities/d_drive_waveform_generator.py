@@ -149,10 +149,10 @@ class DDriveWaveformGenerator(PiezoCapability):
 
     def __init__(
         self,
-        write_cb,
-        device_commands
+        *args,
+        **kwargs
     ) -> None:
-        super().__init__(write_cb, device_commands)
+        super().__init__(*args, **kwargs)
 
         # Register waveform types
         self._sine = StaticWaveformGenerator(

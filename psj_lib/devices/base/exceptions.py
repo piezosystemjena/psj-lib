@@ -221,16 +221,13 @@ class ErrorCode(Enum):
             value (int): The integer value representing the error code.
 
         Returns:
-            ErrorCode: The corresponding ErrorCode enum member.
-
-        Raises:
-            ValueError: If the value does not correspond to any ErrorCode member.
+            ErrorCode: The corresponding ErrorCode enum member. If the value does not match any defined error code, returns ErrorCode.ERROR_NOT_SPECIFIED.
         """
         for member in cls:
             if member.value == value:
                 return member
 
-        raise ValueError(f"No ErrorCode member with value {value}")
+        return cls.ERROR_NOT_SPECIFIED
 
     @classmethod
     def get_exception_class(cls, error_code) -> Type[DeviceError]:

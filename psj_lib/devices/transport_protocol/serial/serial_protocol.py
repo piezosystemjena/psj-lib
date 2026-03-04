@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import List
+from typing import Any
 
 import aioserial
 import serial.tools.list_ports
@@ -100,7 +100,7 @@ class SerialProtocol(TransportProtocol):
         return self.__serial
 
     @staticmethod
-    async def discover_devices(discovery_cb: DiscoveryCallback) -> List[DetectedDevice]:
+    async def discover_devices(discovery_cb: DiscoveryCallback) -> list[DetectedDevice]:
         """Discover piezo devices connected via serial/USB ports.
         
         Enumerates all available serial ports, filters for FTDI USB-serial
@@ -302,6 +302,17 @@ class SerialProtocol(TransportProtocol):
         """
         if self.__serial:
             self.__serial.close()
+
+    def set_property(self, name: str, value: Any) -> None:
+        if name == "baudrate":
+            if self.__serial and self.__serial.is_open:
+                self.__serial.baudrate = value
+
+            self.__baudrate = value
+
+    def get_property(self, name: str) -> Any:
+        if name == "baudrate":
+            return self.__baudrate
 
     @property
     def port(self) -> str:

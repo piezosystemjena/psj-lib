@@ -29,22 +29,13 @@ class PSJ30DVDevice(DDriveFamilyDevice):
     D_DRIVE_IDENTIFIER = "AP"
     """Internal identifier string used to recognize different d-Drive family devices."""
 
-    SINGLE_CHANNEL = True
+    MAX_CHANNEL_COUNT = 1
     """Indicates that PSJ 30DV is a single-channel device."""
 
     async def _discover_channels(self):
         """Initialize the single channel for PSJ 30DV devices."""
         self._channels = {}
         self._channels[0] = PSJ30DVChannel(0, self._write_channel)
-    
-    async def _write_channel(self, channel_id, cmd, params=None):
-        """Write a channel command without explicit channel ID.
-        
-        The PSJ 30DV uses the same command set as d-Drive, but does not require
-        a channel index in the command frame. This override strips the channel
-        ID from commands before delegating to the base implementation.
-        """
-        return await super()._write_channel(None, cmd, params)
 
     # Override to provide typed channels
     @property

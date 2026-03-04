@@ -90,20 +90,20 @@ and device-specific implementations.
         position = await channel.position.get()
         await channel.setpoint.set(50.0)
 
-    Using PSJ 30DV series
-    ^^^^^^^^^^^^^^^^^^^^^
+Using PSJ 30DV series
+^^^^^^^^^^^^^^^^^^^^^
 
-    The 30DV50/300 exposes a single channel (ID 0) with the same capabilities as a d-Drive channel:
+The 30DV50/300 exposes a single channel (ID 0) with the same capabilities as a d-Drive channel:
 
-    .. code-block:: python
+.. code-block:: python
 
-      from psj_lib import PSJ30DVDevice, TransportType
-    
-      device = PSJ30DVDevice(TransportType.SERIAL, "COM3")
-      async with device:
-        channel = device.channels[0]
-        await channel.closed_loop_controller.set(True)
-        await channel.setpoint.set(10.0)
+  from psj_lib import PSJ30DVDevice, TransportType
+
+  device = PSJ30DVDevice(TransportType.SERIAL, "COM3")
+  async with device:
+    channel = device.channels[0]
+    await channel.closed_loop_controller.set(True)
+    await channel.setpoint.set(10.0)
 
 
 Channel Capabilities Reference

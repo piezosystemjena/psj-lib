@@ -22,7 +22,7 @@ communication while exposing the full capabilities of the hardware.
 **Key Features:**
 
 * **Asynchronous Architecture**: Built on Python's asyncio for efficient, non-blocking device communication
-* **Multi-Device Support**: Extensible framework supporting multiple device families (d-Drive and 30DV50/300)
+* **Multi-Device Support**: Extensible framework supporting d-Drive, 30DV50/300, and selected NV-series devices
 * **Comprehensive Capabilities**: Full access to position control, PID tuning, waveform generation, data recording, and filtering
 * **Multiple Transport Protocols**: Connect via Serial (USB) or Telnet (Ethernet)
 * **Type-Safe API**: Complete type hints for excellent IDE autocomplete and type checking
@@ -52,6 +52,16 @@ The **30DV50/300** is a single-channel amplifier designed
 for compact setups that only require one axis. It supports the same command
 set and capabilities as d-Drive channels, including PID control, waveform
 generation, and data recording.
+
+NV40/3(CLE) and NV120/1(CLE) Amplifiers
+^^^^^^^^^^^^^^^^^^^^
+
+Piezo amplifiers with 1 or 3 channels, available in open-loop and closed-loop variants. They include features such as:
+
+* **Position Control**: Synchronous setpoint and position reading for multiple axes
+* **Closed-Loop Control**: Integrated analog closed-loop controller (CLE variants)
+* **Physical Knob**: Front-panel knob for manual control and control mode switching
+* **Display**: Front-panel display for real-time position and status information
 
 
 Architecture Overview

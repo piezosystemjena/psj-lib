@@ -28,8 +28,12 @@ class DDriveSetpoint(Setpoint):
         - If setpoint is changed by another application, cache will be stale
     """
     
-    def __init__(self, write_cb, device_commands):
-        super().__init__(write_cb, device_commands)
+    def __init__(
+        self, 
+        *args, 
+        **kwargs
+    ) -> None:
+        super().__init__(*args, **kwargs)
         self._setpoint_cache = 0.0
     
     async def set(self, value: float) -> None:

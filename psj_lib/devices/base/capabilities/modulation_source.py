@@ -58,18 +58,16 @@ class ModulationSource(PiezoCapability):
 
     def __init__(
         self,
-        write_cb,
-        device_commands,
-        sources: type[ModulationSourceTypes]
+        *args,
+        sources: type[ModulationSourceTypes],
+        **kwargs
     ) -> None:
         """Initialize modulation source capability.
         
         Args:
-            write_cb: Command execution callback
-            device_commands: Command mapping dictionary
             sources: Device-specific ModulationSourceTypes enum type
         """
-        super().__init__(write_cb, device_commands)
+        super().__init__(*args, **kwargs)
         self._sources = sources
 
     async def set_source(self, source: ModulationSourceTypes) -> None:

@@ -493,25 +493,72 @@ Retrieves a human-readable description of the piezoelectric actuator connected t
 * Some devices return empty string if not configured
 
 
-Units
-^^^^^
+Unit
+^^^^
 
-**API Reference:** :class:`~psj_lib.devices.base.capabilities.units.Units`
+**API Reference:** :class:`~psj_lib.devices.base.capabilities.unit.Unit`
 
-Queries device measurement units for voltage and position values. Units may vary by device configuration or hardware model.
+Queries the measurement unit for a specific quantity exposed by the mapped command
+(for example open-loop voltage unit or closed-loop position unit).
 
 .. code-block:: python
 
-    voltage_unit = await channel.units.get_voltage_unit()
-    position_unit = await channel.units.get_position_unit()
-    print(f"Voltage: {voltage_unit}, Position: {position_unit}")
-    # Example output: "Voltage: V, Position: µm"
+    unit = await channel.openloop_unit.get()
+    print(f"Open-loop unit: {unit}")
+    # Example output: "V"
 
 **Key Points:**
 
-* Common voltage units: V, mV
-* Common position units: µm, mrad
-* Units may be configurable on some devices
+* Returns a single unit string for the configured command mapping
+* Typical values include ``V``, ``µm`` and ``mrad``
+
+
+Limits
+^^^^^^
+
+**API Reference:** :class:`~psj_lib.devices.base.capabilities.limits.Limits`
+
+Reads lower/upper limits for a device quantity (for example voltage or position limits).
+
+.. code-block:: python
+
+    lower = await channel.openloop_limits.get_lower()
+    upper = await channel.openloop_limits.get_upper()
+    print(f"Allowed range: {lower} .. {upper}")
+
+**Key Points:**
+
+* Provides read-only range boundaries
+* ``get_range()`` returns ``(lower, upper)``
+
+
+Display
+^^^^^^^
+
+**API Reference:** :class:`~psj_lib.devices.base.capabilities.display.Display`
+
+Controls device display brightness (when supported).
+
+.. code-block:: python
+
+    await device.display.set(brightness=40.0)
+
+
+Multi-Channel Helpers
+^^^^^^^^^^^^^^^^^^^^^
+
+**API References:**
+
+* :class:`~psj_lib.devices.base.capabilities.multi_setpoint.MultiSetpoint`
+* :class:`~psj_lib.devices.base.capabilities.multi_position.MultiPosition`
+
+These capabilities allow setting or reading multiple channels synchronously on
+devices that expose group operations (for example NV40/3 variants).
+
+.. code-block:: python
+
+    await device.multi_setpoint.set([10.0, 20.0, 30.0])
+    positions = await device.multi_position.get()
 
 
 Signal Routing

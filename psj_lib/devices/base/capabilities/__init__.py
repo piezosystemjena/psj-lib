@@ -2,12 +2,16 @@ from .actuator_description import ActuatorDescription
 from .capability_descriptor import CapabilityDescriptor
 from .closed_loop_controller import ClosedLoopController
 from .data_recorder import DataRecorder, DataRecorderChannel
+from .display import Display
 from .error_low_pass_filter import ErrorLowPassFilter
 from .factory_reset import FactoryReset
 from .fan import Fan
+from .limits import Limits
 from .low_pass_filter import LowPassFilter
 from .modulation_source import ModulationSource, ModulationSourceTypes
 from .monitor_output import MonitorOutput, MonitorOutputSource
+from .multi_setpoint import MultiSetpoint
+from .multi_position import MultiPosition
 from .notch_filter import NotchFilter
 from .pcf import PreControlFactor
 from .pid_controller import PIDController
@@ -19,7 +23,7 @@ from .static_waveform_generator import StaticWaveformGenerator
 from .status import Status, StatusRegister
 from .temperature import Temperature
 from .trigger_out import TriggerOut, TriggerDataSource, TriggerEdge
-from .units import Units
+from .unit import Unit
 
 __all__ = [
     "ActuatorDescription",
@@ -27,14 +31,18 @@ __all__ = [
     "ClosedLoopController",
     "DataRecorder",
     "DataRecorderChannel",
+    "Display",
     "ErrorLowPassFilter",
     "FactoryReset",
     "Fan",
+    "Limits",
     "LowPassFilter",
     "ModulationSource",
     "ModulationSourceTypes",
     "MonitorOutput",
     "MonitorOutputSource",
+    "MultiSetpoint",
+    "MultiPosition",
     "NotchFilter",
     "PIDController",
     "PiezoCapability",
@@ -50,5 +58,5 @@ __all__ = [
     "TriggerOut",
     "TriggerDataSource",
     "TriggerEdge",
-    "Units",
+    "Unit",
 ]

@@ -207,15 +207,11 @@ class DDriveFamilyDevice(PiezoDevice):
         except TimeoutError as e:
             return None
         
-    def _parse_response(self, response: str) -> list[str]:
-        """"""
+    def _handle_error(self, response):
         # Check for error strings in response
         for err_str, err_code in self.ERROR_MAP.items():
             if err_str in response.lower():
                 ErrorCode.raise_error(err_code)
-
-        # Default parsing (comma-separated values)
-        return super()._parse_response(response)
 
     async def write_raw(
         self, 
@@ -223,7 +219,8 @@ class DDriveFamilyDevice(PiezoDevice):
         timeout: float = DEFAULT_TIMEOUT_SECS, 
         rx_delimiter: bytes = FRAME_DELIMITER_READ
     ) -> str:
-        is_read = (self.SINGLE_CHANNEL and cmd.count(",") == 0) or (not self.SINGLE_CHANNEL and cmd.count(",") <= 1)
+        single_channel = self.MAX_CHANNEL_COUNT == 1
+        is_read = (single_channel and cmd.count(",") == 0) or (not single_channel and cmd.count(",") <= 1)
 
         # Override frame delimiter if command has specific mapping (but only for reading or "m" or "u" commands)
         if is_read or cmd.startswith(("m,", "u,")):

@@ -104,9 +104,12 @@ class CapabilityDescriptor[T: PiezoCapability]:
             return self
         
         if not hasattr(instance, self.attr_name):
+            channel_id = getattr(instance, "id", None)
+
             capability = self.capability_class(
                 instance._capability_write,
                 self.device_commands,
+                channel_id,
                 **self.kwargs
             )
             setattr(instance, self.attr_name, capability)

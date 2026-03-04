@@ -60,18 +60,16 @@ class MonitorOutput(PiezoCapability):
 
     def __init__(
         self,
-        write_cb,
-        device_commands,
-        sources: type[MonitorOutputSource]
+        *args,
+        sources: type[MonitorOutputSource],
+        **kwargs
     ) -> None:
         """Initialize monitor output capability.
         
         Args:
-            write_cb: Command execution callback
-            device_commands: Command mapping dictionary
             sources: Device-specific MonitorOutputSource enum type
         """
-        super().__init__(write_cb, device_commands)
+        super().__init__(*args, **kwargs)
         self._sources = sources
 
     async def set_source(self, source: MonitorOutputSource) -> None:

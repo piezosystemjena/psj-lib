@@ -36,11 +36,11 @@ class ClosedLoopController(PiezoCapability):
 
     def __init__(
         self, 
-        write_cb, 
-        device_commands,
-        sample_period: int
+        *args,
+        sample_period: int,
+        **kwargs
     ):
-        super().__init__(write_cb, device_commands)
+        super().__init__(*args, **kwargs)
         self._sample_period = sample_period
 
     async def set(self, enabled: bool) -> None:
@@ -74,6 +74,12 @@ class ClosedLoopController(PiezoCapability):
             ...     print("Using open-loop control")
         """
         result = await self._write(self.CMD_ENABLE)
+
+        # If device does not return a value for this command, assume False.
+        # This can happen if the actuator is not plugged in.
+        if not result:
+            return False
+        
         return bool(int(result[0]))
     
     @property

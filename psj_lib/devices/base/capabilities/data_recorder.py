@@ -70,11 +70,11 @@ class DataRecorder(PiezoCapability):
 
     def __init__(
         self, 
-        write_cb, 
-        device_commands,
-        sample_period: int
+        *args,
+        sample_period: int,
+        **kwargs
     ) -> None:
-        super().__init__(write_cb, device_commands)
+        super().__init__(*args, **kwargs)
         self._sample_period = sample_period  # in microseconds
 
     async def set(

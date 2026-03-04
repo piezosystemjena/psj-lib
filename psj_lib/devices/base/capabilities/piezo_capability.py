@@ -68,15 +68,18 @@ class PiezoCapability:
         self, 
         write_cb: WriteCallback,
         device_commands: DeviceCommands,
+        channel_id: int | None = None
     ):
         """Initialize the capability with command execution callback.
         
         Args:
             write_cb: Function to execute device commands
             device_commands: Mapping of command IDs to device strings
+            channel_id: Optional channel identifier for multi-channel devices (might be used by subclasses)
         """
         self._write_cb = write_cb
         self._device_commands = device_commands
+        self._channel_id = channel_id
 
     async def _write(self, command: str, params: list[Param] | None = None) -> list[str]:
         """Execute a device command with optional parameters.

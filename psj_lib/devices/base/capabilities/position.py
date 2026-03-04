@@ -35,7 +35,7 @@ class Position(PiezoCapability):
             >>> print(f"Actuator at {pos:.2f} µm")
         
         Note:
-            - Units can be queried via device.units.get_position_unit()
+            - Units can be queried via the channels units capability
             - Update rate depends on device capabilities
         """
         result = await self._write(self.CMD_POSITION)

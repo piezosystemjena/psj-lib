@@ -9,6 +9,7 @@ from ..base.capabilities import *
 from .capabilities.d_drive_closed_loop_controller import DDriveClosedLoopController
 from .capabilities.d_drive_data_recorder import DDriveDataRecorder
 from .capabilities.d_drive_modulation_source import DDriveModulationSourceTypes
+from .capabilities.d_drive_monitor_output import DDriveMonitorOutputSource
 from .capabilities.d_drive_setpoint import DDriveSetpoint
 from .capabilities.d_drive_status_register import DDriveStatusRegister
 from .capabilities.d_drive_trigger_out import DDriveTriggerOut
@@ -284,7 +285,8 @@ class DDriveFamilyChannel(PiezoChannel):
     monitor_output: MonitorOutput = CapabilityDescriptor(
         MonitorOutput, {
             MonitorOutput.CMD_OUTPUT_SRC: "monsrc"
-        }
+        },
+        sources=DDriveMonitorOutputSource
     )
     """Analog monitor output source routing.
     
