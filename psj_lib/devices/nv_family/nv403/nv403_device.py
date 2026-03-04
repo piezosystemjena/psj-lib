@@ -44,7 +44,11 @@ class NV403Device(NVFamilyDevice):
         },
         channel_count=MAX_CHANNEL_COUNT
     )
-    """Synchronous setpoint write for all three channels."""
+    """Synchronous setpoint write for all three channels.
+    
+    Note: To use this capability, all 3 channels must have an actuator connected and their modulation mode
+    set to SERIAL. Otherwise, the amplifier will ignore the command.
+    """
 
     multi_position: MultiPosition = CapabilityDescriptor(
         MultiPosition, {

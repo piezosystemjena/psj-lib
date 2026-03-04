@@ -276,10 +276,11 @@ Demonstrates key NV403CLE capabilities in one workflow.
     backup_data = await device.backup()
 
     try:
+        # Set required modulation source at startup for all channels
+        for ch in device.channels.values():
+            await ch.modulation_source.set_source(NVModulationSourceTypes.SERIAL)
+        
         channel = device.channels[0]
-
-        # Set required modulation source at startup
-        await channel.modulation_source.set_source(NVModulationSourceTypes.SERIAL)
 
         # Display brightness
         await device.display.set(brightness=40.0)
@@ -300,6 +301,8 @@ Demonstrates key NV403CLE capabilities in one workflow.
             print(f"Channel {channel_id}: actuator connected = {status.actuator_plugged}")
 
         # Multi-channel setpoint/position
+        # Note: Using multi_setpoint requires all channels to have an actuator connected 
+        # and modulation mode set to SERIAL. Otherwise, the amplifier will ignore the command.
         await device.multi_setpoint.set([10.0, 20.0, 30.0])
         positions = await device.multi_position.get()
     finally:
