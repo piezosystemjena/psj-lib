@@ -3,7 +3,7 @@
 from .piezo_capability import PiezoCapability
 
 
-class Units(PiezoCapability):
+class Unit(PiezoCapability):
     """Query device measurement units for voltage and position.
     
     Provides methods to retrieve the units of measurement used by the
@@ -23,31 +23,22 @@ class Units(PiezoCapability):
         - Common position units: µm, mrad
     """
     
-    CMD_UNIT_VOLTAGE = "UNIT_VOLTAGE"
-    CMD_UNIT_POSITION = "UNIT_POSITION"
+    CMD_UNIT = "UNIT"
 
-    async def get_voltage_unit(self) -> str:
-        """Get the unit of measurement for voltage values (open loop).
+    async def get(self) -> str:
+        """Get the unit of measurement for the specified capability.
         
         Returns:
             Unit string (e.g., 'V', 'mV')
         
         Example:
-            >>> unit = await device.units.get_voltage_unit()
+            >>> unit = await device.units.get_unit()
             >>> print(f"Voltage is measured in {unit}")
         """
-        result = await self._write(self.CMD_UNIT_VOLTAGE)
-        return result[0]
+        result = await self._write(self.CMD_UNIT)
 
-    async def get_position_unit(self) -> str:
-        """Get the unit of measurement for position values (closed loop).
+        if not result:
+            return "Unknown"
         
-        Returns:
-            Unit string (e.g., 'µm', 'mrad')
-        
-        Example:
-            >>> unit = await device.units.get_position_unit()
-            >>> print(f"Position is measured in {unit}")
-        """
-        result = await self._write(self.CMD_UNIT_POSITION)
         return result[0]
+    

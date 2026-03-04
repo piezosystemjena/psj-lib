@@ -127,7 +127,7 @@ class PiezoDevice:
     """
     DEVICE_ID = None  # Placeholder for device ID, to be set in subclasses
 
-    SINGLE_CHANNEL = False # Indicates if the device is single-channel (True) or multi-channel (False)
+    MAX_CHANNEL_COUNT = 0 # Maximum number of channels supported by the device (set in subclasses)
 
     CACHEABLE_COMMANDS: set[str] = set()  # set of commands that can be cached
     BACKUP_COMMANDS: set[str] = set()  # set of commands to backup device settings
@@ -138,6 +138,8 @@ class PiezoDevice:
 
     _channels: dict[int, PiezoChannel] = {}  # Dictionary to store channels by their number
 
+    SERIAL_BAUDRATE = 115200
+    """Baudrate for serial communication. Default is 115200 baud."""
 
     def __init__(
         self,
@@ -182,6 +184,8 @@ class PiezoDevice:
             transport_type,
             identifier
         )
+
+        self._transport.set_property("baudrate", self.SERIAL_BAUDRATE)  # Set baudrate for serial transport (ignored for Telnet)
 
         self._cache: CommandCache = CommandCache(self.CACHEABLE_COMMANDS)
         self._lock = _ReentrantAsyncLock()
@@ -295,7 +299,10 @@ class PiezoDevice:
         """
         if cls.DEVICE_ID is None:
             for subclass in DEVICE_MODEL_REGISTRY.values():
+                # Flush any existing input to ensure clean communication for identification
+                tp.flush_input()
                 id = await subclass._is_device_type(tp)
+
                 if id is not None:
                     return id
 
@@ -450,9 +457,7 @@ class PiezoDevice:
             - Error responses halt execution by raising exceptions
         """
         # Check if the response indicates an error
-        if response.startswith("error"):
-            self._raise_error(response)
-            return  # This line will never be reached due to the exception being raised
+        self._handle_error(response)
             
         # Else, Normal response, split the command and parameters
         parts = response.split(',', 1)
@@ -463,6 +468,11 @@ class PiezoDevice:
 
         return parameters
     
+
+    def _handle_error(self, response: str):
+        if response.startswith("error"):
+            self._raise_error(response)
+
 
     def _raise_error(self, response: str):
         """Parse error response and raise appropriate DeviceError exception.
@@ -562,7 +572,7 @@ class PiezoDevice:
         method. It's used as the write callback for PiezoChannel instances.
 
         Args:
-            channel_id: Numeric ID of the target channel (typically 0-based) or None for single-channel devices
+            channel_id: Numeric ID of the target channel (typically 0-based). None for global commands.
             cmd: Command name to send
             params: Optional list of parameters for the command. None for read operations.
 
@@ -579,8 +589,10 @@ class PiezoDevice:
             - Automatically formats command with channel ID
             - Command format: "command,channel_id[,param1,param2,...]"
         """
+        single_channel = self.MAX_CHANNEL_COUNT == 1
+        global_cmd = channel_id is None or single_channel
         cmd_list = cmd.split(",")
-        full_cmd = f"{cmd_list[0]},{channel_id}" if channel_id is not None else cmd_list[0]
+        full_cmd = f"{cmd_list[0]},{channel_id}" if not global_cmd else cmd_list[0]
 
         # If channel command has additional parts after comma, append them as parameters
         if len(cmd_list) > 1:
@@ -589,10 +601,10 @@ class PiezoDevice:
         response = await self.write(full_cmd, params)
 
         # Strip channel ID (first param) from response
-        if channel_id is not None and len(response) > 0:
+        if not global_cmd and len(response) > 0:
             return response[1:]
         
-        # If no channel ID, return full response
+        # If global command, return full response
         return response
 
     async def _capability_write(
@@ -709,16 +721,22 @@ class PiezoDevice:
     async def _write_and_parse(
         self,
         cmd: str,
-        timeout: float = DEFAULT_TIMEOUT_SECS
+        timeout: float | None = None
     ) -> list[str]:
+        if timeout is None:
+            timeout = self.DEFAULT_TIMEOUT_SECS
+
         response = await self.write_raw(cmd, timeout=timeout)
         return self._parse_response(response)
 
     async def _read_with_cache(
         self,
         cmd: str,
-        timeout: float = DEFAULT_TIMEOUT_SECS
+        timeout: float | None = None
     ) -> list[str]:
+        if timeout is None:
+            timeout = self.DEFAULT_TIMEOUT_SECS
+
         values = self._cache.get(cmd)
 
         if values is not None:
@@ -739,8 +757,11 @@ class PiezoDevice:
         self,
         cmd: str,
         values: list[int | float | str | bool],
-        timeout: float = DEFAULT_TIMEOUT_SECS
+        timeout: float | None = None
     ) -> list[str]:
+        if timeout is None:
+            timeout = self.DEFAULT_TIMEOUT_SECS
+
         str_values = []
 
         # Convert all values to strings, handling booleans as integers
@@ -761,7 +782,7 @@ class PiezoDevice:
         self,
         cmd: str,
         params: list[int | float | str | bool] | None = None,
-        timeout: float = DEFAULT_TIMEOUT_SECS
+        timeout: float | None = None
     ) -> list[str]:
         """Execute a device command with optional parameters and caching.
         
@@ -824,6 +845,9 @@ class PiezoDevice:
             - All operations use the device's reentrant lock for thread safety
             - Boolean parameters: True becomes '1', False becomes '0'
         """
+        if timeout is None:
+            timeout = self.DEFAULT_TIMEOUT_SECS
+
         # If params is None, perform a read operation
         if params is None:
             return await self._read_with_cache(cmd, timeout=timeout)
@@ -835,8 +859,8 @@ class PiezoDevice:
     async def write_raw(
         self,
         cmd: str,
-        timeout: float = DEFAULT_TIMEOUT_SECS,
-        rx_delimiter: bytes = FRAME_DELIMITER_READ
+        timeout: float | None = None,
+        rx_delimiter: bytes | None = None
     ) -> Awaitable[str]:
         """Send a raw command string and return unparsed device response.
         
@@ -886,6 +910,12 @@ class PiezoDevice:
             - Useful for device discovery and debugging
             - Thread-safe via automatic lock acquisition
         """
+        if rx_delimiter is None:
+            rx_delimiter = self.FRAME_DELIMITER_READ
+
+        if timeout is None:
+            timeout = self.DEFAULT_TIMEOUT_SECS
+
         logger.debug("Writing cmd.: %s", cmd)
         response = None
 

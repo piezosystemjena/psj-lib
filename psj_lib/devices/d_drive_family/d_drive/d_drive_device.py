@@ -72,6 +72,9 @@ class DDriveDevice(DDriveFamilyDevice):
     D_DRIVE_IDENTIFIER = "DSM"
     """Internal identifier string used to recognize different d-Drive family devices."""
 
+    MAX_CHANNEL_COUNT = 6
+    """The d-Drive system can support up to 6 amplifier channels, but actual count depends on hardware configuration."""
+
     async def _discover_channels(self):
         """Discover and initialize all available amplifier channels.
         

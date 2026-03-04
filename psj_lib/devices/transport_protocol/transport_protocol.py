@@ -75,7 +75,7 @@ class TransportProtocol(ABC):
     LF = b'\x0A'
     CR = b'\x0D'
     CRLF = b'\x0D\x0A'
-    DEFAULT_TIMEOUT_SECS = 0.6
+    DEFAULT_TIMEOUT_SECS = 1.0
 
     TRANSPORT_TYPE: TransportType | None = None  # To be set in subclasses
 
@@ -374,6 +374,14 @@ class TransportProtocol(ABC):
             - May want to flush output before closing
             - Use in finally blocks or async context managers
         """
+
+    @abstractmethod
+    def set_property(self, name: str, value: any) -> None:
+        pass
+
+    @abstractmethod
+    def get_property(self, name: str) -> any:
+        pass
 
     @property
     @abstractmethod

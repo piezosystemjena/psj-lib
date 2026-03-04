@@ -29,13 +29,19 @@ class StatusRegister:
         - Raw value format varies by device model
     """
     
-    def __init__(self, value: list[str]) -> None:
+    def __init__(
+        self, 
+        value: list[str], 
+        channel_id: int | None = None
+    ) -> None:
         """Initialize status register with raw device response.
         
         Args:
             value: Raw status response from device
+            channel_id: Optional channel identifier for multi-channel devices (might be used by subclasses)
         """
         self._raw = value
+        self._channel_id = channel_id
 
     @property
     def raw(self) -> list[str]:
@@ -79,9 +85,9 @@ class Status(PiezoCapability):
 
     def __init__(
         self,
-        write_cb,
-        device_commands,
-        register_type: type[StatusRegister]
+        *args,
+        register_type: type[StatusRegister],
+        **kwargs
     ) -> None:
         """Initialize status capability with register interpreter.
         
@@ -90,7 +96,7 @@ class Status(PiezoCapability):
             device_commands: Command mapping dictionary
             register_type: Device-specific StatusRegister subclass
         """
-        super().__init__(write_cb, device_commands)
+        super().__init__(*args, **kwargs)
         self._register_type = register_type
 
     async def get(self) -> StatusRegister:
@@ -109,4 +115,4 @@ class Status(PiezoCapability):
             - Status interpretation varies by device model
         """
         response = await self._write(self.CMD_STATUS)
-        return self._register_type(response)
+        return self._register_type(response, channel_id=self._channel_id)

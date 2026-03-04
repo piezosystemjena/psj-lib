@@ -303,6 +303,17 @@ class SerialProtocol(TransportProtocol):
         if self.__serial:
             self.__serial.close()
 
+    def set_property(self, name: str, value: any):
+        if name == "baudrate":
+            if self.__serial and self.__serial.is_open:
+                self.__serial.baudrate = value
+
+            self.__baudrate = value
+
+    def get_property(self, name: str) -> any:
+        if name == "baudrate":
+            return self.__baudrate
+
     @property
     def port(self) -> str:
         """Get the serial port identifier.

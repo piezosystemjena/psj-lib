@@ -230,7 +230,7 @@ class ErrorCode(Enum):
             if member.value == value:
                 return member
 
-        raise ValueError(f"No ErrorCode member with value {value}")
+        return cls.ERROR_NOT_SPECIFIED
 
     @classmethod
     def get_exception_class(cls, error_code) -> Type[DeviceError]:
