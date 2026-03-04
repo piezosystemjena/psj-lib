@@ -197,7 +197,7 @@ Usage Example
         device = NV403CLEDevice(TransportType.SERIAL, "COM10")
 
         async with device:
-            device.display.set(brightness=50.0)
+            await device.display.set(brightness=50.0)
 
             ch0 = device.channels[0]
             await ch0.closed_loop_controller.set(enabled=True)

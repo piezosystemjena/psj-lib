@@ -58,7 +58,7 @@ class NVFamilyDevice(PiezoDevice):
     }
     """Commands whose responses can be cached to optimize performance."""
 
-    BACKUP_COMMANDS: list[str] = {
+    BACKUP_COMMANDS: set[str] = {
         "light",
         "encmode",
         "enctime",
@@ -113,7 +113,7 @@ class NVFamilyDevice(PiezoDevice):
         
         try:
             parts = response.split(',', 1)
-            error_code = int(parts[1])
+            error_code = self.ERROR_MAP.get(int(parts[1]), ErrorCode.ERROR_NOT_SPECIFIED)
             ErrorCode.raise_error(error_code)
         except Exception:
             ErrorCode.raise_error(ErrorCode.ERROR_NOT_SPECIFIED)

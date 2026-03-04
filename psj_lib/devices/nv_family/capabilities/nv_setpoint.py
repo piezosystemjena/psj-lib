@@ -9,7 +9,9 @@ class NVSetpoint(Setpoint):
     value is cached and returned by :meth:`get`.
     """
 
-    _setpoint_cache: float = 0.0
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._setpoint_cache: float = 0.0
 
     async def set(self, value: float) -> None:
         """Write channel setpoint.

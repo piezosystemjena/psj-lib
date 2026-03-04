@@ -221,10 +221,7 @@ class ErrorCode(Enum):
             value (int): The integer value representing the error code.
 
         Returns:
-            ErrorCode: The corresponding ErrorCode enum member.
-
-        Raises:
-            ValueError: If the value does not correspond to any ErrorCode member.
+            ErrorCode: The corresponding ErrorCode enum member. If the value does not match any defined error code, returns ErrorCode.ERROR_NOT_SPECIFIED.
         """
         for member in cls:
             if member.value == value:

@@ -6,16 +6,13 @@ from .piezo_capability import PiezoCapability
 class Unit(PiezoCapability):
     """Query device measurement units for voltage and position.
     
-    Provides methods to retrieve the units of measurement used by the
-    device for voltage and position values. Units may vary by device
-    configuration or hardware model.
+    Provides methods to retrieve the units of measurement for a device's operation mode.
     
     Example:
-        >>> units = device.units
-        >>> openloop_unit = await units.get_openloop_unit()
-        >>> closedloop_unit = await units.get_closedloop_unit()
-        >>> print(f"Voltage: {openloop_unit}, Position: {closedloop_unit}")
-        >>> # Voltage: V, Position: µm
+        >>> unit = device.openloop_unit
+        >>> openloop_unit = await unit.get()
+        >>> print(f"Voltage: {openloop_unit}")
+        >>> # Voltage: V or mV depending on device configuration
     
     Note:
         - Units are device-specific and may be configurable
@@ -29,10 +26,10 @@ class Unit(PiezoCapability):
         """Get the unit of measurement for the specified capability.
         
         Returns:
-            Unit string (e.g., 'V', 'mV')
+            Unit string (e.g., 'V', 'mV', 'µm', 'mrad') or 'Unknown' if not available.
         
         Example:
-            >>> unit = await device.units.get_unit()
+            >>> unit = await device.openloop_unit.get()
             >>> print(f"Voltage is measured in {unit}")
         """
         result = await self._write(self.CMD_UNIT)

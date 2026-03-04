@@ -27,7 +27,9 @@ class NVMonitorOutputSource(MonitorOutputSource):
 class NVMonitorOutput(MonitorOutput):
     """Monitor output capability with cached readback behavior."""
 
-    _source_cache: NVMonitorOutputSource = NVMonitorOutputSource.ACTUATOR_VOLTAGE
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._source_cache: NVMonitorOutputSource = NVMonitorOutputSource.UNKNOWN
 
     async def set_source(self, source: NVMonitorOutputSource) -> None:
         """Set monitor output source.

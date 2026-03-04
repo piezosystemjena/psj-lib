@@ -5,7 +5,7 @@ from ...base.capabilities import Display
 class NVDisplay(Display):
     """Display capability for NV devices.
 
-    Internaly scale brightness to NV's expected 0-255 range.
+    Internally scale brightness to NV's expected 0-255 range.
     """
 
     async def set(

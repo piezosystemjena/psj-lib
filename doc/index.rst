@@ -25,7 +25,7 @@ acquisition, and advanced control system configuration.
 
 **Not currently supported:**
 
-* **NV200D/NET**: Please use [nv200-python-lib](https://github.com/piezosystem/nv200-python-lib)
+* **NV200D/NET**: Please use `nv200-python-lib <https://github.com/piezosystem/nv200-python-lib>`_ for NV200D/NET devices
 
 **Quick Start:**
 

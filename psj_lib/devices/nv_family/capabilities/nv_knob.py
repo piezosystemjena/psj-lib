@@ -44,7 +44,6 @@ class NVKnob(PiezoCapability):
         accel_exponent: int | None = None,
         step_limit: int | None = None,
         step_open_loop: float | None = None,
-        step_closed_loop: float | None = None,
     ) -> None:
         """
         Set encoder knob parameters. Only parameters that are not None will be updated.
@@ -55,7 +54,6 @@ class NVKnob(PiezoCapability):
             accel_exponent: Exponent for acceleration mode (higher = more aggressive)
             step_limit: Maximum step size for interval mode
             step_open_loop: Step size for open loop control (V)
-            step_closed_loop: Step size for closed loop control (um)
 
         Returns:
             None
@@ -71,8 +69,6 @@ class NVKnob(PiezoCapability):
             await self._write(self.CMD_STEP_LIMIT, [step_limit])
         if step_open_loop is not None:
             await self._write(self.CMD_STEP_OPEN_LOOP, [step_open_loop])
-        if step_closed_loop is not None:
-            await self._write(self.CMD_STEP_CLOSED_LOOP, [step_closed_loop])
 
     async def get_mode(self) -> NVKnobMode:
         """Read the currently configured knob mode.
@@ -129,6 +125,34 @@ class NVCLEKnob(NVKnob):
     """Encoder knob capability variant with closed-loop step settings."""
 
     CMD_STEP_CLOSED_LOOP = "KNOB_STEP_CLOSED_LOOP"
+    
+    async def set(
+        self,
+        mode: NVKnobMode | None = None,
+        sample_time: float | None = None,
+        accel_exponent: int | None = None,
+        step_limit: int | None = None,
+        step_open_loop: float | None = None,
+        step_closed_loop: float | None = None,
+    ) -> None:
+        """
+        Set encoder knob parameters. Only parameters that are not None will be updated.
+
+        Args:
+            mode: Encoder knob mode (acceleration, interval, or interval with acceleration)
+            sample_time: Sample time in seconds (NV expects multiples of 20ms)
+            accel_exponent: Exponent for acceleration mode (higher = more aggressive)
+            step_limit: Maximum step size for interval mode
+            step_open_loop: Step size for open loop control (V)
+            step_closed_loop: Step size for closed loop control (µm)
+
+        Returns:
+            None
+        """
+        await super().set(mode, sample_time, accel_exponent, step_limit, step_open_loop)
+
+        if step_closed_loop is not None:
+            await self._write(self.CMD_STEP_CLOSED_LOOP, [step_closed_loop])
     
     async def get_step_closed_loop(self) -> float:
         """Read closed-loop knob step value.
