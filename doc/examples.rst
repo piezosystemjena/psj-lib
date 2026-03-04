@@ -250,6 +250,63 @@ Save and restore device configuration to/from files.
     await channel.pid_controller.set_d(config['pid']['d'])
 
 
+08 - NV403CLE Capabilities Overview
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Demonstrates key NV403CLE capabilities in one workflow.
+
+**What You'll Learn:**
+
+* Backing up configuration at start and restoring it at end
+* Setting modulation source to ``SERIAL`` at startup
+* Reading and writing display brightness
+* Toggling closed-loop control
+* Reading open-loop/closed-loop units and limits
+* Reading ``actuator connected`` status for all channels
+* Using ``multi_setpoint`` and ``multi_position``
+
+**Code:** ``examples/08_nv403cle_capabilities_overview.py``
+
+.. code-block:: python
+
+    from psj_lib import NV403CLEDevice, NVModulationSourceTypes, TransportType
+
+    device = NV403CLEDevice(TransportType.SERIAL, "COM1")
+    await device.connect()
+    backup_data = await device.backup()
+
+    try:
+        channel = device.channels[0]
+
+        # Set required modulation source at startup
+        await channel.modulation_source.set_source(NVModulationSourceTypes.SERIAL)
+
+        # Display brightness
+        await device.display.set(brightness=40.0)
+
+        # Closed-loop toggle
+        enabled = await channel.closed_loop_controller.get_enabled()
+        await channel.closed_loop_controller.set(not enabled)
+
+        # Unit and limit readout
+        open_unit = await channel.openloop_unit.get()
+        open_limits = await channel.openloop_limits.get_range()
+        closed_unit = await channel.closedloop_unit.get()
+        closed_limits = await channel.closedloop_limits.get_range()
+
+        # Status readout for all channels
+        for channel_id, ch in device.channels.items():
+            status = await ch.status.get()
+            print(f"Channel {channel_id}: actuator connected = {status.actuator_plugged}")
+
+        # Multi-channel setpoint/position
+        await device.multi_setpoint.set([10.0, 20.0, 30.0])
+        positions = await device.multi_position.get()
+    finally:
+        await device.restore(backup_data)
+        await device.close()
+
+
 Common Patterns
 ---------------
 
