@@ -120,10 +120,10 @@ All NV-family device capabilities with API references:
      - API Reference
      - Description
    * - ``display``
-     - :class:`~psj_lib.devices.nv_family.capabilties.nv_display.NVDisplay`
+     - :class:`~psj_lib.devices.nv_family.capabilities.nv_display.NVDisplay`
      - Device display brightness control
    * - ``knob``
-     - :class:`~psj_lib.devices.nv_family.capabilties.nv_knob.NVKnob`/ :class:`~psj_lib.devices.nv_family.capabilties.nv_knob.NVCLEKnob` (CLE variants)
+     - :class:`~psj_lib.devices.nv_family.capabilities.nv_knob.NVKnob`/ :class:`~psj_lib.devices.nv_family.capabilities.nv_knob.NVCLEKnob` (CLE variants)
      - Encoder knob configuration
    * - ``multi_setpoint``
      - :class:`~psj_lib.devices.base.capabilities.multi_setpoint.MultiSetpoint`
@@ -151,19 +151,19 @@ All NV-family channel capabilities with API references:
      - API Reference
      - Description
    * - ``setpoint``
-     - :class:`~psj_lib.devices.nv_family.capabilties.nv_setpoint.NVSetpoint`
+     - :class:`~psj_lib.devices.nv_family.capabilities.nv_setpoint.NVSetpoint`
      - | Target open-loop/closed-loop setpoint
        **Cached readback**
    * - ``position``
      - :class:`~psj_lib.devices.base.capabilities.position.Position`
      - Actual channel position readback
    * - ``modulation_source``
-     - :class:`~psj_lib.devices.nv_family.capabilties.nv_modulation_source.NVModulationSource`
-     - | Modulation source selection (expects :class:`~psj_lib.devices.nv_family.capabilties.nv_modulation_source.NVModulationSourceTypes` enum)
+     - :class:`~psj_lib.devices.nv_family.capabilities.nv_modulation_source.NVModulationSource`
+     - | Modulation source selection (expects :class:`~psj_lib.devices.nv_family.capabilities.nv_modulation_source.NVModulationSourceTypes` enum)
        **Cached readback**
    * - ``monitor_output``
-     - :class:`~psj_lib.devices.nv_family.capabilties.nv_monitor_output.NVMonitorOutput`
-     - | Analog monitor output routing (expects :class:`~psj_lib.devices.nv_family.capabilties.nv_monitor_output.NVMonitorOutputSource` enum)
+     - :class:`~psj_lib.devices.nv_family.capabilities.nv_monitor_output.NVMonitorOutput`
+     - | Analog monitor output routing (expects :class:`~psj_lib.devices.nv_family.capabilities.nv_monitor_output.NVMonitorOutputSource` enum)
        **Cached readback**
    * - ``openloop_unit``
      - :class:`~psj_lib.devices.base.capabilities.unit.Unit`
@@ -173,7 +173,7 @@ All NV-family channel capabilities with API references:
      - Open-loop lower and upper limits
    * - ``status``
      - :class:`~psj_lib.devices.base.capabilities.status.Status`
-     - Status access using :class:`~psj_lib.devices.nv_family.capabilties.nv_status_register.NVStatusRegister`
+     - Status access using :class:`~psj_lib.devices.nv_family.capabilities.nv_status_register.NVStatusRegister`
    * - ``closed_loop_controller``
      - :class:`~psj_lib.devices.base.capabilities.closed_loop_controller.ClosedLoopController`
      - Closed-loop feedback control enable/disable (CLE variants only)

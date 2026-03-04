@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Awaitable, Callable
+from typing import Any, Awaitable, Callable
 
 from .transport_types import DetectedDevice, TransportProtocolInfo, TransportType
 
@@ -75,7 +75,7 @@ class TransportProtocol(ABC):
     LF = b'\x0A'
     CR = b'\x0D'
     CRLF = b'\x0D\x0A'
-    DEFAULT_TIMEOUT_SECS = 1.0
+    DEFAULT_TIMEOUT_SECS = 0.6
 
     TRANSPORT_TYPE: TransportType | None = None  # To be set in subclasses
 
@@ -375,12 +375,10 @@ class TransportProtocol(ABC):
             - Use in finally blocks or async context managers
         """
 
-    @abstractmethod
-    def set_property(self, name: str, value: any) -> None:
+    def set_property(self, name: str, value: Any) -> None:
         pass
 
-    @abstractmethod
-    def get_property(self, name: str) -> any:
+    def get_property(self, name: str) -> Any:
         pass
 
     @property

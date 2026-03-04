@@ -8,10 +8,10 @@ from typing import Awaitable
 
 from ..base.piezo_channel import PiezoChannel
 from ..base.capabilities import *
-from .capabilties.nv_setpoint import NVSetpoint
-from .capabilties.nv_modulation_source import NVModulationSource, NVModulationSourceTypes
-from .capabilties.nv_monitor_output import NVMonitorOutputSource, NVMonitorOutput
-from .capabilties.nv_status_register import NVStatusRegister
+from .capabilities.nv_setpoint import NVSetpoint
+from .capabilities.nv_modulation_source import NVModulationSource, NVModulationSourceTypes
+from .capabilities.nv_monitor_output import NVMonitorOutputSource, NVMonitorOutput
+from .capabilities.nv_status_register import NVStatusRegister
 
 class NVFamilyChannel(PiezoChannel):
     """Base channel for NV-series amplifiers.
@@ -34,18 +34,18 @@ class NVFamilyChannel(PiezoChannel):
         >>> print(pos, status.over_temperature)
     """
 
-    BACKUP_COMMANDS = [
+    BACKUP_COMMANDS: set[str] = {
         "monwpa",
         "setk",
         "cloop"
-    ]
+    }
     """NV channel commands included in backup/restore operations."""
 
-    GLOBAL_COMMANDS = [
+    GLOBAL_COMMANDS: set[str] = {
         "ERROR",
         "dspvmin",
         "dspvmax",
-    ]
+    }
     """
     Commands that should belong to a channel, but the device expects them without a channel ID prefix. 
     Handled specially in the _write method.
@@ -85,7 +85,7 @@ class NVFamilyChannel(PiezoChannel):
     )
     """Channel modulation source selection.
 
-    Expects :class:`~psj_lib.devices.nv_family.capabilties.nv_modulation_source.NVModulationSourceTypes` values.
+    Expects :class:`~psj_lib.devices.nv_family.capabilities.nv_modulation_source.NVModulationSourceTypes` values.
     Readback value is always the last set value, due to the lack of direct readback for this value in NV devices. 
     """
 
@@ -97,7 +97,7 @@ class NVFamilyChannel(PiezoChannel):
     )
     """Analog monitor output source routing.
 
-    Expects :class:`~psj_lib.devices.nv_family.capabilties.nv_monitor_output.NVMonitorOutputSource` values.
+    Expects :class:`~psj_lib.devices.nv_family.capabilities.nv_monitor_output.NVMonitorOutputSource` values.
     Readback value is always the last set value, due to the lack of direct readback for this value in NV devices. 
     """
 
@@ -132,7 +132,7 @@ class NVFamilyChannel(PiezoChannel):
     )
     """NV status register access.
 
-    Returns :class:`~psj_lib.devices.nv_family.capabilties.nv_status_register.NVStatusRegister` for interpreted per-channel flags.
+    Returns :class:`~psj_lib.devices.nv_family.capabilities.nv_status_register.NVStatusRegister` for interpreted per-channel flags.
     """
     
     async def _write(self, cmd: str, params: list[PiezoChannel.Param] | None) -> Awaitable[list[str]]:

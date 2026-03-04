@@ -4,13 +4,12 @@ Each d-Drive channel is an independent piezo amplifier with digital control,
 providing high-precision positioning with 20-bit resolution and 50 kHz sampling.
 """
 
-from psj_lib.devices.d_drive_family.capabilities.d_drive_monitor_output import DDriveMonitorOutputSource
-
 from ..base.piezo_channel import PiezoChannel
 from ..base.capabilities import *
 from .capabilities.d_drive_closed_loop_controller import DDriveClosedLoopController
 from .capabilities.d_drive_data_recorder import DDriveDataRecorder
 from .capabilities.d_drive_modulation_source import DDriveModulationSourceTypes
+from .capabilities.d_drive_monitor_output import DDriveMonitorOutputSource
 from .capabilities.d_drive_setpoint import DDriveSetpoint
 from .capabilities.d_drive_status_register import DDriveStatusRegister
 from .capabilities.d_drive_trigger_out import DDriveTriggerOut

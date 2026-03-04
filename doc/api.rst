@@ -375,32 +375,32 @@ d-Drive Specific Capabilities
 NV Specific Capabilities
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: psj_lib.devices.nv_family.capabilties.nv_display
+.. automodule:: psj_lib.devices.nv_family.capabilities.nv_display
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.nv_family.capabilties.nv_knob
+.. automodule:: psj_lib.devices.nv_family.capabilities.nv_knob
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.nv_family.capabilties.nv_modulation_source
+.. automodule:: psj_lib.devices.nv_family.capabilities.nv_modulation_source
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.nv_family.capabilties.nv_monitor_output
+.. automodule:: psj_lib.devices.nv_family.capabilities.nv_monitor_output
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.nv_family.capabilties.nv_setpoint
+.. automodule:: psj_lib.devices.nv_family.capabilities.nv_setpoint
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: psj_lib.devices.nv_family.capabilties.nv_status_register
+.. automodule:: psj_lib.devices.nv_family.capabilities.nv_status_register
    :members:
    :undoc-members:
    :show-inheritance:

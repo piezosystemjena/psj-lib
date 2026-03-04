@@ -1,19 +1,19 @@
-from .capabilties.nv_display import NVDisplay
-from .capabilties.nv_knob import (
+from .capabilities.nv_display import NVDisplay
+from .capabilities.nv_knob import (
     NVKnob, 
     NVCLEKnob, 
     NVKnobMode
 )
-from .capabilties.nv_modulation_source import (
+from .capabilities.nv_modulation_source import (
     NVModulationSourceTypes, 
     NVModulationSource
 )
-from .capabilties.nv_monitor_output import (
+from .capabilities.nv_monitor_output import (
     NVMonitorOutputSource, 
     NVMonitorOutput
 )
-from .capabilties.nv_setpoint import NVSetpoint
-from .capabilties.nv_status_register import NVStatusRegister
+from .capabilities.nv_setpoint import NVSetpoint
+from .capabilities.nv_status_register import NVStatusRegister
 from .nv_family_channel import NVFamilyChannel
 from .nv_family_device import NVFamilyDevice
 from .nv120.nv120_channel import NV120Channel

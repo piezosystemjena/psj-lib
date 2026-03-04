@@ -207,7 +207,7 @@ class DDriveFamilyDevice(PiezoDevice):
         except TimeoutError as e:
             return None
         
-    async def _handle_error(self, response):
+    def _handle_error(self, response):
         # Check for error strings in response
         for err_str, err_code in self.ERROR_MAP.items():
             if err_str in response.lower():

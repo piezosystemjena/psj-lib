@@ -8,7 +8,7 @@ from ..base.capabilities import *
 from ..base.exceptions import *
 from ..base.piezo_device import PiezoDevice
 from ..transport_protocol import TransportProtocol
-from .capabilties.nv_display import NVDisplay
+from .capabilities.nv_display import NVDisplay
 from .nv_family_channel import NVFamilyChannel
 
 class NVFamilyDevice(PiezoDevice):
@@ -31,9 +31,6 @@ class NVFamilyDevice(PiezoDevice):
     DEVICE_ID = "NV Family Device"
     """Device type identifier used for device discovery and type checking."""
 
-    BACKUP_COMMANDS = set()
-    """Global device commands to include in backup operations (currently none for NV Family)."""
-
     NV_FAMILY_IDENTIFIER = "INVALID_STRING"
     """Internal identifier string used to recognize different NV Family devices. Overridden in subclasses."""
 
@@ -43,7 +40,7 @@ class NVFamilyDevice(PiezoDevice):
     MAX_CHANNEL_COUNT = 0
     """Maximum number of channels supported by this device family. Overridden in subclasses."""
 
-    CACHEABLE_COMMANDS = [
+    CACHEABLE_COMMANDS: set[str] = {
         "light",
         "encmode",
         "enctime",
@@ -58,17 +55,18 @@ class NVFamilyDevice(PiezoDevice):
         "dspvmax",
         "unitol",
         "unitcl",
-    ]
+    }
     """Commands whose responses can be cached to optimize performance."""
 
-    BACKUP_COMMANDS = [
+    BACKUP_COMMANDS: list[str] = {
         "light",
         "encmode",
         "enctime",
         "enclim",
         "encexp",
         "encstol",
-    ]
+    }
+    """Commands to include in backup operations for state restoration."""
 
     ERROR_MAP = {
         11: ErrorCode.UNKNOWN_COMMAND,
@@ -95,13 +93,11 @@ class NVFamilyDevice(PiezoDevice):
             await tp.write("\r")
             msg = await tp.read_until(cls.FRAME_DELIMITER_READ, timeout=1.0)
             
-            tp.set_property("baudrate", initial_baudrate)
             return cls.NV_FAMILY_IDENTIFIER if (cls.NV_FAMILY_IDENTIFIER + ">") in msg else None
         except TimeoutError:
-            print("No response received during device identification.")
-
-            tp.set_property("baudrate", initial_baudrate)
             return None
+        finally:
+            tp.set_property("baudrate", initial_baudrate)
     
     async def _discover_channels(self):
         """Create channel instances from ``MAX_CHANNEL_COUNT``."""

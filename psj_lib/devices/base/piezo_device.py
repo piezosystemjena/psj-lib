@@ -300,7 +300,7 @@ class PiezoDevice:
         if cls.DEVICE_ID is None:
             for subclass in DEVICE_MODEL_REGISTRY.values():
                 # Flush any existing input to ensure clean communication for identification
-                tp.flush_input()
+                await tp.flush_input()
                 id = await subclass._is_device_type(tp)
 
                 if id is not None:

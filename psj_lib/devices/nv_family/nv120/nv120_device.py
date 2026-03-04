@@ -1,5 +1,5 @@
 from ...base.capabilities import CapabilityDescriptor
-from ..capabilties.nv_knob import NVKnob
+from ..capabilities.nv_knob import NVKnob
 from ..nv_family_device import NVFamilyDevice
 from .nv120_channel import NV120Channel
 

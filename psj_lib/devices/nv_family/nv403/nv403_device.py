@@ -1,6 +1,6 @@
 from ...base.capabilities import CapabilityDescriptor, MultiPosition, MultiSetpoint
 from ..nv_family_device import NVFamilyDevice
-from ..capabilties.nv_knob import NVKnob
+from ..capabilities.nv_knob import NVKnob
 from .nv403_channel import NV403Channel
 
 class NV403Device(NVFamilyDevice):

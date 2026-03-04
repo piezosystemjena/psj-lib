@@ -100,7 +100,7 @@ touch psj_lib/devices/your_device/your_device_channel.py
 
 If your device extends or modifies standard capabilities, create device-specific implementations. 
 
-If your device supports capabilties currently not defined by the base classes and they might be used by other devices as well, think about making your new capability a base class and add them to the ``base/capabilities`` directory.
+If your device supports capabilities currently not defined by the base classes and they might be used by other devices as well, think about making your new capability a base class and add them to the ``base/capabilities`` directory.
 
 #### Example: Custom Status Register
 

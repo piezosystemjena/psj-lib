@@ -1,6 +1,6 @@
 from ...base.capabilities import CapabilityDescriptor
 from ..nv_family_device import NVFamilyDevice
-from ..capabilties.nv_knob import NVCLEKnob
+from ..capabilities.nv_knob import NVCLEKnob
 from .nv120_cle_channel import NV120CLEChannel
 
 class NV120CLEDevice(NVFamilyDevice):
