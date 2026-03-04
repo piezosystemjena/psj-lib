@@ -82,6 +82,10 @@ async def main() -> None:
         # and modulation mode set to SERIAL. Otherwise, the amplifier will ignore the command.
         setpoints = [10.0, 20.0, 30.0]
         await device.multi_setpoint.set(setpoints)
+
+        # Wait a moment for the actuators to respond before reading positions
+        await asyncio.sleep(1.0)
+
         positions = await device.multi_position.get()
         print(f"Setpoints written: {setpoints}")
         print(f"Positions read:    {positions}")

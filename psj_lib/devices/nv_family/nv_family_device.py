@@ -93,7 +93,7 @@ class NVFamilyDevice(PiezoDevice):
             await tp.write("\r")
             msg = await tp.read_until(cls.FRAME_DELIMITER_READ, timeout=1.0)
             
-            return cls.NV_FAMILY_IDENTIFIER if (cls.NV_FAMILY_IDENTIFIER + ">") in msg else None
+            return cls.DEVICE_ID if (cls.NV_FAMILY_IDENTIFIER + ">") in msg else None
         except TimeoutError:
             return None
         finally:
