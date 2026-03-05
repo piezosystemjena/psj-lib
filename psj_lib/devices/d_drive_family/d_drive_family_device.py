@@ -201,11 +201,17 @@ class DDriveFamilyDevice(PiezoDevice):
         """
         # Check if the device returns the expected device string
         try:
-            await tp.write("\r\n")
-            msg = await tp.read_message()
-            return cls.DEVICE_ID if (cls.D_DRIVE_IDENTIFIER + " V") in msg else None
+            # Probe twice in case of leftover input buffer data
+            for _ in range(2):
+                await tp.write("\r\n")
+                msg = await tp.read_message()
+
+                if (cls.D_DRIVE_IDENTIFIER + " V") in msg:
+                    return cls.DEVICE_ID
         except TimeoutError as e:
             return None
+        
+        return None
         
     def _handle_error(self, response):
         # Check for error strings in response

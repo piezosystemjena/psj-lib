@@ -21,12 +21,11 @@ async def main():
     
     # Step 1: Discover all available Piezo devices
     print("\n[1] Discovering devices on all interfaces...")
-    print("    (This searches both Serial and Telnet connections)")
     
     try:
         # Discover devices on all interfaces (Serial + Telnet)
         devices = await PiezoDevice.discover_devices(
-            flags=DiscoverFlags.ALL_INTERFACES
+            flags=DiscoverFlags.DETECT_SERIAL
         )
         
         if not devices:

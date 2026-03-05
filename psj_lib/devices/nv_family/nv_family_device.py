@@ -89,16 +89,21 @@ class NVFamilyDevice(PiezoDevice):
         initial_baudrate = tp.get_property("baudrate")
         tp.set_property("baudrate", cls.SERIAL_BAUDRATE)
 
+        # Probe twice incase the device has some leftover garbage in its input buffer.
         try:
-            await tp.write("\r")
-            msg = await tp.read_until(cls.FRAME_DELIMITER_READ, timeout=1.0)
+            for _ in range(2):
+                await tp.write("\r")
+                msg = await tp.read_until(cls.FRAME_DELIMITER_READ, timeout=1.0)
+                if (cls.NV_FAMILY_IDENTIFIER + ">") in msg:
+                    return cls.DEVICE_ID
             
-            return cls.DEVICE_ID if (cls.NV_FAMILY_IDENTIFIER + ">") in msg else None
         except TimeoutError:
             return None
         finally:
             tp.set_property("baudrate", initial_baudrate)
-    
+        
+        return None
+        
     async def _discover_channels(self):
         """Create channel instances from ``MAX_CHANNEL_COUNT``."""
         self._channels = {}
