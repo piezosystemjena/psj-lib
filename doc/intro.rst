@@ -11,6 +11,7 @@ manufactured by `piezosystem jena GmbH <https://www.piezosystem.com>`_. The libr
 asynchronous interface for precise position control, waveform generation, data acquisition, and advanced 
 control system configuration.
 
+For a C# port of psj-lib, see `psj-lib C# GitHub <https://github.com/piezosystemjena/psj-lib-cs>`_
 
 What is psj-lib?
 ----------------
@@ -125,7 +126,7 @@ Asynchronous by Default
 
 All device communication is asynchronous, enabling:
 
-* **Concurrent Operations**: Control multiple channels simultaneously
+* **Concurrent Operations**: Control multiple devices simultaneously
 * **Non-blocking**: Keep UI responsive while waiting for device responses
 * **Efficient**: Minimize idle time in complex sequences
 * **Scalable**: Handle multiple devices without threading complexity
@@ -173,11 +174,11 @@ Community and Support
 
 **Documentation**: You're reading it! This documentation covers everything from basic usage to advanced topics.
 
-**Examples**: The library includes 10+ working examples demonstrating common tasks.
+**Examples**: The library includes multiple working examples demonstrating common tasks.
 
 **Developer Guide**: See :doc:`developer_guide` if you want to extend the library or add support for new devices.
 
-**Contact**: For support, contact `piezosystem jena GmbH <https://www.piezosystem.com>`_.
+**Contact**: For support, contact `piezosystem jena GmbH <https://www.piezosystem.com>`_ or `create an issue on GitHub <https://github.com/piezosystemjena/psj-lib/issues/new>`_.
 
 
 License and Attribution
@@ -186,8 +187,6 @@ License and Attribution
 psj-lib is developed and maintained by piezosystem jena GmbH.
 
 **Authors**: piezosystem jena GmbH
-
-**Version**: 0.0.1
 
 **Python Version**: 3.12+
 
