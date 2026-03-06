@@ -155,7 +155,7 @@ voltage_data = await channel.data_recorder.get_all_data(
 
 ## 📖 Documentation
 
-Full documentation is available at: [GitHub Repository](https://github.com/piezosystemjena/psj-lib)
+Full documentation is available [here](https://piezosystemjena.github.io/psj-lib/):
 
 - **Getting Started** - Tutorials and basic usage
 - **API Reference** - Complete API documentation

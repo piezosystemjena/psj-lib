@@ -179,7 +179,7 @@ PiezoDevice (e.g., DDriveDevice)
 
 ## 📖 Documentation
 
-Comprehensive documentation is available at TODO: Link github page (or locally in `doc/_build/index.html`):
+Comprehensive documentation is available [here](https://piezosystemjena.github.io/psj-lib/) (or locally in `doc/_build/index.html`):
 
 - **Getting Started** - Tutorials and basic usage
 - **API Reference** - Complete API documentation
