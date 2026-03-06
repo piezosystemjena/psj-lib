@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.nv_family.capabilities.nv_status_register &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../nv_series.html">NV40/3(CLE) and NV120/1(CLE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.nv_family.capabilities.nv_status_register</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.nv_family.capabilities.nv_status_register</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;NV status register interpretation helpers.</span>
+
+<span class="sd">This module provides flag constants and an NV-specific</span>
+<span class="sd">:class:`~psj_lib.devices.base.capabilities.status.StatusRegister`</span>
+<span class="sd">implementation for decoding per-channel status words.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">...base.capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">StatusRegister</span><span class="p">,</span> <span class="n">Status</span>
+
+<span class="n">FLAG_ACTUATOR_NOT_PLUGGED</span> <span class="o">=</span> <span class="mh">0x0001</span>
+<span class="n">FLAG_ACTUATOR_SHORT</span> <span class="o">=</span> <span class="mh">0x0002</span>
+<span class="n">FLAG_EEPROM_ERROR</span> <span class="o">=</span> <span class="mh">0x0010</span>
+<span class="n">FLAG_UNDERLOAD</span> <span class="o">=</span> <span class="mh">0x1000</span>
+<span class="n">FLAG_OVERLOAD</span> <span class="o">=</span> <span class="mh">0x2000</span>
+<span class="n">FLAG_INVALID_ACTUATOR</span> <span class="o">=</span> <span class="mh">0x4000</span>
+<span class="n">FLAG_OVER_TEMPERATURE</span> <span class="o">=</span> <span class="mh">0x8000</span>
+
+<div class="viewcode-block" id="NVStatusRegister">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.nv_family.capabilities.nv_status_register.NVStatusRegister">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NVStatusRegister</span><span class="p">(</span><span class="n">StatusRegister</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;NV-specific interpretation of per-channel error/status flags.</span>
+
+<span class="sd">    The raw NV ``ERROR`` response contains one hexadecimal status value per</span>
+<span class="sd">    channel. This class interprets those bit fields.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; status = await channel.status.get()</span>
+<span class="sd">        &gt;&gt;&gt; if not status.actuator_plugged:</span>
+<span class="sd">        ...     print(&quot;No actuator connected&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; if status.over_temperature:</span>
+<span class="sd">        ...     print(&quot;Thermal warning&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NVStatusRegister.interpret_status_register">
+<a class="viewcode-back" href="../../../../../api.html#psj_lib.devices.nv_family.capabilities.nv_status_register.NVStatusRegister.interpret_status_register">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interpret_status_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Interpret a specific flag from the raw status register value.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            flag: Specific flag bit to interpret (e.g. FLAG_ACTUATOR_NOT_PLUGGED)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the specified bit is set for the current channel,</span>
+<span class="sd">            otherwise False.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no channel ID context is available.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channel_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Channel ID is required to interpret status register for NV Family.&quot;</span><span class="p">)</span>
+
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_channel_id</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="n">flag</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">actuator_plugged</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates whether the actuator is plugged in.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the actuator is detected, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpret_status_register</span><span class="p">(</span><span class="n">FLAG_ACTUATOR_NOT_PLUGGED</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">actuator_short</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates whether a short circuit is detected on the actuator.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if a short condition is present, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpret_status_register</span><span class="p">(</span><span class="n">FLAG_ACTUATOR_SHORT</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eeprom_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates whether an EEPROM error is detected.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if EEPROM error flag is set, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpret_status_register</span><span class="p">(</span><span class="n">FLAG_EEPROM_ERROR</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">underload</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Indicates whether an underload condition is detected.</span>
+
+<span class="sd">        In this case the actuator is not able to reach the setpoint even with minimum voltage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if underload condition is active, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpret_status_register</span><span class="p">(</span><span class="n">FLAG_UNDERLOAD</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">overload</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Indicates whether an overload condition is detected.</span>
+<span class="sd">    </span>
+<span class="sd">        In this case the actuator is not able to reach the setpoint even with maximum voltage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if overload condition is active, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpret_status_register</span><span class="p">(</span><span class="n">FLAG_OVERLOAD</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">invalid_actuator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates whether an invalid actuator is detected.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if actuator identification is invalid, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpret_status_register</span><span class="p">(</span><span class="n">FLAG_INVALID_ACTUATOR</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">over_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indicates whether an over-temperature condition is detected.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if over-temperature flag is set, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpret_status_register</span><span class="p">(</span><span class="n">FLAG_OVER_TEMPERATURE</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Mar 06, 2026 12:55.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

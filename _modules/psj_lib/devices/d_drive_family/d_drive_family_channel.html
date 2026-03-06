@@ -1,0 +1,732 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.d_drive_family.d_drive_family_channel &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nv_series.html">NV40/3(CLE) and NV120/1(CLE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.d_drive_family.d_drive_family_channel</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.d_drive_family.d_drive_family_channel</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;d-Drive amplifier channel implementation with all capabilities.</span>
+
+<span class="sd">Each d-Drive channel is an independent piezo amplifier with digital control,</span>
+<span class="sd">providing high-precision positioning with 20-bit resolution and 50 kHz sampling.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base.piezo_channel</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoChannel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base.capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_closed_loop_controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveClosedLoopController</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_data_recorder</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveDataRecorder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_modulation_source</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveModulationSourceTypes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_monitor_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveMonitorOutputSource</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_setpoint</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveSetpoint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_status_register</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveStatusRegister</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_trigger_out</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveTriggerOut</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.d_drive_waveform_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">DDriveWaveformGenerator</span>
+
+<div class="viewcode-block" id="DDriveFamilyChannel">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.d_drive_family.d_drive_family_channel.DDriveFamilyChannel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DDriveFamilyChannel</span><span class="p">(</span><span class="n">PiezoChannel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Single d-Drive amplifier channel with all control capabilities.</span>
+<span class="sd">    </span>
+<span class="sd">    Each d-Drive channel provides complete control of one piezoelectric</span>
+<span class="sd">    actuator with:</span>
+<span class="sd">    </span>
+<span class="sd">    Hardware Specifications (from d-Drive manual):</span>
+<span class="sd">    - 20-bit resolution</span>
+<span class="sd">    - 50 kHz sampling rate (20µs control loop period)</span>
+<span class="sd">    - Digital PID controller with feedforward (PCF)</span>
+<span class="sd">    - Multiple filter stages:</span>
+<span class="sd">      * Notch filter (resonance suppression)</span>
+<span class="sd">      * Low-pass filter (noise reduction)</span>
+<span class="sd">      * Error low-pass filter (PID stability)</span>
+<span class="sd">    </span>
+<span class="sd">    Signal Generation:</span>
+<span class="sd">    - Waveform generator (sine, triangle, rectangle, sweep, noise)</span>
+<span class="sd">    - Modulation input (external analog or internal waveform)</span>
+<span class="sd">    - Analog monitor output (configurable signal routing)</span>
+<span class="sd">    </span>
+<span class="sd">    Data Acquisition:</span>
+<span class="sd">    - Two-channel data recorder</span>
+<span class="sd">    - 500,000 samples per channel maximum</span>
+<span class="sd">    - 50 kHz max sample rate with stride (decimation) support</span>
+<span class="sd">    - Channel 1: position signal, Channel 2: actuator voltage</span>
+<span class="sd">    </span>
+<span class="sd">    Trigger System:</span>
+<span class="sd">    - Hardware trigger output (TTL)</span>
+<span class="sd">    - Window mode with start/stop thresholds</span>
+<span class="sd">    - Periodic triggers with configurable interval</span>
+<span class="sd">    - Edge detection (rising, falling, both)</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        SAMPLE_PERIOD: Control loop period in microseconds (20µs = 50kHz)</span>
+<span class="sd">        BACKUP_COMMANDS: Channel-specific commands included in backup</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; channel = device.channels[0]</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Configure closed-loop control with PID tuning</span>
+<span class="sd">        &gt;&gt;&gt; await channel.closed_loop_controller.set(True)</span>
+<span class="sd">        &gt;&gt;&gt; await channel.pid_controller.set(p=10.0, i=5.0, d=0.5)</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Enable notch filter to suppress 500 Hz resonance</span>
+<span class="sd">        &gt;&gt;&gt; await channel.notch.set(</span>
+<span class="sd">        ...     enabled=True,</span>
+<span class="sd">        ...     frequency=500.0,</span>
+<span class="sd">        ...     bandwidth=50.0</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Generate 10 Hz sine wave for scanning</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.sine.set(</span>
+<span class="sd">        ...     amplitude=20.0,</span>
+<span class="sd">        ...     offset=50.0,</span>
+<span class="sd">        ...     frequency=10.0</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.set_waveform_type(</span>
+<span class="sd">        ...     WaveformType.SINE</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Configure data recorder for 1 second capture</span>
+<span class="sd">        &gt;&gt;&gt; await channel.data_recorder.set(</span>
+<span class="sd">        ...     memory_length=50000,  # 50k samples at 50kHz = 1 sec</span>
+<span class="sd">        ...     stride=1  # No decimation</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Sample period defines control loop and data recorder timing</span>
+<span class="sd">        - Capabilities are accessed as properties (e.g., channel.setpoint)</span>
+<span class="sd">        - Hardware-specific enums defined in d_drive/capabilities/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SAMPLE_PERIOD</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Sample period in microseconds of control loop</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Control loop sample period in microseconds.</span>
+<span class="sd">    </span>
+<span class="sd">    The d-Drive control loop runs at 50 kHz (20µs period). This timing</span>
+<span class="sd">    affects:</span>
+<span class="sd">    - PID controller update rate</span>
+<span class="sd">    - Data recorder maximum sample rate (50 kHz)</span>
+<span class="sd">    - Waveform generator resolution</span>
+<span class="sd">    - Trigger output timing</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - 20µs period = 50 kHz sampling frequency</span>
+<span class="sd">        - Actual system bandwidth depends on actuator and filters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">BACKUP_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;modon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;monsrc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cl&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sr&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;pcf&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;errlpf&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;elpor&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;kp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ki&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;kd&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tf&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notchon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notchf&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notchb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lpon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lpf&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gfkt&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gasin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gosin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gfsin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gatri&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gotri&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gftri&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gstri&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;garec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gorec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gfrec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gsrec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ganoi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gonoi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gaswe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;goswe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gtswe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sct&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trgss&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trgse&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trgsi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trglen&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trgedge&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trgsrc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trgos&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive commands to include in backup operations.</span>
+<span class="sd">    </span>
+<span class="sd">    These commands represent channel configuration that should be saved</span>
+<span class="sd">    and restored during backup/restore operations. Includes:</span>
+<span class="sd">    - Control parameters (PID, slew rate, PCF)</span>
+<span class="sd">    - Filter settings (notch, low-pass, error filter)</span>
+<span class="sd">    - Waveform generator configuration</span>
+<span class="sd">    - Trigger and recorder settings</span>
+<span class="sd">    - Display and monitoring configuration</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Dynamic state (position, setpoint) not included</span>
+<span class="sd">        - Only configuration parameters are backed up</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Capability descriptors</span>
+    <span class="n">status_register</span><span class="p">:</span> <span class="n">Status</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Status</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Status</span><span class="o">.</span><span class="n">CMD_STATUS</span><span class="p">:</span> <span class="s2">&quot;stat&quot;</span>
+        <span class="p">},</span>
+        <span class="n">register_type</span><span class="o">=</span><span class="n">DDriveStatusRegister</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;d-Drive status register with hardware state information.</span>
+<span class="sd">    </span>
+<span class="sd">    Provides real-time status including:</span>
+<span class="sd">    - actor_plugged: Whether actuator is connected</span>
+<span class="sd">    - sensor_type: Type of position sensor (STRAIN_GAUGE, CAPACITIVE, etc.)</span>
+<span class="sd">    - piezo_voltage_enabled: Output voltage enable state</span>
+<span class="sd">    - closed_loop: Closed-loop control active status</span>
+<span class="sd">    - waveform_generator_status: Current waveform type (SINE, TRIANGLE, etc.)</span>
+<span class="sd">    - notch_filter_active: Notch filter enable state</span>
+<span class="sd">    - low_pass_filter_active: Low-pass filter enable state</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; status = await channel.status_register.get()</span>
+<span class="sd">        &gt;&gt;&gt; if status.actor_plugged:</span>
+<span class="sd">        ...     print(f&quot;Sensor: {status.sensor_type.name}&quot;)</span>
+<span class="sd">        ...     print(f&quot;Closed-loop: {status.closed_loop}&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">actuator_description</span><span class="p">:</span> <span class="n">ActuatorDescription</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">ActuatorDescription</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">ActuatorDescription</span><span class="o">.</span><span class="n">CMD_DESCRIPTION</span><span class="p">:</span> <span class="s2">&quot;acdescr&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Actuator description and identification.</span>
+<span class="sd">    </span>
+<span class="sd">    Retrieves human-readable description of connected piezo actuator.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; desc = await channel.actuator_description.get()</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Actuator: {desc}&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">setpoint</span><span class="p">:</span> <span class="n">DDriveSetpoint</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">DDriveSetpoint</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">DDriveSetpoint</span><span class="o">.</span><span class="n">CMD_SETPOINT</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Target position control (commanded position).</span>
+<span class="sd">    </span>
+<span class="sd">    Set and read the desired actuator position. In closed-loop mode,</span>
+<span class="sd">    the controller actively drives to this position. In open loop mode,</span>
+<span class="sd">    the setpoint acts as the voltage output to the actuator.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.setpoint.set(75.0)  # Move to 75 µm</span>
+<span class="sd">        &gt;&gt;&gt; target = await channel.setpoint.get()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">position</span><span class="p">:</span> <span class="n">Position</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Position</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Position</span><span class="o">.</span><span class="n">CMD_POSITION</span><span class="p">:</span> <span class="s2">&quot;mess&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Actual position readback from sensor.</span>
+<span class="sd">    </span>
+<span class="sd">    Reads the current measured position from the actuator&#39;s position sensor.</span>
+<span class="sd">    In closed-loop mode, this is the feedback value.</span>
+<span class="sd">    In open loop mode, this is the output voltage.</span>
+
+<span class="sd">    Please note that for d-Drive devices, the position value is only updated every 500ms.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; pos = await channel.position.get()</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Current position: {pos:.3f} µm&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">temperature</span><span class="p">:</span> <span class="n">Temperature</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Temperature</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Temperature</span><span class="o">.</span><span class="n">CMD_TEMPERATURE</span><span class="p">:</span> <span class="s2">&quot;ktemp&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Channel electronics temperature monitoring.</span>
+<span class="sd">    </span>
+<span class="sd">    Reads internal temperature of the amplifier electronics for</span>
+<span class="sd">    thermal management and diagnostics.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; temp = await channel.temperature.get()</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Temperature: {temp:.1f}°C&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">fan</span><span class="p">:</span> <span class="n">Fan</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Fan</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Fan</span><span class="o">.</span><span class="n">CMD_ENABLE</span><span class="p">:</span> <span class="s2">&quot;fan&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cooling fan control for thermal management.</span>
+<span class="sd">    </span>
+<span class="sd">    Enable or disable the channel&#39;s cooling fan.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.fan.set(True)  # Enable fan</span>
+<span class="sd">        &gt;&gt;&gt; is_on = await channel.fan.get_enabled()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">modulation_source</span><span class="p">:</span> <span class="n">ModulationSource</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">ModulationSource</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">ModulationSource</span><span class="o">.</span><span class="n">CMD_SOURCE</span><span class="p">:</span> <span class="s2">&quot;modon&quot;</span>
+        <span class="p">},</span>
+        <span class="n">sources</span><span class="o">=</span><span class="n">DDriveModulationSourceTypes</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modulation input source selection.</span>
+<span class="sd">    </span>
+<span class="sd">    Select modulation source from d-Drive specific options:</span>
+<span class="sd">    - SERIAL_ENCODER: Serial encoder input</span>
+<span class="sd">    - SERIAL_ENCODER_ANALOG: Analog serial encoder</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveModulationSourceTypes</span>
+<span class="sd">        &gt;&gt;&gt; await channel.modulation_source.set_source(</span>
+<span class="sd">        ...     DDriveModulationSourceTypes.SERIAL_ENCODER</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">monitor_output</span><span class="p">:</span> <span class="n">MonitorOutput</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">MonitorOutput</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">MonitorOutput</span><span class="o">.</span><span class="n">CMD_OUTPUT_SRC</span><span class="p">:</span> <span class="s2">&quot;monsrc&quot;</span>
+        <span class="p">},</span>
+        <span class="n">sources</span><span class="o">=</span><span class="n">DDriveMonitorOutputSource</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analog monitor output source routing.</span>
+<span class="sd">    </span>
+<span class="sd">    Route internal signals to analog monitor output connector.</span>
+<span class="sd">    Available sources:</span>
+<span class="sd">    - CLOSED_LOOP_POSITION: Closed-loop position value</span>
+<span class="sd">    - SETPOINT: Commanded setpoint</span>
+<span class="sd">    - CONTROLLER_VOLTAGE: PID controller output</span>
+<span class="sd">    - POSITION_ERROR: Setpoint - position error</span>
+<span class="sd">    - POSITION_ERROR_ABS: Absolute position error</span>
+<span class="sd">    - ACTUATOR_VOLTAGE: Output voltage to actuator</span>
+<span class="sd">    - OPEN_LOOP_POSITION: Open-loop position estimate</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveMonitorOutputSource</span>
+<span class="sd">        &gt;&gt;&gt; await channel.monitor_output.set_source(</span>
+<span class="sd">        ...     DDriveMonitorOutputSource.POSITION_ERROR</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">closed_loop_controller</span><span class="p">:</span> <span class="n">DDriveClosedLoopController</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">DDriveClosedLoopController</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">DDriveClosedLoopController</span><span class="o">.</span><span class="n">CMD_ENABLE</span><span class="p">:</span> <span class="s2">&quot;cl&quot;</span><span class="p">,</span>
+            <span class="n">DDriveClosedLoopController</span><span class="o">.</span><span class="n">CMD_STATUS</span><span class="p">:</span> <span class="s2">&quot;stat&quot;</span>
+        <span class="p">},</span>
+        <span class="n">sample_period</span><span class="o">=</span><span class="n">SAMPLE_PERIOD</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Closed-loop position control enable/disable.</span>
+<span class="sd">    </span>
+<span class="sd">    Enable sensor-based feedback control for precise positioning.</span>
+
+<span class="sd">    To configure the closed-loop PID controller, use the `pid_controller` property.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.closed_loop_controller.set(True)</span>
+<span class="sd">        &gt;&gt;&gt; is_closed = await channel.closed_loop_controller.get_enabled()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">slew_rate</span><span class="p">:</span> <span class="n">SlewRate</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">SlewRate</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">SlewRate</span><span class="o">.</span><span class="n">CMD_RATE</span><span class="p">:</span> <span class="s2">&quot;sr&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Maximum rate of change limiting.</span>
+<span class="sd">    </span>
+<span class="sd">    Limits how fast the actuator can change position, providing</span>
+<span class="sd">    smooth motion and protecting actuators and samples.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.slew_rate.set(10.0)  # 10 V/ms</span>
+<span class="sd">        &gt;&gt;&gt; rate = await channel.slew_rate.get()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pcf</span><span class="p">:</span> <span class="n">PreControlFactor</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">PreControlFactor</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">PreControlFactor</span><span class="o">.</span><span class="n">CMD_VALUE</span><span class="p">:</span> <span class="s2">&quot;pcf&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pre-control factor for feedforward compensation.</span>
+<span class="sd">    </span>
+<span class="sd">    Provides feedforward control to improve response speed and</span>
+<span class="sd">    reduce tracking error in closed-loop operation.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.pcf.set(0.5)  # 50% feedforward</span>
+<span class="sd">        &gt;&gt;&gt; pcf_val = await channel.pcf.get()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">error_lpf</span><span class="p">:</span> <span class="n">ErrorLowPassFilter</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">ErrorLowPassFilter</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">ErrorLowPassFilter</span><span class="o">.</span><span class="n">CMD_CUTOFF_FREQUENCY</span><span class="p">:</span> <span class="s2">&quot;errlpf&quot;</span><span class="p">,</span>
+            <span class="n">ErrorLowPassFilter</span><span class="o">.</span><span class="n">CMD_ORDER</span><span class="p">:</span> <span class="s2">&quot;elpor&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error signal low-pass filter for PID input.</span>
+<span class="sd">    </span>
+<span class="sd">    Filters the position error signal before PID controller to</span>
+<span class="sd">    reduce noise and improve stability.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.error_lpf.set(</span>
+<span class="sd">        ...     cutoff_frequency=200.0,  # 200 Hz</span>
+<span class="sd">        ...     order=2  # 2nd order filter</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pid_controller</span><span class="p">:</span> <span class="n">PIDController</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">PIDController</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">PIDController</span><span class="o">.</span><span class="n">CMD_P</span><span class="p">:</span> <span class="s2">&quot;kp&quot;</span><span class="p">,</span>
+            <span class="n">PIDController</span><span class="o">.</span><span class="n">CMD_I</span><span class="p">:</span> <span class="s2">&quot;ki&quot;</span><span class="p">,</span>
+            <span class="n">PIDController</span><span class="o">.</span><span class="n">CMD_D</span><span class="p">:</span> <span class="s2">&quot;kd&quot;</span><span class="p">,</span>
+            <span class="n">PIDController</span><span class="o">.</span><span class="n">CMD_TF</span><span class="p">:</span> <span class="s2">&quot;tf&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;PID controller parameter configuration.</span>
+<span class="sd">    </span>
+<span class="sd">    Configure Proportional, Integral, Derivative, and differential</span>
+<span class="sd">    filter (TF) parameters for closed-loop control.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.pid_controller.set(</span>
+<span class="sd">        ...     p=10.0,  # Proportional gain</span>
+<span class="sd">        ...     i=5.0,   # Integral gain</span>
+<span class="sd">        ...     d=0.5,   # Derivative gain</span>
+<span class="sd">        ...     diff_filter=100.0  # Diff filter time constant</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">notch</span><span class="p">:</span> <span class="n">NotchFilter</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">NotchFilter</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">NotchFilter</span><span class="o">.</span><span class="n">CMD_ENABLE</span><span class="p">:</span> <span class="s2">&quot;notchon&quot;</span><span class="p">,</span>
+            <span class="n">NotchFilter</span><span class="o">.</span><span class="n">CMD_FREQUENCY</span><span class="p">:</span> <span class="s2">&quot;notchf&quot;</span><span class="p">,</span>
+            <span class="n">NotchFilter</span><span class="o">.</span><span class="n">CMD_BANDWIDTH</span><span class="p">:</span> <span class="s2">&quot;notchb&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Notch filter for mechanical resonance suppression.</span>
+<span class="sd">    </span>
+<span class="sd">    Attenuates specific frequencies to suppress resonances that</span>
+<span class="sd">    can cause instability in closed-loop systems.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.notch.set(</span>
+<span class="sd">        ...     enabled=True,</span>
+<span class="sd">        ...     frequency=500.0,  # Suppress 500 Hz resonance</span>
+<span class="sd">        ...     bandwidth=50.0    # 50 Hz bandwidth</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lpf</span><span class="p">:</span> <span class="n">LowPassFilter</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">LowPassFilter</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">LowPassFilter</span><span class="o">.</span><span class="n">CMD_ENABLE</span><span class="p">:</span> <span class="s2">&quot;lpon&quot;</span><span class="p">,</span>
+            <span class="n">LowPassFilter</span><span class="o">.</span><span class="n">CMD_CUTOFF_FREQUENCY</span><span class="p">:</span> <span class="s2">&quot;lpf&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Low-pass filter for signal conditioning.</span>
+<span class="sd">    </span>
+<span class="sd">    Reduces high-frequency noise in position or control signals.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.lpf.set(</span>
+<span class="sd">        ...     enabled=True,</span>
+<span class="sd">        ...     cutoff_frequency=100.0  # 100 Hz cutoff</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">trigger_out</span><span class="p">:</span> <span class="n">DDriveTriggerOut</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">DDriveTriggerOut</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">DDriveTriggerOut</span><span class="o">.</span><span class="n">CMD_START</span><span class="p">:</span> <span class="s2">&quot;trigstart&quot;</span><span class="p">,</span>
+            <span class="n">DDriveTriggerOut</span><span class="o">.</span><span class="n">CMD_STOP</span><span class="p">:</span> <span class="s2">&quot;trigstop&quot;</span><span class="p">,</span>
+            <span class="n">DDriveTriggerOut</span><span class="o">.</span><span class="n">CMD_INTERVAL</span><span class="p">:</span> <span class="s2">&quot;trigint&quot;</span><span class="p">,</span>
+            <span class="n">DDriveTriggerOut</span><span class="o">.</span><span class="n">CMD_LENGTH</span><span class="p">:</span> <span class="s2">&quot;triglen&quot;</span><span class="p">,</span>
+            <span class="n">DDriveTriggerOut</span><span class="o">.</span><span class="n">CMD_EDGE</span><span class="p">:</span> <span class="s2">&quot;trigedge&quot;</span><span class="p">,</span>
+            <span class="n">DDriveTriggerOut</span><span class="o">.</span><span class="n">CMD_SRC</span><span class="p">:</span> <span class="s2">&quot;trigsrc&quot;</span><span class="p">,</span>
+            <span class="n">DDriveTriggerOut</span><span class="o">.</span><span class="n">CMD_OFFSET</span><span class="p">:</span> <span class="s2">&quot;trigoffset&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hardware trigger output generation.</span>
+<span class="sd">    </span>
+<span class="sd">    d-Drive specific trigger output with additional offset parameter. </span>
+<span class="sd">    Generates TTL pulses synchronized with actuator position or setpoint.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import TriggerEdge, TriggerDataSource</span>
+<span class="sd">        &gt;&gt;&gt; await channel.trigger_out.set(</span>
+<span class="sd">        ...     start_value=20.0,  # Start at 20 µm</span>
+<span class="sd">        ...     stop_value=80.0,   # Stop at 80 µm</span>
+<span class="sd">        ...     interval=10.0,     # Trigger every 10 µm</span>
+<span class="sd">        ...     length=1000,       # 1000 µs pulse</span>
+<span class="sd">        ...     edge=TriggerEdge.BOTH,</span>
+<span class="sd">        ...     src=TriggerDataSource.POSITION,</span>
+<span class="sd">        ...     offset=0.0  # d-Drive specific offset parameter</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">data_recorder</span><span class="p">:</span> <span class="n">DDriveDataRecorder</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">DDriveDataRecorder</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CMD_START_RECORDING</span><span class="p">:</span> <span class="s2">&quot;recstart&quot;</span><span class="p">,</span>
+            <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CMD_STRIDE</span><span class="p">:</span> <span class="s2">&quot;recstride&quot;</span><span class="p">,</span>
+            <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CMD_MEMORY_LENGTH</span><span class="p">:</span> <span class="s2">&quot;reclen&quot;</span><span class="p">,</span>
+            <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CMD_PTR</span><span class="p">:</span> <span class="s2">&quot;recrdptr&quot;</span><span class="p">,</span>
+            <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CMD_GET_DATA_1</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+            <span class="n">DataRecorder</span><span class="o">.</span><span class="n">CMD_GET_DATA_2</span><span class="p">:</span> <span class="s2">&quot;u&quot;</span>
+        <span class="p">},</span>
+        <span class="n">sample_period</span><span class="o">=</span><span class="n">SAMPLE_PERIOD</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Two-channel data recorder for signal capture.</span>
+<span class="sd">    </span>
+<span class="sd">    Records position (channel 1) and voltage (channel 2) at up to</span>
+<span class="sd">    50 kHz (20 µs period). Maximum 500,000 samples per channel.</span>
+<span class="sd">    </span>
+<span class="sd">    Channel mapping:</span>
+<span class="sd">    - Channel 1: Position sensor signal</span>
+<span class="sd">    - Channel 2: Actuator voltage</span>
+<span class="sd">    </span>
+<span class="sd">    The waveform generator is automatically started when sending a new setpoint,</span>
+<span class="sd">    starting a waveform output or starting a scan.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveDataRecorderChannel</span>
+<span class="sd">        &gt;&gt;&gt; # Configure for 1 second at 50 kHz</span>
+<span class="sd">        &gt;&gt;&gt; await channel.data_recorder.set(</span>
+<span class="sd">        ...     memory_length=50000,</span>
+<span class="sd">        ...     stride=1  # No decimation</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; await channel.data_recorder.start()</span>
+<span class="sd">        &gt;&gt;&gt; # ... perform motion ...</span>
+<span class="sd">        &gt;&gt;&gt; position_data = await channel.data_recorder.get_all_data(</span>
+<span class="sd">        ...     DDriveDataRecorderChannel.POSITION</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; voltage_data = await channel.data_recorder.get_all_data(</span>
+<span class="sd">        ...     DDriveDataRecorderChannel.VOLTAGE</span>
+<span class="sd">        ... )</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Sample period = 20 µs (50 kHz max rate)</span>
+<span class="sd">        - Both channels always record same length</span>
+<span class="sd">        - Use stride for longer durations at lower rate</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">waveform_generator</span><span class="p">:</span> <span class="n">DDriveWaveformGenerator</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">DDriveWaveformGenerator</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_WFG_TYPE</span><span class="p">:</span> <span class="s2">&quot;gfkt&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SINE_AMPLITUDE</span><span class="p">:</span> <span class="s2">&quot;gasin&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SINE_OFFSET</span><span class="p">:</span> <span class="s2">&quot;gosin&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SINE_FREQUENCY</span><span class="p">:</span> <span class="s2">&quot;gfsin&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_TRI_AMPLITUDE</span><span class="p">:</span> <span class="s2">&quot;gatri&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_TRI_OFFSET</span><span class="p">:</span> <span class="s2">&quot;gotri&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_TRI_FREQUENCY</span><span class="p">:</span> <span class="s2">&quot;gftri&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_TRI_DUTY_CYCLE</span><span class="p">:</span> <span class="s2">&quot;gstri&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_REC_AMPLITUDE</span><span class="p">:</span> <span class="s2">&quot;garec&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_REC_OFFSET</span><span class="p">:</span> <span class="s2">&quot;gorec&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_REC_FREQUENCY</span><span class="p">:</span> <span class="s2">&quot;gfrec&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_REC_DUTY_CYCLE</span><span class="p">:</span> <span class="s2">&quot;gsrec&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_NOISE_AMPLITUDE</span><span class="p">:</span> <span class="s2">&quot;ganoi&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_NOISE_OFFSET</span><span class="p">:</span> <span class="s2">&quot;gonoi&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SWEEP_AMPLITUDE</span><span class="p">:</span> <span class="s2">&quot;gaswe&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SWEEP_OFFSET</span><span class="p">:</span> <span class="s2">&quot;goswe&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SWEEP_TIME</span><span class="p">:</span> <span class="s2">&quot;gtswe&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SCAN_START</span><span class="p">:</span> <span class="s2">&quot;ss&quot;</span><span class="p">,</span>
+            <span class="n">DDriveWaveformGenerator</span><span class="o">.</span><span class="n">CMD_SCAN_TYPE</span><span class="p">:</span> <span class="s2">&quot;sct&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Multi-waveform generator for scanning and modulation.</span>
+<span class="sd">    </span>
+<span class="sd">    d-Drive waveform generator supporting multiple waveform types:</span>
+<span class="sd">    - SINE: Sinusoidal waveform</span>
+<span class="sd">    - TRIANGLE: Triangular waveform with adjustable duty cycle</span>
+<span class="sd">    - RECTANGLE: Square/rectangle wave with duty cycle</span>
+<span class="sd">    - NOISE: Random noise for dithering</span>
+<span class="sd">    - SWEEP: Linear sweep (ramp)</span>
+<span class="sd">    </span>
+<span class="sd">    Each waveform type has dedicated configuration via properties:</span>
+<span class="sd">    - waveform_generator.sine: Sine wave parameters</span>
+<span class="sd">    - waveform_generator.triangle: Triangle wave parameters</span>
+<span class="sd">    - waveform_generator.rectangle: Rectangle wave parameters</span>
+<span class="sd">    - waveform_generator.noise: Noise parameters</span>
+<span class="sd">    - waveform_generator.sweep: Sweep/ramp parameters</span>
+
+<span class="sd">    For sweep waveform, the frequency parameter acts as the time in seconds</span>
+<span class="sd">    to complete one full sweep cycle (0.1 Hz to 10kHz).</span>
+<span class="sd">    </span>
+<span class="sd">    Scan function for automated single or double scans.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveWaveformType, DDriveScanType</span>
+<span class="sd">        &gt;&gt;&gt; # Configure sine wave</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.sine.set(</span>
+<span class="sd">        ...     amplitude=20.0,  # 20 µm peak-to-peak</span>
+<span class="sd">        ...     offset=50.0,     # Centered at 50 µm</span>
+<span class="sd">        ...     frequency=10.0   # 10 Hz</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; # Activate sine waveform</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.set_waveform_type(</span>
+<span class="sd">        ...     DDriveWaveformType.SINE</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Configure triangle with asymmetric duty cycle</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.triangle.set(</span>
+<span class="sd">        ...     amplitude=30.0,</span>
+<span class="sd">        ...     offset=50.0,</span>
+<span class="sd">        ...     frequency=5.0,</span>
+<span class="sd">        ...     duty_cycle=70.0  # 70% rise, 30% fall</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.set_waveform_type(</span>
+<span class="sd">        ...     DDriveWaveformType.TRIANGLE</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; # Start automated scan</span>
+<span class="sd">        &gt;&gt;&gt; from psj_lib import DDriveScanType</span>
+<span class="sd">        &gt;&gt;&gt; await channel.waveform_generator.start_scan(</span>
+<span class="sd">        ...     DDriveScanType.TRIANGLE_ONCE</span>
+<span class="sd">        ... )</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        - Set waveform parameters before activating type</span>
+<span class="sd">        - By setting a waveform type, the generator is started. To stop, set type to NONE.</span>
+<span class="sd">        - Only one waveform type active at a time</span>
+<span class="sd">        - Scan function provides automated scanning sequences</span>
+<span class="sd">        - Check status with get_waveform_type() or is_scan_running()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DDriveFamilyChannel.backup">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.d_drive_family.d_drive_family_channel.DDriveFamilyChannel.backup">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">backup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">backup</span><span class="p">()</span>
+
+        <span class="c1"># Override cl command to use status register</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cl&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">closed_loop_controller</span><span class="o">.</span><span class="n">get_enabled</span><span class="p">()))]</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Mar 06, 2026 12:55.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

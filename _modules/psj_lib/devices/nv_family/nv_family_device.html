@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.nv_family.nv_family_device &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nv_series.html">NV40/3(CLE) and NV120/1(CLE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.nv_family.nv_family_device</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.nv_family.nv_family_device</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;NV family base device implementation.</span>
+
+<span class="sd">This module defines shared transport, discovery, error handling, and global</span>
+<span class="sd">capabilities for NV-series amplifiers.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base.capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base.piezo_device</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoDevice</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..transport_protocol</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransportProtocol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.nv_display</span><span class="w"> </span><span class="kn">import</span> <span class="n">NVDisplay</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.nv_family_channel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NVFamilyChannel</span>
+
+<div class="viewcode-block" id="NVFamilyDevice">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.nv_family.nv_family_device.NVFamilyDevice">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NVFamilyDevice</span><span class="p">(</span><span class="n">PiezoDevice</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for all supported NV-series devices.</span>
+
+<span class="sd">    Implements shared NV-family behavior:</span>
+<span class="sd">    - Device identification at NV serial baudrate</span>
+<span class="sd">    - NV frame delimiters and error parsing</span>
+<span class="sd">    - Channel discovery from ``MAX_CHANNEL_COUNT``</span>
+<span class="sd">    - Common device-level capabilities</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; device = NV403CLEDevice(TransportType.SERIAL, &quot;COM10&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; async with device:</span>
+<span class="sd">        ...     await device.display.set(brightness=35.0)</span>
+<span class="sd">        ...     ch0 = device.channels[0]</span>
+<span class="sd">        ...     await ch0.setpoint.set(20.0)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">DEVICE_ID</span> <span class="o">=</span> <span class="s2">&quot;NV Family Device&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Device type identifier used for device discovery and type checking.&quot;&quot;&quot;</span>
+
+    <span class="n">NV_FAMILY_IDENTIFIER</span> <span class="o">=</span> <span class="s2">&quot;INVALID_STRING&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Internal identifier string used to recognize different NV Family devices. Overridden in subclasses.&quot;&quot;&quot;</span>
+
+    <span class="n">NV_CHANNEL_TYPE</span> <span class="o">=</span> <span class="n">NVFamilyChannel</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Channel class type used for instantiating channels in this device family. Overridden in subclasses.&quot;&quot;&quot;</span>
+
+    <span class="n">MAX_CHANNEL_COUNT</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Maximum number of channels supported by this device family. Overridden in subclasses.&quot;&quot;&quot;</span>
+
+    <span class="n">CACHEABLE_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;light&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;encmode&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;enctime&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;enclim&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;encexp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;encstol&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setk&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;monwpa&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dspclmin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dspclmax&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dspvmin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dspvmax&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;unitol&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;unitcl&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Commands whose responses can be cached to optimize performance.&quot;&quot;&quot;</span>
+
+    <span class="n">BACKUP_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;light&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;encmode&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;enctime&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;enclim&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;encexp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;encstol&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Commands to include in backup operations for state restoration.&quot;&quot;&quot;</span>
+
+    <span class="n">ERROR_MAP</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">11</span><span class="p">:</span> <span class="n">ErrorCode</span><span class="o">.</span><span class="n">UNKNOWN_COMMAND</span><span class="p">,</span>
+        <span class="mi">15</span><span class="p">:</span> <span class="n">ErrorCode</span><span class="o">.</span><span class="n">UNKNOWN_CHANNEL</span><span class="p">,</span>
+        <span class="mi">16</span><span class="p">:</span> <span class="n">ErrorCode</span><span class="o">.</span><span class="n">UNKNOWN_CHANNEL</span><span class="p">,</span>
+        <span class="mi">17</span><span class="p">:</span> <span class="n">ErrorCode</span><span class="o">.</span><span class="n">PARAMETER_MISSING</span><span class="p">,</span>
+        <span class="mi">18</span><span class="p">:</span> <span class="n">ErrorCode</span><span class="o">.</span><span class="n">ADMISSIBLE_PARAMETER_RANGE_EXCEEDED</span><span class="p">,</span>
+        <span class="mi">25</span><span class="p">:</span> <span class="n">ErrorCode</span><span class="o">.</span><span class="n">ACTUATOR_NOT_CONNECTED</span>
+    <span class="p">}</span>
+
+    <span class="n">FRAME_DELIMITER_WRITE</span> <span class="o">=</span> <span class="n">TransportProtocol</span><span class="o">.</span><span class="n">CR</span>
+    <span class="n">FRAME_DELIMITER_READ</span> <span class="o">=</span> <span class="n">TransportProtocol</span><span class="o">.</span><span class="n">XON</span>
+
+    <span class="n">SERIAL_BAUDRATE</span> <span class="o">=</span> <span class="mi">19200</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Baudrate for serial communication during device identification. NV Family devices respond at 19200 baud.&quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_is_device_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tp</span><span class="p">:</span> <span class="n">TransportProtocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Probe transport and match against the configured NV family identifier.&quot;&quot;&quot;</span>
+        <span class="n">initial_baudrate</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s2">&quot;baudrate&quot;</span><span class="p">)</span>
+        <span class="n">tp</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;baudrate&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">SERIAL_BAUDRATE</span><span class="p">)</span>
+
+        <span class="c1"># Probe twice incase the device has some leftover garbage in its input buffer.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+                <span class="k">await</span> <span class="n">tp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">tp</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">FRAME_DELIMITER_READ</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">NV_FAMILY_IDENTIFIER</span> <span class="o">+</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">DEVICE_ID</span>
+            
+        <span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">tp</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;baudrate&quot;</span><span class="p">,</span> <span class="n">initial_baudrate</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="kc">None</span>
+        
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_discover_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create channel instances from ``MAX_CHANNEL_COUNT``.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">channel_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MAX_CHANNEL_COUNT</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">[</span><span class="n">channel_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NV_CHANNEL_TYPE</span><span class="p">(</span><span class="n">channel_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_channel</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_handle_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse NV error frames and raise matching ``DeviceError`` subclasses.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ErrorCode&quot;</span><span class="p">):</span>
+            <span class="k">return</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">error_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ERROR_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ErrorCode</span><span class="o">.</span><span class="n">ERROR_NOT_SPECIFIED</span><span class="p">)</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">raise_error</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">ErrorCode</span><span class="o">.</span><span class="n">raise_error</span><span class="p">(</span><span class="n">ErrorCode</span><span class="o">.</span><span class="n">ERROR_NOT_SPECIFIED</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NVFamilyChannel</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Typed access to NV family channels.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping channel IDs to ``NVFamilyChannel`` instances</span>
+<span class="sd">            (or subclass instances on model-specific devices).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span>
+
+    <span class="n">display</span><span class="p">:</span> <span class="n">NVDisplay</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">NVDisplay</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">NVDisplay</span><span class="o">.</span><span class="n">CMD_BRIGHTNESS</span><span class="p">:</span> <span class="s2">&quot;light&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Front-panel display brightness capability.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await device.display.set(brightness=50.0)</span>
+<span class="sd">        &gt;&gt;&gt; current = await device.display.get_brightness()</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Mar 06, 2026 12:55.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
