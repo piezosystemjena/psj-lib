@@ -237,16 +237,6 @@ For a complete guide on adding support for new devices, see:
 - [`psj_lib/devices/ADDING_NEW_DEVICES.md`](psj_lib/devices/ADDING_NEW_DEVICES.md) (1200+ line comprehensive guide)
 - Developer Guide in documentation
 
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Update documentation as needed
-5. Submit a pull request
-
 ## 💬 Support
 
 - **Documentation**: [GitHub Pages](https://piezosystemjena.github.io/psj-lib)
