@@ -1,5 +1,5 @@
-NV40/3(CLE) and NV120/1(CLE)
-=======================================
+NV40/3(CLE)
+===========
 
 This page covers the currently supported NV-series amplifiers and their psj-lib integration.
 
@@ -25,13 +25,11 @@ Device Variants
 Open-loop variants
 ^^^^^^^^^^^^^^^^^^
 
-* :class:`~psj_lib.devices.nv_family.nv120.nv120_device.NV120Device` (single channel)
 * :class:`~psj_lib.devices.nv_family.nv403.nv403_device.NV403Device` (three channels)
 
 Closed-loop variants
 ^^^^^^^^^^^^^^^^^^^^
 
-* :class:`~psj_lib.devices.nv_family.nv120_cle.nv120_cle_device.NV120CLEDevice` (single channel)
 * :class:`~psj_lib.devices.nv_family.nv403_cle.nv403_cle_device.NV403CLEDevice` (three channels)
 
 
