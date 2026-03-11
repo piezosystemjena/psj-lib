@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psj_lib.devices.nv_family.nv_family_channel &mdash; psj-lib Python Library</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5349f25f" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/style_override.css?v=6a36a437" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/style_override_css/color_roles.css?v=7881a399" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../../../../_static/dark_mode_js/default_light.js?v=c2e647ce"></script>
+      <script src="../../../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            psj-lib Python Library
+              <img src="../../../../_static/piezosystem_logo_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../connecting.html">Connecting to Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Device Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../d_drive.html">d-Drive and 30DV50/300</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nv_series.html">NV40/3(CLE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../base_capabilities.html">Base Capabilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide.html">Developer Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">psj-lib Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">psj_lib.devices.nv_family.nv_family_channel</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for psj_lib.devices.nv_family.nv_family_channel</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;NV family channel model and capability mapping.</span>
+
+<span class="sd">This module defines the shared channel-level capabilities for supported</span>
+<span class="sd">NV-series amplifiers.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Awaitable</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base.piezo_channel</span><span class="w"> </span><span class="kn">import</span> <span class="n">PiezoChannel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base.capabilities</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.nv_setpoint</span><span class="w"> </span><span class="kn">import</span> <span class="n">NVSetpoint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.nv_modulation_source</span><span class="w"> </span><span class="kn">import</span> <span class="n">NVModulationSource</span><span class="p">,</span> <span class="n">NVModulationSourceTypes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.nv_monitor_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">NVMonitorOutputSource</span><span class="p">,</span> <span class="n">NVMonitorOutput</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.capabilities.nv_status_register</span><span class="w"> </span><span class="kn">import</span> <span class="n">NVStatusRegister</span>
+
+<div class="viewcode-block" id="NVFamilyChannel">
+<a class="viewcode-back" href="../../../../api.html#psj_lib.devices.nv_family.nv_family_device.NVFamilyChannel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NVFamilyChannel</span><span class="p">(</span><span class="n">PiezoChannel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base channel for NV-series amplifiers.</span>
+
+<span class="sd">    This class provides common channel capabilities across open-loop and</span>
+<span class="sd">    closed-loop NV variants.</span>
+
+<span class="sd">    Common capabilities include:</span>
+<span class="sd">    - Setpoint and position control/readback</span>
+<span class="sd">    - Status register access with NV-specific flag decoding</span>
+<span class="sd">    - Modulation source selection</span>
+<span class="sd">    - Monitor output routing</span>
+<span class="sd">    - Open-loop unit and limit queries</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; channel = device.channels[0]</span>
+<span class="sd">        &gt;&gt;&gt; await channel.setpoint.set(25.0)</span>
+<span class="sd">        &gt;&gt;&gt; pos = await channel.position.get()</span>
+<span class="sd">        &gt;&gt;&gt; status = await channel.status.get()</span>
+<span class="sd">        &gt;&gt;&gt; print(pos, status.over_temperature)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">BACKUP_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;monwpa&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;setk&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cloop&quot;</span>
+    <span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;NV channel commands included in backup/restore operations.&quot;&quot;&quot;</span>
+
+    <span class="n">GLOBAL_COMMANDS</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dspvmin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dspvmax&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Commands that should belong to a channel, but the device expects them without a channel ID prefix. </span>
+<span class="sd">    Handled specially in the _write method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Capability descriptors</span>
+    <span class="n">setpoint</span><span class="p">:</span> <span class="n">NVSetpoint</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">NVSetpoint</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">NVSetpoint</span><span class="o">.</span><span class="n">CMD_SETPOINT</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Channel setpoint capability.</span>
+
+<span class="sd">    Readback value is always the last set value, due to the lack of direct readback for this value in NV devices. </span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; await channel.setpoint.set(40.0)</span>
+<span class="sd">        &gt;&gt;&gt; target = await channel.setpoint.get()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">position</span><span class="p">:</span> <span class="n">Position</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Position</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Position</span><span class="o">.</span><span class="n">CMD_POSITION</span><span class="p">:</span> <span class="s2">&quot;rk&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Channel position readback capability.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; actual = await channel.position.get()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">modulation_source</span><span class="p">:</span> <span class="n">NVModulationSource</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">NVModulationSource</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">NVModulationSource</span><span class="o">.</span><span class="n">CMD_SOURCE</span><span class="p">:</span> <span class="s2">&quot;setk&quot;</span>
+        <span class="p">},</span>
+        <span class="n">sources</span><span class="o">=</span><span class="n">NVModulationSourceTypes</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Channel modulation source selection.</span>
+
+<span class="sd">    Expects :class:`~psj_lib.devices.nv_family.capabilities.nv_modulation_source.NVModulationSourceTypes` values.</span>
+<span class="sd">    Readback value is always the last set value, due to the lack of direct readback for this value in NV devices. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">monitor_output</span><span class="p">:</span> <span class="n">NVMonitorOutput</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">NVMonitorOutput</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">NVMonitorOutput</span><span class="o">.</span><span class="n">CMD_OUTPUT_SRC</span><span class="p">:</span> <span class="s2">&quot;monwpa&quot;</span>
+        <span class="p">},</span>
+        <span class="n">sources</span><span class="o">=</span><span class="n">NVMonitorOutputSource</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analog monitor output source routing.</span>
+
+<span class="sd">    Expects :class:`~psj_lib.devices.nv_family.capabilities.nv_monitor_output.NVMonitorOutputSource` values.</span>
+<span class="sd">    Readback value is always the last set value, due to the lack of direct readback for this value in NV devices. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">openloop_unit</span><span class="p">:</span> <span class="n">Unit</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Unit</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Unit</span><span class="o">.</span><span class="n">CMD_UNIT</span><span class="p">:</span> <span class="s2">&quot;unitol&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Open-loop unit readback capability.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; unit = await channel.openloop_unit.get()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">openloop_limits</span><span class="p">:</span> <span class="n">Limits</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Limits</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Limits</span><span class="o">.</span><span class="n">CMD_LOWER_LIMIT</span><span class="p">:</span> <span class="s2">&quot;dspvmin&quot;</span><span class="p">,</span>
+            <span class="n">Limits</span><span class="o">.</span><span class="n">CMD_UPPER_LIMIT</span><span class="p">:</span> <span class="s2">&quot;dspvmax&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Open-loop lower and upper limit queries.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; lower, upper = await channel.openloop_limits.get_range()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">status</span><span class="p">:</span> <span class="n">Status</span> <span class="o">=</span> <span class="n">CapabilityDescriptor</span><span class="p">(</span>
+        <span class="n">Status</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">Status</span><span class="o">.</span><span class="n">CMD_STATUS</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span>
+        <span class="p">},</span>
+        <span class="n">register_type</span><span class="o">=</span><span class="n">NVStatusRegister</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;NV status register access.</span>
+
+<span class="sd">    Returns :class:`~psj_lib.devices.nv_family.capabilities.nv_status_register.NVStatusRegister` for interpreted per-channel flags.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">PiezoChannel</span><span class="o">.</span><span class="n">Param</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send channel command, with special handling for global NV status command.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;No write callback defined for this channel.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Do not send channel ID for some commands</span>
+        <span class="k">if</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">GLOBAL_COMMANDS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_cb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channel_id</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, piezosystem Jena.
+      <span class="lastupdated">Last updated on Mar 11, 2026 08:15.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
