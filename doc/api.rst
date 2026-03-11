@@ -56,11 +56,9 @@ Package Structure
     │   │       ├── d_drive_status_register.py
     │   │       ├── d_drive_waveform_generator.py
     │   │       └── ...
-   │   ├── nv_family/               # NV family (NV120/NV403, OL + CLE variants)
+   │   ├── nv_family/               # NV family (NV403, OL + CLE variants)
    │   │   ├── nv_family_device.py
    │   │   ├── nv_family_channel.py
-   │   │   ├── nv120/
-   │   │   ├── nv120_cle/
    │   │   ├── nv403/
    │   │   └── nv403_cle/
     │   └── transport_protocol/      # Internal (only TransportType, DiscoverFlags, TransportProtocolInfo exported)
@@ -149,26 +147,6 @@ NV Family
    :show-inheritance:
 
 .. automodule:: psj_lib.devices.nv_family.nv_family_channel
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: psj_lib.devices.nv_family.nv120.nv120_device
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: psj_lib.devices.nv_family.nv120.nv120_channel
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: psj_lib.devices.nv_family.nv120_cle.nv120_cle_device
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: psj_lib.devices.nv_family.nv120_cle.nv120_cle_channel
    :members:
    :undoc-members:
    :show-inheritance:

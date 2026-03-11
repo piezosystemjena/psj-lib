@@ -104,10 +104,6 @@ from .devices.d_drive_family import (
     PSJ30DVDevice,
 )
 from .devices.nv_family import (
-    NV120Channel,
-    NV120CLEChannel,
-    NV120CLEDevice,
-    NV120Device,
     NV403Channel,
     NV403CLEChannel,
     NV403CLEDevice,
@@ -212,10 +208,6 @@ __all__ = [
     "PSJ30DVDevice",
 
     # NV Family Classes
-    "NV120Channel",
-    "NV120CLEChannel",
-    "NV120CLEDevice",
-    "NV120Device",
     "NV403Channel",
     "NV403CLEChannel",
     "NV403CLEDevice",

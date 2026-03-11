@@ -41,6 +41,15 @@ The **PSJ 30DV50/300** is a single-channel, d-Drive-compatible amplifier:
 - **d-Drive Compatible**: Uses the same command set and capabilities
 - **Full Feature Set**: PID control, waveform generation, data recorder, filters
 
+### NV40/3(CLE) Amplifiers
+
+Piezo amplifiers with 3 channels, available in open-loop and closed-loop variants. They include features such as:
+
+- **Position Control**: Synchronous setpoint and position reading for multiple axes
+- **Closed-Loop Control**: Integrated analog closed-loop controller (CLE variants)
+- **Physical Knob**: Front-panel knob for manual control and control mode switching
+- **Display**: Front-panel display for real-time position and status information
+
 
 ## 📦 Installation
 
